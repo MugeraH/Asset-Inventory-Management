@@ -4,7 +4,6 @@ from django.db.models.fields import CharField
 
 # Create your models here.
 
-
 class Profile(models.Model):
     employee=models.OneToOneField(User,on_delete=models.CASCADE)
     phone=models.CharField(max_length=150)
