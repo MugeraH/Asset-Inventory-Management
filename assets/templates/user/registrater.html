@@ -1,0 +1,27 @@
+{%extends 'assets/base.html'%}
+
+{%block title%}
+Register 
+{%endblock%}
+
+{%load crispy_forms %}
+
+{% block content %}
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="border p-3 bg-white">
+            <h4>Register here</h4>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-success" type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
