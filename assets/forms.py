@@ -1,10 +1,7 @@
 from django import forms
-from .models import Category, Department, Asset,EmployeeAssetRequest,ManagerRequest
+from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest
 
-class CategoryForm(forms.ModelForm):
-    class Meta:
-        model=Category
-        fields= ('name',)
+
 
 class DepartmentForm(forms.ModelForm):
     class Meta:
@@ -22,9 +19,11 @@ class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
         fields= '__all__'
+        exclude= ('user',)
 
 
 class ManagerRequest(forms.ModelForm):
     class Meta:
         model=ManagerRequest
         fields= '__all__'
+        exclude= ('user',)

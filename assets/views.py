@@ -1,7 +1,7 @@
 from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
-from . forms import CategoryForm,DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequest
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequest
 
 # third party imports
 
@@ -21,12 +21,13 @@ def HomePageView(request):
 
 def myforms(request):
     if request.method == 'POST':
-        form=CategoryForm(request.POST)
+        form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
-            category = form.save(commit=False)
-            category.save()
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
     else:
-        form=CategoryForm()
+        form=AssetForm()
     params={
         'form':form,
     }
