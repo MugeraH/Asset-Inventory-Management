@@ -1,6 +1,7 @@
 from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
+from . forms import CategoryForm,DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequest
 
 # third party imports
 
@@ -15,3 +16,18 @@ import datetime as dt
 def HomePageView(request):
   
     return render(request,'assets/home.html')
+
+
+
+def myforms(request):
+    if request.method == 'POST':
+        form=CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.save()
+    else:
+        form=CategoryForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/myforms.html', params)

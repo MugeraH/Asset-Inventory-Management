@@ -79,8 +79,12 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'asset',
+        'USER': 'ibrahim',
+        'PASSWORD': 'secret',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 # # development
