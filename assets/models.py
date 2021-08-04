@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from django.db.models.enums import Choices
 # Create your models here.
 
 
@@ -31,10 +32,18 @@ class Requesttype(models.Model):
     repair= models.CharField(max_length=50)
     replacement= models.CharField(max_length=50)
 
+REQUESTTYPE_CHOICES = (
+    ("new_asset", "new_asset"),
+    ("repair", "repair"),
+    ("replacement", "replacement"),
+
+)
+
+
 class EmployeeAssetRequest(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='employeeassetrequest')
     name= models.ForeignKey(Asset,on_delete=models.CASCADE)
-    type= models.ForeignKey('Requesttype',on_delete=models.CASCADE,null=True)
+    type= models.CharField(max_length=50 , choices=REQUESTTYPE_CHOICES,default='new_asset')
     request_urgency= models.TextField()
     quantity= models.IntegerField(default=0)
     status= models.BooleanField(default=False)
@@ -49,5 +58,6 @@ class ManagerRequest(models.Model):
     posted_date=models.DateTimeField(auto_now_add=True)
     status=models.BooleanField(default=False)
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='managerrequest')
+
     def __str__(self) -> str:
         return self.request
