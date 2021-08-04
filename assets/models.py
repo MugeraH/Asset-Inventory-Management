@@ -27,10 +27,7 @@ class Asset(models.Model):
     def __str__(self) -> str:
         return self.name
 
-class Requesttype(models.Model):
-    New_sset= models.CharField(max_length=50)
-    repair= models.CharField(max_length=50)
-    replacement= models.CharField(max_length=50)
+
 
 REQUESTTYPE_CHOICES = (
     ("new_asset", "new_asset"),
