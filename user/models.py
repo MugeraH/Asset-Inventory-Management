@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.deletion import CASCADE
 from django.db.models.fields import CharField
 
 # Create your models here.
@@ -13,3 +14,6 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.employee.username}- Profile'
 
+# class Asset(models.Models):
+#     user=models.ForeignKey(Profile,on_delete=models.CASCADE)
+#     asset_type=models.CharField()

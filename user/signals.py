@@ -4,10 +4,9 @@ from .models import Profile
 from django.dispatch import receiver
 
 @receiver(post_save, sender=User)
-def create_profile(sender,instance,created, *args,**kwargs):
+def create_profile(sender,instance,created,**kwargs):
     if created:
         Profile.objects.create(employee=instance)
-
 
 @receiver(post_save,sender=User)
 def save_profile(sender, instance, **kwargs):
