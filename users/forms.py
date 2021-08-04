@@ -18,7 +18,6 @@ class EmployeeSignUpForm(UserCreationForm):
         return user
 
 
-
 class ManagerSignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
