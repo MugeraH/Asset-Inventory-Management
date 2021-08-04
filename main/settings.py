@@ -27,6 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 INSTALLED_APPS = [
     'assets',
     'user',
+    # 'users',
     'crispy_forms',
     # installed dependancies
     'rest_framework',  
