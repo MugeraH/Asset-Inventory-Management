@@ -30,4 +30,15 @@ class ManagerSignUpForm(UserCreationForm):
             user.save()
         return user
 
+class AdminSignUpForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = User
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.is_admin = True
+        if commit:
+            user.save()
+        return user
+
 
