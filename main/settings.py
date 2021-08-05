@@ -28,6 +28,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
       'assets',
+      'users',
    
      
     
@@ -77,14 +78,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'asset',
-        'USER': 'carey',
-        'PASSWORD': 'carey',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 # development
 if config('MODE')=="dev":
    DATABASES = {
@@ -171,6 +170,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
 
 
 cloudinary.config( 
