@@ -13,5 +13,4 @@ import datetime as dt
 
 # @login_required(login_url='/login')
 def HomePageView(request):
-  
     return render(request,'assets/home.html')
