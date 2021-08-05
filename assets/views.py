@@ -19,7 +19,7 @@ def HomePageView(request):
 
 
 
-def myforms(request):
+def asset(request):
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
@@ -31,4 +31,19 @@ def myforms(request):
     params={
         'form':form,
     }
-    return render(request,'assets/myforms.html', params)
+    return render(request,'assets/addasset.html', params)
+
+
+def department(request):
+    if request.method == 'POST':
+        form=DepartmentForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=DepartmentForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/adddep.html', params)

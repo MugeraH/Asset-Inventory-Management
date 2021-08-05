@@ -13,7 +13,9 @@ urlpatterns=[
     
 path('',HomePageView,name='home'),
     
-path('forms/',views.myforms,name='forms')
+path('asset/',views.asset,name='assetform'),
+path('department/',views.department,name='departmentform')
+
 
 
  ]
