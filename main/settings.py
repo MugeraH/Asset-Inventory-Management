@@ -29,8 +29,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 INSTALLED_APPS = [
       'assets',
       'users',
-
-
      # installed dependancies
      'rest_framework',  
      'corsheaders', 
