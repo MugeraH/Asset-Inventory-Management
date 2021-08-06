@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
-
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +6,7 @@
   font-family: "Roboto", sans-serif;
 }
 
+/* styling for scroll bar */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgb(30, 30, 211) transparent;
@@ -36,6 +36,15 @@ body {
   display: flex;
   width: 100%;
 }
+.home_content {
+  width: 78%;
+  flex: 1;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+/* sidebar */
+
 .sidenav {
   width: 20%;
   height: 100;
@@ -67,18 +76,15 @@ body {
 .side_option:hover {
   background-color: rgb(42, 42, 177);
 }
+.side_option .title {
+  font-weight: 600;
+}
 
 #open {
   display: none;
 }
-.home_content {
 
-  width: 78%;
-  flex: 1;
-  height: 100vh;
-  overflow-y: scroll;
-}
-
+/* navbar */
 .navbar {
   display: flex;
   align-items: center;
@@ -103,7 +109,7 @@ body {
   gap: 10px;
 }
 .icon img {
-  width: 25px;
+  width: 30px;
 }
 .navbar-brand .logo_name {
   padding: 0;
