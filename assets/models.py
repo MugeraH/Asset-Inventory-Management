@@ -82,9 +82,9 @@ class ManagerRequest(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = CloudinaryField('image', null=True)
-    phone = models.IntegerField()
+    phone = models.IntegerField(null=True)
     bio = models.TextField(default='Bio...', max_length=100)
-    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department')
+    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department',null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'
