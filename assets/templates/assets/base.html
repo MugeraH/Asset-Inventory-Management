@@ -68,19 +68,34 @@
             {% if user.is_authenticated %}
             <li class="nav-item active p-0">
               <a class="nav-link" href="/"
-                >Hello {{user}} <span class="sr-only">(current)</span></a
+                >Hello <span class="myname">{{user}}</span>
+                <span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item active p-0">
-              <a class="nav-link" href="/">Profile </a>
+              <div class="nav-icon">
+                <div class="icon">
+                  <img src="../../static/icons/user.png" alt="" />
+                </div>
+                <div>
+                  <a class="nav-link" href="/">Profile </a>
+                </div>
+              </div>
             </li>
             <li class="nav-item active p-0">
-              <a class="nav-link" href="/">Logout</a>
+              <div class="nav-icon">
+                <div class="icon">
+                  <img src="../../static/icons/logout.png" alt="" />
+                </div>
+                <div>
+                  <a class="nav-link" href="{%url 'logout'%}">Logout</a>
+                </div>
+              </div>
             </li>
 
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="#"> Login </a>
+              <a class="nav-link" href="{%url 'login'%}"> Login </a>
             </li>
             {% endif %}
           </ul>
@@ -88,11 +103,11 @@
       </div>
     </nav>
     <div class="main">
-      <!-- {% if user.is_authenticated %} {% endif %} -->
+      {% if user.is_authenticated %}
       <div id="sidebar" class="sidenav">
         <div id="sidelink1">
           <div class="side_option">
-            <a class="flex-cont" href="#">
+            <a class="flex-cont" href="/dashboard">
               <div class="icon">
                 <img src="../../static/icons/menu.png" alt="" />
               </div>
@@ -133,7 +148,7 @@
           </div>
         </div>
       </div>
-
+      {% endif %}
       <div class="home_content">{%block content%} {%endblock content%}</div>
     </div>
     {%include "assets/scripts.html"%} {% block scripts %}
