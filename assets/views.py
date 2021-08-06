@@ -2,6 +2,9 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from .models import Asset, Department
+import sys
+sys.path.append("..")
+from users.models import User
 
 
 # third party imports
@@ -18,16 +21,18 @@ def HomePageView(request):
   
     return render(request,'assets/home.html')
 
-
-# @login_required(login_url='login')
-def dashboard(request):
-    total_asset = Asset.objects.count()
-    total_department = Department.objects.count()
-  
-
-    
-    context = {
+@login_required(login_url='/login')
+def DashBoardView(request):
+        total_asset = Asset.objects.count()
+        total_department = Department.objects.count()
+        total_user = User.objects.count()
+        context = {
+        
         'asset': total_asset,
         'department': total_department,
-    }
-    return render(request, 'assets/dashboard.html', context)
+        'user' : total_user
+    
+        
+
+        }
+        return render(request,'assets/dashboard.html',context)

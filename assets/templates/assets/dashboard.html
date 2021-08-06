@@ -1,8 +1,13 @@
 {%extends 'assets/base.html'%}
-{% load bootstrap4 %}
-{% block title %}Dashboard{% endblock title %}
 
+<!-- bootstrap -->
+{% load bootstrap4 %}
+<!-- html -->
 {% block content %}
+<!-- content -->
+<div class="container-fluid p-4">
+  <h1 class="text-success">Dashboard</h1>
+</div>
     <!-- Widgets  -->
     <div class="row">
         <div class="col-lg-3 col-md-6">
@@ -14,8 +19,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{ Asset }}</span></div>
-                                <div class="stat-heading">Asset</div>
+                                <div class="stat-text"><span class="count">{{ asset }}</span></div>
+                                <div class="stat-heading">Asset stat</div>
                             </div>
                         </div>
                     </div>
@@ -32,8 +37,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{ asset }}</span></div>
-                                <div class="stat-heading">Asset</div>
+                                <div class="stat-text"><span class="count">{{ department }}</span></div>
+                                <div class="stat-heading">Departments</div>
                             </div>
                         </div>
                     </div>
@@ -50,8 +55,8 @@
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{ Departments }}</span></div>
-                                <div class="stat-heading">Department</div>
+                                <div class="stat-text"><span class="count">{{ user }}</span></div>
+                                <div class="stat-heading">Employees</div>
                             </div>
                         </div>
                     </div>
@@ -59,81 +64,12 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-4">
-                            <i class="fa fa-users"></i>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+       
     </div>
     <!-- /Widgets -->
     
     <div class="clearfix"></div>
-
-    <!-- Orders -->
-    <div class="orders">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="box-title">Assets </h4>
-                    </div>
-                    <div class="card-body--">
-                        <div class="table-stats order-table ov-h">
-                            <table class="table ">
-                                <thead>
-                                    <tr>
-                                        <th class="serial">#</th>
-                                        <th>Dashboard</th>
-                                        <th>Asset</th>
-                                        
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% if assets %}
-                                    {% for asset in assets %}
-                                    <tr>
-                                        <td class="serial">{{ forloop.counter }}</td>
-                                        <td>{{ asset.Department }}</td>
-                                        <td>{{ asset.Employee }}</td>
-                                        
-                                        <td>{{ asset.created_date }}</td>
-                                        <td>
-                                            {% if asset.status == 'pending' %}
-                                                <a class="btn btn-warning" href="">{{ oasset.status }}</a>
-                                            {% elif asset.status == 'decline' %}
-                                                <a class="btn btn-danger" href="">{{ asset.status }}</a>
-                                            {% elif order.status == 'complete' %}
-                                                <a class="btn btn-success" href="">{{ asset.status }}</a>
-                                            {% elif order.status == 'approved' %}
-                                                <a class="btn btn-primary" href="">{{ asset.status }}</a>
-                                    
-                                            {% else %}
-                                                <a class="btn btn-info" href="">{{ order.status }}</a>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    {% else %}
-                                        <tr><td>No Asset Data</td></tr>
-                                    {% endif %}
-                                </tbody>
-                            </table>
-                        </div> <!-- /.table-stats -->
-                    </div>
-                </div> <!-- /.card -->
-            </div>  <!-- /.col-lg-8 -->
-
-            
-        </div>
-    </div>
-    <!-- /.orders -->
+   
 {% endblock content %}
+
+
