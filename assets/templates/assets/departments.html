@@ -2,21 +2,94 @@
 {% load bootstrap4%}
 {% load static %}
 {%block content%}
-​
-<div class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <h3>Departments</h3>
-​
-            <hr>
-            {% for department in department%}
-​
-            <ul>
-                <li>{{ department.name }} <a href="update/department/{{department.id}}"></a> </li>
-            </ul>
-            {%endfor%}
+
+{%for department in department%}
+    <h1>{{department.name}}</h1>
+    {%endfor%}
+
+<div class="container " style='padding-top: 30px;margin-left: 80px;'>
+    <h1 class="mt-center">MANAGEMENT DEPARTMENTS</h1>
+    <p class="text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde voluptatem exercitationem provident quaerat porro labore sint nobis adipisci. Quam, architecto!</p>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-6">
+    
+    <div class="col-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">DEPARTMENT NAME</h5>
+                <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, molestiae.</p>
+            </div>
+            
         </div>
     </div>
+    <div class="col-6">
+        <div class="card h-100">
+            
+            <div class="card-body">
+                <h5 class="card-title">ADD DEPARTMENT</h5>
+                <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, soluta.</p>
+            </div>
+            
+        </div>
+    </div>
+    
 </div>
+
+
+
+​
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card card-body">
+                <h3>Departments</h3>
+            <hr>
+            {% for department in department %}
+            <ul>
+                <li>{{ department.name }} </li>
+            </ul>
+            <ul>
+                <li>{{ department.created_at }} <a href="update/department/{{department.id}}"></a> </li>
+            </ul>
+            <ul>
+                <li>{{ department.modified_at }} <a href="update/department/{{department.id}}"></a> </li>
+            </ul>
+
+            <ul>
+                <li>{{ department.manager }} <a href="update/department/{{department.id}}"></a> </li>
+            </ul>
+            </div>
+            {%endfor%}
+            <hr>
+        </div>
+
+        <div class="col-md-5">
+            <div class="card card-body">
+                <h3>Departments</h3>
+            <hr>
+            {% for department in department %}
+            <ul>
+                <li>{{ department.name }} </li>
+            </ul>
+            <ul>
+                <li>{{ department.created_at }} <a href="update/department/{{department.id}}"></a> </li>
+            </ul>
+            <ul>
+                <li>{{ department.modified_at }} <a href="update/department/{{department.id}}"></a> </li>
+            </ul>
+
+            <ul>
+                <li>{{ department.manager }} <a href="update/department/{{department.id}}"></a> </li>
+            </ul>
+            </div>
+            {%endfor%}
+            <hr>
+        </div>
+        
+    </div>
+    
+    
+</div> -->
 ​
 {% endblock %}

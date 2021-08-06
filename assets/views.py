@@ -31,12 +31,14 @@ def asset(request):
         'form':form,
     }
     return render(request,'assets/addasset.html', params)
+
+
 def departments(request):
-      department=Department.objects.all()
-      params={
-          'department':department,
-      }
-      return render(request,'assets/departments.html', params)
+        department=Department.objects.all()
+        params={
+        'department':department,
+        }
+        return render(request,'assets/departments.html', params)
 def add_departments(request):
     if request.method == 'POST':
         form=DepartmentForm(request.POST,request.FILES)
@@ -59,8 +61,8 @@ def update_department(request, id):
         return redirect('/')
     form = DepartmentForm(request.POST or None, instance = dept)
     if form.is_valid():
-       form.save()
-       return redirect('/')
+        form.save()
+        return redirect('/')
     params={
         'form':form,
     }
@@ -94,9 +96,8 @@ def managerrequest(request):
         'form':form,
     }
     return render(request,'assets/manager_request.html', params)
+
 @login_required(login_url='/login')
 def DashBoardView(request):
-    
-  
     return render(request,'assets/dashboard.html')
 
