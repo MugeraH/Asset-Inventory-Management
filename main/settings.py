@@ -17,11 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -29,7 +28,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'assets',
     'users',
-    
     # installed dependancies
     'rest_framework',  
     'corsheaders', 
@@ -84,24 +82,24 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # }
 # development
 if config('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
-       
-   }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': '',
+        }
+
+    }
 # production
 else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
@@ -171,9 +169,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
 
+LOGIN_REDIRECT_URL = "/dashboard"
+LOGIN_URL = "/login"
 
-# cloudinary.config( 
-#     cloud_name = "mine-hero" ,
-#     api_key = "561458666771218", 
-#     api_secret = "hx_Uh21rrRP84Ob4FjhKzmgeHLE" 
-# )
+
+cloudinary.config(
+    cloud_name="transformers",
+    api_key="514495512752333",
+    api_secret="WYVPmAG-pNZDXtnCYG-ODFpNq-c"
+)
+# django_heroku.settings(locals())
