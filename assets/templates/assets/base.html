@@ -19,13 +19,122 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
     {% block styles %} {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {% endblock %}
   </head>
   <body>
-    <div class="container-fluid p-0 m-0">
-      {%include "assets/navbar.html"%} {%block content%} {%endblock content%}
+    <nav class="navbar navbar-expand-lg p-0">
+      <div class="flex-cont">
+        <div class="icon">
+          <img
+            onclick="openSideMenu()"
+            id="open"
+            src="../../static/icons/menu (2).svg"
+            alt=""
+          />
+          <img
+            onclick="closeSideMenu()"
+            id="close"
+            src="../../static/icons/menu (1).png"
+            alt=""
+          />
+        </div>
+
+        <a class="navbar-brand" href="/">
+          <span class="logo_name">TARATIBU ASSETS</span>
+          <span>SIMPLIFIED ASSET MANAGEMENT</span>
+        </a>
+      </div>
+
+      <div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="text-white">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
+
+        <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto p-0">
+            {% if user.is_authenticated %}
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/"
+                >Hello {{user}} <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Profile </a>
+            </li>
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Logout</a>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="#"> Login </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="main">
+      <!-- {% if user.is_authenticated %} {% endif %} -->
+      <div id="sidebar" class="sidenav">
+        <div id="sidelink1">
+          <div class="side_option">
+            <a class="flex-cont" href="#">
+              <div class="icon">
+                <img src="../../static/icons/menu.png" alt="" />
+              </div>
+              <div class="title">Dashboard</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="#">
+              <div class="icon">
+                <img src="../../static/icons/department.png" alt="" />
+              </div>
+              <div class="title">Departments</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="#">
+              <div class="icon">
+                <img src="../../static/icons/company.png" alt="" />
+              </div>
+              <div class="title">Employees</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="#">
+              <div class="icon">
+                <img src="../../static/icons/assets.png" alt="" />
+              </div>
+              <div class="title">Assets</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="#">
+              <div class="icon">
+                <img src="../../static/icons/mail.png" alt="" />
+              </div>
+              <div class="title">Requests</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="home_content">{%block content%} {%endblock content%}</div>
     </div>
     {%include "assets/scripts.html"%} {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
