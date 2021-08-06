@@ -110,12 +110,69 @@
       <!-- {% if user.is_authenticated %} {% endif %} -->
       <div id="sidebar" class="sidenav">
         <div id="sidelink1">
-          <a href="/home">home</a>
-          <a href="/create">create</a>
-          <a href="/edit">edit</a>
+          <div class="side_option">
+            <a class="flex-cont" href="/home">
+              <div class="icon">
+                <img
+                  onclick="openSideMenu()"
+                  src="../../static/icons/menu (2).svg"
+                  alt=""
+                />
+              </div>
+              <div class="title">Dashboard</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="/home">
+              <div class="icon">
+                <img
+                  onclick="openSideMenu()"
+                  src="../../static/icons/department.png"
+                  alt=""
+                />
+              </div>
+              <div class="title">Departments</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="/home">
+              <div class="icon">
+                <img
+                  onclick="openSideMenu()"
+                  src="../../static/icons/company.png"
+                  alt=""
+                />
+              </div>
+              <div class="title">Employees</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="/home">
+              <div class="icon">
+                <img
+                  onclick="openSideMenu()"
+                  src="../../static/icons/assets.png"
+                  alt=""
+                />
+              </div>
+              <div class="title">Assets</div>
+            </a>
+          </div>
+          <div class="side_option">
+            <a class="flex-cont" href="/home">
+              <div class="icon">
+                <img
+                  onclick="openSideMenu()"
+                  src="../../static/icons/mail.png"
+                  alt=""
+                />
+              </div>
+              <div class="title">Requests</div>
+            </a>
+          </div>
         </div>
       </div>
-     
+
       <div class="p-0 m-0 home_content">
         {%block content%} {%endblock content%}
       </div>

@@ -28,10 +28,25 @@ body {
   background: rgb(30, 30, 211);
   color: #fff;
   transition: 0.3s all ease;
+  padding-top: 20px;
 }
 .sidenav a {
   color: #fff;
   text-decoration: none;
+}
+
+#sidelink1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+}
+
+.side_option {
+  margin: 10px;
 }
 
 #open {
@@ -61,7 +76,10 @@ body {
 
 .flex-cont {
   display: flex;
+  width: 100px;
+
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
 }
 .icon img {
