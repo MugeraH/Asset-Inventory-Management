@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequest
 from . models import EmployeeAsset,EmployeeAssetRequest,Department
+from users.models import User
 
 # third party imports
 
@@ -74,13 +75,13 @@ def update_department(request, dept_id):
     return render(request,'assets/apdatedep.html', params)
 
 
-
-def employee_dashboard(request):
-    assets= EmployeeAsset.objects.all()
+@login_required(login_url='/login')
+def employees(request):
+    employees= User.objects.all()
     params={
-        'assets':assets,
+        'assets':employees,
     }
-    return render(request,'assets/employee_dashboard.html', params)
+    return render(request,'assets/employees.html', params)
 
 def employee_assets(request):
     assets= EmployeeAsset.objects.all()
@@ -89,12 +90,12 @@ def employee_assets(request):
     return render(request,'assets/employee_assets.html', params)
 
 
-def employee_requests(request):
+def employeerequests(request):
     assets= EmployeeAssetRequest.objects.all()
-    employee_asset= EmployeeAsset.objects.all()
+   
 
-    params= {'assets': assets,
-    'employee_asset': employee_asset}
+    params= {'assets': assets,}
+
     return render(request,'assets/employee_request.html', params)
 
 @login_required(login_url='/login')

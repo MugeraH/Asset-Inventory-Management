@@ -1,0 +1,42 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
+{%block content%}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-7">
+            <h2 class="mt-4">Employees</h2>
+          
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Admin</th>
+                  </tr>
+                </thead>
+
+            {% for asset in assets %}
+           
+                <tbody>
+                  <tr>
+                    <th scope="row">{{ asset.id }}</th>
+                    <td>{{ asset.username }}</td>
+                    <td>{{ asset.email }}</td>
+                    <td>{{ asset.is_admin }} </td>
+                  </tr>
+                
+                </tbody>
+                {% endfor %}
+              </table>
+              
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+{% endblock%}
