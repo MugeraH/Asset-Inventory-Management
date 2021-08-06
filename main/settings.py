@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-import django_heroku
+# import django_heroku
 import dj_database_url
 from decouple import config,Csv
 
@@ -178,4 +178,4 @@ cloudinary.config(
     api_key="232389687371234",
     api_secret="BisOIzyQwpW8ltS_RPtlzAnBXSg"
 )
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
