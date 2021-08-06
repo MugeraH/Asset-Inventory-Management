@@ -1,0 +1,22 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+{%block content%}
+​
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <h3>Departments</h3>
+​
+            <hr>
+            {% for department in department%}
+​
+            <ul>
+                <li>{{ department.name }} <a href="update/department/{{department.id}}"></a> </li>
+            </ul>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+​
+{% endblock %}
