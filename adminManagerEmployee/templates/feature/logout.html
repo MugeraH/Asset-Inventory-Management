@@ -1,0 +1,11 @@
+{%extends 'assets/base.html'%}
+{% block content %}
+<div class="container">
+    <div class="card mt-5">
+        <h2 class="text-center card-header bg-success text-danger">You Have been logged Out!</h2>
+        <div class="border-top pt-3 card-footer bg-info">
+            <p class="text-muted"><a class="ml-2 text-light" href="{% url 'login' %}">Log in Again.</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
