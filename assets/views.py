@@ -2,6 +2,7 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequest
+from . models import EmployeeAsset,EmployeeAssetRequest,Department
 
 # third party imports
 
@@ -33,8 +34,16 @@ def asset(request):
     }
     return render(request,'assets/addasset.html', params)
 
+def departments(request):
+      department=Department.objects.all()
+      params={
+          'department':department,
+      }
+      return render(request,'assets/departments.html', params)
 
-def department(request):
+
+def add_departments(request):
+   
     if request.method == 'POST':
         form=DepartmentForm(request.POST,request.FILES)
         if form.is_valid():
@@ -45,5 +54,46 @@ def department(request):
         form=DepartmentForm()
     params={
         'form':form,
+        
     }
     return render(request,'assets/adddep.html', params)
+
+def update_department(request, dept_id):
+    dept_id = int(dept_id)
+    try:
+        dept = Department.objects.get(id = dept_id)
+    except Department.DoesNotExist:
+        return redirect('/')
+    form = DepartmentForm(request.POST or None, instance = dept)
+    if form.is_valid():
+       form.save()
+       return redirect('/')
+    params={
+        'form':form,
+    }
+    return render(request,'assets/apdatedep.html', params)
+
+
+
+def employee_dashboard(request):
+    assets= EmployeeAsset.objects.all()
+    params={
+        'assets':assets,
+    }
+    return render(request,'assets/employee_dashboard.html', params)
+
+def employee_assets(request):
+    assets= EmployeeAsset.objects.all()
+
+    params= {'assets': assets}
+    return render(request,'assets/employee_assets.html', params)
+
+
+def employee_requests(request):
+    assets= EmployeeAssetRequest.objects.all()
+    employee_asset= EmployeeAsset.objects.all()
+
+    params= {'assets': assets,
+    'employee_asset': employee_asset}
+    return render(request,'assets/employee_request.html', params)
+
