@@ -1,0 +1,52 @@
+{%extends 'assets/base.html'%}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+
+    <div class="card mt-5 mb-5 shadow-lg">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img class=" card-img img-responsive" src="{{ user.profile.image.url }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">{{ user.username }}</h2>
+                    <p class="card-text"><span class="badge badge-secondary">{{ user.email }}</span><span
+                            class="mr-auto"><a class="ml-2" href="{% url 'logout' %}">Log out.</a></span></p>
+                    <hr class="bg-warning">
+                    <p class="card-text"><small class="text-muted">{{user.profile.bio}}</small></p>
+                    <a href="{% url 'update_profile' %}" class="btn btn-outline-success">Update Profile</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr class="bg-white">
+
+    {% for post in posts %}
+
+    <div class="card mt-5">
+        <div class="card-header">
+            <h5 class="card-title"><span class="h3 text-danger">{{ post.project_title }}</span></h5>
+        </div>
+        <div class="d-flex justify-content-center">
+            <img src="{{ post.project_image.url }}"
+                class="card-img-top img-responsive img-thumbnail mt-2 mb-2 shadow-lg" alt="{{ post.project_title }}"
+                style="max-height: 598.02px; max-width: 598.02px;">
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ post.project_description }}</p>
+            <a href="{{ post.project_url }}" class="btn btn-outline-info" target="_blank">Visit
+                {{ post.project_title }}</a>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated {{post.last_modified}}</small>
+        </div>
+    </div>
+
+    {% endfor %}
+
+</div>
+{% endblock %}
