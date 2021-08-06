@@ -1,12 +1,12 @@
 from pathlib import Path
 import os
-# import django_heroku
 import dj_database_url
+# import django_heroku
 from decouple import config,Csv
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,13 +75,13 @@ WSGI_APPLICATION = 'main.wsgi.application'
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-# development
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+# # development
 if config('MODE')=="dev":
    DATABASES = {
        'default': {
@@ -174,9 +174,3 @@ LOGIN_REDIRECT_URL = "/dashboard"
 LOGIN_URL = "/login"
 
 
-cloudinary.config(
-    cloud_name="juniorinstagram",
-    api_key="232389687371234",
-    api_secret="BisOIzyQwpW8ltS_RPtlzAnBXSg"
-)
-# django_heroku.settings(locals())
