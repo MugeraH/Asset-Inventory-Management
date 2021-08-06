@@ -1,10 +1,8 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import HomePageView
+from .views import HomePageView,DashBoardView
 from . import views
-
-
 
 app_name ="assets"
 
@@ -20,6 +18,8 @@ urlpatterns=[
     path('employee_dashboard/', views.employee_dashboard,name='employee_dashboard'),
     path('employee_assets/', views.employee_assets,name='employee_assets'),
     path('employee_requests/', views.employee_requests,name='employee_requests'),
+    path('dashboard',DashBoardView,name='dashboard'),
+
 
  ]
  

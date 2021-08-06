@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 import datetime as dt
 
 
-# @login_required(login_url='/login')
+
 def HomePageView(request):
   
     return render(request,'assets/home.html')
@@ -97,3 +97,8 @@ def employee_requests(request):
     'employee_asset': employee_asset}
     return render(request,'assets/employee_request.html', params)
 
+@login_required(login_url='/login')
+def DashBoardView(request):
+    
+  
+    return render(request,'assets/dashboard.html')
