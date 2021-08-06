@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-# import django_heroku
+import django_heroku
 import dj_database_url
 from decouple import config,Csv
 
@@ -16,12 +16,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x#80y(mzl^@dr-*pbv4cevdizwbq-fez-j0otpdzz2nt4f#ch6'
+# SECRET_KEY = 'django-insecure-x#80y(mzl^@dr-*pbv4cevdizwbq-fez-j0otpdzz2nt4f#ch6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
       'assets',
       'users',
+
+
      # installed dependancies
      'rest_framework',  
      'corsheaders', 
@@ -108,12 +110,12 @@ DATABASES['default'].update(db_from_env)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Email configurations
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-ACCOUNT_EMAIL_VERIFICATION= 'none'
+# EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_PORT = config('EMAIL_PORT')
+# EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+# ACCOUNT_EMAIL_VERIFICATION= 'none'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -171,8 +173,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 
-cloudinary.config( 
-  cloud_name = "mine-hero" ,
-  api_key = "561458666771218", 
-  api_secret = "hx_Uh21rrRP84Ob4FjhKzmgeHLE" 
+cloudinary.config(
+    cloud_name="juniorinstagram",
+    api_key="232389687371234",
+    api_secret="BisOIzyQwpW8ltS_RPtlzAnBXSg"
 )
+django_heroku.settings(locals())
