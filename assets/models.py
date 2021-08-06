@@ -32,7 +32,7 @@ class Asset(models.Model):
     created_at= models.DateTimeField(auto_now_add=True)
     modified_at= models.DateTimeField(auto_now=True)
     is_assigned= models.BooleanField(default=False)
- 
+
     def __str__(self):
         return self.name
     
@@ -67,10 +67,9 @@ class ManagerRequest(models.Model):
     posted_date=models.DateTimeField(auto_now_add=True)
     status=models.BooleanField(default=False)
     employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='managerrequest')
-   
+
     def __str__(self):
         return f'{self.request} Manager_request'
-    
     
     
 class Profile(models.Model):
