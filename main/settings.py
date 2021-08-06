@@ -29,9 +29,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
       'assets',
       'users',
-   
-     
-    
      # installed dependancies
      'rest_framework',  
      'corsheaders', 
