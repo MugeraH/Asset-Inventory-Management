@@ -40,7 +40,7 @@ class EmployeeAsset(models.Model):
     employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee')
     asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset')
     def __str__(self):
-        return self.employee
+        return self.employee.username
     
     
     
@@ -50,12 +50,18 @@ REQUESTTYPE_CHOICES = (
     ("replacement", "replacement"),
 
 )
+REQUEST_STATUS = (
+    ("pending", "pending"),
+    ("approved", "approved"),
+    ("rejected", "rejected"),
+
+)
 class EmployeeAssetRequest(models.Model):
-    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='employeeassetrequest')
+    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee_asset_request')
     type= models.CharField(max_length=50,choices=REQUESTTYPE_CHOICES,default='new_asset')
     request_detail= models.TextField()
     quantity= models.IntegerField(default=0)
-    status= models.BooleanField(default=False)
+    status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     posted_date=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -65,8 +71,8 @@ class ManagerRequest(models.Model):
     request= models.TextField()
     specs= models.TextField()
     posted_date=models.DateTimeField(auto_now_add=True)
-    status=models.BooleanField(default=False)
-    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='managerrequest')
+    status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
+    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='manager_request')
    
     def __str__(self):
         return f'{self.request} Manager_request'

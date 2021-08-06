@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-import django_heroku
+# import django_heroku
 import dj_database_url
 from decouple import config,Csv
 
@@ -29,10 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 INSTALLED_APPS = [
       'assets',
       'users',
-      'adminManagerEmployee',
-
-     
-    
+          
      # installed dependancies
      'rest_framework',  
      'corsheaders', 
@@ -180,4 +177,4 @@ cloudinary.config(
     api_key="232389687371234",
     api_secret="BisOIzyQwpW8ltS_RPtlzAnBXSg"
 )
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
