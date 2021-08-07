@@ -59,7 +59,7 @@ REQUEST_STATUS = (
 class EmployeeAssetRequest(models.Model):
     employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee_asset_request',null=True)
     type= models.CharField(max_length=50,choices=REQUESTTYPE_CHOICES,default='new_asset')
-    request_details= models.TextField()
+    request_detail= models.TextField()
     quantity= models.IntegerField(default=0)
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     posted_date=models.DateTimeField(auto_now_add=True)
@@ -70,6 +70,7 @@ class EmployeeAssetRequest(models.Model):
 class ManagerRequest(models.Model):
     request= models.TextField()
     specs= models.TextField()
+    quantity= models.IntegerField(default=0)
     posted_date=models.DateTimeField(auto_now_add=True)
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='manager_request',null=True)

@@ -3,6 +3,9 @@ import os
 import dj_database_url
 # import django_heroku
 from decouple import config,Csv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 
@@ -177,4 +180,8 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = "/dashboard"
 LOGIN_URL = "/login"
 
-
+cloudinary.config(
+    cloud_name='dvnq8iwfs',
+    api_key='654829185384754',
+    api_secret='W6PpdAIj131akBUwlCY0ffQmjK8',
+)

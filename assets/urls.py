@@ -13,7 +13,7 @@ urlpatterns=[
     
     path('',HomePageView,name='home'),
     path('forms/',views.departments,name='forms'),
-    path('update_department/<int:dept_id>/',views.update_department,name='update_department'),
+    path('update/department/<int:id>/',views.update_department,name='update_department'),
     path('departments/',views.departments,name='departments'), 
     path('assets/addasset/',views.asset,name='assetform'),
     path('add_department/',views.add_departments,name='departmentform'),
@@ -23,6 +23,13 @@ urlpatterns=[
     path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
     path('dashboard',DashBoardView,name='dashboard'),
     path('assets/',assets, name='assets'),
+    path('update/asset/<int:id>/',views.update_asset,name='update_asset'),
+    path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
+    path('managerrequest/',views.managerrequest,name='managerrequest'),
+
+
+
+
 
 
 
