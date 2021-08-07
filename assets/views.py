@@ -1,8 +1,10 @@
 from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,Profile,ManagerRequest
+
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm
+from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+
 import sys
 sys.path.append("..")
 from users.models import User
@@ -39,10 +41,6 @@ def  DashBoardView(request):
         return render(request,'assets/dashboard.html',context)
   
        
-
-
-
-
 def asset(request):
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
@@ -64,20 +62,20 @@ def assets(request):
       }
       return render(request,'assets/assets.html', params)
 
-def update_asset(request, id):
-    asset_id = int(id)
-    try:
-        asset = Asset.objects.get(id = asset_id)
-    except Asset.DoesNotExist:
-        return redirect('/')
-    form = AssetForm(request.POST or None, instance = asset)
-    if form.is_valid():
-       form.save()
-       return redirect('/')
+def update_asset(request):
+    if request.method == 'POST':
+        form=AssetAssigningForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=AssetAssigningForm()
     params={
         'form':form,
     }
     return render(request,'assets/update_asset.html', params)
+    
 
 def departments(request):
       department=Department.objects.all()
@@ -100,16 +98,15 @@ def add_departments(request):
     }
     return render(request,'assets/adddep.html', params)
 
-def update_department(request, id):
-    dept_id = int(id)
-    try:
-        dept = Department.objects.get(id = dept_id)
-    except Department.DoesNotExist:
-        return redirect('/')
-    form = DepartmentForm(request.POST or None, instance = dept)
-    if form.is_valid():
-       form.save()
-       return redirect('/')
+def update_department(request):
+    if request.method == 'POST':
+        form=DepartmentAssigningForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=DepartmentAssigningForm()
     params={
         'form':form,
     }
@@ -197,6 +194,21 @@ def requestdetails(request,id):
     }
     return render(request,'assets/requestdetails.html', params)
 
+
+
+def employeeasset(request):
+    if request.method == 'POST':
+        form=EmployeeAssetForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=EmployeeAssetForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/employee_asset.html', params)
 
 
 
