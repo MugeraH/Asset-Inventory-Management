@@ -65,7 +65,7 @@ class EmployeeAssetRequest(models.Model):
     posted_date=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f'{self.request_details} employee_request'
+        return f'{self.request_detail} employee_request'
     
 class ManagerRequest(models.Model):
     request= models.TextField()
