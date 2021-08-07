@@ -16,30 +16,39 @@ urlpatterns=[
 
 path('',HomePageView,name='home'),
 path('employees',views.EmployeesView,name='employees'),
-   path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
-   
+path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
+
 path('dashboard',DashBoardView,name='dashboard'),
 path('departments/',views.departments,name='departments'),
+path('department_detail/<int:id>',views.department_detail,name='department_detail'),
 path('assets/',views.assets,name='assets'),
-  path('assets/addasset/',views.asset,name='assetform'),
+path('assets/addasset/',views.asset,name='assetform'),
 path('add_department/',views.add_departments,name='departmentform'),
 path('update/department/<int:id>/',views.update_department,name='departmentform'),
-  
+
 path('update/asset/<int:id>/',views.update_asset,name='assetform'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
 path('managerrequest/',views.managerrequest,name='managerrequest'),
 path('employeeasset',views.employeeasset,name='employeeasset'),
 path('assetassigning/',views.update_asset,name='assetassigning'),
 path('departmentassigning/',views.update_department,name='departmentform'),
-     path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
-    path('managerrequest/',views.managerrequest,name='managerrequest'),
-    path('assetdetails/<int:id>', employeedetails,name='assetdetails'),
+path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
+path('managerrequest/',views.managerrequest,name='managerrequest'),
+path('assetdetails/<int:id>', employeedetails,name='assetdetails'),
+
+path('forms/',views.departments,name='forms'),
+path('update/department/<int:id>/',views.update_department,name='update_department'),
+path('departments/',views.departments,name='departments'),
 
 
+path('asset/',views.asset,name='assetform'),
+path('add_departments/',views.add_departments,name='add_departments'),
+path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
+path('managerrequest/',views.managerrequest,name='managerrequest'),
+path('dashboard',DashBoardView,name='dashboard'),
 
+]
 
- ]
- 
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL,document_root= settings.MEDIA_ROOT)
 
