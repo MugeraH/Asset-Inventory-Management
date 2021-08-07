@@ -17,12 +17,10 @@ from django.contrib.auth.decorators import login_required
 import datetime as dt
 
 
-# @login_required(login_url='/login')
 def HomePageView(request):
-  
     return render(request,'assets/home.html')
 def EmployeesView(request):
-  
+
     return render(request,'assets/employees.html')
 def  DashBoardView(request):
         total_asset = Asset.objects.count()
@@ -39,8 +37,7 @@ def  DashBoardView(request):
         
         }
         return render(request,'assets/dashboard.html',context)
-  
-       
+
 def asset(request):
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
@@ -56,11 +53,11 @@ def asset(request):
     return render(request,'assets/addasset.html', params)
 
 def assets(request):
-      asset=Asset.objects.all()
-      params={
-          'asset':asset,
-      }
-      return render(request,'assets/assets.html', params)
+    asset=Asset.objects.all()
+    params={
+        'asset':asset,
+    }
+    return render(request,'assets/assets.html', params)
 
 def update_asset(request):
     if request.method == 'POST':
@@ -78,11 +75,18 @@ def update_asset(request):
     
 
 def departments(request):
-      department=Department.objects.all()
-      params={
-          'department':department,
-      }
-      return render(request,'assets/departments.html', params)
+        department=Department.objects.all()
+        params={
+        'department':department,
+        }
+        return render(request,'assets/departments.html', params)
+
+def department_detail(request,id):
+        department=Department.objects.get(id=id)
+        context={
+        'department': department,
+        }
+        return render(request,'assets/depdetails.html', context)
 
 def add_departments(request):
     if request.method == 'POST':
@@ -98,15 +102,17 @@ def add_departments(request):
     }
     return render(request,'assets/adddep.html', params)
 
-def update_department(request):
-    if request.method == 'POST':
-        form=DepartmentAssigningForm(request.POST,request.FILES)
-        if form.is_valid():
-            asset = form.save(commit=False)
-            asset.save()
-            return redirect('/')
-    else:
-        form=DepartmentAssigningForm()
+
+def update_department(request, id):
+    dept_id = int(id)
+    try:
+        dept = Department.objects.get(id = dept_id)
+    except Department.DoesNotExist:
+        return redirect('/')
+    form = DepartmentForm(request.POST or None, instance = dept)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
     params={
         'form':form,
     }
@@ -138,7 +144,6 @@ def employeedetails(request,id):
 
 def employeerequests(request):
     assets= EmployeeAssetRequest.objects.all()
-   
 
     params= {'assets': assets,}
 
@@ -163,6 +168,7 @@ def employeeassetrequest(request):
         'form':form,
     }
     return render(request,'assets/employee_request.html', params)
+
 
 def managerrequest(request):
     if request.method == 'POST':
