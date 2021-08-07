@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from . import views
-from .views import HomePageView,DashBoardView
+from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails,assets
 
 
 app_name ="assets"
@@ -19,7 +19,7 @@ path('departments/',views.departments,name='departments'),
 path('department_detail/<int:id>',views.department_detail,name='department_detail'),
 
 path('asset/',views.asset,name='assetform'),
-path('add_department/',views.add_departments,name='add_department'),
+path('add_departments/',views.add_departments,name='add_departments'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
 path('managerrequest/',views.managerrequest,name='managerrequest'),
 path('dashboard',DashBoardView,name='dashboard'),

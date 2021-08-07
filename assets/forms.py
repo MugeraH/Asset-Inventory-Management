@@ -13,16 +13,16 @@ class AssetForm(forms.ModelForm):
     class Meta:
         model=Asset
         fields= '__all__'
+        exclude= ('is_assigned','created_at','modified_at',)
 
 
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
-        fields= '__all__'
-        exclude= ('user',)
+        fields= ('type','request_detail','quantity')
 
 class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
-        fields= '__all__'
-        exclude= ('user',)
+        fields= ('request','specs','quantity')
+        

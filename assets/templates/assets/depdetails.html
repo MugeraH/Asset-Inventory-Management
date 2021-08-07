@@ -9,12 +9,12 @@
     <h1 class="text-center text-success">DEPARTMENTS DETAILS</h1>
     <hr>
     <div class="row row-cols-1 row-cols-md-3 g-6">
-        {%for department in department%}
+        
         <div class="col-6">
-            <a href="">
+            <a href="/departments">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-department_detailtitle text-success text-center">{{department.name}}</h5>
+                        <h5 class="card-title text-success text-center">{{department.name}}</h5>
                         <p class="card-text">{{department.description}}</p>
                         <p class="card-title"><mark>Head of Department {{department.manager}}</mark></p>
                         <a href="update/department/{{department.id}}"></a>
@@ -24,8 +24,19 @@
                     </div>
                 </div>
             </a>
+            
         </div>
-        {%endfor%}
+        <div class="card" style="width: 8rem;">
+            <div class="card-header">
+                Actions
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Edit</li>
+                <li class="list-group-item">Add asset</li>
+                <li class="list-group-item">delete department</li>
+            </ul>
+        </div>
     </div>
+    
 </div>
 {% endblock%}
