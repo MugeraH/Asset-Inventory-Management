@@ -26,10 +26,15 @@ def  DashBoardView(request):
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()
+        dept_employees=User.objects.count()
+        dept_assets=Asset.objects.count()
         context = {
         'assets': total_asset,
         'departments': total_department,
-        'employees' : total_user
+        'employees' : total_user,
+        'dept_employees':dept_employees,
+        'dept_assets':dept_assets
+        
         }
         return render(request,'assets/dashboard.html',context)
   

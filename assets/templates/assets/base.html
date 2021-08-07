@@ -114,6 +114,7 @@
               <div class="title">Dashboard</div>
             </a>
           </div>
+          {% if user.is_superuser %}
           <div class="side_option">
             <a class="flex-cont" href="/departments">
               <div class="icon">
@@ -122,6 +123,9 @@
               <div class="title">Departments</div>
             </a>
           </div>
+          {%endif%}
+          <!-- next -->
+          {% if user.is_superuser or user.is_admin %}
           <div class="side_option">
             <a class="flex-cont" href="/employees">
               <div class="icon">
@@ -130,6 +134,7 @@
               <div class="title">Employees</div>
             </a>
           </div>
+          {%endif%}
           <div class="side_option">
             <a class="flex-cont" href="#">
               <div class="icon">
