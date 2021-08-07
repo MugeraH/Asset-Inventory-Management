@@ -19,10 +19,10 @@ class AssetForm(forms.ModelForm):
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
-        fields= ('type','request_detail',)
+        fields= ('type','request_detail','quantity')
 
 class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
-        fields= ('request','specs',)
+        fields= ('request','specs','quantity')
         
