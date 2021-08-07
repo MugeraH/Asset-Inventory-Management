@@ -10,38 +10,49 @@
         <div class="col-md-7 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
                 <h2>Assets</h2>
-                <a href="addasset/" class="btn btn-primary">Add asset</a>
+                <div class="dropdown" style="float:right;">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
+                        <a class="dropdown-item" href="#">Assign Department</a>
+                        <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a>
+                    </div>
+                </div>
 
             </div>
 
 
-            <table class="table mt-4">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Department</th>
-
-                    </tr>
-                </thead>
-
-                {% for asset in assets %}
-
-                <tbody>
-                    <tr onclick="window.location='/assetdetails/{{asset.id}}'">
-
-                        <th scope="row">{{ asset.id }}</th>
-                        <td>{{ asset.name }}</td>
-                        <td>{{ asset.category }}</td>
-                        <td>{{ asset.department.name }}</td>
 
 
-                    </tr>
 
-                </tbody>
-                {% endfor %}
-            </table>
+            <div class="row">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <div class="card card-body">
+                        <div class="card-title" style="text-decoration: underline;">
+                            <h2>Asset Details</h2>
+                        </div>
+                        <div class="card-title">
+                            <p> {{asset.name}}</p>
+                            <hr>
+                            <ul class="p-4">
+                                <li>Category: <strong>{{ asset.category }}</strong></li>
+                                <li>Department: <strong>{{ asset.department.name }}</strong></li>
+                                <li>Created <strong>{{ asset.created_at }}</strong></li>
+                                <li>Is Assigned?: <strong>{{ asset.is_assigned}}</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
 
         </div>
         <div class="col-md-5"></div>
@@ -49,4 +60,3 @@
 </div>
 
 {% endblock%}
-

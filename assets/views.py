@@ -64,6 +64,15 @@ def assets(request):
       }
       return render(request,'assets/assets.html', params)
 
+def assetdetails(request,id):
+    asset=Asset.objects.get(id=id)
+    params={
+        'asset':asset
+    }
+
+  
+    return render(request,'assets/assetdetails.html', params)
+
 def update_asset(request, id):
     asset_id = int(id)
     try:
@@ -183,3 +192,11 @@ def managerrequest(request):
 
 
 
+def delete_asset(request, id):
+    id = int(id)
+    try:
+        asset = Asset.objects.get(id = id)
+    except Asset.DoesNotExist:
+        return redirect('assets')
+    asset.delete()
+    return render(request,'assets/assets.html')

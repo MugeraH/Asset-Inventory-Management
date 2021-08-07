@@ -10,7 +10,7 @@
         <div class="col-md-7 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
                 <h2>Assets</h2>
-                <a href="addasset/" class="btn btn-primary">Add asset</a>
+                <a href="addasset" class="btn btn-primary">Add asset</a>
 
             </div>
 
@@ -22,6 +22,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Category</th>
                         <th scope="col">Department</th>
+                        <th scope="col">Action</th>
 
                     </tr>
                 </thead>
@@ -35,6 +36,9 @@
                         <td>{{ asset.name }}</td>
                         <td>{{ asset.category }}</td>
                         <td>{{ asset.department.name }}</td>
+                        <td><a href="delete/{{asset.id}}" class="btn btn-danger" id = '{{asset.id}}'>delete</a></td>
+                        
+                        
 
 
                     </tr>
