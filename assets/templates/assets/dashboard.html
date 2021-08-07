@@ -1,10 +1,72 @@
 {%extends 'assets/base.html'%}
 <!-- bootstrap -->
-{% load bootstrap4 %}
-<!-- html -->
-{% block content %}
+{% load bootstrap4%}
+<!-- static -->
+{% load static %}
+
 <!-- content -->
-<div class="container-fluid p-4">
-  <h1 class="text-success">Dashboard</h1>
+{%block content%} ​
+<div class="container-fluid dashboard">
+  <h2>Dashboard</h2>
+  <!-- greeting -->
+  {% if user.is_superuser %}
+  <h3>Welcome Admin</h3>
+  {%elif user.is_admin%}
+  <h3>Welcome Manager</h3>
+  {%else%}
+  <h3>Welcome Employee</h3>
+  {% endif %}
+
+  <!-- row -->
+
+  {% if user.is_superuser or user.is_admin %}
+  <div class="row mt-5">
+    {% if user.is_superuser %}
+    <div class="col-md-3 m-4 dash-card one">
+      <div class="title">
+        <h3>{{departments}}</h3>
+        <h6>Departments</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/department.png" alt="" />
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="col-md-3 m-4 dash-card two">
+      <div class="title">
+        {% if user.is_superuser %}
+        <h3>{{employees}}</h3>
+        {%elif user.is_admin %}
+        <h3>{{dept_employees}}</h3>
+
+        {% endif %}
+        <h6>Employees</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/company.png" alt="" />
+      </div>
+    </div>
+
+    <div class="col-md-3 m-4 dash-card three">
+      <div class="title">
+        {% if user.is_superuser %}
+        <h3>{{assets}}</h3>
+        {%elif user.is_admin %}
+        <!-- <h3>{{employees}}</h3> -->
+        <h3>dp</h3>
+        {% endif %}
+        <h6>Assets</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/assets.png" alt="" />
+      </div>
+    </div>
+  </div>
+  {%else%}
+  <div class="row">
+    <h3>Employee view</h3>
+  </div>
+  {% endif %}
 </div>
-{% endblock%}
+​ {% endblock %}

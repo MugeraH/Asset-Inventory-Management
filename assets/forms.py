@@ -1,48 +1,43 @@
 from django import forms
-from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest
-from django.contrib.auth.models import User
-from .models import Profile
-
-
-
+from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset
 
 class DepartmentForm(forms.ModelForm):
     class Meta:
         model=Department
         fields= ('name',)
 
-
 class AssetForm(forms.ModelForm):
     class Meta:
         model=Asset
-        fields= '__all__'
-
+        fields= ('name','description','image','category',)
+     
 
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
-        fields= '__all__'
-        exclude= ('user',)
+        fields= ('type','request_detail','quantity')
 
 class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
-        fields= '__all__'
-        exclude= ('user',)
+        fields= ('request','specs','quantity')
 
-class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
-    
-    
 
+class DepartmentAssigningForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['username', 'email',]
+        model=Department
+        fields= ('manager',)
 
-
-class ProfileUpdateForm(forms.ModelForm):
-    
-
+class AssetAssigningForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ['image', 'bio', 'phone' ]
+        model=Asset
+        fields= ('department',)
+
+class EmployeeAssetForm(forms.ModelForm):
+    class Meta:
+        model=EmployeeAsset
+        fields= ('employee',)
+
+
+        
+
