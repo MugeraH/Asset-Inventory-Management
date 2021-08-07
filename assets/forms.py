@@ -1,7 +1,5 @@
 from django import forms
-from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest
-
-
+from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset
 
 class DepartmentForm(forms.ModelForm):
     class Meta:
@@ -25,4 +23,21 @@ class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
         fields= ('request','specs',)
+
+class DepartmentAssigningForm(forms.ModelForm):
+    class Meta:
+        model=Department
+        fields= ('manager',)
+
+class AssetAssigningForm(forms.ModelForm):
+    class Meta:
+        model=Asset
+        fields= ('department',)
+
+class EmployeeAssetForm(forms.ModelForm):
+    class Meta:
+        model=EmployeeAsset
+        fields= ('employee',)
+
+
         
