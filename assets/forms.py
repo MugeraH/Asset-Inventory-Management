@@ -8,13 +8,11 @@ class DepartmentForm(forms.ModelForm):
         model=Department
         fields= ('name',)
 
-
 class AssetForm(forms.ModelForm):
     class Meta:
         model=Asset
-        fields= '__all__'
-        exclude= ('is_assigned','created_at','modified_at',)
-
+        fields= ('name','description','image','category',)
+     
 
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:

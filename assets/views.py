@@ -132,11 +132,11 @@ def employeedetails(request,id):
     }
     return render(request,'assets/employeedetails.html', params)
 
-def employee_assets(request):
-    assets= EmployeeAsset.objects.all()
+# def employee_assets(request):
+#     assets= EmployeeAsset.objects.all()
 
-    params= {'assets': assets}
-    return render(request,'assets/employee_assets.html', params)
+#     params= {'assets': assets}
+#     return render(request,'assets/employee_assets.html', params)
 
 
 def employeerequests(request):
