@@ -21,8 +21,7 @@ class EmployeeAssetRequestForm(forms.ModelForm):
         fields= '__all__'
         exclude= ('user',)
 
-
-class ManagerRequest(forms.ModelForm):
+class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
         fields= '__all__'

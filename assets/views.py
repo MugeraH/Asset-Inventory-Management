@@ -1,10 +1,11 @@
 from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequest
-from . models import EmployeeAsset,EmployeeAssetRequest,Department
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm
+from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,Profile
+import sys
+sys.path.append("..")
 from users.models import User
-
 # third party imports
 
 from django.views import generic 
@@ -14,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 import datetime as dt
 
 
-
+# @login_required(login_url='/login')
 def HomePageView(request):
   
     return render(request,'assets/home.html')
@@ -41,10 +42,7 @@ def departments(request):
           'department':department,
       }
       return render(request,'assets/departments.html', params)
-
-
 def add_departments(request):
-   
     if request.method == 'POST':
         form=DepartmentForm(request.POST,request.FILES)
         if form.is_valid():
@@ -55,12 +53,11 @@ def add_departments(request):
         form=DepartmentForm()
     params={
         'form':form,
-        
     }
     return render(request,'assets/adddep.html', params)
 
-def update_department(request, dept_id):
-    dept_id = int(dept_id)
+def update_department(request, id):
+    dept_id = int(id)
     try:
         dept = Department.objects.get(id = dept_id)
     except Department.DoesNotExist:
@@ -79,9 +76,17 @@ def update_department(request, dept_id):
 def employees(request):
     employees= User.objects.all()
     params={
-        'assets':employees,
+        'employees':employees,
     }
     return render(request,'assets/employees.html', params)
+
+@login_required(login_url='/login')
+def employeedetails(request,id):
+    employees= User.objects.get(id=id)
+    params={
+        'employees': employees
+    }
+    return render(request,'assets/employeedetails.html', params)
 
 def employee_assets(request):
     assets= EmployeeAsset.objects.all()
@@ -98,8 +103,48 @@ def employeerequests(request):
 
     return render(request,'assets/employee_request.html', params)
 
+    
+
+
+def employeeassetrequest(request):
+    if request.method == 'POST':
+        form=EmployeeAssetRequestForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=EmployeeAssetRequestForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/employee_request.html', params)
+
+def managerrequest(request):
+    if request.method == 'POST':
+        form=ManagerRequestForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=ManagerRequestForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/manager_request.html', params)
 @login_required(login_url='/login')
 def DashBoardView(request):
+        total_asset = Asset.objects.count()
+        total_department = Department.objects.count()
+        total_user = User.objects.count()
+        context = {
+        
+        'asset': total_asset,
+        'department': total_department,
+        'user' : total_user
     
-  
-    return render(request,'assets/dashboard.html')
+        
+
+        }
+        return render(request,'assets/dashboard.html',context)

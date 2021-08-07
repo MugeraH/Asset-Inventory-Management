@@ -1,8 +1,10 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import HomePageView,DashBoardView,employeerequests,employees,employeerequests
+
 from . import views
+from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails
+
 
 app_name ="assets"
 
@@ -17,8 +19,10 @@ urlpatterns=[
     path('add_department/',views.add_departments,name='departmentform'),
     path('employees', employees,name='employees'),
     path('employee_assets', views.employee_assets,name='employee_assets'),
-    path('employeerequests', employeerequests,name='employeerequests'),
+    path('employeerequests', employeeassetrequest,name='employeerequests'),
+    path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
     path('dashboard',DashBoardView,name='dashboard'),
+
 
 
  ]

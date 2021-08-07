@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3"></div>
+      
         <div class="col-md-7">
             <h2 class="mt-4">Employees</h2>
           
@@ -16,18 +16,22 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Admin</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Role</th>
                   </tr>
                 </thead>
 
-            {% for asset in assets %}
+            {% for employee in employees %}
            
                 <tbody>
-                  <tr>
-                    <th scope="row">{{ asset.id }}</th>
-                    <td>{{ asset.username }}</td>
-                    <td>{{ asset.email }}</td>
-                    <td>{{ asset.is_admin }} </td>
+                  <tr onclick="window.location='/employeedetails/{{employee.id}}'">
+                
+                    <th scope="row">{{ employee.id }}</th>
+                    <td>{{ employee.username }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.department.name }}</td>
+                    <td>{{ employee.is_admin }} </td>
+               
                   </tr>
                 
                 </tbody>
@@ -35,7 +39,7 @@
               </table>
               
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-md-5"></div>
     </div>
 </div>
 
