@@ -19,9 +19,7 @@ import datetime as dt
 
 def HomePageView(request):
     return render(request,'assets/home.html')
-def EmployeesView(request):
 
-    return render(request,'assets/employees.html')
 def  DashBoardView(request):
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
@@ -38,7 +36,7 @@ def  DashBoardView(request):
         }
         return render(request,'assets/dashboard.html',context)
 
-def asset(request):
+def add_asset(request):
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
@@ -119,9 +117,10 @@ def update_department(request, id):
     return render(request,'assets/apdatedep.html', params)
 
 
-@login_required(login_url='/login')
+
 def employees(request):
     employees= User.objects.all()
+
     params={
         'employees':employees,
     }
@@ -129,9 +128,9 @@ def employees(request):
 
 @login_required(login_url='/login')
 def employeedetails(request,id):
-    employees= User.objects.get(id=id)
+    employee= User.objects.get(id=id)
     params={
-        'employees': employees
+        'employee': employee
     }
     return render(request,'assets/employeedetails.html', params)
 
@@ -195,6 +194,7 @@ def requests(request):
 @login_required(login_url='/login')
 def requestdetails(request,id):
     requests= ManagerRequest.objects.get(id=id)
+    print(requests)
     params={
         'requests': requests
     }
