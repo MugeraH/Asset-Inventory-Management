@@ -19,6 +19,22 @@ import datetime as dt
 def HomePageView(request):
   
     return render(request,'assets/home.html')
+def EmployeesView(request):
+  
+    return render(request,'assets/employees.html')
+def  DashBoardView(request):
+        total_asset = Asset.objects.count()
+        total_department = Department.objects.count()
+        total_user = User.objects.count()
+        context = {
+        'assets': total_asset,
+        'departments': total_department,
+        'employees' : total_user
+        }
+        return render(request,'assets/dashboard.html',context)
+  
+       
+
 
 
 
@@ -136,18 +152,6 @@ def managerrequest(request):
         'form':form,
     }
     return render(request,'assets/manager_request.html', params)
-@login_required(login_url='/login')
-def DashBoardView(request):
-        total_asset = Asset.objects.count()
-        total_department = Department.objects.count()
-        total_user = User.objects.count()
-        context = {
-        
-        'asset': total_asset,
-        'department': total_department,
-        'user' : total_user
-    
-        
 
-        }
-        return render(request,'assets/dashboard.html',context)
+
+
