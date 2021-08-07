@@ -94,7 +94,7 @@ def add_departments(request):
         if form.is_valid():
             asset = form.save(commit=False)
             asset.save()
-            return redirect('/')
+            return redirect('assets:departments')
     else:
         form=DepartmentForm()
     params={
