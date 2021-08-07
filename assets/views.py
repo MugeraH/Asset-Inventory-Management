@@ -103,7 +103,10 @@ def employeerequests(request):
 
     return render(request,'assets/employee_request.html', params)
 
-    
+def assets(request):
+    assets=Asset.objects.all()
+    params= {'assets': assets}
+    return render(request,'assets/assets.html', params)
 
 
 def employeeassetrequest(request):
