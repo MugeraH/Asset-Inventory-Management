@@ -16,6 +16,8 @@ path('',HomePageView,name='home'),
 path('forms/',views.departments,name='forms'),
 path('update/department/<int:id>/',views.update_department,name='update_department'),
 path('departments/',views.departments,name='departments'),
+path('department_detail/<int:id>',views.department_detail,name='department_detail'),
+
 path('asset/',views.asset,name='assetform'),
 path('add_department/',views.add_departments,name='add_department'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),

@@ -1,20 +1,20 @@
 {%extends 'assets/base.html'%}
-{% load bootstrap4%}
-{% load static %}
-{%block content%}
-
-<div class="container " style='padding-top: 30px;margin-left: 80px;'>
-    <h1 class="mt-center">MANAGEMENT DEPARTMENTS</h1>
-    <p class="text-center">We ensure that all assets in departments are physically safeguarded and properly accounted for in our organization asset records</p>
-    <div class="container" style="width: 500px;margin-left: auto;display: flex; justify-content: space-between;">
-        <a href="/add_department"><button type="button" class="btn btn-success" >Add Department</button> </a></div> 
+<!-- bootstrap -->
+{% load static%}
+{% load bootstrap4 %}
+<!-- html -->
+{% block content %}
+<!-- content -->
+<div class="container-fluid p-4">
+    <h1 class="text-center text-success">DEPARTMENTS DETAILS</h1>
+    <hr>
     <div class="row row-cols-1 row-cols-md-3 g-6">
         {%for department in department%}
         <div class="col-6">
-            <a href="department_detail/{{department.id}}">
+            <a href="">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-success text-center">{{department.name}}</h5>
+                        <h5 class="card-department_detailtitle text-success text-center">{{department.name}}</h5>
                         <p class="card-text">{{department.description}}</p>
                         <p class="card-title"><mark>Head of Department {{department.manager}}</mark></p>
                         <a href="update/department/{{department.id}}"></a>
@@ -27,11 +27,5 @@
         </div>
         {%endfor%}
     </div>
-    
-    
 </div>
-
-
-
-​
-{% endblock %}
+{% endblock%}

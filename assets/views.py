@@ -12,10 +12,8 @@ from django.contrib.auth.decorators import login_required
 import datetime as dt
 
 
-
 def HomePageView(request):
     return render(request,'assets/home.html')
-
 
 
 def asset(request):
@@ -39,6 +37,14 @@ def departments(request):
         'department':department,
         }
         return render(request,'assets/departments.html', params)
+
+def department_detail(request,id):
+        department_details=Department.objects.get(id=id)
+        context={
+        'details': department_details,
+        }
+        return render(request,'assets/depdetails.html', context)
+
 def add_departments(request):
     if request.method == 'POST':
         form=DepartmentForm(request.POST,request.FILES)
@@ -52,6 +58,7 @@ def add_departments(request):
         'form':form,
     }
     return render(request,'assets/adddep.html', params)
+
 
 def update_department(request, id):
     dept_id = int(id)
@@ -83,6 +90,7 @@ def employeeassetrequest(request):
     }
     return render(request,'assets/employee_request.html', params)
 
+
 def managerrequest(request):
     if request.method == 'POST':
         form=ManagerRequestForm(request.POST,request.FILES)
@@ -96,6 +104,7 @@ def managerrequest(request):
         'form':form,
     }
     return render(request,'assets/manager_request.html', params)
+
 
 @login_required(login_url='/login')
 def DashBoardView(request):
