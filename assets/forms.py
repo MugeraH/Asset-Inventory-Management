@@ -19,11 +19,10 @@ class AssetForm(forms.ModelForm):
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
-        fields= '__all__'
-        exclude= ('quantity','status','employee',)
+        fields= ('type','request_detail',)
 
 class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
-        fields= '__all__'
-        exclude= ('status','employee',)
+        fields= ('request','specs',)
+        
