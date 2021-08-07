@@ -26,6 +26,7 @@ urlpatterns=[
     path('update/asset/<int:id>/',views.update_asset,name='update_asset'),
     path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
     path('managerrequest/',views.managerrequest,name='managerrequest'),
+    path('assetdetails/<int:id>', employeedetails,name='assetdetails'),
 
 
 
