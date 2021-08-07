@@ -1,0 +1,19 @@
+{%block content%}
+​
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <h3>Assets</h3>
+​
+            <hr>
+            {% for asset in asset%}
+​
+            <ul>
+                <li>{{ asset.name }} <a href="update/asset/{{asset.id}}"></a> </li>
+            </ul>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+​
+{% endblock %}

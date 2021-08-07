@@ -6,23 +6,22 @@ class DepartmentForm(forms.ModelForm):
         model=Department
         fields= ('name',)
 
-
 class AssetForm(forms.ModelForm):
     class Meta:
         model=Asset
-        fields= '__all__'
-        exclude= ('is_assigned','created_at','modified_at',)
-
+        fields= ('name','description','image','category',)
+     
 
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
-        fields= ('type','request_detail',)
+        fields= ('type','request_detail','quantity')
 
 class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
-        fields= ('request','specs',)
+        fields= ('request','specs','quantity')
+
 
 class DepartmentAssigningForm(forms.ModelForm):
     class Meta:
@@ -41,3 +40,4 @@ class EmployeeAssetForm(forms.ModelForm):
 
 
         
+
