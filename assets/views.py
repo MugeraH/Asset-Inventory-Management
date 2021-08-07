@@ -2,7 +2,7 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,Profile
+from . models import EmployeeAssetRequest,Department,Asset,Profile
 import sys
 sys.path.append("..")
 from users.models import User
@@ -141,11 +141,11 @@ def employeedetails(request,id):
     }
     return render(request,'assets/employeedetails.html', params)
 
-def employee_assets(request):
-    assets= EmployeeAsset.objects.all()
+# def employee_assets(request):
+#     assets= EmployeeAsset.objects.all()
 
-    params= {'assets': assets}
-    return render(request,'assets/employee_assets.html', params)
+#     params= {'assets': assets}
+#     return render(request,'assets/employee_assets.html', params)
 
 
 def employeerequests(request):
