@@ -3,8 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from . import views
-
-from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails,assets, update_asset
+from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails,assets,requests,requestdetails, update_asset
 
 
 
@@ -28,13 +27,16 @@ path('update/department/<int:id>/',views.update_department,name='departmentform'
 
 path('update/asset/<int:id>/',views.update_asset,name='assetform'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
-path('managerrequest/',views.managerrequest,name='managerrequest'),
 path('employeeasset',views.employeeasset,name='employeeasset'),
 path('assetassigning/',views.update_asset,name='assetassigning'),
 path('departmentassigning/',views.update_department,name='departmentform'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
 path('managerrequest/',views.managerrequest,name='managerrequest'),
 path('assetdetails/<int:id>', employeedetails,name='assetdetails'),
+
+path('requests', requests,name='requests'),
+path('requestdetails/<int:id>', requestdetails,name='requestdetails'),
+
 
 path('forms/',views.departments,name='forms'),
 path('update/department/<int:id>/',views.update_department,name='update_department'),
