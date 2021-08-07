@@ -27,7 +27,7 @@ class Asset(models.Model):
     name= models.CharField(max_length=50)
     description= models.TextField()
     image= CloudinaryField('image')
-    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='department_asset')
+    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='asset_department',null=True)
     category= models.CharField(max_length=50,choices=CATEGORY_CHOICES,default='furniture')
     created_at= models.DateTimeField(auto_now_add=True)
     modified_at= models.DateTimeField(auto_now=True)
@@ -38,7 +38,7 @@ class Asset(models.Model):
     
 class EmployeeAsset(models.Model):
     employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee')
-    asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset')
+    asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset',null=True)
     def __str__(self):
         return self.employee.username
     
