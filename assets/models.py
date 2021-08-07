@@ -10,6 +10,7 @@ from users.models import User
 
 class Department(models.Model):
     name= models.CharField(max_length=50)
+    description=models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     manager=models.ForeignKey(User,on_delete=models.CASCADE,related_name='department', null=True)
@@ -27,18 +28,20 @@ class Asset(models.Model):
     name= models.CharField(max_length=50)
     description= models.TextField()
     image= CloudinaryField('image')
-    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='department_asset')
+
+    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='asset_department',null=True)
+
     category= models.CharField(max_length=50,choices=CATEGORY_CHOICES,default='furniture')
     created_at= models.DateTimeField(auto_now_add=True)
-    modified_at= models.DateTimeField(auto_now=True)
+    updated_date= models.DateTimeField(auto_now=True)
     is_assigned= models.BooleanField(default=False)
- 
+
     def __str__(self):
         return self.name
     
 class EmployeeAsset(models.Model):
     employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee')
-    asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset')
+    asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset',null=True)
     def __str__(self):
         return self.employee.username
     
@@ -57,7 +60,7 @@ REQUEST_STATUS = (
 
 )
 class EmployeeAssetRequest(models.Model):
-    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee_asset_request')
+    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee_asset_request',null=True)
     type= models.CharField(max_length=50,choices=REQUESTTYPE_CHOICES,default='new_asset')
     request_detail= models.TextField()
     quantity= models.IntegerField(default=0)
@@ -65,24 +68,23 @@ class EmployeeAssetRequest(models.Model):
     posted_date=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f'{self.request_details} employee_request'
+        return f'{self.request_detail} employee_request'
     
 class ManagerRequest(models.Model):
     request= models.TextField()
     specs= models.TextField()
+    quantity= models.IntegerField(default=0)
     posted_date=models.DateTimeField(auto_now_add=True)
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
-    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='manager_request')
-   
+    employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='manager_request',null=True)
     def __str__(self):
         return f'{self.request} Manager_request'
-    
     
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = CloudinaryField('image', null=True)
-    phone = models.IntegerField(null=True)
+    phone = models.IntegerField(default="07100")
     bio = models.TextField(default='Bio...', max_length=100)
     department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department',null=True)
 
@@ -108,4 +110,4 @@ class Profile(models.Model):
     def filter_profile_by_id(cls, id):
         profile = Profile.objects.filter(user__id = id).first()
         return profile
-  
+

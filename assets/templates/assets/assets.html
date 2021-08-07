@@ -1,0 +1,54 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
+{%block content%}
+
+<div class="container-fluid">
+    <div class="row">
+
+
+        <div class="col-md-7 mt-4">
+            <div class="header d-flex flex-row  justify-content-between">
+                <h2>Assets</h2>
+                <a href="addasset/" class="btn btn-primary">Add asset</a>
+
+            </div>
+
+
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Department</th>
+
+                    </tr>
+                </thead>
+
+                {% for asset in assets %}
+
+                <tbody>
+                    <tr onclick="window.location='/assetdetails/{{asset.id}}'">
+
+                        <th scope="row">{{ asset.id }}</th>
+                        <td>{{ asset.name }}</td>
+                        <td>{{ asset.category }}</td>
+                        <td>{{ asset.department.name }}</td>
+
+
+                    </tr>
+
+                </tbody>
+                {% endfor %}
+            </table>
+
+
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</div>
+
+{% endblock%}
+

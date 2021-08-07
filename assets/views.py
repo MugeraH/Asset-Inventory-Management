@@ -4,8 +4,13 @@ from .forms import UserUpdateForm, ProfileUpdateForm
 from assets.models import Profile 
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm
-from . models import EmployeeAsset,EmployeeAssetRequest,Department
+
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm
+from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+
+import sys
+sys.path.append("..")
+from users.models import User
 # third party imports
 
 from django.views import generic 
@@ -15,14 +20,26 @@ from django.contrib.auth.decorators import login_required
 import datetime as dt
 
 
-
 def HomePageView(request):
-  
     return render(request,'assets/home.html')
 
+def  DashBoardView(request):
+        total_asset = Asset.objects.count()
+        total_department = Department.objects.count()
+        total_user = User.objects.count()
+        dept_employees=User.objects.count()
+        dept_assets=Asset.objects.count()
+        context = {
+        'assets': total_asset,
+        'departments': total_department,
+        'employees' : total_user,
+        'dept_employees':dept_employees,
+        'dept_assets':dept_assets
+        
+        }
+        return render(request,'assets/dashboard.html',context)
 
-
-def asset(request):
+def add_asset(request):
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
@@ -35,25 +52,57 @@ def asset(request):
         'form':form,
     }
     return render(request,'assets/addasset.html', params)
+
+def assets(request):
+    asset=Asset.objects.all()
+    params={
+        'asset':asset,
+    }
+    return render(request,'assets/assets.html', params)
+
+def update_asset(request):
+    if request.method == 'POST':
+        form=AssetAssigningForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=AssetAssigningForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/update_asset.html', params)
+    
+
 def departments(request):
-      department=Department.objects.all()
-      params={
-          'department':department,
-      }
-      return render(request,'assets/departments.html', params)
+        department=Department.objects.all()
+        params={
+        'department':department,
+        }
+        return render(request,'assets/departments.html', params)
+
+def department_detail(request,id):
+        department=Department.objects.get(id=id)
+        context={
+        'department': department,
+        }
+        return render(request,'assets/depdetails.html', context)
+
 def add_departments(request):
     if request.method == 'POST':
         form=DepartmentForm(request.POST,request.FILES)
         if form.is_valid():
             asset = form.save(commit=False)
             asset.save()
-            return redirect('/')
+            return redirect('assets:departments')
     else:
         form=DepartmentForm()
     params={
         'form':form,
     }
     return render(request,'assets/adddep.html', params)
+
 
 def update_department(request, id):
     dept_id = int(id)
@@ -63,12 +112,49 @@ def update_department(request, id):
         return redirect('/')
     form = DepartmentForm(request.POST or None, instance = dept)
     if form.is_valid():
-       form.save()
-       return redirect('/')
+        form.save()
+        return redirect('/')
     params={
         'form':form,
     }
-    return render(request,'assets/updatedep.html', params)
+    return render(request,'assets/apdatedep.html', params)
+
+
+
+def employees(request):
+    employees= User.objects.all()
+
+    params={
+        'employees':employees,
+    }
+    return render(request,'assets/employees.html', params)
+
+@login_required(login_url='/login')
+def employeedetails(request,id):
+    employee= User.objects.get(id=id)
+    params={
+        'employee': employee
+    }
+    return render(request,'assets/employeedetails.html', params)
+
+# def employee_assets(request):
+#     assets= EmployeeAsset.objects.all()
+
+#     params= {'assets': assets}
+#     return render(request,'assets/employee_assets.html', params)
+
+
+def employeerequests(request):
+    assets= EmployeeAssetRequest.objects.all()
+
+    params= {'assets': assets,}
+
+    return render(request,'assets/employee_request.html', params)
+
+def assets(request):
+    assets=Asset.objects.all()
+    params= {'assets': assets}
+    return render(request,'assets/assets.html', params)
 
 
 def employeeassetrequest(request):
@@ -85,6 +171,7 @@ def employeeassetrequest(request):
     }
     return render(request,'assets/employee_request.html', params)
 
+
 def managerrequest(request):
     if request.method == 'POST':
         form=ManagerRequestForm(request.POST,request.FILES)
@@ -98,11 +185,41 @@ def managerrequest(request):
         'form':form,
     }
     return render(request,'assets/manager_request.html', params)
+
 @login_required(login_url='/login')
-def DashBoardView(request):
-    
-  
-    return render(request,'assets/dashboard.html')
+def requests(request):
+    requests= ManagerRequest.objects.all()
+    params={
+        'requests':requests,
+    }
+    return render(request,'assets/requests.html',params)
+
+@login_required(login_url='/login')
+def requestdetails(request,id):
+    requests= ManagerRequest.objects.get(id=id)
+    print(requests)
+    params={
+        'requests': requests
+    }
+    return render(request,'assets/requestdetails.html', params)
+
+
+
+def employeeasset(request):
+    if request.method == 'POST':
+        form=EmployeeAssetForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=EmployeeAssetForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/employee_asset.html', params)
+
+
 
 @login_required
 def profile(request):
@@ -115,7 +232,7 @@ def profile(request):
             u_form.save()
             p_form.save()
             messages.success(request, f'Your account has been updated!')
-            return redirect('home')
+            return redirect('profile')
 
     else:
         u_form = UserUpdateForm(instance=request.user)

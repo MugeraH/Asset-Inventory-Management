@@ -1,12 +1,15 @@
 from pathlib import Path
 import os
-# import django_heroku
 import dj_database_url
+# import django_heroku
 from decouple import config,Csv
-
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-x#80y(mzl^@dr-*pbv4cevdizwbq-fez-j0otpdzz2nt4f#ch6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -27,14 +29,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Application definition
 
 INSTALLED_APPS = [
-      'assets',
-      'users',
-      'crispy_forms',
-     # installed dependancies
-     'rest_framework',  
-     'corsheaders', 
-     'cloudinary',
-     'bootstrap4', 
+    'assets',
+    'users',
+    # installed dependancies
+    'rest_framework',  
+    'corsheaders', 
+    'cloudinary',
+    'bootstrap4', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -78,30 +79,34 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'asset',
+#         'USER': 'ibrahim',
+#         'PASSWORD': 'secret',
+#         'HOST': 'localhost',
+#         'PORT': '5432'
 #     }
 # }
 # development
 if config('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
-       
-   }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': '',
+        }
+
+    }
 # production
 else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
@@ -174,10 +179,8 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = "/dashboard"
 LOGIN_URL = "/login"
 
-
 cloudinary.config(
-    cloud_name="juniorinstagram",
-    api_key="232389687371234",
-    api_secret="BisOIzyQwpW8ltS_RPtlzAnBXSg"
+    cloud_name="transformers",
+    api_key="514495512752333",
+    api_secret="WYVPmAG-pNZDXtnCYG-ODFpNq-c"
 )
-# django_heroku.settings(locals())

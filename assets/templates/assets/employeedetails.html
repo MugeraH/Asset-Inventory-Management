@@ -1,0 +1,61 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
+{%block content%}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+           <div class="header d-flex flex-row mt-4 mb-4 justify-content-between">
+            <h2 >Employees Details</h2>
+            <div class="dropdown" style="float:right;">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Actions
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Assign Role</a>
+                    <a class="dropdown-item" href="#">Assign asset</a>
+                    <a class="dropdown-item" href="#">Remove</a>
+                </div>
+            </div>
+           </div>
+           <hr>
+
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    <tr>
+
+                        <th scope="row">{{ employee.id }}</th>
+                        <td>{{ employee.username }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.department.name }}</td>
+                        <td>{{ employee.is_admin }} </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+{% endblock%}

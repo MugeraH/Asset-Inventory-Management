@@ -2,21 +2,37 @@
 {% load bootstrap4%}
 {% load static %}
 {%block content%}
-​
-<div class="container">
-    <div class="row">
-        <div class="col-md-5">
-            <h3>Departments</h3>
-​
-            <hr>
-            {% for department in department%}
-​
-            <ul>
-                <li>{{ department.name }} <a href="update/department/{{department.id}}"></a> </li>
-            </ul>
-            {%endfor%}
+
+
+<div class="container " style='padding-top: 30px;margin-left: 80px;'>
+    <h1 class="mt-center">MANAGEMENT DEPARTMENTS</h1>
+    <p class="text-center">We ensure that all assets in departments are physically safeguarded and properly accounted for in our organization asset records</p>
+    <div class="container" style="width: 00px;display: flex; justify-content: space-between;">
+        <a href="/add_department"><button type="button" class="btn btn-success" >Add Department</button> </a></div> 
+    <div class="row row-cols-1 row-cols-md-3 g-6">
+        {%for department in department%}
+        <div class="col-6">
+            <a href="/department_detail/{{department.id}}">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-success text-center">{{department.name}}</h5>
+                        <p class="card-text">{{department.description}}</p>
+                        <p class="card-title"><mark>Head of Department {{department.manager}}</mark></p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">{{department.created_at}}</small>
+                    </div>
+                </div>
+            </a>
+
         </div>
+        {%endfor%}
     </div>
+    
+    
 </div>
+
+
+
 ​
 {% endblock %}

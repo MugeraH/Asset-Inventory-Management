@@ -9,10 +9,8 @@ class User(AbstractUser):
     lastname   = models.CharField(max_length=255, unique=True)
     is_admin       = models.BooleanField(default=False) 
     
-    
     USERNAME_FIELD = 'username' 
     REQUIRED_FIELDS = []
     
 
- 
-        
+    

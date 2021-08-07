@@ -12,6 +12,7 @@ from django.contrib.auth.views import(
 from users.views import SignupView
 from assets import views as user_views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include("assets.urls")),
