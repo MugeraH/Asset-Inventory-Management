@@ -1,0 +1,63 @@
+{%extends 'assets/base.html'%} {% load bootstrap4%} {% load static %}
+<!-- content  -->
+{%block content%}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7 mt-4">
+      <div class="header d-flex flex-row justify-content-between">
+        <h2>Request Details</h2>
+        <div class="dropdown" style="float: right">
+          <button
+            class="btn btn-outline-primary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Dropdown button
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Update</a>
+            <a class="dropdown-item" href="#">Remove</a>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Department</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Specs</th>
+            <th scope="col">Date_added</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+
+        {% for request in requests %}
+
+        <tbody>
+          <tr onclick="window.location='/requesttdetails/{{request.id}}'">
+            <th scope="row">{{ request.id }}</th>
+            <td>{{ request.name }}</td>
+            <td>{{ request.category }}</td>
+            <td>{{ request.department.name }}</td>
+            <td>{{ request.quantity }}</td>
+            <td>{{ request.specs }}</td>
+            <td>{{ request.status }}</td>
+            <td>{{ request.date_added }}</td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="col-md-5"></div>
+  </div>
+</div>
+
+{% endblock%}

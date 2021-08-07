@@ -2,7 +2,7 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,Profile
+from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,Profile,ManagerRequest
 import sys
 sys.path.append("..")
 from users.models import User
@@ -180,6 +180,23 @@ def managerrequest(request):
         'form':form,
     }
     return render(request,'assets/manager_request.html', params)
+
+@login_required(login_url='/login')
+def requests(request):
+    requests= ManagerRequest.objects.all()
+    params={
+        'requests':requests,
+    }
+    return render(request,'assets/requests.html',params)
+
+@login_required(login_url='/login')
+def requestdetails(request,id):
+    requests= ManagerRequest.objects.get(id=id)
+    params={
+        'requests': requests
+    }
+    return render(request,'assets/requestdetails.html', params)
+
 
 
 
