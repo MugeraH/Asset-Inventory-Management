@@ -35,12 +35,36 @@ def asset(request):
         'form':form,
     }
     return render(request,'assets/addasset.html', params)
+
+def assets(request):
+      asset=Asset.objects.all()
+      params={
+          'asset':asset,
+      }
+      return render(request,'assets/assets.html', params)
+
+def update_asset(request, id):
+    asset_id = int(id)
+    try:
+        asset = Asset.objects.get(id = asset_id)
+    except Asset.DoesNotExist:
+        return redirect('/')
+    form = AssetForm(request.POST or None, instance = asset)
+    if form.is_valid():
+       form.save()
+       return redirect('/')
+    params={
+        'form':form,
+    }
+    return render(request,'assets/update_asset.html', params)
+
 def departments(request):
       department=Department.objects.all()
       params={
           'department':department,
       }
       return render(request,'assets/departments.html', params)
+
 def add_departments(request):
     if request.method == 'POST':
         form=DepartmentForm(request.POST,request.FILES)
