@@ -1,8 +1,10 @@
 from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,Profile
+
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm
+from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+
 import sys
 sys.path.append("..")
 from users.models import User
@@ -36,8 +38,6 @@ def  DashBoardView(request):
         }
         return render(request,'assets/dashboard.html',context)
 
-
-
 def asset(request):
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
@@ -52,6 +52,27 @@ def asset(request):
     }
     return render(request,'assets/addasset.html', params)
 
+def assets(request):
+    asset=Asset.objects.all()
+    params={
+        'asset':asset,
+    }
+    return render(request,'assets/assets.html', params)
+
+def update_asset(request):
+    if request.method == 'POST':
+        form=AssetAssigningForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=AssetAssigningForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/update_asset.html', params)
+    
 
 def departments(request):
         department=Department.objects.all()
@@ -114,11 +135,11 @@ def employeedetails(request,id):
     }
     return render(request,'assets/employeedetails.html', params)
 
-def employee_assets(request):
-    assets= EmployeeAsset.objects.all()
+# def employee_assets(request):
+#     assets= EmployeeAsset.objects.all()
 
-    params= {'assets': assets}
-    return render(request,'assets/employee_assets.html', params)
+#     params= {'assets': assets}
+#     return render(request,'assets/employee_assets.html', params)
 
 
 def employeerequests(request):
@@ -164,7 +185,19 @@ def managerrequest(request):
     return render(request,'assets/manager_request.html', params)
 
 
-@login_required(login_url='/login')
-def DashBoardView(request):
-    return render(request,'assets/dashboard.html')
+def employeeasset(request):
+    if request.method == 'POST':
+        form=EmployeeAssetForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('/')
+    else:
+        form=EmployeeAssetForm()
+    params={
+        'form':form,
+    }
+    return render(request,'assets/employee_asset.html', params)
+
+
 
