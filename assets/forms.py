@@ -4,7 +4,7 @@ from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,Emplo
 class DepartmentForm(forms.ModelForm):
     class Meta:
         model=Department
-        fields= ('name',)
+        fields= ('name','description')
 
 class AssetForm(forms.ModelForm):
     class Meta:
