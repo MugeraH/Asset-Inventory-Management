@@ -1,42 +1,87 @@
 {%extends 'assets/base.html'%}
 <!-- bootstrap -->
-{% load static%}
-{% load bootstrap4 %}
+{% load static%} {% load bootstrap4 %}
 <!-- html -->
 {% block content %}
 <!-- content -->
-<div class="container-fluid p-4">
-    <h1 class="text-center text-success">DEPARTMENTS DETAILS</h1>
-    <hr>
-    <div class="row row-cols-1 row-cols-md-3 g-6">
-        
-        <div class="col-6">
-            <a href="/departments">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <h5 class="card-title text-success text-center">{{department.name}}</h5>
-                        <p class="card-text">{{department.description}}</p>
-                        <p class="card-title"><mark>Head of Department {{department.manager}}</mark></p>
-                        <a href="update/department/{{department.id}}"></a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">{{department.created_at}}</small>
-                    </div>
-                </div>
-            </a>
-            
-        </div>
-        <div class="card" style="width: 8rem;">
-            <div class="card-header">
-                Actions
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Edit</li>
-                <li class="list-group-item">Add asset</li>
-                <li class="list-group-item">delete department</li>
-            </ul>
-        </div>
+<div class="p-5 mt-2">
+  <header>
+    <div>
+      <h1 class="">DEPARTMENTS DETAILS</h1>
+      <p class="p-0 m-0">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta, odit.
+      </p>
     </div>
-    
+    <div class="dropdown">
+      <button
+        class="btn btn-primary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Actions
+      </button>
+      <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Add Assets</a>
+        <a class="dropdown-item" href="#">Update Manager</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="mycard"><h4>Manager : Lucy</h4></div>
+  <div class="dep_detail">
+    <div class="row">
+      <div class="col-md-2 m-4 dep-card two d-flex">
+        <div class="title">
+          <h3>0</h3>
+          <h5>Employees</h5>
+        </div>
+        <div class="dash_icon">
+          <img src="../../static/icons/department.png" alt="" />
+        </div>
+      </div>
+      <div class="col-md-2 m-4 dep-card three d-flex">
+        <div class="title">
+          <h3>0</h3>
+          <h5>Assets</h5>
+        </div>
+        <div class="dash_icon">
+          <img src="../../static/icons/assets.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-6">
+    <div class="col-6">
+      <a href="/departments">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title text-success text-center">
+              {{department.name}}
+            </h5>
+            <p class="card-text">{{department.description}}</p>
+            <p class="card-title">
+              <mark>Head of Department {{department.manager}}</mark>
+            </p>
+            <a href="update/department/{{department.id}}"></a>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{department.created_at}}</small>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="card" style="width: 8rem">
+      <div class="card-header">Actions</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Edit</li>
+        <li class="list-group-item">Add asset</li>
+        <li class="list-group-item">delete department</li>
+      </ul>
+    </div>
+  </div>
 </div>
 {% endblock%}

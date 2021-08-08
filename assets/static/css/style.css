@@ -202,14 +202,14 @@ body {
   font-weight: 600;
 }
 
-.dash-card .dash_icon {
+.dash_icon {
   height: 60px;
   display: flex !important;
   align-items: center;
   justify-content: center;
   flex: 1;
 }
-.dash-card .dash_icon img {
+.dash_icon img {
   height: 100%;
 }
 .one {
@@ -220,4 +220,108 @@ body {
 }
 .three {
   background: rgb(6, 112, 112);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.shadow {
+  -webkit-box-shadow: 0px 1px 12px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 1px 12px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 1px 12px -1px rgba(0, 0, 0, 0.75);
+}
+
+.departments {
+}
+.departments .row {
+  width: 90%;
+  display: flex;
+
+  flex-wrap: wrap;
+}
+
+.mycard {
+  width: 200px !important;
+
+  color: rgb(16, 15, 15);
+  background: #fff;
+  border-radius: 5px;
+  padding: 14px;
+  margin: 20px 10px;
+
+  box-shadow: 3px 4px 7px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 4px 7px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 4px 7px 0px rgba(0, 0, 0, 0.75);
+}
+
+.departments .row .col-md-3 {
+  width: 27% !important;
+  cursor: pointer;
+  text-decoration: none;
+
+  color: rgb(16, 15, 15);
+  background: #fff;
+  border-radius: 5px;
+  padding: 14px;
+
+  box-shadow: 3px 4px 7px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 4px 7px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 4px 7px 0px rgba(0, 0, 0, 0.75);
+}
+
+.dep-card h3 {
+  font-weight: 600;
+  line-height: 7px;
+  padding: 10px 0px;
+}
+.dep-card h5 {
+  font-weight: 600;
+  line-height: 5px;
+  padding: 10px 0px;
+}
+
+.modal {
+  border-radius: 10px;
+}
+.modal-header {
+  background: rgb(30, 30, 211);
+}
+.modal-header .modal-title {
+  font-weight: 600;
+  color: white;
+}
+
+.modal-body textarea {
+  height: 150px;
+}
+
+.dep_detail .row {
+}
+
+.dep-card {
+  padding: 18px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.dep-card .title {
+  flex: 1;
+}
+
+.dep-card .title h5 {
+  font-weight: 600;
+}
+
+.dropdown-menu {
+  padding: 9px 1px;
+}
+.dropdown-item {
+  font-weight: 550;
+  margin: 7px 0px;
+  padding: 8px;
 }
