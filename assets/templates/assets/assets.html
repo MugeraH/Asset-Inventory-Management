@@ -6,12 +6,19 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div>
+            <a href="/add_department" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
+                Add Asset</a>
+        </div>
 
 
         <div class="col-md-7 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
                 <h2>Assets</h2>
-                <a href="addasset"><img src="https://img.icons8.com/ios/50/4a90e2/add--v1.png" alt="add asset"/></a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Assign asset
+                </button>
+                <a href="addasset"><img src="https://img.icons8.com/ios/50/4a90e2/add--v1.png" alt="add asset" /></a>
 
             </div>
 
@@ -23,7 +30,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">Category</th>
                         <th scope="col">Department</th>
-                     
+
 
                     </tr>
                 </thead>
@@ -37,8 +44,8 @@
                         <td>{{ asset.name }}</td>
                         <td>{{ asset.category }}</td>
                         <td>{{ asset.department.name }}</td>
-                        
-                        
+
+
 
 
                     </tr>
@@ -51,7 +58,30 @@
         </div>
         <div class="col-md-5"></div>
     </div>
+
+
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Asset</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form" method="post" novalidate enctype="multipart/form-data">
+                    {% csrf_token %} {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-success">Add</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 {% endblock%}
-

@@ -17,25 +17,13 @@
       {% endif %}
     </div>
     <div class="dropdown">
-      <button
-        class="btn btn-primary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
         Actions
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <!-- <a class="dropdown-item" href="#">Add Assets</a> -->
-        <a
-          class="dropdown-item"
-          href="#"
-          data-toggle="modal"
-          data-target="#staticBackdrop"
-          >Update Department</a
-        >
+        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">Update Department</a>
       </div>
     </div>
   </header>
@@ -100,35 +88,18 @@
 </div>
 
 <!-- update department manager modal -->
-<div
-  class="modal fade"
-  id="staticBackdrop"
-  data-backdrop="static"
-  data-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
-        <button
-          type="button"
-          class="close text-white"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           &times;
         </button>
       </div>
       <div class="modal-body">
-        <form
-          class="form"
-          method="post"
-          novalidate
-          enctype="multipart/form-data"
-        >
+        <form class="form" method="post" novalidate enctype="multipart/form-data">
           {% csrf_token %} {% bootstrap_form form layout='block' %}
           <button type="submit" class="btn btn-success">Update</button>
         </form>

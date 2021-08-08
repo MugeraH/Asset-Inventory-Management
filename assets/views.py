@@ -49,7 +49,7 @@ def addasset(request):
     else:
         form=AssetForm()
     params={
-        'form':form,
+        'form':form
     }
     return render(request,'assets/addasset.html', params)
 
