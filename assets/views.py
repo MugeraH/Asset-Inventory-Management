@@ -39,13 +39,13 @@ def  DashBoardView(request):
 
 
 def addasset(request):
-
+   
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
             asset = form.save(commit=False)
             asset.save()
-            return redirect('/')
+            return redirect('assets:assets')
     else:
         form=AssetForm()
     params={
@@ -53,13 +53,23 @@ def addasset(request):
     }
     return render(request,'assets/addasset.html', params)
 
-def assets(request):
+# def assets(request):
+#     asset=Asset.objects.all()
+#     form = AssetForm()
+#     if request.method == 'POST':
+#         form=AssetForm(request.POST,request.FILES)
+#     if form.is_valid():   
+#         asset = form.save(commit=False)
+#         asset.save()
+#         return redirect('assets:assets')
+#     else:
+#         form=AssetForm()    
 
-      asset=Asset.objects.all()
-      params={
-          'asset':asset,
-      }
-      return (request,'assets/assets.html', params)
+#     params={
+#           'asset':asset,
+#            'form':form
+#       }
+#     return render(request,'assets/assets.html', params)
 
 def assetdetails(request,id):
     asset=Asset.objects.get(id=id)
@@ -67,7 +77,6 @@ def assetdetails(request,id):
         'asset':asset
     }
 
-  
     return render(request,'assets/assetdetails.html', params)
 
 def update_asset(request, id):
