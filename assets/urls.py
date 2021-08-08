@@ -14,7 +14,7 @@ urlpatterns=[
     
 
 path('',HomePageView,name='home'),
-path('employees',views.EmployeesView,name='employees'),
+path('employees',views.employees,name='employees'),
 path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
    
 path('dashboard',DashBoardView,name='dashboard'),
