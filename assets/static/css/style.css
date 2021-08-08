@@ -182,7 +182,7 @@ body {
 .dashboard .row {
   width: 80%;
 
-  margin: 0 auto;
+  /* margin: 0 auto; */
   /* display: flex;
   justify-content: space-between; */
 }
@@ -305,7 +305,7 @@ header {
 .dep_detail .row {
 }
 
-.dep_detail .row .dep-card {
+.dep_detail .row .dep_det-card {
   padding: 18px 15px;
   display: flex;
   align-items: center;
@@ -313,11 +313,12 @@ header {
   border-radius: 5px;
 }
 
-.dep-card .title {
+.dep_det-card .title {
   flex: 1;
+  color: white;
 }
 
-.dep-card .title h5 {
+.dep_det-card .title h5 {
   font-weight: 600;
 }
 

@@ -7,10 +7,14 @@
 <div class="p-5 mt-2">
   <header>
     <div>
-      <h1 class="">DEPARTMENTS DETAILS</h1>
-      <p class="p-0 m-0">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta, odit.
-      </p>
+      <h1 class="">
+        <span style="text-transform: capitalize">{{department.name}}</span>
+        Department
+      </h1>
+      {% if department.description %}
+
+      <p class="p-0 m-0">{{department.description}}</p>
+      {% endif %}
     </div>
     <div class="dropdown">
       <button
@@ -23,17 +27,27 @@
       >
         Actions
       </button>
-      <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Add Assets</a>
-        <a class="dropdown-item" href="#">Update Manager</a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <!-- <a class="dropdown-item" href="#">Add Assets</a> -->
+        <a
+          class="dropdown-item"
+          href="#"
+          data-toggle="modal"
+          data-target="#staticBackdrop"
+          >Update Department</a
+        >
       </div>
     </div>
   </header>
 
-  <div class="mycard"><h4>Manager : Lucy</h4></div>
-  <div class="dep_detail">
+  <div class="mycard mt-5 mb-5">
+    <h4>
+      Manager : {% if department.manager %} {{department.manager}} {% endif %}
+    </h4>
+  </div>
+  <div class="dep_detail mt-5">
     <div class="row">
-      <div class="col-md-2 m-4 dep-card two d-flex">
+      <div class="col-md-2 m-4 dep_det-card two d-flex">
         <div class="title">
           <h3>0</h3>
           <h5>Employees</h5>
@@ -42,7 +56,7 @@
           <img src="../../static/icons/department.png" alt="" />
         </div>
       </div>
-      <div class="col-md-2 m-4 dep-card three d-flex">
+      <div class="col-md-2 m-4 dep_det-card three d-flex">
         <div class="title">
           <h3>0</h3>
           <h5>Assets</h5>
@@ -54,7 +68,7 @@
     </div>
   </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-6">
+  <!-- <div class="row row-cols-1 row-cols-md-3 g-6">
     <div class="col-6">
       <a href="/departments">
         <div class="card h-100">
@@ -81,6 +95,48 @@
         <li class="list-group-item">Add asset</li>
         <li class="list-group-item">delete department</li>
       </ul>
+    </div>
+  </div> -->
+</div>
+
+<!-- update department manager modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="form"
+          method="post"
+          novalidate
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {% bootstrap_form form layout='block' %}
+          <button type="submit" class="btn btn-success">Update</button>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
     </div>
   </div>
 </div>
