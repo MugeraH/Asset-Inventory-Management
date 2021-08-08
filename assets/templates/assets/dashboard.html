@@ -64,8 +64,24 @@
     </div>
   </div>
   {%else%}
-  <div class="row">
-    <h3>Employee view</h3>
+  <div class="m-4">
+    <div class="row">
+      <div class="col-md-3 m-4 dash-card two">
+        <div class="title">
+          <h3>{{employee.assets}}</h3>
+          <h3>0</h3>
+
+          <h6>Assets</h6>
+        </div>
+        <div class="dash_icon">
+          <img src="../../static/icons/assets.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-4">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, id!
+    </p>
   </div>
   {% endif %}
 </div>

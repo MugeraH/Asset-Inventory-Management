@@ -1,29 +1,33 @@
 {%extends 'assets/base.html'%}
 {% load bootstrap4%}
+
 {% load static %}
 
 {%block content%}
 
 <div class="container-fluid">
     <div class="row">
+        <a href="/employees" class="m-3 mt-3"> <img
+             src="https://img.icons8.com/flat-round/40/000000/back--v1.png" alt="backicon"/></a>
 
-        <div class="col-md-1"></div>
+
+       
         <div class="col-md-7">
-           <div class="header d-flex flex-row mt-4 mb-4 justify-content-between">
-            <h2 >Employees Details</h2>
-            <div class="dropdown" style="float:right;">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Actions
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Assign Role</a>
-                    <a class="dropdown-item" href="#">Assign asset</a>
-                    <a class="dropdown-item" href="#">Remove</a>
+            <div class="header d-flex flex-row mt-4 mb-4 justify-content-between">
+                <h2>Employees Details</h2>
+                <div class="dropdown" style="float:right;">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Assign Role</a>
+                        <a class="dropdown-item" href="#">Assign asset</a>
+                        <a class="dropdown-item" href="#">Remove</a>
+                    </div>
                 </div>
             </div>
-           </div>
-           <hr>
+            <hr>
 
             <table class="table mt-4">
                 <thead>
@@ -33,6 +37,7 @@
                         <th scope="col">Email</th>
                         <th scope="col">Department</th>
                         <th scope="col">Role</th>
+
                     </tr>
                 </thead>
 
@@ -40,17 +45,85 @@
                 <tbody>
                     <tr>
 
-                        <th scope="row">{{ employees.id }}</th>
-                        <td>{{ employees.username }}</td>
-                        <td>{{ employees.email }}</td>
-                        <td>{{ employees.department.name }}</td>
-                        <td>{{ employees.is_admin }} </td>
+                        <th scope="row">{{ employee.id }}</th>
+                        <td>{{ employee.username }}</td>
+                        <td>{{ employee.email }}</td>
+                        <td>{{ employee.department.name }}</td>
+                        <td>{{ employee.is_admin }} </td>
 
                     </tr>
 
                 </tbody>
 
             </table>
+
+            <div class="row">
+
+                <div class="col-md-8 m-4">
+                    <h3 style="text-decoration:underline">Assigned assets</h3>
+
+                    <hr>
+                    {% for asset in asset%}
+                    <ul>
+                        <li>{{asset.asset.name}} -- {{ asset.asset.description }}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-8 m-4">
+                    <h3 style="text-decoration:underline">Past Requests made</h3>
+                    {% for request in requests%}
+                    <ul>
+                        <li>{{request.type}} -- {{ request.quantity }}</li>
+                    </ul>
+                    {% endfor %}
+
+                </div>
+
+
+
+
+
+
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Assign asset
+            </button>
+            <div class="btn btn-primary">Assign Role</div>
+
+
+
+
+
+            <!-- Button trigger modal -->
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form" method="post" novalidate enctype="multipart/form-data">
+                                {% csrf_token %}
+                                ​
+                                {{form}}
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Assign</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </div>
