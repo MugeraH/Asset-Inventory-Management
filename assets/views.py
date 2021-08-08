@@ -169,7 +169,7 @@ def update_department(request, id):
 
 
 def employees(request):
-    employees= User.objects.all()
+    employees= Profile.objects.all()
 
     params={
         'employees':employees,
@@ -178,9 +178,9 @@ def employees(request):
 
 @login_required(login_url='/login')
 def employeedetails(request,id):
-    employee= User.objects.get(id=id)
-    asset=EmployeeAsset.objects.filter(employee=employee)
-    requests=EmployeeAssetRequest.objects.filter(employee=employee)
+    employee= Profile.objects.get(id=id)
+    asset=EmployeeAsset.objects.filter(employee=employee.user)
+    requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
 
     params={
         'employee': employee,

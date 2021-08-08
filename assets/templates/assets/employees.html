@@ -21,15 +21,20 @@
         {% for employee in employees %}
 
         <tbody>
-          <tr onclick="window.location='/employeedetails/{{employee.id}}'">
+          <tr
+            style="cursor: pointer"
+            onclick="window.location='/employeedetails/{{employee.id}}'"
+          >
             <th scope="row">{{ employee.id }}</th>
-            <td>{{ employee.username }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.department.name }}</td>
+            <td>{{ employee.user.username }}</td>
+            <td>{{ employee.user.email }}</td>
+            <td>{{ employee.department }}</td>
             <td>
-              {% if employee.is_admin %} Manager
+              {% if employee.user.is_admin %} Manager
               <!-- super -->
-              {%elif employee.is_superuser%} Admin {%else%} Employee {% endif %}
+              {%elif employee.user.is_superuser%} Admin {%else%}
+              <!-- employee -->
+              Employee {% endif %}
             </td>
           </tr>
         </tbody>

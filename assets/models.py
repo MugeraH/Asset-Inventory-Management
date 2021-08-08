@@ -88,6 +88,9 @@ class Profile(models.Model):
     bio = models.TextField(default='Bio...', max_length=100)
     department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department',null=True)
 
+    class Meta:
+        ordering = ["pk"]
+   
     def __str__(self):
         return f'{self.user.username} Profile'
     
