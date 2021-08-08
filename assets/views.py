@@ -74,15 +74,34 @@ def update_asset(request):
 
 def departments(request):
         department=Department.objects.all()
+        form = DepartmentForm()
+        if request.method == 'POST':
+            form=DepartmentForm(request.POST,request.FILES)
+        if form.is_valid():
+                asset = form.save(commit=False)
+                asset.save()
+                return redirect('assets:departments')
+        else:
+            form=DepartmentForm()
+   
         params={
         'department':department,
+         'form':form,
         }
         return render(request,'assets/departments.html', params)
 
 def department_detail(request,id):
+        form = DepartmentForm()
         department=Department.objects.get(id=id)
+        form = DepartmentForm(instance=department)
+        if request.method == "POST":
+            form = DepartmentForm(request.POST or None, instance = department)
+            if form.is_valid():
+                form.save()
+                return redirect('assets:department_detail', id)
         context={
         'department': department,
+         'form':form,
         }
         return render(request,'assets/depdetails.html', context)
 
@@ -110,7 +129,7 @@ def update_department(request, id):
     form = DepartmentForm(request.POST or None, instance = dept)
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('assets:department_detail', id)
     params={
         'form':form,
     }
