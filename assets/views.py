@@ -36,7 +36,10 @@ def  DashBoardView(request):
         }
         return render(request,'assets/dashboard.html',context)
 
-def add_asset(request):
+
+
+def addasset(request):
+
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
@@ -51,25 +54,53 @@ def add_asset(request):
     return render(request,'assets/addasset.html', params)
 
 def assets(request):
+
+      asset=Asset.objects.all()
+      params={
+          'asset':asset,
+      }
+      return (request,'assets/assets.html', params)
+
+def assetdetails(request,id):
+    asset=Asset.objects.get(id=id)
+    params={
+        'asset':asset
+    }
+
+  
+    return render(request,'assets/assetdetails.html', params)
+
+def update_asset(request, id):
+    asset_id = int(id)
+    try:
+        asset = Asset.objects.get(id = asset_id)
+    except Asset.DoesNotExist:
+        return redirect('/')
+    form = AssetForm(request.POST or None, instance = asset)
+    if form.is_valid():
+       form.save()
+       return redirect('/')
+
     asset=Asset.objects.all()
     params={
         'asset':asset,
     }
     return render(request,'assets/assets.html', params)
 
-def update_asset(request):
+def asign_asset(request):
     if request.method == 'POST':
-        form=AssetAssigningForm(request.POST,request.FILES)
+        form=DepartmentAssigningForm(request.POST,request.FILES)
         if form.is_valid():
             asset = form.save(commit=False)
             asset.save()
             return redirect('/')
     else:
         form=AssetAssigningForm()
+
     params={
         'form':form,
     }
-    return render(request,'assets/update_asset.html', params)
+    return render(request,'assets/employeedetails.html', params)
     
 
 def departments(request):
@@ -148,8 +179,13 @@ def employees(request):
 @login_required(login_url='/login')
 def employeedetails(request,id):
     employee= User.objects.get(id=id)
+    asset=EmployeeAsset.objects.filter(employee=employee)
+    requests=EmployeeAssetRequest.objects.filter(employee=employee)
+
     params={
-        'employee': employee
+        'employee': employee,
+        'asset': asset,
+        'requests': requests
     }
     return render(request,'assets/employeedetails.html', params)
 
@@ -202,6 +238,14 @@ def managerrequest(request):
     }
     return render(request,'assets/manager_request.html', params)
 
+def delete_employee(request, id):
+    id = int(id)
+    try:
+        employee = User.objects.get(id = id)
+    except Asset.DoesNotExist:
+        return redirect(request,'assets/employees.html')
+    employee.delete()
+    return redirect(request,'assets/employees.html')
 @login_required(login_url='/login')
 def requests(request):
     requests= ManagerRequest.objects.all()
@@ -236,4 +280,11 @@ def employeeasset(request):
     return render(request,'assets/employee_asset.html', params)
 
 
-
+def delete_asset(request, id):
+    id = int(id)
+    try:
+        asset = Asset.objects.get(id = id)
+    except Asset.DoesNotExist:
+        return redirect(request,'assets/assets.html')
+    asset.delete()
+    return redirect(request,'assets/assets.html')

@@ -56,6 +56,28 @@
     </div>
     <div class="col-md-4"></div>
   </div>
+
+  <div class="row">
+    <div class="col-md-8 m-4">
+      <h3 style="text-decoration: underline">Assigned assets</h3>
+
+      <hr />
+      {% for asset in asset%}
+      <ul>
+        <li>{{asset.asset.name}} -- {{ asset.asset.description }}</li>
+      </ul>
+      {% endfor %}
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 m-4">
+      <h3 style="text-decoration: underline">Past Requests made</h3>
+      {% for request in requests%}
+      <ul>
+        <li>{{request.type}} -- {{ request.quantity }}</li>
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
 {% endblock%}
