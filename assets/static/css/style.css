@@ -234,8 +234,7 @@ header {
   box-shadow: 0px 1px 12px -1px rgba(0, 0, 0, 0.75);
 }
 
-.departments {
-}
+
 .departments .row {
   width: 90%;
   display: flex;
@@ -300,9 +299,6 @@ header {
 
 .modal-body textarea {
   height: 150px;
-}
-
-.dep_detail .row {
 }
 
 .dep_detail .row .dep_det-card {
