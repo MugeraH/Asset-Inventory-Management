@@ -81,12 +81,20 @@ class ManagerRequest(models.Model):
         return f'{self.request} Manager_request'
     
     
+ROLES = (
+    ("Admin", "Admin"),
+    ("Employee", "Employee"),
+  
+
+)
+    
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = CloudinaryField('image', null=True)
     phone = models.IntegerField(default="07100")
     bio = models.TextField(default='Bio...', max_length=100)
-    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department',null=True)
+    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department',default='None')
+    role =  models.CharField(max_length=50,choices=ROLES ,default='Employee')
 
     class Meta:
         ordering = ["pk"]

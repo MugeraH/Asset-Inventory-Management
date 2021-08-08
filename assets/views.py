@@ -2,7 +2,7 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
 from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 
 import sys
@@ -54,12 +54,19 @@ def addasset(request):
     return render(request,'assets/addasset.html', params)
 
 def assets(request):
-
-      asset=Asset.objects.all()
-      params={
-          'asset':asset,
-      }
-      return (request,'assets/assets.html', params)
+    assets=Asset.objects.all()
+    form=AssetForm()
+    if request.method == 'POST':
+        form=AssetForm(request.POST,request.FILES)
+        if form.is_valid():
+            asset = form.save(commit=False)
+            asset.save()
+            return redirect('assets:assets')
+    else:
+        form=AssetForm()
+    
+    params= {'assets': assets,'form':form,}
+    return render(request,'assets/assets.html', params)
 
 def assetdetails(request,id):
     asset=Asset.objects.get(id=id)
@@ -108,7 +115,7 @@ def departments(request):
         form = DepartmentForm()
         if request.method == 'POST':
             form=DepartmentForm(request.POST,request.FILES)
-        if form.is_valid():
+            if form.is_valid():
                 asset = form.save(commit=False)
                 asset.save()
                 return redirect('assets:departments')
@@ -176,16 +183,50 @@ def employees(request):
     }
     return render(request,'assets/employees.html', params)
 
+
+
 @login_required(login_url='/login')
 def employeedetails(request,id):
     employee= Profile.objects.get(id=id)
+    user = User.objects.get(id=id)
     asset=EmployeeAsset.objects.filter(employee=employee.user)
     requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
+    
+    form = EmployeeProfile(instance = employee)
+   
+    
+    
+    if request.method == 'POST':
+        form= EmployeeProfile(request.POST,instance = employee)
+      
+        if form.is_valid() :
+        
+            dept = form.cleaned_data['department']
+            
+           
+            department = Department.objects.get(name=dept)
+            role = form.cleaned_data['role']
+            if role == "Admin":
+                department.manager=user
+                department.save()
+                user.is_admin=True
+                user.save()
+            else:
+                department.manager=None
+                department.save()
+                user.is_admin=False
+                user.save()
+           
+            form.save()
+            return redirect('assets:employeedetails',id=id)
+   
 
     params={
         'employee': employee,
         'asset': asset,
-        'requests': requests
+        'requests': requests,
+        'form': form,
+       
     }
     return render(request,'assets/employeedetails.html', params)
 
@@ -203,10 +244,7 @@ def employeerequests(request):
 
     return render(request,'assets/employee_request.html', params)
 
-def assets(request):
-    assets=Asset.objects.all()
-    params= {'assets': assets}
-    return render(request,'assets/assets.html', params)
+
 
 
 def employeeassetrequest(request):
