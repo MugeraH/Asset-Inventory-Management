@@ -154,7 +154,11 @@
         </div>
       </div>
       {% endif %}
-      <div class="home_content">{%block content%} {%endblock content%}</div>
+      <div class="home_content">
+        <div class="container-fluid">
+          {%block content%} {%endblock content%}
+        </div>
+      </div>
     </div>
     {%include "assets/scripts.html"%} {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

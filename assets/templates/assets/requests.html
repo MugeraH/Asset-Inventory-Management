@@ -1,0 +1,50 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
+{%block content%}
+
+<div class="container-fluid">
+    <div class="row">
+      
+        <div class="col-md-7">
+            <h2 class="mt-4">Requests</h2>
+          
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Posted_date</th>
+                    <th scope="col">Specs</th>
+                    <th scope="col">Status</th>
+                    
+                  </tr>
+                </thead>
+
+            {% for request in requests %}
+           
+                <tbody>
+                  <tr onclick="window.location='/requestdetails/{{request.id}}'">
+                
+                    <th scope="row">{{ request.id }}</th>
+                    <td>{{ request.username }}</td>
+                    <td>{{ employee.department.name }}</td>
+                    <td>{{ request.quantity }}</td>
+                    <td>{{ request.posted_date }}</td>
+                    <td>{{ request.is_admin }} </td>
+               
+                  </tr>
+                
+                </tbody>
+                {% endfor %}
+              </table>
+              
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+</div>
+
+{% endblock%}
