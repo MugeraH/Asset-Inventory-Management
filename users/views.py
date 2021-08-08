@@ -1,17 +1,12 @@
 from django.shortcuts import render,redirect,reverse
 
-# from django.views.generic import TemplateView,ListView,DetailView,UpdateView,CreateView,DeleteView same as below
 from django.views import generic 
-# from .models import Lead,Agent
 from .forms import CustomUserCreationForm
 # from .email import send_welcome_email
 from django.core.mail import send_mail
 from django.contrib.auth import login, authenticate
 import datetime as dt
 
-# from agents.mixins import OrganiserAndLoginRequiredMixin
-
-# from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 

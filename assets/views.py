@@ -19,6 +19,8 @@ import datetime as dt
 
 def HomePageView(request):
     return render(request,'assets/home.html')
+
+    
 def EmployeesView(request):
 
     return render(request,'assets/employees.html')

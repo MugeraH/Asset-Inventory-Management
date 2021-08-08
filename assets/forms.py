@@ -10,7 +10,7 @@ class AssetForm(forms.ModelForm):
     class Meta:
         model=Asset
         fields= ('name','description','image','category',)
-     
+
 
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
