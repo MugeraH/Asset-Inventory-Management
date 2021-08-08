@@ -261,6 +261,10 @@ header {
   width: 27% !important;
   cursor: pointer;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 
   color: rgb(16, 15, 15);
   background: #fff;
@@ -301,7 +305,7 @@ header {
 .dep_detail .row {
 }
 
-.dep-card {
+.dep_detail .row .dep-card {
   padding: 18px 15px;
   display: flex;
   align-items: center;
