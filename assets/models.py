@@ -14,6 +14,9 @@ class Department(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     manager=models.ForeignKey(User,on_delete=models.CASCADE,related_name='department', null=True)
+    
+    class Meta:
+        ordering = ["pk"]
 
     def __str__(self):
         return self.name
@@ -93,7 +96,7 @@ class Profile(models.Model):
     image = CloudinaryField('image', null=True)
     phone = models.IntegerField(default="07100")
     bio = models.TextField(default='Bio...', max_length=100)
-    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department',default='None')
+    department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='employee_department',null=True)
     role =  models.CharField(max_length=50,choices=ROLES ,default='Employee')
 
     class Meta:
