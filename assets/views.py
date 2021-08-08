@@ -40,8 +40,6 @@ def  DashBoardView(request):
 
 def addasset(request):
 
-
-
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
@@ -89,9 +87,9 @@ def update_asset(request, id):
     }
     return render(request,'assets/assets.html', params)
 
-def update_asset(request):
+def asign_asset(request):
     if request.method == 'POST':
-        form=AssetAssigningForm(request.POST,request.FILES)
+        form=DepartmentAssigningForm(request.POST,request.FILES)
         if form.is_valid():
             asset = form.save(commit=False)
             asset.save()
@@ -102,7 +100,7 @@ def update_asset(request):
     params={
         'form':form,
     }
-    return render(request,'assets/update_asset.html', params)
+    return render(request,'assets/employeedetails.html', params)
     
 
 def departments(request):
@@ -162,8 +160,13 @@ def employees(request):
 @login_required(login_url='/login')
 def employeedetails(request,id):
     employee= User.objects.get(id=id)
+    asset=EmployeeAsset.objects.filter(employee=employee)
+    requests=EmployeeAssetRequest.objects.filter(employee=employee)
+
     params={
-        'employee': employee
+        'employee': employee,
+        'asset': asset,
+        'requests': requests
     }
     return render(request,'assets/employeedetails.html', params)
 

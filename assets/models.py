@@ -45,7 +45,7 @@ class EmployeeAsset(models.Model):
     def __str__(self):
         return self.employee.username
     
-    
+        
     
 REQUESTTYPE_CHOICES = (
     ("new_asset", "new_asset"),
