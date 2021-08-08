@@ -5,42 +5,44 @@
 {%block content%}
 
 <div class="container-fluid">
-    <div class="row">
-      
-        <div class="col-md-7">
-            <h2 class="mt-4">Employees</h2>
-          
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Role</th>
-                  </tr>
-                </thead>
+  <div class="row">
 
-            {% for employee in employees %}
-           
-                <tbody>
-                  <tr onclick="window.location='/employeedetails/{{employee.id}}'">
-                
-                    <th scope="row">{{ employee.id }}</th>
-                    <td>{{ employee.username }}</td>
-                    <td>{{ employee.email }}</td>
-                    <td>{{ employee.department.name }}</td>
-                    <td>{{ employee.is_admin }} </td>
-               
-                  </tr>
-                
-                </tbody>
-                {% endfor %}
-              </table>
-              
-        </div>
-        <div class="col-md-5"></div>
+    <div class="col-md-7">
+      <h2 class="mt-4">Employees</h2>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Department</th>
+            <th scope="col">Role</th>
+
+
+          </tr>
+        </thead>
+
+        {% for employee in employees %}
+
+        <tbody>
+          <tr onclick="window.location='/employeedetails/{{employee.id}}'">
+
+            <th scope="row">{{ employee.id }}</th>
+            <td>{{ employee.username }}</td>
+            <td>{{ employee.email }}</td>
+            <td>{{ employee.department.name }}</td>
+            <td>{{ employee.is_admin }} </td>
+
+          </tr>
+
+        </tbody>
+        {% endfor %}
+      </table>
+
     </div>
+    <div class="col-md-5"></div>
+  </div>
 </div>
 
 {% endblock%}

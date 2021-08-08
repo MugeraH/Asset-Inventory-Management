@@ -43,7 +43,7 @@ def  DashBoardView(request):
 
 
 
-def asset(request):
+def addasset(request):
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
@@ -62,7 +62,7 @@ def assets(request):
       params={
           'asset':asset,
       }
-      return render(request,'assets/assets.html', params)
+      return (request,'assets/assets.html', params)
 
 def assetdetails(request,id):
     asset=Asset.objects.get(id=id)
@@ -190,13 +190,20 @@ def managerrequest(request):
     }
     return render(request,'assets/manager_request.html', params)
 
-
+def delete_employee(request, id):
+    id = int(id)
+    try:
+        employee = User.objects.get(id = id)
+    except Asset.DoesNotExist:
+        return redirect(request,'assets/employees.html')
+    employee.delete()
+    return redirect(request,'assets/employees.html')
 
 def delete_asset(request, id):
     id = int(id)
     try:
         asset = Asset.objects.get(id = id)
     except Asset.DoesNotExist:
-        return redirect('assets')
+        return redirect(request,'assets/assets.html')
     asset.delete()
-    return render(request,'assets/assets.html')
+    return redirect(request,'assets/assets.html')

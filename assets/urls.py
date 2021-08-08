@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from . import views
-from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails,assets,assetdetails
+from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails,assets,assetdetails,addasset
 
 
 app_name ="assets"
@@ -15,7 +15,7 @@ urlpatterns=[
     path('forms/',views.departments,name='forms'),
     path('update/department/<int:id>/',views.update_department,name='update_department'),
     path('departments/',views.departments,name='departments'), 
-    path('addasset',views.asset,name='assetform'),
+    path('addasset',views.addasset,name='assetform'),
     path('add_department/',views.add_departments,name='departmentform'),
     path('employees', employees,name='employees'),
     # path('employee_assets', views.employee_assets,name='employee_assets'),
