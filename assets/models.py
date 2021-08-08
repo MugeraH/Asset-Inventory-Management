@@ -10,6 +10,7 @@ from users.models import User
 
 class Department(models.Model):
     name= models.CharField(max_length=50)
+    description=models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     manager=models.ForeignKey(User,on_delete=models.CASCADE,related_name='department', null=True)
@@ -27,12 +28,14 @@ class Asset(models.Model):
     name= models.CharField(max_length=50)
     description= models.TextField()
     image= CloudinaryField('image')
+
     department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='asset_department',null=True)
+
     category= models.CharField(max_length=50,choices=CATEGORY_CHOICES,default='furniture')
     created_at= models.DateTimeField(auto_now_add=True)
     updated_date= models.DateTimeField(auto_now=True)
     is_assigned= models.BooleanField(default=False)
- 
+
     def __str__(self):
         return self.name
     
@@ -74,10 +77,8 @@ class ManagerRequest(models.Model):
     posted_date=models.DateTimeField(auto_now_add=True)
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     employee=models.ForeignKey(User,on_delete=models.CASCADE,related_name='manager_request',null=True)
-   
     def __str__(self):
         return f'{self.request} Manager_request'
-    
     
     
 class Profile(models.Model):
@@ -109,4 +110,4 @@ class Profile(models.Model):
     def filter_profile_by_id(cls, id):
         profile = Profile.objects.filter(user__id = id).first()
         return profile
-  
+
