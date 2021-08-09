@@ -26,14 +26,15 @@ urlpatterns=[
     path('delete/<int:id>/', views.delete_asset,name='delete_asset'),
 
 
-path('',HomePageView,name='home'),
+
 path('employees',views.employees,name='employees'),
 path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
 
 path('dashboard',DashBoardView,name='dashboard'),
+
 path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 
-path('dashboard',views.DashBoardView,name='dashboard'),
+
 
 path('department_detail/<int:id>',views.department_detail,name='department_detail'),
 path('assets/',views.assets,name='assets'),
@@ -44,7 +45,7 @@ path('assets/',views.assets,name='assets'),
 path('update/asset/<int:id>/',views.update_asset,name='assetform'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
 path('employeeasset',views.employeeasset,name='employeeasset'),
-path('assetassigning/',views.update_asset,name='assetassigning'),
+path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
 path('departmentassigning/',views.update_department,name='departmentform'),
 
 

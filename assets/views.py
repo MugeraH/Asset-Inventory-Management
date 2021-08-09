@@ -24,17 +24,22 @@ def HomePageView(request):
     return render(request,'assets/home.html')
 
 def  DashBoardView(request):
+        # if request.user.is_admin:
+        #     return redirect('assets:manager_dashboard')
+        department= Department.objects.get(manager=request.user.id)
+        dept_assets=Asset.objects.filter(department=department)
+        dept_employees=Profile.objects.filter(department=department)
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
-        total_user = User.objects.count()
-        dept_employees=User.objects.count()
-        dept_assets=Asset.objects.count()
+        total_user = User.objects.count()      
+       
         context = {
         'assets': total_asset,
         'departments': total_department,
+        'department':department,
         'employees' : total_user,
-        'dept_employees':dept_employees,
-        'dept_assets':dept_assets
+       'dept_assets':dept_assets,
+       'dept_employees': dept_employees
         
         }
         return render(request,'assets/dashboard.html',context)
@@ -97,20 +102,24 @@ def update_asset(request, id):
     }
     return render(request,'assets/assets.html', params)
 
-def asign_asset(request):
+def assign_asset(request,id):
+    asset=Asset.objects.get(id=id)
+    form =AssetAssigningForm(instance = asset)
     if request.method == 'POST':
-        form=DepartmentAssigningForm(request.POST,request.FILES)
+        form=AssetAssigningForm(request.POST,instance = asset)
         if form.is_valid():
             asset = form.save(commit=False)
+            asset.is_assigned = True
             asset.save()
-            return redirect('/')
+            return redirect('assets:assetdetails',id=id)
     else:
         form=AssetAssigningForm()
 
     params={
         'form':form,
+        'asset':asset
     }
-    return render(request,'assets/employeedetails.html', params)
+    return render(request,'assets/assignasset.html', params)
     
 
 def departments(request):
@@ -134,6 +143,8 @@ def departments(request):
 def department_detail(request,id):
         form = DepartmentForm()
         department=Department.objects.get(id=id)
+        employees= Profile.objects.filter(department=department)
+        assets=Asset.objects.filter(department=department)
         form = DepartmentForm(instance=department)
         if request.method == "POST":
             form = DepartmentForm(request.POST or None, instance = department)
@@ -143,6 +154,8 @@ def department_detail(request,id):
         context={
         'department': department,
          'form':form,
+         'assets':assets,
+         'employees':employees
         }
         return render(request,'assets/depdetails.html', context)
 
