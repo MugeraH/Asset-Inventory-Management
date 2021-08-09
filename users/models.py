@@ -12,5 +12,8 @@ class User(AbstractUser):
     USERNAME_FIELD = 'username' 
     REQUIRED_FIELDS = []
     
+    
+    class Meta:
+        ordering = ["pk"]
 
     

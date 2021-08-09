@@ -30,12 +30,15 @@
         href="{%url 'assets:department_detail' department.id%}"
         class="col-md-3 dep-card m-3 mt-5"
       >
-        <h3>{{department.name}}</h3>
+        <h3 style="text-transform: capitalize">{{department.name}}</h3>
 
         <h5>
-          Manager : {% if department.manager %} {{department.manager}}
+          Manager : {% if department.manager %} <span style="text-transform: capitalize;">{{department.manager}} </span>
+          
+          
           <!-- option -->
-          {% endif %}
+          {% endif  %}
+        
         </h5>
 
         <h5>Assets: 20</h5>
