@@ -1,60 +1,87 @@
-{%extends 'assets/base.html'%} {% load bootstrap4%} {% load static %}
-<!-- content  -->
+
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
 {%block content%}
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-7 mt-4">
-      <div class="header d-flex flex-row justify-content-between">
-        <h2>Request Details</h2>
-        <div class="dropdown" style="float: right">
-          <button
-            class="btn btn-outline-primary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            Dropdown button
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Update</a>
-            <a class="dropdown-item" href="#">Remove</a>
-          </div>
-        </div>
-      </div>
-      <hr />
-      <table class="table mt-4">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Department</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Specs</th>
-            <th scope="col">Date_added</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
+    <div class="row">
 
-        <tbody>
-          <tr onclick="window.location='/requestdetails/{{request.id}}'">
-            <th scope="row">{{ request.id }}</th>
-            <td>{{ request.name }}</td>
-            <td>{{ request.category }}</td>
-            <td>{{ request.department.name }}</td>
-            <td>{{ request.quantity }}</td>
-            <td>{{ request.specs }}</td>
-            <td>{{ request.date_added }}</td>
-            <td>{{ request.status }}</td>
-          </tr>
-        </tbody>
-      </table>
+        <div class="col-md-7 mt-4">
+            <div class="header d-flex flex-row  justify-content-between">
+                <h2>Request</h2>
+                <div class="dropdown" style="float:right;">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
+                        <!-- <a class="dropdown-item" href="#">Assign Department</a>
+                        <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a> -->
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <div class="card card-body">
+                        <div class="card-title" style="text-decoration: underline;">
+                            <h2>Request Details</h2>
+                        </div>
+                        <div class="card-title">
+                            <p> {{request.name}}</p>
+                            <hr>
+                            <ul class="p-4">
+                                <li>name: <strong>{{ request.employee }}</strong></li>
+                                <li>Request: <strong>{{ request.request }}</strong></li>
+                                <li>Status: <strong>{{ request.status }}</strong></li>
+                                <li>Created: <strong>{{ request.posted_date }}</strong></li>
+                                <li>Quantity: <strong>{{ request.quantity }}</strong></li>
+                                
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-5"></div>
     </div>
-    <div class="col-md-5"></div>
-  </div>
+   
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" method="post" novalidate enctype="multipart/form-data">
+                            {% csrf_token %}
+                            ​
+                            {{form}}
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Assign</button>
+                    </div>
+                </div>
+            </div>
+  
 </div>
 
 {% endblock%}

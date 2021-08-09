@@ -322,10 +322,26 @@ def requestdetails(request,id):
     requests= ManagerRequest.objects.get(id=id)
     print(requests)
     params={
-        'requests': requests
+        'request': requests
     }
     return render(request,'assets/requestdetails.html', params)
 
+# def requestdetails(request,id):
+#         requests=ManagerRequest.objects.get(id=id)
+#         employees= Profile.objects.filter(department=request)
+#         assets=Asset.objects.filter(department=request)
+#         if request.method == "POST":
+#             form = ManagerRequestForm(request.POST or None, instance = request)
+#             if form.is_valid():
+#                 form.save()
+#                 return redirect('assets:requestdetail', id=id)
+#         context={
+#         'request': requests,
+#          'form':form,
+#          'assets':assets,
+#          'employees':employees
+#         }
+#         return render(request,'assets/requestdetails.html', context)
 
 def employeeasset(request):
     if request.method == 'POST':
