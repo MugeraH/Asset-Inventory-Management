@@ -30,14 +30,17 @@
 
   <div class="mycard mt-5 mb-5">
     <h4>
-      Manager : {% if department.manager %} {{department.manager}} {% endif %}
+      Manager : {% if department.manager %}
+      <span style="text-transform: capitalize">{{department.manager}}</span>
+
+      {% endif %}
     </h4>
   </div>
   <div class="dep_detail mt-5">
     <div class="row">
       <div class="col-md-2 m-4 dep_det-card two d-flex">
         <div class="title">
-          <h3>0</h3>
+          <h3>{{employees.count}}</h3>
           <h5>Employees</h5>
         </div>
         <div class="dash_icon">
@@ -46,7 +49,7 @@
       </div>
       <div class="col-md-2 m-4 dep_det-card three d-flex">
         <div class="title">
-          <h3>0</h3>
+          <h3>{{assets.count}}</h3>
           <h5>Assets</h5>
         </div>
         <div class="dash_icon">

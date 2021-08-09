@@ -6,16 +6,26 @@
 
 <!-- content -->
 {%block content%} ​
+<<<<<<< HEAD
 <div class="container-fluid dashboard bg-secondary">
   <h2>Dashboard</h2>
+=======
+<div class="container-fluid dashboard">
+  {% if user.is_admin %}
+  <h1 class="mt-4 mb-4" style="text-transform: capitalize">
+    {{department.name}} Department
+  </h1>
+  {% endif %}
+  <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
+>>>>>>> 924aec634831d50feec264f62c5e2dc6f6616c52
   <!-- greeting -->
-  {% if user.is_superuser %}
+  <!-- {% if user.is_superuser %}
   <h3>Welcome Admin</h3>
   {%elif user.is_admin%}
   <h3>Welcome Manager</h3>
   {%else%}
   <h3>Welcome Employee</h3>
-  {% endif %}
+  {% endif %} -->
 
   <!-- row -->
 
@@ -38,7 +48,7 @@
         {% if user.is_superuser %}
         <h3>{{employees}}</h3>
         {%elif user.is_admin %}
-        <h3>{{dept_employees}}</h3>
+        <h3>{{ dept_employees.count}}</h3>
 
         {% endif %}
         <h6>Employees</h6>
@@ -53,8 +63,8 @@
         {% if user.is_superuser %}
         <h3>{{assets}}</h3>
         {%elif user.is_admin %}
-        <!-- <h3>{{employees}}</h3> -->
-        <h3>dp</h3>
+
+        <h3>{{dept_assets.count}}</h3>
         {% endif %}
         <h6>Assets</h6>
       </div>
