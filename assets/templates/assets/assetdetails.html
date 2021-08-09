@@ -16,9 +16,12 @@
                         Actions
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
-                        <!-- <a class="dropdown-item" href="#">Assign Department</a>
-                        <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a> -->
+                      {% if user.is_superuser %}
+                          <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
+                      {% endif %}
+
+                  
+                       
                     </div>
                 </div>
 

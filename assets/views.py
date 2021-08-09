@@ -21,16 +21,12 @@ def HomePageView(request):
     return render(request,'assets/home.html')
 
 def  DashBoardView(request):
-        # if request.user.is_admin:
-        #     return redirect('assets:manager_dashboard')
-        try:
-            department= Department.objects.get(manager=request.user.id)
-            dept_assets=Asset.objects.filter(department=department)
-            dept_employees=Profile.objects.filter(department=department)
-        except Department.DoesNotExist:
-            department=[]
-            dept_assets=[]
-            dept_employees=[]
+     
+        if request.user.is_admin:
+            return redirect('assets:manager_dashboard')
+       
+       
+           
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
@@ -38,8 +34,26 @@ def  DashBoardView(request):
         context = {
         'assets': total_asset,
         'departments': total_department,
-        'department':department,
+        
         'employees' : total_user,
+    
+        
+        }
+        return render(request,'assets/dashboard.html',context)
+    
+def  managerDashBoardView(request):
+       
+        
+        department= Department.objects.get(manager=request.user.id)
+        dept_assets=Asset.objects.filter(department=department)
+        dept_employees=Profile.objects.filter(department=department)
+       
+         
+       
+        context = {
+    
+        'department':department,
+      
        'dept_assets':dept_assets,
        'dept_employees': dept_employees
         
@@ -64,7 +78,12 @@ def addasset(request):
     return render(request,'assets/addasset.html', params)
 
 def assets(request):
+    if request.user.is_admin:
+            return redirect('assets:dept_assets')
+    
     assets=Asset.objects.all()
+    user=User.objects.get(id=request.user.id)
+    print(user)
     form=AssetForm()
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
@@ -75,13 +94,29 @@ def assets(request):
     else:
         form=AssetForm()
     
-    params= {'assets': assets,'form':form,}
+    params= {'assets': assets,'form':form,'user':user}
     return render(request,'assets/assets.html', params)
+
+def dept_assets(request):
+   
+    department= Department.objects.get(manager=request.user.id)
+    dept_assets=Asset.objects.filter(department=department)
+    user=User.objects.get(id=request.user.id)
+    print(dept_assets)
+  
+    
+    params= {'dept_assets': dept_assets,'user':user}
+    return render(request,'assets/departmentAsset.html',params)
+
+
+
+
 
 def assetdetails(request,id):
     asset=Asset.objects.get(id=id)
     params={
-        'asset':asset
+        'asset':asset,
+        
     }
 
   
@@ -211,7 +246,7 @@ def employeedetails(request,id):
     requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     
     form = EmployeeProfile(instance = employee)
-   
+    
     
     
     if request.method == 'POST':

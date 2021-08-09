@@ -46,7 +46,7 @@
         </thead>
 
         <tbody>
-          <tr >
+          <tr>
             <th scope="row">{{ employee.id }}</th>
             <td>{{ employee.user.username }}</td>
             <td>{{ employee.user.email }}</td>
@@ -65,7 +65,8 @@
     <div class="col-md-4"></div>
   </div>
 
-  <div class="row">
+  {% if not user.is_superuser or not user.is_admin %}
+  <!-- <div class="row">
     <div class="col-md-8 m-4">
       <h3 style="text-decoration: underline">Assigned assets</h3>
 
@@ -85,7 +86,8 @@
       </ul>
       {% endfor %}
     </div>
-  </div>
+  </div> -->
+  {% endif %}
 
   <!-- update department manager modal -->
   <div
