@@ -19,11 +19,6 @@ urlpatterns=[
     path('addasset',views.addasset,name='assetform'),
     path('add_department/',views.add_departments,name='departmentform'),
     path('employees', views.employees,name='employees'),
-    
- 
-  
-   
-   
  
     path('employeeassetrequest',views.employeeassetrequest,name='employeeassetrequest'),
     path('managerrequest/',views.managerrequest,name='managerrequest'),
@@ -44,28 +39,17 @@ path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 path('department_detail/<int:id>',views.department_detail,name='department_detail'),
 path('assets/',views.assets,name='assets'),
 
-
-
-
 path('update/asset/<int:id>/',views.update_asset,name='assetform'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
 path('employeeasset',views.employeeasset,name='employeeasset'),
 path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
-path('departmentassigning/',views.update_department,name='departmentform'),
+
 
 
 
 
 path('requests', views.requests,name='requests'),
 path('requestdetails/<int:id>', views.requestdetails,name='requestdetails'),
-
-
-
-
-
-
-
-
 path('add_departments/',views.add_departments,name='add_departments'),
 
 
