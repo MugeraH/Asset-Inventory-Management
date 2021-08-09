@@ -6,20 +6,20 @@
   <div class="row">
     <div class="col-md-7 mt-4">
       <div class="header d-flex flex-row justify-content-between">
-          <h2> Department Assets</h2>
+        <h2>Department Assets</h2>
         <!-- <a href="addasset"
           ><img
             src="https://img.icons8.com/ios/50/4a90e2/add--v1.png"
             alt="add asset"
         /></a> -->
-        <a
+        <!-- <a
           href="#"
           class="btn btn-primary"
           data-toggle="modal"
           data-target="#staticBackdrop"
         >
           Add Asset</a
-        >
+        > -->
       </div>
 
       <table class="table mt-4">
@@ -29,6 +29,7 @@
             <th scope="col">Name</th>
             <th scope="col">Category</th>
             <th scope="col">Department</th>
+            <th scope="col">Assigned To</th>
           </tr>
         </thead>
 
@@ -37,16 +38,23 @@
         <tbody>
           <tr
             style="cursor: pointer"
-            onclick="window.location='/assetdetails/{{asset.id}}'"
+            onclick="window.location='/assign_asset_user/{{asset.asset.id}}'"
           >
-            <th scope="row">{{ asset.id }}</th>
-            <td>{{ asset.name }}</td>
-            <td>{{ asset.category }}</td>
-            <td>{{ asset.department }}</td>
+            <th scope="row">{{ asset.asset.id }}</th>
+            <td>{{ asset.asset.name }}</td>
+            <td>{{ asset.asset.category }}</td>
+            <td>{{ asset.asset.department }}</td>
+            <td>{{ asset.employee.user.username }}</td>
             <td>
-              {% if not asset.is_assigned %}
+              {% if not asset.asset.is_assigned_user %}
               <a class="btn btn-sm btn-outline-primary" href="#">
                 Assign Employee</a
+              >
+              {% endif %} {% if asset.asset.is_assigned_user %}
+              <a
+                href="{%url 'assets:unassign_asset_user'  asset.asset.id   %}"
+                class="btn btn-sm btn-outline-danger"
+                >Unassign Employee</a
               >
               {% endif %}
             </td>

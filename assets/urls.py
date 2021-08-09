@@ -45,6 +45,8 @@ path('update/asset/<int:id>/',views.update_asset,name='assetform'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
 path('employeeasset',views.employeeasset,name='employeeasset'),
 path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
+path('assign_asset_user/<int:id>',views.assign_asset_user,name='assign_asset_user'),
+path('unassign_asset_user/<int:id>',views.unassign_asset_user,name='unassign_asset_user'),
 
 
 
