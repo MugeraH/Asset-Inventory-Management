@@ -23,9 +23,14 @@ def HomePageView(request):
 def  DashBoardView(request):
         # if request.user.is_admin:
         #     return redirect('assets:manager_dashboard')
-        department= Department.objects.get(manager=request.user.id)
-        dept_assets=Asset.objects.filter(department=department)
-        dept_employees=Profile.objects.filter(department=department)
+        try:
+            department= Department.objects.get(manager=request.user.id)
+            dept_assets=Asset.objects.filter(department=department)
+            dept_employees=Profile.objects.filter(department=department)
+        except Department.DoesNotExist:
+            department=[]
+            dept_assets=[]
+            dept_employees=[]
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
