@@ -284,13 +284,26 @@ def delete_employee(request, id):
         return redirect(request,'assets/employees.html')
     employee.delete()
     return redirect(request,'assets/employees.html')
+
+
 @login_required(login_url='/login')
 def requests(request):
     requests= ManagerRequest.objects.all()
+    form=ManagerRequestForm()
+    if request.method == 'POST':
+        form=ManagerRequestForm(request.POST,request.FILES)
+        if form.is_valid():
+            request = form.save(commit=False)
+            request.save()
+            return redirect('assets:requests')
+    else:
+        form=ManagerRequestForm()
+            
     params={
-        'requests':requests,
+        'requests':requests,'form':form,
     }
     return render(request,'assets/requests.html',params)
+
 
 @login_required(login_url='/login')
 def requestdetails(request,id):
@@ -302,6 +315,21 @@ def requestdetails(request,id):
     return render(request,'assets/requestdetails.html', params)
 
 
+# def addrequest(request):
+
+#     if request.method == 'POST':
+#         form=ManagerRequestForm(request.POST,request.FILES)
+#         if form.is_valid():
+#             request = form.save(commit=False)
+#             request.save()
+            
+#             return redirect('/')
+#     else:
+#         form=ManagerRequestForm()
+#     params={
+#         'form':form,
+#     }
+#     return render(request,'assets/addrequest.html', params)
 
 def employeeasset(request):
     if request.method == 'POST':
