@@ -24,22 +24,25 @@ def HomePageView(request):
     return render(request,'assets/home.html')
 
 def  DashBoardView(request):
-        # if request.user.is_admin:
-        #     return redirect('assets:manager_dashboard')
-        department= Department.objects.get(manager=request.user.id)
-        dept_assets=Asset.objects.filter(department=department)
-        dept_employees=Profile.objects.filter(department=department)
+        try:
+            department= Department.objects.get(manager=request.user.id)
+            dept_assets=Asset.objects.filter(department=department)
+            dept_employees=Profile.objects.filter(department=department)
+        except Department.DoesNotExist:
+            department=[]
+            dept_assets=[]
+            dept_employees=[]
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
-       
+
         context = {
         'assets': total_asset,
         'departments': total_department,
         'department':department,
         'employees' : total_user,
-       'dept_assets':dept_assets,
-       'dept_employees': dept_employees
+        'dept_assets':dept_assets,
+        'dept_employees': dept_employees
         
         }
         return render(request,'assets/dashboard.html',context)
@@ -93,8 +96,8 @@ def update_asset(request, id):
         return redirect('/')
     form = AssetForm(request.POST or None, instance = asset)
     if form.is_valid():
-       form.save()
-       return redirect('/')
+        form.save()
+        return redirect('/')
 
     asset=Asset.objects.all()
     params={
@@ -133,10 +136,10 @@ def departments(request):
                 return redirect('assets:departments')
         else:
             form=DepartmentForm()
-   
+
         params={
         'department':department,
-         'form':form,
+        'form':form,
         }
         return render(request,'assets/departments.html', params)
 
@@ -153,9 +156,9 @@ def department_detail(request,id):
                 return redirect('assets:department_detail', id)
         context={
         'department': department,
-         'form':form,
-         'assets':assets,
-         'employees':employees
+        'form':form,
+        'assets':assets,
+        'employees':employees
         }
         return render(request,'assets/depdetails.html', context)
 
@@ -209,17 +212,15 @@ def employeedetails(request,id):
     requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     
     form = EmployeeProfile(instance = employee)
-   
+
     
     
     if request.method == 'POST':
         form= EmployeeProfile(request.POST,instance = employee)
-      
         if form.is_valid() :
         
             dept = form.cleaned_data['department']
-            
-           
+
             department = Department.objects.get(name=dept)
             role = form.cleaned_data['role']
             if role == "Admin":
@@ -232,25 +233,20 @@ def employeedetails(request,id):
                 department.save()
                 user.is_admin=False
                 user.save()
-           
+    
             form.save()
             return redirect('assets:employeedetails',id=id)
-   
+
 
     params={
         'employee': employee,
         'asset': asset,
         'requests': requests,
         'form': form,
-       
     }
     return render(request,'assets/employeedetails.html', params)
 
-# def employee_assets(request):
-#     assets= EmployeeAsset.objects.all()
 
-#     params= {'assets': assets}
-#     return render(request,'assets/employee_assets.html', params)
 
 
 def employeerequests(request):
@@ -347,9 +343,7 @@ def delete_asset(request, id):
 def profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST,
-                                   request.FILES,
-                                   instance=request.user.profile)
+        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
@@ -370,6 +364,6 @@ def profile(request):
 def profile_page(request):
     profile = Profile.objects.all()
     context = {
-       'profile':profile
+        'profile':profile
 	}
     return render(request, 'assets/profile_view.html', context)
