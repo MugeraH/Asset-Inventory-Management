@@ -41,3 +41,6 @@ class SignupView(generic.CreateView):
 #     else:
 #         form = CustomUserCreationForm()
 #     return render(request, 'registration/signup.html', {'form': form})
+def HomePageView(request):
+  
+    return render(request,'users/home.html')

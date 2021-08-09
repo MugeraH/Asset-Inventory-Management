@@ -3,14 +3,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from . import views
-from .views import HomePageView,DashBoardView, update_asset
+from .views import HomePageView,DashBoardView, home, update_asset
 
 
 app_name ="assets"
 
 
 urlpatterns=[
-    
+path('', home, name='home'),  
 path('',HomePageView,name='home'),
 path('employees',views.EmployeesView,name='employees'),
 path('dashboard',DashBoardView,name='dashboard'),
