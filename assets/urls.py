@@ -19,9 +19,9 @@ urlpatterns=[
     path('addasset',views.addasset,name='assetform'),
     path('add_department/',views.add_departments,name='departmentform'),
     path('employees', views.employees,name='employees'),
-    
- 
-  
+    path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
+    path('myemployees', views.myemployees,name='myemployees'),
+    path('myemployeesdetails/<int:id>', views.myemployeesdetails,name='myemployeedetails'),
    
    
  
@@ -31,11 +31,10 @@ urlpatterns=[
     path('delete/<int:id>/', views.delete_asset,name='delete_asset'),
 
 
-path('',HomePageView,name='home'),
-path('employees',views.employees,name='employees'),
-path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
+
+
    
-path('dashboard',DashBoardView,name='dashboard'),
+
 path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 
 path('dashboard',views.DashBoardView,name='dashboard'),

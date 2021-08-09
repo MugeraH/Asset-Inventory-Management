@@ -1,0 +1,133 @@
+{%extends 'assets/base.html'%} {% load bootstrap4%} {% load static %}
+<!-- content -->
+{%block content%}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+      <div class="header d-flex flex-row mt-4 mb-4 justify-content-between">
+        <h2>Employees Details</h2>
+        <div class="dropdown" style="float: right">
+          <button
+            class="btn btn-primary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Actions
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a
+              class="dropdown-item"
+              href="#"
+              data-toggle="modal"
+              data-target="#staticBackdrop"
+              >Update</a
+            >
+            <!-- <a class="dropdown-item" href="#">Add to department</a>
+            <a class="dropdown-item" href="#">Assign asset</a>
+            <a class="dropdown-item" href="#">Remove</a> -->
+          </div>
+        </div>
+      </div>
+
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Department</th>
+            <th scope="col">Role</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr >
+            <th scope="row">{{ employee.id }}</th>
+            <td>{{ employee.user.username }}</td>
+            <td>{{ employee.user.email }}</td>
+            <td>{{ employee.department }}</td>
+            <td>
+              {% if employee.user.is_admin %} Manager
+              <!-- super -->
+              {%elif employee.user.is_superuser%} Admin {%else%}
+              <!-- employee -->
+              Employee {% endif %}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 m-4">
+      <h3 style="text-decoration: underline">Assigned assets</h3>
+
+      <hr />
+      {% for asset in asset%}
+      <ul>
+        <li>{{asset.asset.name}} -- {{ asset.asset.description }}</li>
+      </ul>
+      {% endfor %}
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8 m-4">
+      <h3 style="text-decoration: underline">Past Requests made</h3>
+      {% for request in requests%}
+      <ul>
+        <li>{{request.type}} -- {{ request.quantity }}</li>
+      </ul>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- update department manager modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Update Employee Details
+          </h5>
+          <button
+            type="button"
+            class="close text-white"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form
+            class="form"
+            method="post"
+            novalidate
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %}
+            <!-- form2 -->
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock%}
+</div>
