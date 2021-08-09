@@ -36,6 +36,7 @@ path('employees',views.employees,name='employees'),
 
    
 path('dashboard',DashBoardView,name='dashboard'),
+
 path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 
 
