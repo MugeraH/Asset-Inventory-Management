@@ -6,10 +6,6 @@
 
 <!-- content -->
 {%block content%} ​
-<<<<<<< HEAD
-<div class="container-fluid dashboard bg-secondary">
-  <h2>Dashboard</h2>
-=======
 <div class="container-fluid dashboard">
   {% if user.is_admin %}
   <h1 class="mt-4 mb-4" style="text-transform: capitalize">
@@ -17,7 +13,6 @@
   </h1>
   {% endif %}
   <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
->>>>>>> 924aec634831d50feec264f62c5e2dc6f6616c52
   <!-- greeting -->
   <!-- {% if user.is_superuser %}
   <h3>Welcome Admin</h3>

@@ -311,8 +311,9 @@ def employeeassetrequest(request):
     if request.method == 'POST':
         form=EmployeeAssetRequestForm(request.POST,request.FILES)
         if form.is_valid():
-            asset = form.save(commit=False)
-            asset.save()
+            request = form.save(commit=False)
+            request.employee=request.user.profile
+            request.save()
             return redirect('/')
     else:
         form=EmployeeAssetRequestForm()
@@ -348,11 +349,14 @@ def delete_employee(request, id):
 
 @login_required(login_url='/login')
 def requests(request):
+    # user=User.objects.filter(employee=request.user)
+    my_requests=EmployeeAssetRequest.objects.all()
     requests= ManagerRequest.objects.all()
     form=ManagerRequestForm()
     if request.method == 'POST':
         form=ManagerRequestForm(request.POST,request.FILES)
-        if form.is_valid():
+        myform=EmployeeAssetRequestForm(request.POST,request.FILES)
+        if form.is_valid() or myform.is_valid():
             request = form.save(commit=False)
             request.save()
             return redirect('assets:requests')
@@ -360,7 +364,7 @@ def requests(request):
         form=ManagerRequestForm()
             
     params={
-        'requests':requests,'form':form,
+        'requests':requests,'form':form,'my_requests':my_requests,
     }
     return render(request,'assets/requests.html',params)
 
@@ -368,28 +372,14 @@ def requests(request):
 @login_required(login_url='/login')
 def requestdetails(request,id):
     requests= ManagerRequest.objects.get(id=id)
+    employee_requests=EmployeeAssetRequest.objects.get(id=id)
     print(requests)
     params={
-        'request': requests
+        'requests': requests,
+        'employee_requests': employee_requests,
     }
     return render(request,'assets/requestdetails.html', params)
 
-# def requestdetails(request,id):
-#         requests=ManagerRequest.objects.get(id=id)
-#         employees= Profile.objects.filter(department=request)
-#         assets=Asset.objects.filter(department=request)
-#         if request.method == "POST":
-#             form = ManagerRequestForm(request.POST or None, instance = request)
-#             if form.is_valid():
-#                 form.save()
-#                 return redirect('assets:requestdetail', id=id)
-#         context={
-#         'request': requests,
-#          'form':form,
-#          'assets':assets,
-#          'employees':employees
-#         }
-#         return render(request,'assets/requestdetails.html', context)
 
 def employeeasset(request):
     if request.method == 'POST':

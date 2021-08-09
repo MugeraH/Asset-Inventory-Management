@@ -37,11 +37,11 @@
                             <p> {{request.name}}</p>
                             <hr>
                             <ul class="p-4">
-                                <li>name: <strong>{{ request.employee }}</strong></li>
-                                <li>Request: <strong>{{ request.request }}</strong></li>
-                                <li>Status: <strong>{{ request.status }}</strong></li>
-                                <li>Created: <strong>{{ request.posted_date }}</strong></li>
-                                <li>Quantity: <strong>{{ request.quantity }}</strong></li>
+                                <li>name: <strong>{{ employee_requests.employee.employee.username  }}</strong></li>
+                                <li>Request: <strong>{{ employee_requests.request_detail}}</strong></li>
+                                <li>Status: <strong>{{ employee_requests.status }}</strong></li>
+                                <li>Created: <strong>{{ employee_requests.posted_date }}</strong></li>
+                                <li>Quantity: <strong>{{ employee_requests.quantity }}</strong></li>
                                 
                             </ul>
 
