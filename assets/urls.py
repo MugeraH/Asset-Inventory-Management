@@ -20,11 +20,6 @@ urlpatterns=[
     path('add_department/',views.add_departments,name='departmentform'),
     path('employees', views.employees,name='employees'),
     
- 
-  
-   
-   
- 
     path('employeeassetrequest',views.employeeassetrequest,name='employeeassetrequest'),
     path('managerrequest/',views.managerrequest,name='managerrequest'),
     path('assetdetails/<int:id>', views.assetdetails,name='assetdetails'),
@@ -34,7 +29,7 @@ urlpatterns=[
 path('',HomePageView,name='home'),
 path('employees',views.employees,name='employees'),
 path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
-   
+
 path('dashboard',DashBoardView,name='dashboard'),
 path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 
