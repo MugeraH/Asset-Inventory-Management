@@ -280,7 +280,18 @@ def update_department(request, id):
 
 
 def employees(request):
+    if request.user.is_admin:
+            return redirect('assets:dept_employees')
     employees= Profile.objects.all()
+
+    params={
+        'employees':employees,
+    }
+    return render(request,'assets/employees.html', params)
+
+def dept_employees(request):
+    department= Department.objects.get(manager=request.user.id)
+    employees= Profile.objects.filter(department=department)
 
     params={
         'employees':employees,

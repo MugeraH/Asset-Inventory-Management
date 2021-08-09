@@ -28,6 +28,7 @@ urlpatterns=[
 
 
 path('employees',views.employees,name='employees'),
+path('dept_employees',views.dept_employees,name='dept_employees'),
 
    
 path('dashboard',DashBoardView,name='dashboard'),
