@@ -40,7 +40,7 @@ class Asset(models.Model):
         return self.name
     
 class EmployeeAsset(models.Model):
-    employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee')
+    employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee' ,null=True)
     asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset',null=True)
     def __str__(self):
         return self.employee.username
