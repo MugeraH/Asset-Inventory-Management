@@ -23,6 +23,9 @@ import datetime as dt
 def HomePageView(request):
     return render(request,'assets/home.html')
 
+def EmployeesView(request):
+      
+    return render(request,'assets/employees.html')
 def  DashBoardView(request):
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
@@ -218,6 +221,9 @@ def employeeasset(request):
         'form':form,
     }
     return render(request,'assets/employee_asset.html', params)
+
+def home(request):
+	return render(request, 'assets/home.html')
 
 
 

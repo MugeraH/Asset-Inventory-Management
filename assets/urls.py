@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 
 from . import views
 
+from .views import HomePageView,DashBoardView, home, update_asset
 
 
 app_name ="assets"
@@ -17,6 +18,10 @@ path('employees',views.employees,name='employees'),
 path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 
 path('dashboard',views.DashBoardView,name='dashboard'),
+path('', home, name='home'),  
+path('',HomePageView,name='home'),
+path('employees',views.EmployeesView,name='employees'),
+path('dashboard',DashBoardView,name='dashboard'),
 path('departments/',views.departments,name='departments'),
 path('department_detail/<int:id>',views.department_detail,name='department_detail'),
 path('assets/',views.assets,name='assets'),
