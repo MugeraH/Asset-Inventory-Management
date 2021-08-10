@@ -39,8 +39,6 @@
           </tr>
         </thead>
 
-        {% for request in requests %}
-
         <tbody>
           <tr onclick="window.location='/requestdetails/{{request.id}}'">
             <th scope="row">{{ request.id }}</th>
@@ -49,11 +47,10 @@
             <td>{{ request.department.name }}</td>
             <td>{{ request.quantity }}</td>
             <td>{{ request.specs }}</td>
-            <td>{{ request.status }}</td>
             <td>{{ request.date_added }}</td>
+            <td>{{ request.status }}</td>
           </tr>
         </tbody>
-        {% endfor %}
       </table>
     </div>
     <div class="col-md-5"></div>

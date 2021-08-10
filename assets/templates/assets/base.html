@@ -67,8 +67,11 @@
           <ul class="navbar-nav mr-auto p-0">
             {% if user.is_authenticated %}
             <li class="nav-item active p-0">
-              <a class="nav-link" href="/"
-                >Hello <span class="myname">{{user}}</span>
+              <a class="nav-link" href="/"></a>
+                <span class="myname">
+                  {% if user.is_superuser %} Admin {%elif user.is_admin%}
+                  Manager {%else%} Employee {% endif %}
+                </span>
                 <span class="sr-only">(current)</span></a
               >
             </li>
@@ -157,7 +160,11 @@
         </div>
       </div>
       {% endif %}
-      <div class="home_content">{%block content%} {%endblock content%}</div>
+      <div class="home_content">
+        <div class="container-fluid">
+          {%block content%} {%endblock content%}
+        </div>
+      </div>
     </div>
     {%include "assets/scripts.html"%} {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

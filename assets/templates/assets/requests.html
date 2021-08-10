@@ -10,16 +10,27 @@
         <div class="col-md-7">
             <h2 class="mt-4">Requests</h2>
           
+            <div>
+              <a
+                href="/add_request"
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#staticBackdrop"
+              >
+                Add Request</a
+              >
+            </div>
             <table class="table">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Department</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Posted_date</th>
                     <th scope="col">Specs</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Quantity</th>
+                    
                   </tr>
                 </thead>
 
@@ -30,8 +41,8 @@
                 
                     <th scope="row">{{ request.id }}</th>
                     <td>{{ request.username }}</td>
-                    <td>{{ request.quantity }}</td>
                     <td>{{ employee.department.name }}</td>
+                    <td>{{ request.quantity }}</td>
                     <td>{{ request.posted_date }}</td>
                     <td>{{ request.is_admin }} </td>
                
@@ -46,4 +57,44 @@
     </div>
 </div>
 
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Request</h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="form"
+          method="post"
+          novalidate
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {% bootstrap_form form layout='block' %}
+          <button type="submit" class="btn btn-success">Add</button>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
 {% endblock%}

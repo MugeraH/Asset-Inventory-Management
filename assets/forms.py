@@ -2,11 +2,23 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset
+from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset,Profile,User
 
+
+
+
+class EmployeeProfile(forms.ModelForm):
+    class Meta:
+        model=Profile
+        fields= ('department','role')
+        
+
+        
+        
 class DepartmentForm(forms.ModelForm):
     class Meta:
         model=Department
-        fields= ('name',)
+        fields= ('name','description')
 
 class AssetForm(forms.ModelForm):
     class Meta:
