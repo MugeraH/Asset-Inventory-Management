@@ -1,0 +1,65 @@
+{%extends 'assets/base.html'%}
+<!-- bootstrap -->
+{% load bootstrap4%}
+<!-- static -->
+{% load static %}
+
+<!-- content -->
+{%block content%} ​
+<div class="container-fluid dashboard">
+
+  <h1 class="mt-4 mb-4" style="text-transform: capitalize">
+    {{department.name}} Department
+  </h1>
+
+  <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
+  <!-- greeting -->
+  <!-- {% if user.is_superuser %}
+  <h3>Welcome Admin</h3>
+  {%elif user.is_admin%}
+  <h3>Welcome Manager</h3>
+  {%else%}
+  <h3>Welcome Employee</h3>
+  {% endif %} -->
+
+  <!-- row -->
+
+
+  <div class="row mt-5">
+
+
+    <div class="col-md-3 m-4 dash-card two">
+      <div class="title">
+    
+        <h3>{{ dept_employees.count}}</h3>
+
+        
+        <h6>Employees</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/company.png" alt="" />
+      </div>
+    </div>
+
+    <div class="col-md-3 m-4 dash-card three">
+      <div class="title">
+       
+
+        <h3>{{dept_assets.count}}</h3>
+        
+        <h6>Assets</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/assets.png" alt="" />
+      </div>
+    </div>
+  </div>
+ 
+
+    <p class="mt-4">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, id!
+    </p>
+  </div>
+
+</div>
+​ {% endblock %}
