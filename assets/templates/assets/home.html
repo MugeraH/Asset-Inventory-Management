@@ -67,9 +67,9 @@
         }
 
         /* Change the link color to #111 (black) on hover */
-        li a:hover {
+        /* li a:hover {
             background-color: #111;
-        }
+        } */
     </style>
 
     <!--====== PRELOADER PART START ======-->
@@ -117,59 +117,11 @@
             </button>
 
             <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
-                <div class="sidebar">
-
-                    <ul class="nav_list">
-                        <li>
-                            <a href="#">
-                                <i></i>
-                                <span class="link_name">Dashboard</span>
-                            </a>
-                            <span class="tooltip">text</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i></i>
-                                <span class="link_name">User</span>
-                            </a>
-                            <span class="tooltip">text</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i></i>
-                                <span class="link_name">Employees</span>
-                            </a>
-                            <span class="tooltip">text</span>
-                        </li>
-                        <li>
-                            <a href="/departments">
-                                <i></i>
-                                <span class="link_name">Department</span>
-                            </a>
-                            <span class="tooltip">text</span>
-                        </li>
-                        <li>
-                            <a href="/assets">
-                                <i></i>
-                                <span class="link_name">Assets</span>
-                            </a>
-                            <span class="tooltip">text</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i></i>
-                                <span class="link_name">Requests</span>
-                            </a>
-                            <span class="tooltip">text</span>
-                        </li>
-
-                        <span class="footer">lll</span>
-                    </ul>
-                </div>
+                
                 <ul class="navbar-nav mr-auto p-0">
                     {% if user.is_authenticated %}
                     <li class="nav-item active p-0">
-                        <a class="nav-link" href="/">Hello {{user}} <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Hello {{user}}, Welcome to an amazing Asset  Management application <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active p-0">
                         <a class="nav-link" href="{%url 'profile'%}">Profile </a>
@@ -205,7 +157,7 @@
                                     <div class="col-xl-6 col-lg-7 col-sm-10">
                                         <h2 class="carousel-title">WELCOME TO TARATIBU ASSETS</h2>
                                         <ul class="carousel-btn rounded-buttons">
-                                            <li><a class="main-btn rounded-three" href="#">GET STARTED</a></li>
+                                            <li><a class="main-btn rounded-three" href="{%url 'login'%}">GET STARTED</a></li>
                                             <li><a class="main-btn rounded-one" href="#">DOWNLOAD</a></li>
                                         </ul>
                                     </div>
