@@ -46,10 +46,7 @@ class AssetAssigningForm(forms.ModelForm):
         model=Asset
         fields= ('department',)
 
-class EmployeeAssetForm(forms.ModelForm):
-    class Meta:
-        model=EmployeeAsset
-        fields= ('employee',)
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()

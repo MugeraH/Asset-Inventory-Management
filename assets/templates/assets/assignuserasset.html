@@ -16,12 +16,10 @@
                         Actions
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      {% if user.is_superuser %}
-                          <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
-                      {% endif %}
-
-                  
-                       
+                        <a class="dropdown-item"  
+                         data-toggle="modal"
+          data-target="#staticBackdrop">Assign Asset to Employee</a>
+                   
                     </div>
                 </div>
 
@@ -39,10 +37,10 @@
                             <p> {{asset.name}}</p>
                             <hr>
                             <ul class="p-4">
-                                <li>Category: <strong>{{ asset.category }}</strong></li>
-                                <li>Department: <strong>{{ asset.department.name }}</strong></li>
-                                <li>Created <strong>{{ asset.created_at }}</strong></li>
-                                <li>Is Assigned?: <strong>{{ asset.is_assigned}}</li>
+                                <li>Category: <strong>{{ asset.asset.category }}</strong></li>
+                                <li>Department: <strong>{{ asset.asset.department.name }}</strong></li>
+                                <li>Created <strong>{{ asset.asset.created_at }}</strong></li>
+                                <li>Is Assigned?: <strong>{{ asset.asset.is_assigned}}</li>
                             </ul>
 
                         </div>
@@ -57,8 +55,13 @@
     </div>
    
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div   class="modal fade"
+    id="staticBackdrop"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -68,20 +71,32 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="form" method="post" novalidate enctype="multipart/form-data">
-                            {% csrf_token %}
-                            ​
-                            {{form}}
+                        <form action="{% url 'assets:assign_asset_user' asset.asset.id %}" class="form" method="post" novalidate enctype="multipart/form-data">
+                           
+       {% csrf_token %}
+                          
 
+<div class="form-group ">
+     <label for="select">Employee</label>
+                         ​ <select class="form-control" id="select" name="employee" >
+    <option selected></option>
+    {% for employee in employees  %}
+      <option value="{{employee.user.username}}">{{employee.user.username}}</option>
+    {% endfor %}
+   
+  </select>
+   
+  </div>
+
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Assign</button>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Assign</button>
-                    </div>
+                   
                 </div>
             </div>
-  
+        </div>
+
 </div>
 
 {% endblock%}
