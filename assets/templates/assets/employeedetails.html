@@ -8,6 +8,8 @@
     <div class="col-md-7">
       <div class="header d-flex flex-row mt-4 mb-4 justify-content-between">
         <h2>Employees Details</h2>
+
+        {% if user.is_superuser %}
         <div class="dropdown" style="float: right">
           <button
             class="btn btn-primary dropdown-toggle"
@@ -27,11 +29,9 @@
               data-target="#staticBackdrop"
               >Update</a
             >
-            <!-- <a class="dropdown-item" href="#">Add to department</a>
-            <a class="dropdown-item" href="#">Assign asset</a>
-            <a class="dropdown-item" href="#">Remove</a> -->
           </div>
         </div>
+        {%endif%}
       </div>
 
       <table class="table mt-4">
@@ -46,7 +46,7 @@
         </thead>
 
         <tbody>
-          <tr >
+          <tr>
             <th scope="row">{{ employee.id }}</th>
             <td>{{ employee.user.username }}</td>
             <td>{{ employee.user.email }}</td>
@@ -63,28 +63,6 @@
       </table>
     </div>
     <div class="col-md-4"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-8 m-4">
-      <h3 style="text-decoration: underline">Assigned assets</h3>
-
-      <hr />
-      {% for asset in asset%}
-      <ul>
-        <li>{{asset.asset.name}} -- {{ asset.asset.description }}</li>
-      </ul>
-      {% endfor %}
-    </div>
-    <div class="col-md-2"></div>
-    <div class="col-md-8 m-4">
-      <h3 style="text-decoration: underline">Past Requests made</h3>
-      {% for request in requests%}
-      <ul>
-        <li>{{request.type}} -- {{ request.quantity }}</li>
-      </ul>
-      {% endfor %}
-    </div>
   </div>
 
   <!-- update department manager modal -->
