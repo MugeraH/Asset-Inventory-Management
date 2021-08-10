@@ -234,7 +234,6 @@ header {
   box-shadow: 0px 1px 12px -1px rgba(0, 0, 0, 0.75);
 }
 
-
 .departments .row {
   width: 90%;
   display: flex;
@@ -258,6 +257,7 @@ header {
 
 .departments .row .col-md-3 {
   width: 27% !important;
+
   cursor: pointer;
   text-decoration: none;
   display: flex;
@@ -266,7 +266,7 @@ header {
   justify-content: flex-start;
 
   color: rgb(16, 15, 15);
-  background: #fff;
+  background: rgb(248, 247, 247);
   border-radius: 5px;
   padding: 14px;
 
@@ -277,13 +277,9 @@ header {
 
 .dep-card h3 {
   font-weight: 600;
-  line-height: 7px;
-  padding: 10px 0px;
 }
 .dep-card h5 {
   font-weight: 600;
-  line-height: 5px;
-  padding: 10px 0px;
 }
 
 .modal {
