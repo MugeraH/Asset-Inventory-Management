@@ -11,19 +11,25 @@
     <div class="col-md-8">
       <h2 class="mt-4"> Manager Requests</h2>
 
-
+      {% if user.is_superuser%}
+      <div></div>
+      {%elif user.is_staff%}
       <div>
+       
         <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
           Add Request</a>
+         
       </div>
+      {% endif%}
       <table class="table">
         <thead>
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Request</th>
-            <th scope="col">Status</th>
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+           
           </tr>
         </thead>
 
@@ -33,12 +39,12 @@
         <tbody>
           <tr onclick="window.location='/requestdetails/{{request.id}}'">
 
-            <th scope="row">{{ request.employee}}</th>
+            <th scope="row">{{ request.id}}</th>
             <td>{{ request.request }}</td>
-            <td>{{ request.status }}</td>
-            <td>{{ request.posted_date }}</td>
+            <td>{{ request.posted_date | date  }}</td>
             <td>{{ request.quantity }} </td>
-
+            <td>{{ request.status }}</td>
+           
           </tr>
 
         </tbody>
@@ -56,20 +62,29 @@
 
     <div class="col-md-8">
       <h2 class="mt-4">Employee Requests</h2>
+      {% if user.is_superuser %}
+      <div></div>
+      {% else %}
       <div>
         <a href="/employeeassetrequest" class="btn btn-success">
           Add Request</a>
       </div>
+      {% endif %}
+
+
+
+
 
 
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Type</th>
+            <th scope="col">ID</th>
             <th scope="col">Request</th>
-            <th scope="col">Status</th>
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+            
           </tr>
         </thead>
 
@@ -80,11 +95,12 @@
         <tbody>
           <tr onclick="window.location='/requestdetails/{{request.id}}'">
 
-            <th scope="row">{{ request.type}}</th>
-            <td>{{ request.request_detail }}</td>
-            <td>{{ request.status }}</td>
-            <td>{{ request.posted_date }}</td>
+            <th scope="row">{{ request.id}}</th>
+            <td>{{ request.request_detail }}({{ request.type }})</td>
+            <td>{{ request.posted_date | date }}</td>
             <td>{{ request.quantity }} </td>
+            <td>{{ request.status }}</td>
+          
             <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 
             </td>
@@ -128,7 +144,7 @@
             <th scope="row">{{ request.type}}</th>
             <td>{{ request.request_detail }}</td>
             <td>{{ request.status }}</td>
-            <td>{{ request.posted_date }}</td>
+            <td>{{ request.posted_date | date }}</td>
             <td>{{ request.quantity }} </td>
             <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 

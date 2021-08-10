@@ -20,8 +20,8 @@ urlpatterns=[
     path('add_department/',views.add_departments,name='departmentform'),
     path('employees', views.employees,name='employees'),
     path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
-    path('myemployees', views.myemployees,name='myemployees'),
-    path('myemployeesdetails/<int:id>', views.myemployeesdetails,name='myemployeedetails'),
+    # path('myemployees', views.myemployees,name='myemployees'),
+    # path('myemployeesdetails/<int:id>', views.myemployeesdetails,name='myemployeedetails'),
    
    
  
