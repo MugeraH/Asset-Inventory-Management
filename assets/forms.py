@@ -49,6 +49,9 @@ class EmployeeAssetForm(forms.ModelForm):
         model=EmployeeAsset
         fields= ('employee',)
 
-
+class EmployeeRequest(forms.ModelForm):
+    class Meta:
+        model=EmployeeAssetRequest
+        fields= ('status',)
         
 

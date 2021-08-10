@@ -2,7 +2,7 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest
 from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 
 import sys
@@ -351,6 +351,7 @@ def delete_employee(request, id):
 def requests(request):
     # user=User.objects.filter(employee=request.user)
     my_requests=EmployeeAssetRequest.objects.all()
+    emp_requests=EmployeeAssetRequest.objects.all()
     requests= ManagerRequest.objects.all()
     form=ManagerRequestForm()
     if request.method == 'POST':
@@ -364,7 +365,7 @@ def requests(request):
         form=ManagerRequestForm()
             
     params={
-        'requests':requests,'form':form,'my_requests':my_requests,
+        'requests':requests,'form':form,'my_requests':my_requests,'emp_requests':emp_requests,
     }
     return render(request,'assets/requests.html',params)
 
@@ -373,10 +374,42 @@ def requests(request):
 def requestdetails(request,id):
     requests= ManagerRequest.objects.get(id=id)
     employee_requests=EmployeeAssetRequest.objects.get(id=id)
-    print(requests)
+    employee= Profile.objects.get(id=id)
+    user = User.objects.get(id=id)
+    requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
+    # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
+    
+    form = EmployeeRequest(instance = employee)
+        
+    if request.method == 'POST':
+            form= EmployeeRequest(request.POST,instance = employee)
+        
+            if form.is_valid() :
+            
+               
+                            
+                
+                status = form.cleaned_data['status']
+                if status == "approved":
+                    
+                    # request= form.save()
+                    employee.save()
+                    user.save()
+                    
+                    form.save()
+                else:
+                
+                    # request=
+                    employee.save()
+                    user.save()
+                    form.save()
+                    return redirect('assets:requestdetails',id=id)
+    
+    
     params={
         'requests': requests,
         'employee_requests': employee_requests,
+        'form': form,
     }
     return render(request,'assets/requestdetails.html', params)
 
