@@ -2,7 +2,7 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
 from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 
 import sys
@@ -24,9 +24,12 @@ def  DashBoardView(request):
      
         if request.user.is_admin:
             return redirect('assets:manager_dashboard')
+        
+        if not request.user.is_admin and not request.user.is_superuser:
+            return redirect('assets:employee_dashboard')
        
        
-           
+        
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
@@ -40,11 +43,21 @@ def  DashBoardView(request):
         
         }
         return render(request,'assets/dashboard.html',context)
+def  employeeDashBoardView(request):
+       
+     
+        asset = EmployeeAsset.objects.filter(employee__user=request.user.id) 
+          
+        context = {
+        'asset': asset,        
+        }
+        return render(request,'assets/employee_dashboard.html',context)
     
 def  managerDashBoardView(request):
        
         
         department= Department.objects.get(manager=request.user.id)
+        
         dept_assets=Asset.objects.filter(department=department)
         dept_employees=Profile.objects.filter(department=department)
        
@@ -80,6 +93,9 @@ def addasset(request):
 def assets(request):
     if request.user.is_admin:
             return redirect('assets:dept_assets')
+        
+    if not request.user.is_admin and not request.user.is_superuser:
+            return redirect('assets:employee_assets')
     
     assets=Asset.objects.all()
     user=User.objects.get(id=request.user.id)
@@ -109,6 +125,14 @@ def dept_assets(request):
     
     params= {'dept_assets': dept_assets,'user':user}
     return render(request,'assets/departmentAsset.html',params)
+
+def employee_assets(request):
+    assets = EmployeeAsset.objects.filter(employee__user=request.user.id) 
+           
+    context = {
+        'assets': assets,        
+        }
+    return render(request,'assets/employee_assets.html', context)
 
 
 
@@ -280,7 +304,18 @@ def update_department(request, id):
 
 
 def employees(request):
+    if request.user.is_admin:
+            return redirect('assets:dept_employees')
     employees= Profile.objects.all()
+
+    params={
+        'employees':employees,
+    }
+    return render(request,'assets/employees.html', params)
+
+def dept_employees(request):
+    department= Department.objects.get(manager=request.user.id)
+    employees= Profile.objects.filter(department=department)
 
     params={
         'employees':employees,
@@ -413,19 +448,7 @@ def requestdetails(request,id):
     return render(request,'assets/requestdetails.html', params)
 
 
-def employeeasset(request):
-    if request.method == 'POST':
-        form=EmployeeAssetForm(request.POST,request.FILES)
-        if form.is_valid():
-            asset = form.save(commit=False)
-            asset.save()
-            return redirect('/')
-    else:
-        form=EmployeeAssetForm()
-    params={
-        'form':form,
-    }
-    return render(request,'assets/employee_asset.html', params)
+
 
 
 def delete_asset(request, id):

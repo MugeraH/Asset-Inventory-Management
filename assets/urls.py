@@ -28,10 +28,13 @@ urlpatterns=[
 
 
 path('employees',views.employees,name='employees'),
+path('dept_employees',views.dept_employees,name='dept_employees'),
+path('employee_assets',views.employee_assets,name='employee_assets'),
 
    
 path('dashboard',DashBoardView,name='dashboard'),
 path('manager_dashboard',views.managerDashBoardView,name='manager_dashboard'),
+path('employee_dashboard',views.employeeDashBoardView,name='employee_dashboard'),
 
 path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 
@@ -43,7 +46,7 @@ path('dept_assets/',views.dept_assets,name='dept_assets'),
 
 path('update/asset/<int:id>/',views.update_asset,name='assetform'),
 path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
-path('employeeasset',views.employeeasset,name='employeeasset'),
+
 path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
 path('assign_asset_user/<int:id>',views.assign_asset_user,name='assign_asset_user'),
 path('unassign_asset_user/<int:id>',views.unassign_asset_user,name='unassign_asset_user'),
