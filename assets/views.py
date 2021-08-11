@@ -443,7 +443,7 @@ def requestdetails(request,id):
     requests= ManagerRequest.objects.get(id=id)
     print(requests)
     params={
-        'requests': requests
+        'request': requests
     }
     return render(request,'assets/requestdetails.html', params)
 
@@ -459,3 +459,5 @@ def delete_asset(request, id):
         return redirect(request,'assets/assets.html')
     asset.delete()
     return redirect(request,'assets/assets.html')
+
+

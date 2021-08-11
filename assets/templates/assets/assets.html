@@ -5,26 +5,27 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-7 mt-4">
-      <div class="header d-flex flex-row justify-content-between">
-        <h2>Assets</h2>
-
+      <div class="header d-flex flex-row justify-content-around " >
+      
+        <h2 class="aset" style="text-align: center;">Assets</h2>
+      </div>
+    </div>
         <!-- <a href="addasset"
           ><img
             src="https://img.icons8.com/ios/50/4a90e2/add--v1.png"
             alt="add asset"
         /></a> -->
-        {% if user.is_superuser %}
-        <a
+        <div class="col-md-5 mt-4">
+        <div class="header d-flex flex-row justify-content-around ">
+        <a style="text-align: left;"
           href="#"
           class="btn btn-primary"
           data-toggle="modal"
-          data-target="#staticBackdrop"
-        >
-          Add Asset</a
-        >
-        {% endif %}
+          data-target="#staticBackdrop">
+          Add Asset</a>      
+        </div>
       </div>
-
+  </div>
       <table class="table mt-4">
         <thead>
           <tr>
