@@ -9,7 +9,7 @@
 
         <div class="col-md-7 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
-                <h2>Request</h2>
+               {% if user.is_superuser%}
                 <div class="dropdown" style="float:right;">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -21,6 +21,7 @@
                         <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a> -->
                     </div>
                 </div>
+                {% endif%}
 
             </div>
 
@@ -61,7 +62,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Update Employee Details
+            Update Requests
           </h5>
           <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
             &times;

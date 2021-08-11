@@ -11,7 +11,7 @@
     <div class="col-md-8">
       <h2 class="mt-4"> Manager Requests</h2>
 
-      {% if user.is_superuser%}
+      {% if user.is_admin%}
       <div></div>
       {%elif user.is_staff%}
       <div>
@@ -129,9 +129,10 @@
           <tr>
             <th scope="col">Type</th>
             <th scope="col">Request</th>
-            <th scope="col">Status</th>
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+            
           </tr>
         </thead>
 
@@ -143,9 +144,10 @@
 
             <th scope="row">{{ request.type}}</th>
             <td>{{ request.request_detail }}</td>
-            <td>{{ request.status }}</td>
             <td>{{ request.posted_date | date }}</td>
             <td>{{ request.quantity }} </td>
+            <td>{{ request.status }}</td>
+           
             <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 
             </td>

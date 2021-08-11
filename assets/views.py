@@ -369,56 +369,6 @@ def employeedetails(request,id):
     }
     return render(request,'assets/employeedetails.html', params)
 
-# def myemployees(request):
-#     employees= Profile.objects.all()
-#     params={
-#         'employees':employees,
-#     }
-#     return render(request,'assets/myemployees.html', params)
-
-# def myemployeesdetails(request, id):
-#     employee= Profile.objects.get(id=id)
-#     user = User.objects.get(id=id)
-#     asset=EmployeeAsset.objects.filter(employee=employee.user)
-#     requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
-    
-#     form = EmployeeProfile(instance = employee)
-   
-#     if request.method == 'POST':
-#         form= EmployeeProfile(request.POST,instance = employee)
-      
-#         if form.is_valid() :
-        
-#             dept = form.cleaned_data['department']
-            
-           
-#             department = Department.objects.get(name=dept)
-#             role = form.cleaned_data['role']
-#             if role == "Admin":
-#                 department.manager=user
-#                 department.save()
-#                 user.is_admin=True
-#                 user.save()
-#             else:
-#                 department.manager=None
-#                 department.save()
-#                 user.is_admin=False
-#                 user.save()
-           
-#             form.save()
-#             return redirect('assets:employeedetails',id=id)
-   
-
-#     params={
-#         'employee': employee,
-#         'asset': asset,
-#         'requests': requests,
-#         'form': form,
-       
-#     }
-
-#     return render(request,'assets/myemployeesdetails.html', params)
-
 def employeerequests(request):
     assets= EmployeeAssetRequest.objects.all()
 
@@ -436,7 +386,7 @@ def employeeassetrequest(request):
             request = form.save(commit=False)
             # request.employee=request.profile
             request.save()
-            return redirect('assets: requests')
+            return redirect('/')
     else:
         form=EmployeeAssetRequestForm()
     params={
@@ -494,11 +444,11 @@ def requests(request):
 
 @login_required(login_url='/login')
 def requestdetails(request,id):
-    requests= ManagerRequest.objects.get(id=id)
+    # manager_requests= ManagerRequest.objects.get(id=id)
     employee_requests=EmployeeAssetRequest.objects.get(id=id)
     employee= Profile.objects.get(id=id)
-    user = User.objects.get(id=id)
-    requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
+    # user = User.objects.get(id=id)
+    # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     status= get_object_or_404(EmployeeAssetRequest,id=id)
     form = EmployeeRequest(instance = employee)
@@ -509,16 +459,14 @@ def requestdetails(request,id):
             if form.is_valid() :
                                 
                 form.save()
+                return redirect('assets:requestdetails',id=id)
+
             
              
-            else:
-                             
-                form.save()
-                return redirect('assets:requestdetails',id=id)
-    
+           
     
     params={
-        'requests': requests,
+        # 'requests': manager_requests,
         'employee_requests': employee_requests,
         'form': form,
     }
