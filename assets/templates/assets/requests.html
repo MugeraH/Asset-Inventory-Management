@@ -6,12 +6,14 @@
 
 <div class="container-fluid">
     <div class="row">
-      
-        <div class="col-md-7">
-            <h2 class="mt-4">Requests</h2>
-          
-            <div>
-              <a
+      <div class="col-md-7 mt-4">
+        <div class="header d-flex flex-row justify-content-around">
+            <h2>Requests</h2>
+        </div>
+      </div>
+      <div class="col-md-5 mt-4">
+      <div class="header d-flex flex-row justify-content-around ">
+              <a style="text-align: left;"
                 href="/add_request"
                 class="btn btn-success"
                 data-toggle="modal"
@@ -20,6 +22,8 @@
                 Add Request</a
               >
             </div>
+          </div>
+        </div>
             <table class="table">
                 <thead>
                   <tr>
@@ -34,7 +38,9 @@
             {% for request in requests %}
            
                 <tbody>
-                  <tr onclick="window.location='/requestdetails/{{request.id}}'">
+                  <tr 
+                  style="cursor: pointer"
+                  onclick="window.location='/requestdetails/{{request.id}}'">
                 
                     <th scope="row">{{ request.employee}}</th>
                     <td>{{ request.request }}</td>
@@ -49,6 +55,16 @@
               </table>
               
         </div>
+
+        <h5>
+          Manager : {% if request.manager %}
+          <span style="text-transform: capitalize"
+            >{{request.manager}}
+          </span>
+
+          <!-- option -->
+          {% endif %}
+        </h5>
         <div class="col-md-5"></div>
     </div>
 </div>
@@ -66,6 +82,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Request</h5>
+        <div class="modal1">
         <button
           type="button"
           class="close text-white"
@@ -75,6 +92,7 @@
           &times;
         </button>
       </div>
+      </div>
       <div class="modal-body">
         <form
           class="form"
@@ -83,7 +101,13 @@
           enctype="multipart/form-data"
         >
           {% csrf_token %} {% bootstrap_form form layout='block' %}
-          <button type="submit" class="btn btn-success">Add</button>
+          <button
+           type="submit"
+            class="btn btn-success"
+            style="margin-top: 13px; margin-left: 7px"
+            >
+            Add
+          </button>
         </form>
       </div>
       <!-- <div class="modal-footer">
@@ -94,3 +118,4 @@
   </div>
 </div>
 {% endblock%}
+</div>

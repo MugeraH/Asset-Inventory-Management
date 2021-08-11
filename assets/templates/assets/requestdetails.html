@@ -10,16 +10,14 @@
 
         <div class="col-md-7 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
-                <h2>Request</h2>
                 <div class="dropdown" style="float:right;">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Actions
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
-                        <!-- <a class="dropdown-item" href="#">Assign Department</a>
-                        <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a> -->
+                        <a class="dropdown-item" href="{%url 'assets:requestdetails' request.id %}">Update </a>
+                        
                     </div>
                 </div>
 
@@ -37,7 +35,7 @@
                             <p> {{request.name}}</p>
                             <hr>
                             <ul class="p-4">
-                                <li>name: <strong>{{ request.employee }}</strong></li>
+                                <li>id: <strong>{{ request.employee }}</strong></li>
                                 <li>Request: <strong>{{ request.request }}</strong></li>
                                 <li>Status: <strong>{{ request.status }}</strong></li>
                                 <li>Created: <strong>{{ request.posted_date }}</strong></li>

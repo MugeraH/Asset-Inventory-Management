@@ -326,3 +326,11 @@ header {
   margin: 7px 0px;
   padding: 8px;
 }
+
+.modal1{
+  display: flex;
+  border-radius: 10px;
+}
+#emp{
+  text-align: center;
+}

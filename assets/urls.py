@@ -47,6 +47,7 @@ path('add_departments/',views.add_departments,name='add_departments'),
 
 
 
+
 ]
 
 if settings.DEBUG:
