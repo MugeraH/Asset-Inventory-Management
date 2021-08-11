@@ -2,7 +2,7 @@ from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
 from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 
@@ -55,8 +55,8 @@ def  employeeDashBoardView(request):
         return render(request,'assets/employee_dashboard.html',context)
     
 def  managerDashBoardView(request):
-       
-        
+        user=Profile.objects.get(user=request.user)
+        manager_requests= ManagerRequest.objects.filter(employee=user)
         department= Department.objects.get(manager=request.user.id)
         
         dept_assets=Asset.objects.filter(department=department)
@@ -67,7 +67,7 @@ def  managerDashBoardView(request):
         context = {
     
         'department':department,
-      
+      'manager_requests':manager_requests,
        'dept_assets':dept_assets,
        'dept_employees': dept_employees
         
@@ -386,7 +386,7 @@ def employeeassetrequest(request):
             request = form.save(commit=False)
             # request.employee=request.profile
             request.save()
-            return redirect('/')
+            return redirect('/')    
     else:
         form=EmployeeAssetRequestForm()
     params={
@@ -421,15 +421,19 @@ def delete_employee(request, id):
 
 @login_required(login_url='/login')
 def requests(request):
-    # user=User.objects.filter(employee=request.user)
-    my_requests=EmployeeAssetRequest.objects.all()
     emp_requests=EmployeeAssetRequest.objects.all()
-    requests= ManagerRequest.objects.all()
+    manager_requests= ManagerRequest.objects.all()
+
+    employee=Profile.objects.get(user=request.user.id)
+    my_requests_manager=ManagerRequest.objects.filter(employee=employee)
+    my_requests_employee=EmployeeAssetRequest.objects.filter(employee=employee)
+    
+    
     form=ManagerRequestForm()
     if request.method == 'POST':
         form=ManagerRequestForm(request.POST,request.FILES)
-        myform=EmployeeAssetRequestForm(request.POST,request.FILES)
-        if form.is_valid() or myform.is_valid():
+       
+        if form.is_valid():
             request = form.save(commit=False)
             request.save()
             return redirect('assets:requests')
@@ -437,21 +441,24 @@ def requests(request):
         form=ManagerRequestForm()
             
     params={
-        'requests':requests,'form':form,'my_requests':my_requests,'emp_requests':emp_requests,
+        'manager_requests':manager_requests,
+        'form':form,'emp_requests':emp_requests,
+        'my_requests_man':my_requests_manager,
+        'my_requests_emp':my_requests_employee
     }
     return render(request,'assets/requests.html',params)
 
 
 @login_required(login_url='/login')
-def requestdetails(request,id):
-    # manager_requests= ManagerRequest.objects.get(id=id)
+def employeerequestdetails(request,id):
+   
     employee_requests=EmployeeAssetRequest.objects.get(id=id)
-    employee= Profile.objects.get(id=id)
-    # user = User.objects.get(id=id)
-    # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
+    # user= Profile.objects.get(id=id)
+    # user =Profile.objects.get(id=id)
+    # requests=EmployeeAssetRequest.objects.allzz
     # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     status= get_object_or_404(EmployeeAssetRequest,id=id)
-    form = EmployeeRequest(instance = employee)
+    form = EmployeeRequest()
         
     if request.method == 'POST':
             form= EmployeeRequest(request.POST or None,instance = status)
@@ -459,19 +466,36 @@ def requestdetails(request,id):
             if form.is_valid() :
                                 
                 form.save()
-                return redirect('assets:requestdetails',id=id)
+                return redirect('assets:employeerequestdetails',id=id)
 
-            
-             
-           
-    
     params={
-        # 'requests': manager_requests,
+      
         'employee_requests': employee_requests,
         'form': form,
     }
-    return render(request,'assets/requestdetails.html', params)
+    return render(request,'assets/employeerequestdetails.html', params)
 
+def managerrequestdetails(request,id):
+    manager_requests= ManagerRequest.objects.get(id=id)
+    # user = User.objects.get(id=id)
+    status= get_object_or_404(ManagerRequest,id=id)
+    form = ManagerRequestUpdateForm()
+            
+    if request.method == 'POST':
+                form= ManagerRequestUpdateForm(request.POST or None,instance = status)
+            
+                if form.is_valid() :
+                                    
+                    form.save()
+                    return redirect('assets:managerrequestdetails',id=id)
+
+    params={
+        'manager_requests': manager_requests,
+        'form': form,
+    }
+
+
+    return render(request,'assets/managerrequestdetails.html', params)
 
 
 

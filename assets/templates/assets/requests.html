@@ -11,16 +11,18 @@
     <div class="col-md-8">
       <h2 class="mt-4"> Manager Requests</h2>
 
-      {% if user.is_admin%}
+      {% if user.is_superuser %}
       <div></div>
-      {%elif user.is_staff%}
+      {% else%}
+
       <div>
-       
+
         <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
           Add Request</a>
-         
+
       </div>
-      {% endif%}
+      {%endif%}
+
       <table class="table">
         <thead>
           <tr>
@@ -29,22 +31,22 @@
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
             <th scope="col">Status</th>
-           
+
           </tr>
         </thead>
 
-        {% for request in requests %}
+        {% for request in manager_requests %}
 
 
         <tbody>
-          <tr onclick="window.location='/requestdetails/{{request.id}}'">
+          <tr onclick="window.location='/managerrequestdetails/{{request.id}}'">
 
             <th scope="row">{{ request.id}}</th>
             <td>{{ request.request }}</td>
             <td>{{ request.posted_date | date  }}</td>
             <td>{{ request.quantity }} </td>
             <td>{{ request.status }}</td>
-           
+
           </tr>
 
         </tbody>
@@ -62,16 +64,6 @@
 
     <div class="col-md-8">
       <h2 class="mt-4">Employee Requests</h2>
-      {% if user.is_superuser %}
-      <div></div>
-      {% else %}
-      <div>
-        <a href="/employeeassetrequest" class="btn btn-success">
-          Add Request</a>
-      </div>
-      {% endif %}
-
-
 
 
 
@@ -84,7 +76,7 @@
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
             <th scope="col">Status</th>
-            
+
           </tr>
         </thead>
 
@@ -93,14 +85,14 @@
 
 
         <tbody>
-          <tr onclick="window.location='/requestdetails/{{request.id}}'">
+          <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
 
             <th scope="row">{{ request.id}}</th>
             <td>{{ request.request_detail }}({{ request.type }})</td>
             <td>{{ request.posted_date | date }}</td>
             <td>{{ request.quantity }} </td>
             <td>{{ request.status }}</td>
-          
+
             <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 
             </td>
@@ -113,14 +105,71 @@
     </div>
   </div>
 
+  {% elif user.is_admin%}
 
-{% else %}
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <h2 class="mt-4">Employee Requests</h2>
+
+
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Request</th>
+            <th scope="col">Posted_date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+
+          </tr>
+        </thead>
+
+
+        {% for request in emp_requests %}
+
+
+        <tbody>
+          <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
+
+            <th scope="row">{{ request.id}}</th>
+            <td>{{ request.request_detail }}({{ request.type }})</td>
+            <td>{{ request.posted_date | date }}</td>
+            <td>{{ request.quantity }} </td>
+            <td>{{ request.status }}</td>
+
+            <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
+
+            </td>
+          </tr>
+
+
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-8">
       <h2 class="mt-4">My Requests</h2>
-      <div>
+
+
+      <div style="float:right">
+        {% if user.is_admin %}
+
+        <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
+          Add Request</a>
+
+
+        {% else%}
+
         <a href="/employeeassetrequest" class="btn btn-success">
           Add Request</a>
+          {% endif%}
       </div>
 
 
@@ -132,22 +181,22 @@
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
             <th scope="col">Status</th>
-            
+
           </tr>
         </thead>
 
 
-        {% for request in my_requests %}
+        {% for request in my_requests_man %}
 
         <tbody>
           <tr onclick="window.location='/requestdetails/{{request.id}}'">
 
-            <th scope="row">{{ request.type}}</th>
+            <th scope="row">{{ request.request}}</th>
             <td>{{ request.request_detail }}</td>
             <td>{{ request.posted_date | date }}</td>
             <td>{{ request.quantity }} </td>
             <td>{{ request.status }}</td>
-           
+
             <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 
             </td>
@@ -162,12 +211,67 @@
 
     </div>
   </div>
-  {% endif%}
+  {%else %}
+  <div class="row">
+    <div class="col-md-8">
+      <h2 class="mt-4">My Requests</h2>
+
+
+      <div style="float:right">
+        {% if user.is_admin %}
+
+        <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
+          Add Request</a>
+
+
+        {% else%}
+
+        <a href="/employeeassetrequest" class="btn btn-success">
+          Add Request</a>
+          {% endif%}
+      </div>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Type</th>
+            <th scope="col">Request</th>
+            <th scope="col">Posted_date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+
+          </tr>
+        </thead>
+
+
+        {% for request in my_requests_emp %}
+
+        <tbody>
+          <tr onclick="window.location='/requestdetails/{{request.id}}'">
+
+            <th scope="row">{{ request.request}}</th>
+            <td>{{ request.request_detail }}</td>
+            <td>{{ request.posted_date | date }}</td>
+            <td>{{ request.quantity }} </td>
+            <td>{{ request.status }}</td>
+
+            <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
+
+            </td>
+          </tr>
+
+        </tbody>
+
+        {% endfor %}
+      </table>
+
+
+
+    </div>
+    {%endif%}
 
 </div>
-
-
-
 
 
 

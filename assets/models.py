@@ -129,6 +129,9 @@ class EmployeeAssetRequest(models.Model):
     quantity= models.IntegerField(default=0)
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     posted_date=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-pk"]
     
     def __str__(self):
         return f'{self.request_detail} employee_request'
@@ -140,5 +143,9 @@ class ManagerRequest(models.Model):
     posted_date=models.DateTimeField(auto_now_add=True)
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     employee=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='manager_request',null=True)
+
+    class Meta:
+        ordering = ["-pk"]
+
     def __str__(self):
         return f'{self.request} Manager_request'
