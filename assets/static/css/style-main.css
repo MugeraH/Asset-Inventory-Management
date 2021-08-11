@@ -1468,7 +1468,7 @@ p {
 /*===== SLIDER ONE =====*/
 
 .slider-area {
-    padding-top: 94px;
+    padding-top: 0;
 }
 
 .slider-area .bd-example .carousel .carousel-inner {

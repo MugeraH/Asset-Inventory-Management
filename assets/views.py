@@ -27,8 +27,6 @@ def EmployeesView(request):
       
     return render(request,'assets/employees.html')
 def  DashBoardView(request):
-        # if request.user.is_admin:
-        #     return redirect('assets:manager_dashboard')
         try:
             department= Department.objects.get(manager=request.user.id)
             dept_assets=Asset.objects.filter(department=department)
@@ -40,14 +38,14 @@ def  DashBoardView(request):
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
-       
+
         context = {
         'assets': total_asset,
         'departments': total_department,
         'department':department,
         'employees' : total_user,
-       'dept_assets':dept_assets,
-       'dept_employees': dept_employees
+        'dept_assets':dept_assets,
+        'dept_employees': dept_employees
         
         }
         return render(request,'assets/dashboard.html',context)
@@ -101,8 +99,8 @@ def update_asset(request, id):
         return redirect('/')
     form = AssetForm(request.POST or None, instance = asset)
     if form.is_valid():
-       form.save()
-       return redirect('/')
+        form.save()
+        return redirect('/')
 
     asset=Asset.objects.all()
     params={
@@ -141,10 +139,10 @@ def departments(request):
                 return redirect('assets:departments')
         else:
             form=DepartmentForm()
-   
+
         params={
         'department':department,
-         'form':form,
+        'form':form,
         }
         return render(request,'assets/departments.html', params)
 
@@ -161,9 +159,9 @@ def department_detail(request,id):
                 return redirect('assets:department_detail', id)
         context={
         'department': department,
-         'form':form,
-         'assets':assets,
-         'employees':employees
+        'form':form,
+        'assets':assets,
+        'employees':employees
         }
         return render(request,'assets/depdetails.html', context)
 
@@ -217,17 +215,15 @@ def employeedetails(request,id):
     requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     
     form = EmployeeProfile(instance = employee)
-   
+
     
     
     if request.method == 'POST':
         form= EmployeeProfile(request.POST,instance = employee)
-      
         if form.is_valid() :
         
             dept = form.cleaned_data['department']
-            
-           
+
             department = Department.objects.get(name=dept)
             role = form.cleaned_data['role']
             if role == "Admin":
@@ -240,19 +236,20 @@ def employeedetails(request,id):
                 department.save()
                 user.is_admin=False
                 user.save()
-           
+    
             form.save()
             return redirect('assets:employeedetails',id=id)
-   
+
 
     params={
         'employee': employee,
         'asset': asset,
         'requests': requests,
         'form': form,
-       
     }
     return render(request,'assets/employeedetails.html', params)
+
+
 
 
 def employeerequests(request):
@@ -350,6 +347,7 @@ def employeeasset(request):
 def home(request):
 	return render(request, 'assets/home.html')
 
+
 def delete_asset(request, id):
     id = int(id)
     try:
@@ -358,3 +356,32 @@ def delete_asset(request, id):
         return redirect(request,'assets/assets.html')
     asset.delete()
     return redirect(request,'assets/assets.html')
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'assets/profile.html', context)
+
+def profile_page(request):
+    profile = Profile.objects.all()
+    context = {
+        'profile':profile
+	}
+    return render(request, 'assets/profile_view.html', context)
