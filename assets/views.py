@@ -27,14 +27,11 @@ def EmployeesView(request):
       
     return render(request,'assets/employees.html')
 def  DashBoardView(request):
-     
         if request.user.is_admin:
             return redirect('assets:manager_dashboard')
         
         if not request.user.is_admin and not request.user.is_superuser:
             return redirect('assets:employee_dashboard')
-       
-       
         
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()

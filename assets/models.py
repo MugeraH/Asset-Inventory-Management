@@ -43,13 +43,6 @@ class Asset(models.Model):
     def __str__(self):
         return self.name
     
-    
-
-
-
-
-        
-    
 REQUESTTYPE_CHOICES = (
     ("new_asset", "new_asset"),
     ("repair", "repair"),
@@ -82,7 +75,6 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ["pk"]
-   
     def __str__(self):
         return f'{self.user.username} Profile'
     

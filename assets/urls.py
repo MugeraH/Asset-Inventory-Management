@@ -34,7 +34,6 @@ urlpatterns=[
 
     path('update/asset/<int:id>/',views.update_asset,name='assetform'),
     path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
-    path('employeeasset',views.employeeasset,name='employeeasset'),
     path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
 
     path('requests', views.requests,name='requests'),
