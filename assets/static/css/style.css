@@ -239,7 +239,6 @@ body {
 .three {
   background: rgb(6, 112, 112);
 }
-<<<<<<< HEAD
 
 header {
   display: flex;
@@ -344,8 +343,6 @@ header {
   font-weight: 550;
   margin: 7px 0px;
   padding: 8px;
-=======
     color: #fff;
     text-decoration: underline;
->>>>>>> ff1050985a985beb56bc5849ac4954561a088a69
 }

@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset
+from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset,Profile,User
 
 
 
