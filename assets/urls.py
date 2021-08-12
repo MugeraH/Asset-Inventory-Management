@@ -64,6 +64,8 @@ path('unassign_asset_user/<int:id>',views.unassign_asset_user,name='unassign_ass
     path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
 
     path('requests', views.requests,name='requests'),
+    path('dept_requests',views.dept_requests,name='dept_requests'),
+    path('employee_requests/',views.employee_requests,name='employee_requests'),
     path('employeerequestdetails/<int:id>', views.employeerequestdetails,name='employeerequestdetails'),
     path('managerrequestdetails/<int:id>', views.managerrequestdetails ,name='managerrequestdetails'),
     path('add_departments/',views.add_departments,name='add_departments'),
