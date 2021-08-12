@@ -2,7 +2,7 @@ from django import forms
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render,reverse,redirect
 from django.contrib import messages
-from .email import send_welcome_email
+
 from .forms import UserUpdateForm, ProfileUpdateForm, EmailForm
 from assets.models import Profile 
 from django.contrib.auth import login, authenticate
