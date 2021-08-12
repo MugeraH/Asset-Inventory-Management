@@ -10,11 +10,11 @@ from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
+
 from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+
+
 
 import sys
 sys.path.append("..")
@@ -673,7 +673,7 @@ def request_demo(request):
         if form.is_valid():
             # form.save(commit=False)
             name = form.cleaned_data['your_name']
-            email = form.cleaned_data['email']
+            email = form.__str__['email']
             account_specifications = form.cleaned_data['account_specifications']
 
             recipient = Email(full_name = name,email =email, account_specifications  =account_specifications )
