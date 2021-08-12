@@ -5,23 +5,12 @@
 {%block content%}
 
 <div class="container-fluid mb-4">
-  {% if user.is_superuser %}
+
 
   <div class="row">
     <div class="col-md-8">
       <h2 class="mt-4"> Manager Requests</h2>
 
-      {% if user.is_superuser %}
-      <div></div>
-      {% else%}
-
-      <div>
-
-        <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
-          Add Request</a>
-
-      </div>
-      {%endif%}
 
       <table class="table">
         <thead>
@@ -105,224 +94,37 @@
     </div>
   </div>
 
-  {% elif user.is_admin%}
-
-
-  <div class="row">
-
-    <div class="col-md-8">
-      <h2 class="mt-4">Employees Requests</h2>
 
 
 
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Request</th>
-            <th scope="col">Posted_date</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Status</th>
-
-          </tr>
-        </thead>
 
 
-        {% for request in emp_requests %}
-        <!-- {% for request in dept_requests -->
 
 
-        <tbody>
-          <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
 
-            <th scope="row">{{ request.id}}</th>
-            <td>{{ request.request_detail }}({{ request.type }})</td>
-            <td>{{ request.posted_date | date }}</td>
-            <td>{{ request.quantity }} </td>
-            <td>{{ request.status }}</td>
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Request</h5>
+          <div class="modal1">
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+              &times;
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <form class="form" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %} {% bootstrap_form form layout='block' %}
+            <button type="submit" class="btn btn-success" style="margin-top: 13px; margin-left: 7px">
+              Add
+            </button>
+          </form>
+        </div>
 
-            <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
-
-            </td>
-          </tr>
-
-
-        </tbody>
-        {% endfor %}
-      </table>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-md-8">
-      <h2 class="mt-4">My Requests</h2>
-
-
-      <div style="float:right">
-        {% if user.is_admin %}
-
-        <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
-          Add Request</a>
-
-
-        {% else%}
-
-        <a href="/employeeassetrequest" class="btn btn-success">
-          Add Request</a>
-          {% endif%}
-      </div>
-
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Request</th>
-            <th scope="col">Posted_date</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Status</th>
-
-          </tr>
-        </thead>
-
-
-        {% for request in my_requests_man %}
-
-        <tbody>
-          <tr onclick="window.location='/requestdetails/{{request.id}}'">
-
-            <th scope="row">{{ request.request}}</th>
-            <td>{{ request.request_detail }}</td>
-            <td>{{ request.posted_date | date }}</td>
-            <td>{{ request.quantity }} </td>
-            <td>{{ request.status }}</td>
-
-            <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
-
-            </td>
-          </tr>
-
-        </tbody>
-
-        {% endfor %}
-      </table>
-
-
-
-    </div>
-  </div>
-  {%else %}
-  <div class="row">
-    <div class="col-md-8">
-      <h2 class="mt-4">My Requests</h2>
-
-
-      <div style="float:right">
-        {% if user.is_admin %}
-
-        <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
-          Add Request</a>
-
-
-        {% else%}
-
-        <a href="/employeeassetrequest" class="btn btn-success">
-          Add Request</a>
-          {% endif%}
-      </div>
-
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Request</th>
-            <th scope="col">Posted_date</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Status</th>
-
-          </tr>
-        </thead>
-
-
-        {% for request in my_requests_emp %}
-
-        <tbody>
-          <tr onclick="window.location='/requestdetails/{{request.id}}'">
-
-            <th scope="row">{{ request.request}}</th>
-            <td>{{ request.request_detail }}</td>
-            <td>{{ request.posted_date | date }}</td>
-            <td>{{ request.quantity }} </td>
-            <td>{{ request.status }}</td>
-
-            <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
-
-            </td>
-          </tr>
-
-        </tbody>
-
-        {% endfor %}
-      </table>
-
-
-
-    </div>
-    {%endif%}
-
-</div>
-
-
-
-
-
-
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Request</h5>
-<<<<<<< HEAD
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-          &times;
-        </button>
-      </div>
-
-=======
-        <div class="modal1">
-        <button
-          type="button"
-          class="close text-white"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          &times;
-        </button>
-      </div>
-      </div>
->>>>>>> 132ee2c394c9558612040a4072e2a566178fd613
-      <div class="modal-body">
-        <form class="form" method="post" novalidate enctype="multipart/form-data">
-          {% csrf_token %} {% bootstrap_form form layout='block' %}
-          <button
-           type="submit"
-            class="btn btn-success"
-            style="margin-top: 13px; margin-left: 7px"
-            >
-            Add
-          </button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-</div>
-<<<<<<< HEAD
-{% endblock%}
-=======
-{% endblock%}
-</div>
->>>>>>> 132ee2c394c9558612040a4072e2a566178fd613
+ {% endblock%}
