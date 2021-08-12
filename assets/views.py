@@ -223,6 +223,24 @@ def unassign_asset_user(request,id):
     asset.save()
           
     return redirect('assets:dept_assets')
+def unassign_asset_dept(request,id):
+    
+    try:
+        asset= EmployeeAsset.objects.get(asset_id=id)
+    except Asset.DoesNotExist:
+        print("")
+   
+    assigned_asset=Asset.objects.get(id=id)
+       
+    assigned_asset.is_assigned_user=False
+    assigned_asset.is_assigned_dept=False
+    assigned_asset.department=None
+    assigned_asset.save()
+            
+    asset.employee=None
+    asset.save()
+          
+    return redirect('assets:assets')
   
 
 def departments(request):

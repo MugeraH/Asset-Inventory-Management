@@ -51,32 +51,36 @@ path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetreque
 path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
 path('assign_asset_user/<int:id>',views.assign_asset_user,name='assign_asset_user'),
 path('unassign_asset_user/<int:id>',views.unassign_asset_user,name='unassign_asset_user'),
+path('unassign_asset_dept/<int:id>',views.unassign_asset_dept,name='unassign_asset_dept'),
 
 
-    path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
+    # path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
 
-    path('department_detail/<int:id>',views.department_detail,name='department_detail'),
-    path('assets/',views.assets,name='assets'),
+    # path('department_detail/<int:id>',views.department_detail,name='department_detail'),
+    # path('assets/',views.assets,name='assets'),
 
-    path('update/asset/<int:id>/',views.update_asset,name='assetform'),
-    path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
-    # path('employeeasset',views.employeeasset,name='employeeasset'),
-    path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
+    # path('update/asset/<int:id>/',views.update_asset,name='assetform'),
+    # path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
+    # # path('employeeasset',views.employeeasset,name='employeeasset'),
+    # path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
 
-    path('requests', views.requests,name='requests'),
-    path('dept_requests',views.dept_requests,name='dept_requests'),
-    path('employee_requests/',views.employee_requests,name='employee_requests'),
-    path('employeerequestdetails/<int:id>', views.employeerequestdetails,name='employeerequestdetails'),
-    path('managerrequestdetails/<int:id>', views.managerrequestdetails ,name='managerrequestdetails'),
-    path('add_departments/',views.add_departments,name='add_departments'),
-
-
-
-
+    # path('requests', views.requests,name='requests'),
+    # path('dept_requests',views.dept_requests,name='dept_requests'),
+    # path('employee_requests/',views.employee_requests,name='employee_requests'),
+    # path('employeerequestdetails/<int:id>', views.employeerequestdetails,name='employeerequestdetails'),
+    # path('managerrequestdetails/<int:id>', views.managerrequestdetails ,name='managerrequestdetails'),
+    # path('add_departments/',views.add_departments,name='add_departments'),
 
 
 
 
+
+
+
+
+path('requests', views.requests,name='requests'),
+path('requestdetails/<int:id>', views.requestdetails,name='requestdetails'),
+path('add_departments/',views.add_departments,name='add_departments'),
 ]
 
 if settings.DEBUG:
