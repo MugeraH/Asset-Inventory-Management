@@ -345,3 +345,11 @@ header {
     text-decoration: underline;
 >>>>>>> ff1050985a985beb56bc5849ac4954561a088a69
 }
+
+.modal1{
+  display: flex;
+  border-radius: 10px;
+}
+#emp{
+  text-align: center;
+}
