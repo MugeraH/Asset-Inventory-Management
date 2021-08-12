@@ -9,16 +9,18 @@
 
         <div class="col-md-7 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
-                <h2>Assets</h2>
                 <div class="dropdown" style="float:right;">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Actions
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
-                        <!-- <a class="dropdown-item" href="#">Assign Department</a>
-                        <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a> -->
+                      {% if user.is_superuser %}
+                          <a class="dropdown-item" href="updateasset/{{asset.id}}">Update </a>
+                      {% endif %}
+
+                  
+                       
                     </div>
                 </div>
 
@@ -44,6 +46,35 @@
 
                         </div>
                     </div>
+
+                    <!-- <table class="table mt-4">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">created_at</th>
+                            <th scope="col">is_assigned</th>
+                          </tr>
+                        </thead>
+                
+                        <tbody>
+                          <tr>
+                            <th scope="row">{{ asset.name }}</th>
+                            <td>{{asset.category}}</td>
+                            <td>{{asset.department.name }}</td>
+                            <td>{{asset.created_at }}</td>
+                            <td>{{asset.created_at }}</td>
+                            <td>
+                              {% if employee.user.is_admin %} Manager -->
+                              <!-- super -->
+                              <!-- {%elif employee.user.is_superuser%} Admin {%else%} -->
+                              <!-- employee -->
+                              <!-- Employee {% endif %} -->
+                            <!-- </td>
+                          </tr>
+                        </tbody>
+                      </table> -->
                 </div>
             </div>
 

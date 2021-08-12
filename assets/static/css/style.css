@@ -13,6 +13,9 @@
     scrollbar-width: thin;
     scrollbar-color: rgb(30, 30, 211) transparent;
     scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #6d6d7b transparent;
+  scroll-behavior: smooth;
 }
 
 *::-webkit-scrollbar {
@@ -27,6 +30,9 @@
     background: rgb(30, 30, 211);
     border-radius: 20px;
     border: transparent;
+  background: rgb(17, 17, 43);
+  border-radius: 20px;
+  border: transparent;
 }
 
 body {
@@ -58,6 +64,12 @@ body {
     color: #fff;
     transition: 0.3s all ease;
     padding-top: 40px;
+  width: 20%;
+  height: 100;
+  background: rgb(17, 17, 43);
+  color: #fff;
+  transition: 0.3s all ease;
+  padding-top: 40px;
 }
 
 .sidenav a {
@@ -83,6 +95,7 @@ body {
 
 .side_option:hover {
     background-color: rgb(42, 42, 177);
+  background-color: rgb(17, 17, 43);
 }
 
 .side_option .title {
@@ -104,6 +117,13 @@ body {
     background: rgb(30, 30, 211);
     color: #fff;
     padding: 4px 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background:rgb(17, 17, 43);
+  color: #fff;
+  padding: 4px 10px !important;
 }
 
 .navbar-brand {
@@ -252,7 +272,6 @@ header {
   box-shadow: 0px 1px 12px -1px rgba(0, 0, 0, 0.75);
 }
 
-
 .departments .row {
   width: 90%;
   display: flex;
@@ -276,6 +295,7 @@ header {
 
 .departments .row .col-md-3 {
   width: 27% !important;
+
   cursor: pointer;
   text-decoration: none;
   display: flex;
@@ -284,7 +304,7 @@ header {
   justify-content: flex-start;
 
   color: rgb(16, 15, 15);
-  background: #fff;
+  background: rgb(248, 247, 247);
   border-radius: 5px;
   padding: 14px;
 
@@ -295,13 +315,9 @@ header {
 
 .dep-card h3 {
   font-weight: 600;
-  line-height: 7px;
-  padding: 10px 0px;
 }
 .dep-card h5 {
   font-weight: 600;
-  line-height: 5px;
-  padding: 10px 0px;
 }
 
 .modal {
@@ -345,4 +361,12 @@ header {
   padding: 8px;
     color: #fff;
     text-decoration: underline;
+}
+
+.modal1{
+  display: flex;
+  border-radius: 10px;
+}
+#emp{
+  text-align: center;
 }

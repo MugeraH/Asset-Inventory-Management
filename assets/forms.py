@@ -29,12 +29,12 @@ class AssetForm(forms.ModelForm):
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
-        fields= ('type','request_detail','quantity')
+        fields= ('type','request_detail','quantity','urgency')
 
 class ManagerRequestForm(forms.ModelForm):
     class Meta:
         model=ManagerRequest
-        fields= ('request','specs','quantity')
+        fields= ('request','specs','quantity','urgency')
 
 
 class DepartmentAssigningForm(forms.ModelForm):
@@ -47,10 +47,7 @@ class AssetAssigningForm(forms.ModelForm):
         model=Asset
         fields= ('department',)
 
-class EmployeeAssetForm(forms.ModelForm):
-    class Meta:
-        model=EmployeeAsset
-        fields= ('employee',)
+
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
@@ -69,6 +66,14 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['image', 'bio', 'phone' ]
 
+class EmployeeRequest(forms.ModelForm):
+    class Meta:
+        model=EmployeeAssetRequest
+        fields= ('status',)
+class ManagerRequestUpdateForm(forms.ModelForm):
+    class Meta:
+        model=ManagerRequest
+        fields= ('status',)
         
 
 class EmailForm(forms.Form):
