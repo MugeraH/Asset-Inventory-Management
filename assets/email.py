@@ -5,7 +5,7 @@ def send_response_email(name,receiver):
     # Creating message subject and sender
     subject = 'Thanks for reaching out to Assset  Management Inventory, we will get back you as soon as possible.'
     sender = 'jackotienokey@gmail.com'
-
+    
     #passing in the context vairables
     text_content = render_to_string('Email/customeremail.txt',{"name": name})
     html_content = render_to_string('Email/customeremail.html',{"name": name})

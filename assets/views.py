@@ -27,7 +27,6 @@ def HomePageView(request):
     return render(request,'assets/home.html')
 
 def EmployeesView(request):
-      
     return render(request,'assets/employees.html')
 def  DashBoardView(request):
         if request.user.is_admin:
@@ -184,7 +183,6 @@ def assign_asset_user(request,id):
             
             asset.employee=employee
             asset.save()
-          
             return redirect('assets:dept_assets')
     else:
         print('')
@@ -481,5 +479,5 @@ def customer_email(request):
             send_response_email(name,email)
 
             HttpResponseRedirect('home')
-            #.................
+            #..............
     return render(request, 'Email/customeremail.html', {"UserEmailForm":form})

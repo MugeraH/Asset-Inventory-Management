@@ -72,13 +72,12 @@
                     </div>
                     <div class="modal-body">
                         <form action="{% url 'assets:assign_asset_user' asset.asset.id %}" class="form" method="post" novalidate enctype="multipart/form-data">
-                           
-       {% csrf_token %}
-                          
+                            {% csrf_token %}
+
 
 <div class="form-group ">
      <label for="select">Employee</label>
-                         ​ <select class="form-control" id="select" name="employee" >
+    <select class="form-control" id="select" name="employee" >
     <option selected></option>
     {% for employee in employees  %}
       <option value="{{employee.user.username}}">{{employee.user.username}}</option>
