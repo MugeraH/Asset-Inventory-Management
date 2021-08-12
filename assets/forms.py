@@ -46,6 +46,13 @@ class AssetAssigningForm(forms.ModelForm):
 
 
 
-
+class EmployeeRequest(forms.ModelForm):
+    class Meta:
+        model=EmployeeAssetRequest
+        fields= ('status',)
+class ManagerRequestUpdateForm(forms.ModelForm):
+    class Meta:
+        model=ManagerRequest
+        fields= ('status',)
         
 

@@ -1,0 +1,126 @@
+{%extends 'assets/base.html'%} {% load bootstrap4%} {% load static %}
+<!-- content -->
+{%block content%}
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-8 mt-4 mb-4">
+            <div class="top d-flex  justify-content-between mt-4">
+                <h2 >My Requests</h2>
+                <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
+                    Add Request
+                </a>
+
+
+            </div>
+
+
+            <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Request</th>
+                        <th scope="col">Posted_date</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Status</th>
+
+                    </tr>
+                </thead>
+
+
+                {% for request in my_requests %}
+                <!-- {% for request in dept_requests -->
+
+
+                <tbody>
+                    <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
+
+                        <th scope="row">{{ request.id}}</th>
+                        <td>{{ request.request }}</td>
+                        <td>{{ request.posted_date | date }}</td>
+                        <td>{{ request.quantity }} </td>
+                        <td>{{ request.status }}</td>
+
+                        <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+
+
+
+    <div class="row mt-3">
+
+
+        <div class="col-md-8">
+            <h3>Department requests</h3>
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Request</th>
+                        <th scope="col">Posted_date</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Status</th>
+
+                    </tr>
+                </thead>
+
+
+                {% for request in dept_requests %}
+
+
+
+                <tbody>
+                    <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
+
+                        <th scope="row">{{ request.id}}</th>
+                        <td>{{ request.request_detail }}({{ request.type }})</td>
+                        <td>{{ request.posted_date | date }}</td>
+                        <td>{{ request.quantity }} </td>
+                        <td>{{ request.status }}</td>
+
+                        <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</div>
+<!-- modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Request</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form class="form" method="post" novalidate enctype="multipart/form-data">
+                    {% csrf_token %} {% bootstrap_form form layout='block' %}
+                    <button type="submit" class="btn btn-success">Add</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock%}

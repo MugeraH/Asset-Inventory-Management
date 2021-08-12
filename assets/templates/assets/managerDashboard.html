@@ -30,10 +30,10 @@
 
     <div class="col-md-3 m-4 dash-card two">
       <div class="title">
-    
+
         <h3>{{ dept_employees.count}}</h3>
 
-        
+
         <h6>Employees</h6>
       </div>
       <div class="dash_icon">
@@ -43,10 +43,10 @@
 
     <div class="col-md-3 m-4 dash-card three">
       <div class="title">
-       
+
 
         <h3>{{dept_assets.count}}</h3>
-        
+
         <h6>Assets</h6>
       </div>
       <div class="dash_icon">
@@ -54,12 +54,17 @@
       </div>
     </div>
   </div>
- 
-
-    <p class="mt-4">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, id!
-    </p>
+  <div class="row">
+    {% for request in manager_requests%}
+    <ul>
+      <li>{{request.request}}</li>
+    </ul>
+    {% endfor %}
   </div>
+
+
+
+</div>
 
 </div>
 ​ {% endblock %}
