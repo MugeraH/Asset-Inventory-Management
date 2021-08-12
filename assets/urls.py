@@ -66,12 +66,7 @@ urlpatterns=[
 
 
 
-    
-path('employees',views.employees,name='employees'),
-path('dept_employees',views.dept_employees,name='dept_employees'),
-path('employee_assets',views.employee_assets,name='employee_assets'),
 
-   
 path('dashboard',DashBoardView,name='dashboard'),
 path('manager_dashboard',views.managerDashBoardView,name='manager_dashboard'),
 path('employee_dashboard',views.employeeDashBoardView,name='employee_dashboard'),

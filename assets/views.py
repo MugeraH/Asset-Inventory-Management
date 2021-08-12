@@ -3,10 +3,13 @@ from django.contrib import messages
 from .forms import UserUpdateForm, ProfileUpdateForm
 from assets.models import Profile 
 from django.contrib.auth import login, authenticate
-from django.http import Http404,HttpResponse
+from django.http import Http404,HttpResponse, HttpResponseRedirect
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,UserEmailForm
 from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+from .email import send_response_email
+
+
 
 import sys
 sys.path.append("..")
@@ -47,31 +50,22 @@ def  DashBoardView(request):
         }
         return render(request,'assets/dashboard.html',context)
 def  employeeDashBoardView(request):
-       
-     
         asset = EmployeeAsset.objects.filter(employee__user=request.user.id) 
-          
         context = {
         'asset': asset,        
         }
         return render(request,'assets/employee_dashboard.html',context)
     
 def  managerDashBoardView(request):
-       
-        
         department= Department.objects.get(manager=request.user.id)
         
         dept_assets=Asset.objects.filter(department=department)
         dept_employees=Profile.objects.filter(department=department)
-       
-         
-       
         context = {
     
         'department':department,
-      
-       'dept_assets':dept_assets,
-       'dept_employees': dept_employees
+        'dept_assets':dept_assets,
+        'dept_employees': dept_employees
         
         }
         return render(request,'assets/dashboard.html',context)
@@ -117,29 +111,20 @@ def assets(request):
     return render(request,'assets/assets.html', params)
 
 def dept_assets(request):
-   
     department= Department.objects.get(manager=request.user.id)
     dept_assets=EmployeeAsset.objects.filter(asset__department=department)
-    
-    
     user=User.objects.get(id=request.user.id)
     print(dept_assets)
-  
     
     params= {'dept_assets': dept_assets,'user':user}
     return render(request,'assets/departmentAsset.html',params)
 
 def employee_assets(request):
     assets = EmployeeAsset.objects.filter(employee__user=request.user.id) 
-           
     context = {
         'assets': assets,        
         }
     return render(request,'assets/employee_assets.html', context)
-
-
-
-
 
 def assetdetails(request,id):
     asset=Asset.objects.get(id=id)
@@ -147,8 +132,6 @@ def assetdetails(request,id):
         'asset':asset,
         
     }
-
-  
     return render(request,'assets/assetdetails.html', params)
 
 def update_asset(request, id):
@@ -191,8 +174,6 @@ def assign_asset_user(request,id):
     asset= EmployeeAsset.objects.get(asset_id=id)
     assigned_asset=Asset.objects.get(id=id)
     employees = Profile.objects.filter(department=asset.asset.department)
-   
-  
     if request.method == 'POST':
         
             name= request.POST.get('employee')
@@ -209,7 +190,7 @@ def assign_asset_user(request,id):
         print('')
 
     params={
-       'employees':employees,
+        'employees':employees,
         'asset':asset
     }
     return render(request,'assets/assignuserasset.html', params)
@@ -217,13 +198,11 @@ def assign_asset_user(request,id):
 def unassign_asset_user(request,id):
     asset= EmployeeAsset.objects.get(asset_id=id)
     assigned_asset=Asset.objects.get(id=id)
-       
     assigned_asset.is_assigned_user=False
     assigned_asset.save()
             
     asset.employee=None
     asset.save()
-          
     return redirect('assets:dept_assets')
 def unassign_asset_dept(request,id):
     
@@ -231,9 +210,7 @@ def unassign_asset_dept(request,id):
         asset= EmployeeAsset.objects.get(asset_id=id)
     except Asset.DoesNotExist:
         print("")
-   
     assigned_asset=Asset.objects.get(id=id)
-       
     assigned_asset.is_assigned_user=False
     assigned_asset.is_assigned_dept=False
     assigned_asset.department=None
@@ -380,12 +357,8 @@ def employeedetails(request,id):
 
 def employeerequests(request):
     assets= EmployeeAssetRequest.objects.all()
-
     params= {'assets': assets,}
-
     return render(request,'assets/employee_request.html', params)
-
-
 
 
 def employeeassetrequest(request):
@@ -455,12 +428,8 @@ def requestdetails(request,id):
     }
     return render(request,'assets/requestdetails.html', params)
 
-
-
-
 def home(request):
 	return render(request, 'assets/home.html')
-
 
 def delete_asset(request, id):
     id = int(id)
@@ -499,3 +468,18 @@ def profile_page(request):
         'profile':profile
 	}
     return render(request, 'assets/profile_view.html', context)
+
+
+def customer_email(request):
+    if request.method == 'POST':
+        form = UserEmailForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['email']
+            recipient =UserEmailForm(name = name,email =email)
+            recipient.save()
+            send_response_email(name,email)
+
+            HttpResponseRedirect('home')
+            #.................
+    return render(request, 'Email/customeremail.html', {"UserEmailForm":form})

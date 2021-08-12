@@ -59,12 +59,9 @@ REQUEST_STATUS = (
 
 )
 
-    
-    
 ROLES = (
     ("Admin", "Admin"),
     ("Employee", "Employee"),
-  
 
 )
     
@@ -118,8 +115,6 @@ def post_asset_created_signal(sender,instance,created, **kwargs):
 post_save.connect(post_asset_created_signal,sender = Asset)
 
 
-
-    
 URGENCY = (
     ("1", "high"),
     ("2", "medium"),
