@@ -1467,7 +1467,9 @@ p {
 
 /*===== SLIDER ONE =====*/
 
-
+.slider-area {
+    padding-top: 0;
+}
 
 .slider-area .bd-example .carousel .carousel-inner {
     background-color: #38f9d7;

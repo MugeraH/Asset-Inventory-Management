@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Profile
 from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset
+from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset,Profile,User
 
 
 class EmployeeProfile(forms.ModelForm):
@@ -57,3 +58,7 @@ class UserEmailForm(forms.ModelForm):
         model = User
         fields = ['username', 'email',]
 
+class EmailForm(forms.Form):
+    full_name = forms.CharField(label='First Name',max_length=30)
+    email = forms.EmailField(label='Email')
+    account_specifications = forms.CharField(label='Account Specifications')

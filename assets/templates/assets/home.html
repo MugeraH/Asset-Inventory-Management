@@ -130,6 +130,14 @@
                     </li>
                     {% endif %}
                 </ul>
+                <div class="sidebar">
+
+                    <ul class="navbar-nav ml-auto">
+                                    <li><a href="#home" class="menu-btn">HOME</a></li>
+                                    <li><a href="#about" class="menu-btn">ABOUT</a></li>
+                                    
+                                    <li><a href="#contact" class="menu-btn">CONTACT</a></li>
+                                </ul>
             </div>
         </div>
     </nav>
@@ -404,10 +412,68 @@
                         </div> <!-- footer link -->
                     </div>
 
+<section id="contact" class="contact-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center pb-20">
+                        <h3 class="title">REQUEST DEMO</h3>
+                        <p class="text">Taratibu assets will get back to you once we receive your information </p>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-two mt-50 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <h4 class="contact-title">Protocol</h4>
+                        <p class="text">The administration will send you login info for your demo account and incase of any inquiries concerning your account you can reach out to us for help </p>
+                        <ul class="contact-info">
+                            <li><i class="lni-money-location"></i>Moringa, Ngong Road</li>
+                            <li><i class="lni-phone-handset"></i> +254 711-320-751</li>
+                            <li><i class="lni-envelope"></i> taratibu@gmail.com</li><br>
+                            <li><a href="https://facebook.com/"><i class="lni-facebook-filled"></i></a></li>
+                            <li><a href="https://twitter.com/"><i class="lni-twitter-original"></i></a></li>
+                            <li><a href="https://instagram.com/"><i class="lni-instagram-original"></i></a></li>
+                            <li><a href="#"><i class="lni-linkedin-original"></i></a></li> 
+                            
+                        </ul>
+                    </div> <!-- contact two -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-form form-style-one mt-35 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                        <form  id="contact-form" method="post">
+                            {% csrf_token %}
+                            <div class="form-input mt-15">
+                                <label>Full Name</label>
+                                <div class="input-items default">
+                                    <input type="text" placeholder="Name" name="name">
+                                    <i class="lni-user"></i>
+                                </div>
+                            </div> <!-- form input -->
+                            <div class="form-input mt-15">
+                                <label>Email</label>
+                                <div class="input-items default">
+                                    <input type="email" placeholder="Email" name="email">
+                                    <i class="lni-envelope"></i>
+                                </div>
+                            </div> <!-- form input -->
+                            <div class="form-input mt-15">
+                                <label>Account Specifications</label>
+                                <div class="input-items default">
+                                    <textarea placeholder="account Specifications" name="message"></textarea>
+                                    <i class="lni-pencil-alt"></i>
+                                </div>
+                            </div> <!-- form input -->
+                            <p class="form-message"></p>
+                            <div class="form-input rounded-buttons mt-20">
+                                <input type="submit" value="submit">
+                            </div> <!-- form input -->
+                        </form>
+                    </div> <!-- contact form -->
                 </div>
             </div> <!-- row -->
         </div> <!-- container -->
-        </div> <!-- footer widget -->
+    </section>
 
         <div class="footer-copyright">
             <div class="container">
@@ -440,6 +506,11 @@
     <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
 
 
+    <script>
+    function myFunction(){
+        document.getElementById("contact-form").submit();
+    }
+    </script>
     <script src="../../static/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="../../static/js/vendor/jquery-1.12.4.min.js"></script>
 

@@ -12,7 +12,7 @@ app_name ="assets"
 
 urlpatterns=[
     
-    path('',HomePageView,name='home'),
+    # path('',HomePageView,name='home'),
     path('forms/',views.departments,name='forms'),
     path('update/department/<int:id>/',views.update_department,name='update_department'),
     path('departments/',views.departments,name='departments'), 
@@ -39,6 +39,7 @@ urlpatterns=[
     path('requests', views.requests,name='requests'),
     path('requestdetails/<int:id>', views.requestdetails,name='requestdetails'),
     path('add_departments/',views.add_departments,name='add_departments'),
+    path('',views.request_demo,name='request_demo'),
 
 
     path('employees',views.employees,name='employees'),
