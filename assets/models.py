@@ -1,4 +1,6 @@
 import sys
+
+from django.db.models.fields import EmailField
 sys.path.append("..")
 from django.db import models
 
@@ -125,3 +127,10 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user__id = id).first()
         return profile
 
+class Email(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = EmailField()
+    account_specifications = models.TextField()
+
+    def __str__(self):
+        return self.full_name

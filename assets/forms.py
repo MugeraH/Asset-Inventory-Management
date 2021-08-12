@@ -71,3 +71,7 @@ class ProfileUpdateForm(forms.ModelForm):
 
         
 
+class EmailForm(forms.Form):
+    full_name = forms.CharField(label='First Name',max_length=30)
+    email = forms.EmailField(label='Email')
+    account_specifications = forms.CharField(label='Account Specifications')

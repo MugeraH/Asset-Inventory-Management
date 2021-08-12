@@ -1,12 +1,15 @@
+from django import forms
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render,reverse,redirect
 from django.contrib import messages
-from .forms import UserUpdateForm, ProfileUpdateForm
+from .email import send_welcome_email
+from .forms import UserUpdateForm, ProfileUpdateForm, EmailForm
 from assets.models import Profile 
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 
 import sys
 sys.path.append("..")
@@ -386,3 +389,23 @@ def profile_page(request):
 	}
     return render(request, 'assets/profile_view.html', context)
     return render(request, 'assets/profile_view.html', context)
+
+
+def request_demo(request):
+    form=EmailForm(request.POST)
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            # form.save(commit=False)
+            name = form.cleaned_data['your_name']
+            email = form.cleaned_data['email']
+            account_specifications = form.cleaned_data['account_specifications']
+
+            recipient = Email(full_name = name,email =email, account_specifications  =account_specifications )
+            recipient.save()
+            # form.save()
+            send_welcome_email(name,email)
+            
+            HttpResponseRedirect('news_today')
+            #.................
+    return render(request, 'assets/home.html', {"form":form})

@@ -133,16 +133,10 @@
                 <div class="sidebar">
 
                     <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item active">
-                                        <a class="page-scroll" href="#home">HOME</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#about">ABOUT</a>
-                                    </li>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#contact">CONTACT</a>
-                                    </li>
+                                    <li><a href="#home" class="menu-btn">HOME</a></li>
+                                    <li><a href="#about" class="menu-btn">ABOUT</a></li>
+                                    
+                                    <li><a href="#contact" class="menu-btn">CONTACT</a></li>
                                 </ul>
             </div>
         </div>
@@ -447,7 +441,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="contact-form form-style-one mt-35 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                        <form  id="contact-form" action="assets/contact.php" method="post">
+                        <form  id="contact-form" method="post">
+                            {% csrf_token %}
                             <div class="form-input mt-15">
                                 <label>Full Name</label>
                                 <div class="input-items default">
@@ -471,7 +466,7 @@
                             </div> <!-- form input -->
                             <p class="form-message"></p>
                             <div class="form-input rounded-buttons mt-20">
-                                <button type="button" onclick="myFunction()" value="Submit form" class="main-btn rounded-three">Submit</button>
+                                <input type="submit" value="submit">
                             </div> <!-- form input -->
                         </form>
                     </div> <!-- contact form -->
