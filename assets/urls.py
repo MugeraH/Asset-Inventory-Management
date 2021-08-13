@@ -31,7 +31,7 @@ urlpatterns=[
     path('dashboard',DashBoardView,name='dashboard'),
     path('manager_dashboard',views.managerDashBoardView,name='manager_dashboard'),
     path('employee_dashboard',views.employeeDashBoardView,name='employee_dashboard'),
-    path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
+    # path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
     path('department_detail/<int:id>',views.department_detail,name='department_detail'),
     path('assets/',views.assets,name='assets'),
     path('dept_assets/',views.dept_assets,name='dept_assets'),
@@ -42,7 +42,7 @@ urlpatterns=[
     path('assign_asset_user/<int:id>',views.assign_asset_user,name='assign_asset_user'),
     path('unassign_asset_user/<int:id>',views.unassign_asset_user,name='unassign_asset_user'),
     path('unassign_asset_dept/<int:id>',views.unassign_asset_dept,name='unassign_asset_dept'),
-    path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
+    # path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
     path('department_detail/<int:id>',views.department_detail,name='department_detail'),
     path('assets/',views.assets,name='assets'),
     path('update/asset/<int:id>/',views.update_asset,name='assetform'),
@@ -59,6 +59,7 @@ urlpatterns=[
     path('managerrequestdetails/<int:id>', views.managerrequestdetails ,name='managerrequestdetails'),
     path('requests', views.requests,name='requests'),
     path('add_departments/',views.add_departments,name='add_departments'),
+    path('employee_assets',views.employee_assets,name='employee_assets')
 ]
 
 if settings.DEBUG:
