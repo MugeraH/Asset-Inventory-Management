@@ -768,8 +768,8 @@ p {
 /*===== NAVBAR EIGHT =====*/
 
 .navbar-area {
-    background: -webkit-linear-gradient(left, #43cae9 0%, #38f9d7 100%);
-    background: linear-gradient(to right, #43cae9 0%, #38f9d7 100%);
+    background: rgb(30, 30, 211) ;
+
     padding: 10px 0;
     position: absolute;
     top: 0;
@@ -1472,7 +1472,7 @@ p {
 }
 
 .slider-area .bd-example .carousel .carousel-inner {
-    background-color: #38f9d7;
+    background-color: rgb(30, 30, 211) ;
 }
 
 .slider-area .bd-example .carousel .carousel-inner .carousel-item {

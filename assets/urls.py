@@ -35,6 +35,7 @@ urlpatterns=[
     path('department_detail/<int:id>',views.department_detail,name='department_detail'),
     path('assets/',views.assets,name='assets'),
     path('dept_assets/',views.dept_assets,name='dept_assets'),
+    path('employee_assets/',views.employee_assets,name='employee_assets'),
     path('update/asset/<int:id>/',views.update_asset,name='assetform'),
     path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
     path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
