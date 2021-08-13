@@ -1,11 +1,20 @@
+from django import forms
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import render,reverse,redirect
+from django.contrib import messages
+from .email import send_welcome_email
+from .forms import UserUpdateForm, ProfileUpdateForm, EmailForm
+from assets.models import Profile 
 from django.db.models import manager
 from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 
+
+from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+
+
 
 import sys
 sys.path.append("..")
@@ -22,7 +31,18 @@ import datetime as dt
 def HomePageView(request):
     return render(request,'assets/home.html')
 
+def EmployeesView(request):
+      
+    return render(request,'assets/employees.html')
 def  DashBoardView(request):
+        try:
+            department= Department.objects.get(manager=request.user.id)
+            dept_assets=Asset.objects.filter(department=department)
+            dept_employees=Profile.objects.filter(department=department)
+        except Department.DoesNotExist:
+            department=[]
+            dept_assets=[]
+            dept_employees=[]
      
         if request.user.is_admin:
             return redirect('assets:manager_dashboard')
@@ -35,12 +55,14 @@ def  DashBoardView(request):
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
-       
+
         context = {
         'assets': total_asset,
         'departments': total_department,
         
         'employees' : total_user,
+        'dept_assets':dept_assets,
+        'dept_employees': dept_employees
     
         
         }
@@ -157,8 +179,8 @@ def update_asset(request, id):
         return redirect('/')
     form = AssetForm(request.POST or None, instance = asset)
     if form.is_valid():
-       form.save()
-       return redirect('/')
+        form.save()
+        return redirect('/')
 
     asset=Asset.objects.all()
     params={
@@ -254,10 +276,10 @@ def departments(request):
                 return redirect('assets:departments')
         else:
             form=DepartmentForm()
-   
+
         params={
         'department':department,
-         'form':form,
+        'form':form,
         }
         return render(request,'assets/departments.html', params)
 
@@ -274,9 +296,9 @@ def department_detail(request,id):
                 return redirect('assets:department_detail', id)
         context={
         'department': department,
-         'form':form,
-         'assets':assets,
-         'employees':employees
+        'form':form,
+        'assets':assets,
+        'employees':employees
         }
         return render(request,'assets/depdetails.html', context)
 
@@ -341,17 +363,16 @@ def employeedetails(request,id):
     # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     
     form = EmployeeProfile(instance = employee)
+
     
     
     
     if request.method == 'POST':
         form= EmployeeProfile(request.POST,instance = employee)
-      
         if form.is_valid() :
         
             dept = form.cleaned_data['department']
-            
-           
+
             department = Department.objects.get(name=dept)
             role = form.cleaned_data['role']
             if role == "Admin":
@@ -364,19 +385,22 @@ def employeedetails(request,id):
                 department.save()
                 user.is_admin=False
                 user.save()
-           
+    
             form.save()
             return redirect('assets:employeedetails',id=id)
-   
+
 
     params={
         'employee': employee,
         # 'asset': asset,
         # 'requests': requests,
         'form': form,
-       
     }
     return render(request,'assets/employeedetails.html', params)
+
+
+
+
 @login_required(login_url='/login')
 def employeerequests(request):
     assets= EmployeeAssetRequest.objects.all()
@@ -598,9 +622,71 @@ def managerrequestdetails(request,id):
 
     return render(request,'assets/managerrequestdetails.html', params)
 
+def home(request):
+	return render(request, 'assets/home.html')
 
+
+def delete_asset(request, id):
+    id = int(id)
+    try:
+        asset = Asset.objects.get(id = id)
+    except Asset.DoesNotExist:
+        return redirect(request,'assets/assets.html')
+    asset.delete()
+    return redirect(request,'assets/assets.html')
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+
+    return render(request, 'assets/profile.html', context)
+
+def profile_page(request):
+    profile = Profile.objects.all()
+    context = {
+        'profile':profile
+	}
+    return render(request, 'assets/profile_view.html', context)
+    return render(request, 'assets/profile_view.html', context)
+
+
+def request_demo(request):
+    form=EmailForm(request.POST)
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            # form.save(commit=False)
+            name = form.cleaned_data['your_name']
+            email = form.__str__['email']
+            account_specifications = form.cleaned_data['account_specifications']
+
+            recipient = Email(full_name = name,email =email, account_specifications  =account_specifications )
+            recipient.save()
+            # form.save()
+            send_welcome_email(name,email)
+            
+            HttpResponseRedirect('news_today')
+            #.................
+    return render(request, 'assets/home.html', {"form":form})
 
 @login_required(login_url='/login')
+
 def delete_asset(request, id):
     id = int(id)
     try:

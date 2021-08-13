@@ -1,4 +1,6 @@
 import sys
+
+from django.db.models.fields import EmailField
 sys.path.append("..")
 from django.db import models
 
@@ -46,6 +48,11 @@ class Asset(models.Model):
     def __str__(self):
         return self.name
     
+class EmployeeAsset(models.Model):
+    employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee' ,null=True)
+    asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset',null=True)
+    def __str__(self):
+        return self.employee.username
 
     
 
@@ -110,6 +117,13 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user__id = id).first()
         return profile
 
+class Email(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = EmailField()
+    account_specifications = models.TextField()
+
+    def __str__(self):
+        return self.full_name
 class EmployeeAsset(models.Model):
     employee = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='employee_det',null=True)
     asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset_user')

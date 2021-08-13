@@ -1,4 +1,7 @@
 from django import forms
+from django.contrib.auth.models import User
+from .models import Profile
+from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset
 from .models import  Department, Asset,EmployeeAssetRequest,ManagerRequest,EmployeeAsset,Profile,User
 
 
@@ -21,7 +24,7 @@ class AssetForm(forms.ModelForm):
     class Meta:
         model=Asset
         fields= ('name','description','image','category',)
-     
+
 
 class EmployeeAssetRequestForm(forms.ModelForm):
     class Meta:
@@ -46,6 +49,23 @@ class AssetAssigningForm(forms.ModelForm):
 
 
 
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    
+    
+
+    class Meta:
+        model = User
+        fields = ['username', 'email',]
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    
+
+    class Meta:
+        model = Profile
+        fields = ['image', 'bio', 'phone' ]
+
 class EmployeeRequest(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest
@@ -56,3 +76,7 @@ class ManagerRequestUpdateForm(forms.ModelForm):
         fields= ('status',)
         
 
+class EmailForm(forms.Form):
+    full_name = forms.CharField(label='First Name',max_length=30)
+    email = forms.EmailField(label='Email')
+    account_specifications = forms.CharField(label='Account Specifications')
