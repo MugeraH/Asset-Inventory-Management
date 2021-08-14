@@ -9,6 +9,8 @@ from django.db.models import manager
 from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
+from django.conf import settings
+
 
 
 from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
@@ -31,9 +33,7 @@ import datetime as dt
 def HomePageView(request):
     return render(request,'assets/home.html')
 
-def EmployeesView(request):
-      
-    return render(request,'assets/employees.html')
+
 def  DashBoardView(request):
         try:
             department= Department.objects.get(manager=request.user.id)
@@ -51,7 +51,7 @@ def  DashBoardView(request):
             return redirect('assets:employee_dashboard')
        
        
-        
+       
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
@@ -62,7 +62,9 @@ def  DashBoardView(request):
         
         'employees' : total_user,
         'dept_assets':dept_assets,
-        'dept_employees': dept_employees
+        'dept_employees': dept_employees,
+     
+        
     
         
         }
@@ -337,7 +339,9 @@ def update_department(request, id):
 def employees(request):
     if request.user.is_admin:
             return redirect('assets:dept_employees')
-    employees= Profile.objects.all()
+    employees= Profile.objects.all().exclude(user__is_superuser=True)
+    
+   
 
     params={
         'employees':employees,
@@ -493,24 +497,15 @@ def requests(request):
     return render(request,'assets/requests.html',params)
 
 ####################
-
 def dept_requests(request):
-   
-   
-    department= Department.objects.get(manager=request.user.id)
-    print(department)
-    
-    dept_requests=EmployeeAssetRequest.objects.filter(employee__department=department)
-    
     user=Profile.objects.get(user=request.user)
     my_requests= ManagerRequest.objects.filter(employee=user)
+    department= Department.objects.get(manager=request.user.id)
+    employee_dept_requests=EmployeeAssetRequest.objects.filter(employee__department=department)
     
-    print(user)
-
     form=ManagerRequestForm()
     if request.method == 'POST':
         form=ManagerRequestForm(request.POST,request.FILES)
-       
         if form.is_valid():
             request = form.save(commit=False)
             request.employee=user
@@ -519,26 +514,47 @@ def dept_requests(request):
             return redirect('assets:dept_requests')
     else:
         form=ManagerRequestForm()
-  
+        
     
-    params= {
-        'my_requests':my_requests,
-        'dept_requests': dept_requests,
-
-        'user':user,
+    ctx={
+          'my_requests':my_requests,
+          'employee_dept_requests':employee_dept_requests,
+            
         'form':form,
+        
     }
-    return render(request,'assets/departmentRequest.html',params)
+    return render(request,'assets/dept_requests.html',ctx)
+
+# def dept_requests(request):
+#     department= Department.objects.get(manager=request.user.id)
+#     dept_requests=EmployeeAssetRequest.objects.filter(employee__department=department)
+    
+    # user=Profile.objects.get(user=request.user)
+    # my_requests= ManagerRequest.objects.filter(employee=user)
+#     form=ManagerRequestForm()
+#     if request.method == 'POST':
+#         form=ManagerRequestForm(request.POST,request.FILES)
+#         if form.is_valid():
+#             request = form.save(commit=False)
+#             request.employee=user
+        
+#             request.save()
+#             return redirect('assets:dept_requests')
+#     else:
+#         form=ManagerRequestForm()
+  
+#     params= {
+#         'my_requests':my_requests,
+#         'dept_requests': dept_requests,
+
+        # 'user':user,
+        # 'form':form,
+#     }
+#     return render(request,'assets/dept_requests.html',params)
 
 
 def employee_requests(request):
-    
-
     user=request.user.id
-    # employee=Profile.objects.get(user=user)
-    # requests=EmployeeAssetRequest.objects.get(employee=employee)
-    # user=User.objects.get(id=request.user.id)
-    # print(dept_requests)
     user=Profile.objects.get(user=request.user)
     requests=EmployeeAssetRequest.objects.filter(employee=user)
     form=EmployeeAssetRequestForm()
@@ -559,19 +575,7 @@ def employee_requests(request):
     }
 
 
-    return render(request,'assets/employeeRrequests.html',params)
-
-
-
-
-
-
-##########################
-
-
-
-
-
+    return render(request,'assets/employee_request.html',params)
 
 
 
@@ -663,7 +667,7 @@ def profile_page(request):
         'profile':profile
 	}
     return render(request, 'assets/profile_view.html', context)
-    return render(request, 'assets/profile_view.html', context)
+   
 
 
 def request_demo(request):
@@ -695,4 +699,28 @@ def delete_asset(request, id):
         return redirect(request,'assets/assets.html')
     asset.delete()
     return redirect(request,'assets/assets.html')
+
+def delete_department(request, id):
+    id = int(id)   
+    try:
+         dept = Department.objects.get(id = id)
+    except Department.DoesNotExist:
+        return redirect(request,'assets:departments')
+    dept.delete()
+    
+    return redirect('assets:departments')
+
+def delete_employee(request, id):
+    id = int(id)   
+    try:
+         profile = Profile.objects.get(id = id)
+         employee = User.objects.filter(id=profile.user.id)
+    except Department.DoesNotExist:
+        return redirect(request,'assets:departments')
+    profile.delete()
+    employee.delete()
+    
+    return redirect('assets:employees')
+    
+   
 

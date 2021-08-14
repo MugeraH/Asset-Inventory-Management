@@ -19,6 +19,7 @@ urlpatterns=[
     path('addasset',views.addasset,name='assetform'),
     
     path('employeedetails/<int:id>', employeedetails,name='employeedetails'),
+    path('delete_employee/<int:id>', views.delete_employee,name='delete_employee'),
     path('employeeassetrequest',views.employeeassetrequest,name='employeeassetrequest'),
     path('managerrequest/',views.managerrequest,name='managerrequest'),
     path('assetdetails/<int:id>', views.assetdetails,name='assetdetails'),
@@ -44,6 +45,7 @@ urlpatterns=[
     path('unassign_asset_dept/<int:id>',views.unassign_asset_dept,name='unassign_asset_dept'),
     # path('employeedetails/<int:id>', views.employeedetails,name='employeedetails'),
     path('department_detail/<int:id>',views.department_detail,name='department_detail'),
+    path('delete_department/<int:id>',views.delete_department,name='delete_department'),
     path('assets/',views.assets,name='assets'),
     path('update/asset/<int:id>/',views.update_asset,name='assetform'),
     path('employeeassetrequest/',views.employeeassetrequest,name='employeeassetrequest'),
@@ -54,12 +56,13 @@ urlpatterns=[
     
     path('assign_asset/<int:id>',views.assign_asset,name='assign_asset'),
     path('dept_requests',views.dept_requests,name='dept_requests'),
-    path('employee_requests/',views.employee_requests,name='employee_requests'),
+    path('employee_requests',views.employee_requests,name='employee_requests'),
     path('employeerequestdetails/<int:id>', views.employeerequestdetails,name='employeerequestdetails'),
     path('managerrequestdetails/<int:id>', views.managerrequestdetails ,name='managerrequestdetails'),
     path('requests', views.requests,name='requests'),
     path('add_departments/',views.add_departments,name='add_departments'),
-    path('employee_assets',views.employee_assets,name='employee_assets')
+    path('employee_assets',views.employee_assets,name='employee_assets'),
+   
 ]
 
 if settings.DEBUG:

@@ -1,21 +1,19 @@
-{%extends 'assets/base.html'%} {% load bootstrap4%} {% load static %}
+{%extends 'assets/base.html'%}
+<!-- bootstrap -->
+{% load bootstrap4%}
+<!-- static -->
+{% load static %}
+
 <!-- content -->
-{%block content%}
-<div class="container">
-    <div class="row">
+{%block content%} ​
+<div class="container-fluid">
+  <header class="mt-5">
+    <h2>My Request</h2>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">Add Request</button>
+  </header>
 
-        <div class="col-md-8 mt-4 mb-4">
-            <div class="top d-flex  justify-content-between mt-4">
-                <h2 >My Requests</h2>
-                <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
-                    Add Request
-                </a>
-
-
-            </div>
-
-
-            <table class="table mt-4">
+  <div class="my_request mb-5">
+       <table class="table mt-4">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -39,7 +37,22 @@
                         <td>{{ request.request }}</td>
                         <td>{{ request.posted_date | date }}</td>
                         <td>{{ request.quantity }} </td>
-                        <td>{{ request.status }}</td>
+                      <td>  {% if request.status == "approved" %}
+                         
+                           <button class="btn btn-outline-success">{{request.status }}</button>
+                     
+                           {%elif request.status == "rejected" %}
+                          
+ <button class="btn btn-outline-danger">{{request.status }}</button>
+                           
+ 
+                           {%elif request.status == "pending" %}
+                         
+ <button class="btn btn-outline-warning">{{request.status }}</button>
+
+ {%else%}
+
+                         {% endif %}</td>
 
                         <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 
@@ -50,22 +63,15 @@
                 </tbody>
                 {% endfor %}
             </table>
-        </div>
-    </div>
-
-
-
-
-    <div class="row mt-3">
-
-
-        <div class="col-md-8">
-            <h3>Department requests</h3>
+  </div>
+  <div class="dept_requests mt-5">
+            <h2>Department requests</h2>
             <table class="table">
 
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">Employee</th>
                         <th scope="col">Request</th>
                         <th scope="col">Posted_date</th>
                         <th scope="col">Quantity</th>
@@ -75,7 +81,7 @@
                 </thead>
 
 
-                {% for request in dept_requests %}
+                {% for request in employee_dept_requests %}
 
 
 
@@ -83,10 +89,28 @@
                     <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
 
                         <th scope="row">{{ request.id}}</th>
+                        <td >{{ request.employee.user.username}}</td>
                         <td>{{ request.request_detail }}({{ request.type }})</td>
                         <td>{{ request.posted_date | date }}</td>
                         <td>{{ request.quantity }} </td>
-                        <td>{{ request.status }}</td>
+                        <td>
+                         {% if request.status == "approved" %}
+                         
+                           <button class="btn btn-outline-success">{{request.status }}</button>
+                     
+                           {%elif request.status == "rejected" %}
+                          
+ <button class="btn btn-outline-danger">{{request.status }}</button>
+                           
+ 
+                           {%elif request.status == "pending" %}
+                         
+ <button class="btn btn-outline-warning">{{request.status }}</button>
+
+ {%else%}
+
+                         {% endif %}
+                        </td>
 
                         <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 
@@ -97,10 +121,9 @@
                 </tbody>
                 {% endfor %}
             </table>
-        </div>
-    </div>
-
+  </div>
 </div>
+
 <!-- modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -123,4 +146,4 @@
         </div>
     </div>
 </div>
-{% endblock%}
+​ {% endblock %}
