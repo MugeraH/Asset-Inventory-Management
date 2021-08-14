@@ -663,8 +663,7 @@ def profile_page(request):
         'profile':profile
 	}
     return render(request, 'assets/profile_view.html', context)
-    return render(request, 'assets/profile_view.html', context)
-
+    
 
 def request_demo(request):
     form=EmailForm(request.POST)
