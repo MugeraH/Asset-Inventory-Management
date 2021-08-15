@@ -1,24 +1,100 @@
-{% extends "assets/base.html" %}
-{% block content %}
+{% extends "assets/base.html" %} {% load bootstrap4%} {% block content %}
 
-<div class="content-section">
-    <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-        <div class="media-body">
-            <h2 class="account-heading">{{ user.username }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
-        </div>
+<div class="container-fluid">
+  <div class="row profile-wrapper">
+    <div class="profile col-md-2"></div>
+    <div class="profile col-md-8">
+      <div class="img">
+        {% if user_profile.image %}
+        <img src="{{user_profile.image.url}}" alt="" />
+        {%else%}
+        <h3 class="text-muted">Upload image...</h3>
+        {% endif %}
+      </div>
+      <div class="profile-details">
+        <header>
+          <h4></h4>
+          <a
+            href="#"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#staticBackdrop"
+          >
+            Update</a
+          >
+        </header>
+        <h4><span>Username:</span>{{user_profile.user.username}}</h4>
+        <h4>
+          <span>Full name:</span>{{user_profile.user.firstname}}
+          {{user_profile.user.lastname}}
+        </h4>
+
+        <h4><span>Email:</span>{{user_profile.user.email}}</h4>
+        <h4><span>Bio:</span>{{user_profile.bio}}</h4>
+        <h4><span>Phone:</span>{{user_profile.phone}}</h4>
+        <h4><span>Department:</span>{{user_profile.department}}</h4>
+        <h4>
+          <span>Role:</span> {% if user_profile.user.is_admin %} Manager
+          <!-- super -->
+          {%elif user_profile.user.is_superuser%} Admin {%else%}
+          <!-- user_profile -->
+          Employee {% endif %}
+        </h4>
+      </div>
     </div>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Profile Info</legend>
-            {{ u_form.as_p }}
-            {{ p_form.as_p }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Update</button>
-        </div>
-    </form>
+    <div class="profile col-md-2"></div>
+  </div>
+</div>
+
+<!-- <div class="content-section">
+  <div class="media">
+    <img
+      class="rounded-circle account-img"
+      src="{{ user.profile.image.url }}"
+    />
+    <div class="media-body">
+      <h2 class="account-heading">{{ user.username }}</h2>
+      <p class="text-secondary">{{ user.email }}</p>
+    </div>
+  </div>
+</div> -->
+
+<!-- modal -->
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Profile Info</h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+            {% bootstrap_form u_form %} {% bootstrap_form p_form %}
+          </fieldset>
+          <div class="form-group">
+            <button class="btn btn-primary" type="submit">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

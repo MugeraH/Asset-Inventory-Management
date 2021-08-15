@@ -7,21 +7,12 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-md-7 mt-4">
+        <div class="col-md-12 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
                 <h2>Assets</h2>
-                <div class="dropdown" style="float:right;">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Actions
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item"  
+                <a class="btn btn-primary"  
                          data-toggle="modal"
           data-target="#staticBackdrop">Assign Asset to Employee</a>
-                   
-                    </div>
-                </div>
 
             </div>
 
@@ -77,8 +68,13 @@
 
 <div class="form-group ">
      <label for="select">Employee</label>
+<<<<<<< HEAD
     <select class="form-control" id="select" name="employee" >
     <option selected></option>
+=======
+                         ​ <select class="form-control" id="select" name="employee" >
+    <option hidden></option>
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
     {% for employee in employees  %}
       <option value="{{employee.user.username}}">{{employee.user.username}}</option>
     {% endfor %}

@@ -100,6 +100,13 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user__id = id).first()
         return profile
 
+class Email(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = EmailField()
+    account_specifications = models.TextField()
+
+    def __str__(self):
+        return self.full_name
 class EmployeeAsset(models.Model):
     employee = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='employee_det',null=True)
     asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset_user')
@@ -132,10 +139,12 @@ class EmployeeAssetRequest(models.Model):
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     posted_date=models.DateTimeField(auto_now_add=True)
     urgency = models.CharField(max_length=50,choices=URGENCY,default='urgency')
- 
-    class Meta:
-        ordering = ["pk"]
+    completed= models.BooleanField(default=False)
     
+
+    class Meta:
+         ordering = ["urgency"]
+     
     def __str__(self):
         return f'{self.request_detail} employee_request'
     
@@ -147,16 +156,11 @@ class ManagerRequest(models.Model):
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     employee=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='manager_request',null=True)
     urgency = models.CharField(max_length=50,choices=URGENCY,default='urgency2')
-    
+    completed= models.BooleanField(default=False)
+
     class Meta:
-        ordering = ["pk"]
+        ordering = ["urgency"]
+
         
     def __str__(self):
         return f'{self.request} Manager_request'
-class Email(models.Model):
-    full_name = models.CharField(max_length=100)
-    email = EmailField()
-    account_specifications = models.TextField()
-
-    def __str__(self):
-        return self.full_name

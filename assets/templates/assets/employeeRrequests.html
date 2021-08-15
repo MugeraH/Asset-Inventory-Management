@@ -7,19 +7,17 @@
 <!-- content -->
 {%block content%} ​
 
-<div class="container-fluid">
+<div class="container">
 
 
 
   <div class="row">
 
-    <div class="col-md-12">
-     <header>
-          <h2 class="mt-4">My Requests</h2>
+    <div class="col-md-8">
+      <h2 class="mt-4">My Requests</h2>
       <a href="/add_request" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">
         Add Request</a>
 
-     </header>
 
 
 
@@ -47,24 +45,6 @@
             <td>{{ request.request_detail }}({{ request.type }})</td>
             <td>{{ request.posted_date | date }}</td>
             <td>{{ request.quantity }} </td>
-            <td>
-                {% if request.urgency == "1" %}
-                         
-                         <h4 class="text-danger">High</h4>
-                     
-                           {%elif request.urgency == "2" %}
-                          
-<h4 class="text-warning">Medium</h4>
-                           
- 
-                           {%elif request.urgency == "3" %}
-                         
-<h4 class="text-default">Low</h4>
-
- {%else%}
-
-                         {% endif %} 
-            </td>
             <td>
                 {% if request.status == "approved" %}
                          
@@ -111,9 +91,7 @@
       </div>
 
       <div class="modal-body">
-        <form 
-        
-        class="form" method="post" novalidate enctype="multipart/form-data">
+        <form class="form" method="post" novalidate enctype="multipart/form-data">
           {% csrf_token %} {% bootstrap_form form layout='block' %}
           <button type="submit" class="btn btn-success">Add</button>
         </form>
