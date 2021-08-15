@@ -15,13 +15,9 @@
                         Actions
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      {% if user.is_superuser %}
-                          <a class="dropdown-item" href="#"  data-toggle="modal"
-          data-target="#staticBackdrop">Update </a>
-                      {% endif %}
-
-                  
-                       
+                        {% if user.is_superuser %}
+                        <a class="dropdown-item" href="#"  data-toggle="modal"data-target="#staticBackdrop">Update </a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -48,34 +44,6 @@
                         </div>
                     </div>
 
-                    <!-- <table class="table mt-4">
-                        <thead>
-                          <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Department</th>
-                            <th scope="col">created_at</th>
-                            <th scope="col">is_assigned</th>
-                          </tr>
-                        </thead>
-                
-                        <tbody>
-                          <tr>
-                            <th scope="row">{{ asset.name }}</th>
-                            <td>{{asset.category}}</td>
-                            <td>{{asset.department.name }}</td>
-                            <td>{{asset.created_at }}</td>
-                            <td>{{asset.created_at }}</td>
-                            <td>
-                              {% if employee.user.is_admin %} Manager -->
-                              <!-- super -->
-                              <!-- {%elif employee.user.is_superuser%} Admin {%else%} -->
-                              <!-- employee -->
-                              <!-- Employee {% endif %} -->
-                            <!-- </td>
-                          </tr>
-                        </tbody>
-                      </table> -->
                 </div>
             </div>
 
@@ -104,7 +72,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                       <form class="form" action="{%url 'assets:update_asset' asset.id%}" method="post" novalidate enctype="multipart/form-data">
+                        <form class="form" action="{%url 'assets:update_asset' asset.id%}" method="post" novalidate enctype="multipart/form-data">
                     {% csrf_token %} {% bootstrap_form form layout='block' %}
                     <button type="submit" class="btn btn-success">Update</button>
                 </form>
