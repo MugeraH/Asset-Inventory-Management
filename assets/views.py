@@ -8,13 +8,6 @@ from assets.models import Profile
 from django.db.models import manager
 from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
-<<<<<<< HEAD
-from django.http import Http404,HttpResponse, HttpResponseRedirect
-
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,UserEmailForm
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
-from .email import send_response_email
-=======
 from django.http import Http404,HttpResponse
 from django.conf import settings
 
@@ -23,7 +16,6 @@ from django.conf import settings
 from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
 
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 
 
 import sys
@@ -41,11 +33,6 @@ import datetime as dt
 def HomePageView(request):
     return render(request,'assets/home.html')
 
-<<<<<<< HEAD
-def EmployeesView(request):
-    return render(request,'assets/employees.html')
-def  DashBoardView(request):
-=======
 
 def  DashBoardView(request):
         try:
@@ -57,19 +44,14 @@ def  DashBoardView(request):
             dept_assets=[]
             dept_employees=[]
      
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
         if request.user.is_admin:
             return redirect('assets:manager_dashboard')
         
         if not request.user.is_admin and not request.user.is_superuser:
             return redirect('assets:employee_dashboard')
-<<<<<<< HEAD
-        
-=======
        
        
        
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
@@ -79,13 +61,10 @@ def  DashBoardView(request):
         'departments': total_department,
         
         'employees' : total_user,
-<<<<<<< HEAD
-=======
         'dept_assets':dept_assets,
         'dept_employees': dept_employees,
      
         
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
     
         
         }
@@ -98,11 +77,8 @@ def  employeeDashBoardView(request):
         return render(request,'assets/employee_dashboard.html',context)
     
 def  managerDashBoardView(request):
-<<<<<<< HEAD
-=======
         user=Profile.objects.get(user=request.user)
         manager_requests= ManagerRequest.objects.filter(employee=user)
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
         department= Department.objects.get(manager=request.user.id)
         
         dept_assets=Asset.objects.filter(department=department)
@@ -110,14 +86,9 @@ def  managerDashBoardView(request):
         context = {
     
         'department':department,
-<<<<<<< HEAD
-        'dept_assets':dept_assets,
-        'dept_employees': dept_employees
-=======
       'manager_requests':manager_requests,
        'dept_assets':dept_assets,
        'dept_employees': dept_employees
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
         
         }
         return render(request,'assets/dashboard.html',context)
@@ -186,10 +157,6 @@ def assetdetails(request,id):
         'form':form
         
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
     return render(request,'assets/assetdetails.html', params)
 
 def update_asset(request, id):
@@ -272,11 +239,6 @@ def unassign_asset_dept(request,id):
     asset.employee=None
     asset.save()
     return redirect('assets:assets')
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 
 def departments(request):
         department=Department.objects.all()
@@ -378,11 +340,6 @@ def employeedetails(request,id):
     # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     
     form = EmployeeProfile(instance = employee)
-<<<<<<< HEAD
-=======
-
-    
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
     
     
     if request.method == 'POST':
@@ -426,11 +383,8 @@ def employeerequests(request):
     return render(request,'assets/employee_request.html', params)
 
 
-<<<<<<< HEAD
-=======
 
 @login_required(login_url='/login')
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 def employeeassetrequest(request):
     if request.method == 'POST':
         form=EmployeeAssetRequestForm(request.POST,request.FILES)
