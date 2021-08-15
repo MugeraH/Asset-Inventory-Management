@@ -38,16 +38,16 @@
             <td>
               {% if request.urgency == "1" %}
                          
-                         <h4 class="text-danger">high</h4>
+                         <h5 class="text-danger">high</h5>
                      
                            {%elif request.urgency == "2" %}
                           
-<h4 class="text-warning">medium</h4>
+<h5 class="text-warning">medium</h5>
                            
  
                            {%elif request.urgency == "3" %}
                          
-<h4 class="text-default">low</h4>
+<h5 class="text-default">low</h5>
 
  {%else%}
 
@@ -121,16 +121,16 @@
             <td>{{ request.quantity }} </td>
             <td>   {% if request.urgency == "1" %}
                          
-                         <h4 class="text-danger">High</h4>
+                         <h5 class="text-danger">High</h5>
                      
                            {%elif request.urgency == "2" %}
                           
-<h4 class="text-warning">Medium</h4>
+<h5 class="text-warning">Medium</h5>
                            
  
                            {%elif request.urgency == "3" %}
                          
-<h4 class="text-default">Low</h4>
+<h5 class="text-default">Low</h5>
 
  {%else%}
 

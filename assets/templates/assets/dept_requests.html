@@ -20,6 +20,7 @@
                         <th scope="col">Request</th>
                         <th scope="col">Posted_date</th>
                         <th scope="col">Quantity</th>
+                        <th scope="col">Urgency</th>
                         <th scope="col">Status</th>
 
                     </tr>
@@ -37,6 +38,24 @@
                         <td>{{ request.request }}</td>
                         <td>{{ request.posted_date | date }}</td>
                         <td>{{ request.quantity }} </td>
+                        <td>
+                         {% if request.urgency == "1" %}
+                         
+                         <h5 class="text-danger">High</h5>
+                     
+                           {%elif request.urgency == "2" %}
+                          
+<h5 class="text-warning">Medium</h5>
+                           
+ 
+                           {%elif request.urgency == "3" %}
+                         
+<h5 class="text-default">Low</h5>
+
+ {%else%}
+
+                         {% endif %}     
+                        </td>
                       <td>  {% if request.status == "approved" %}
                          
                            <button class="btn btn-success">{{request.status }}</button>
@@ -96,16 +115,16 @@
                         <td>{{ request.quantity }} </td>
                         <td> {% if request.urgency == "1" %}
                          
-                         <h4 class="text-danger">High</h4>
+                         <h5 class="text-danger">High</h5>
                      
                            {%elif request.urgency == "2" %}
                           
-<h4 class="text-warning">Medium</h4>
+<h5 class="text-warning">Medium</h5>
                            
  
                            {%elif request.urgency == "3" %}
                          
-<h4 class="text-default">Low</h4>
+<h5 class="text-default">Low</h5>
 
  {%else%}
 

@@ -7,6 +7,7 @@
     <div class="col-md-12">
       <div class="header d-flex flex-row mt-4 mb-4 justify-content-between">
         <h2 style="text-align: center">Employee Details</h2>
+        {% if user.is_superuser %}
         <div class="dropdown" style="float: right">
           <button
             class="btn btn-primary dropdown-toggle"
@@ -35,6 +36,7 @@
             >
           </div>
         </div>
+        {% endif %}
       </div>
 
       <table class="table mt-4">
@@ -109,46 +111,45 @@
     </div>
   </div>
 
-
   <div
-  class="modal fade"
-  id="staticBackdrop2"
-  data-backdrop="static"
-  data-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Department</h5>
-        <button
-          type="button"
-          class="close text-white"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          &times;
-        </button>
-      </div>
-      <div class="modal-body">
-        <h4>Are you sure you want to remove this employee?</h4>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">
-          Close
-        </button>
-        <a
-          href="{%url 'assets:delete_employee' employee.id %}"
-          type="button"
-          class="btn btn-primary"
-          >Confirm</a
-        >
+    class="modal fade"
+    id="staticBackdrop2"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Department</h5>
+          <button
+            type="button"
+            class="close text-white"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <h4>Are you sure you want to remove this employee?</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Close
+          </button>
+          <a
+            href="{%url 'assets:delete_employee' employee.id %}"
+            type="button"
+            class="btn btn-primary"
+            >Confirm</a
+          >
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   {% endblock%}
 </div>

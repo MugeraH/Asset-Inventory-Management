@@ -390,3 +390,43 @@ td {
   font-size: 20px;
   font-weight: 500;
 }
+
+.profile-wrapper {
+  margin: 60px auto;
+}
+
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile .img {
+  border: 2px solid black;
+  border-right: none;
+  flex: 1;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile .img img {
+  background-color: rgb(73, 73, 73) !important;
+  margin: 20px auto;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-details {
+  background-color: blue !important;
+  flex: 1;
+  padding: 20px;
+  color: white;
+}
+
+.profile-details h4 span {
+  text-transform: uppercase;
+  padding-right: 9px;
+  font-size: 18px;
+  font-weight: 600;
+}

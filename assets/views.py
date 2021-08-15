@@ -353,7 +353,7 @@ def dept_employees(request):
     params={
         'employees':employees,
     }
-    return render(request,'assets/employees.html', params)
+    return render(request,'assets/departmentEmployees.html', params)
 
 
 
@@ -593,7 +593,7 @@ def employeerequestdetails(request,id):
             if form.is_valid() :
                                 
                 form.save()
-                return redirect('assets:dept_requests')
+                return redirect('assets:employeerequestdetails' ,id=id)
 
     params={
       
@@ -669,6 +669,8 @@ def delete_asset(request, id):
 
 @login_required
 def profile(request):
+    
+    user_profile = Profile.objects.get(user=request.user)
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
@@ -684,7 +686,8 @@ def profile(request):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'user_profile':user_profile
     }
 
     return render(request, 'assets/profile.html', context)
@@ -728,6 +731,22 @@ def delete_asset(request, id):
     asset.delete()
     return redirect(request,'assets/assets.html')
 
+
+# try:
+#         asset= EmployeeAsset.objects.get(asset_id=id)
+#     except Asset.DoesNotExist:
+#         print("")
+   
+#     assigned_asset=Asset.objects.get(id=id)
+       
+#     assigned_asset.is_assigned_user=False
+#     assigned_asset.is_assigned_dept=False
+#     assigned_asset.department=None
+#     assigned_asset.save()
+            
+#     asset.employee=None
+#     asset.save()
+
 def delete_department(request, id):
     id = int(id)   
     try:
@@ -749,6 +768,30 @@ def delete_employee(request, id):
     employee.delete()
     
     return redirect('assets:employees')
+
+def delete_manager_request(request, id):
+    id = int(id)   
+    try:
+         request =ManagerRequest.objects.get(id = id)
+        
+    except ManagerRequest.DoesNotExist:
+        return redirect(request,'assets:dept_requests')
+    request.delete()
+   
+    
+    return redirect('assets:dept_requests')
+
+def delete_employee_request(request, id):
+    id = int(id)   
+    try:
+         request =EmployeeAssetRequest.objects.get(id = id)
+        
+    except EmployeeAssetRequest.DoesNotExist:
+        return redirect(request,'assets:employee_requests')
+    request.delete()
+   
+    
+    return redirect('assets:employee_requests')
     
    
 
