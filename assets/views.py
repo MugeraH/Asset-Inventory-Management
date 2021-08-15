@@ -13,9 +13,6 @@ from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,Manager
 from .email import send_response_email
 
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,EmployeeAssetForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile
-from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
-
 import sys
 sys.path.append("..")
 from users.models import User
