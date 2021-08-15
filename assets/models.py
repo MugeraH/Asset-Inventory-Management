@@ -48,11 +48,7 @@ class Asset(models.Model):
     def __str__(self):
         return self.name
     
-class EmployeeAsset(models.Model):
-    employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name='employee' ,null=True)
-    asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset',null=True)
-    def __str__(self):
-        return self.employee.username
+
 
     
 
@@ -158,9 +154,11 @@ class EmployeeAssetRequest(models.Model):
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     posted_date=models.DateTimeField(auto_now_add=True)
     urgency = models.CharField(max_length=50,choices=URGENCY,default='urgency')
+    completed= models.BooleanField(default=False)
+    
 
     class Meta:
-        ordering = ["-pk"]
+         ordering = ["urgency"]
      
     def __str__(self):
         return f'{self.request_detail} employee_request'
@@ -173,9 +171,10 @@ class ManagerRequest(models.Model):
     status=  models.CharField(max_length=50,choices=REQUEST_STATUS,default='pending')
     employee=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='manager_request',null=True)
     urgency = models.CharField(max_length=50,choices=URGENCY,default='urgency2')
+    completed= models.BooleanField(default=False)
 
     class Meta:
-        ordering = ["-pk"]
+        ordering = ["urgency"]
 
         
     def __str__(self):
