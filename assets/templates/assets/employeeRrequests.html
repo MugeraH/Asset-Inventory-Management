@@ -28,6 +28,7 @@
             <th scope="col">Request</th>
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
+            <th scope="col">Urgency</th>
             <th scope="col">Status</th>
 
           </tr>
@@ -44,7 +45,25 @@
             <td>{{ request.request_detail }}({{ request.type }})</td>
             <td>{{ request.posted_date | date }}</td>
             <td>{{ request.quantity }} </td>
-            <td>{{ request.status }}</td>
+            <td>
+                {% if request.status == "approved" %}
+                         
+                           <button class="btn btn-success">{{request.status }}</button>
+                     
+                           {%elif request.status == "rejected" %}
+                          
+ <button class="btn btn-danger">{{request.status }}</button>
+                           
+ 
+                           {%elif request.status == "pending" %}
+                         
+ <button class="btn btn-warning">{{request.status }}</button>
+
+ {%else%}
+
+                         {% endif %}
+               
+            </td>
 
             <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
 

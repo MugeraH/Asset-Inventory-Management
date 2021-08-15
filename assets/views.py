@@ -166,8 +166,10 @@ def employee_assets(request):
 
 def assetdetails(request,id):
     asset=Asset.objects.get(id=id)
+    form = AssetForm(instance = asset)
     params={
         'asset':asset,
+        'form':form
         
     }
 
@@ -178,17 +180,13 @@ def update_asset(request, id):
     try:
         asset = Asset.objects.get(id = asset_id)
     except Asset.DoesNotExist:
-        return redirect('/')
+        return redirect('assets:assets')
     form = AssetForm(request.POST or None, instance = asset)
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('assets:assets')
 
-    asset=Asset.objects.all()
-    params={
-        'asset':asset,
-    }
-    return render(request,'assets/assets.html', params)
+   
 
 def assign_asset(request,id):
     asset=Asset.objects.get(id=id)
@@ -199,7 +197,7 @@ def assign_asset(request,id):
             asset = form.save(commit=False)
             asset.is_assigned_dept = True
             asset.save()
-            return redirect('assets:assetdetails',id=id)
+            return redirect('assets:assets')
     else:
         form=AssetAssigningForm()
 
@@ -570,7 +568,7 @@ def employee_requests(request):
         form=EmployeeAssetRequestForm()
     params = {
         'requests':requests,
-        'user':user,
+       
         'form':form
     }
 
@@ -587,6 +585,7 @@ def employeerequestdetails(request,id):
    
     status= get_object_or_404(EmployeeAssetRequest,id=id)
     form = EmployeeRequest()
+    form2 = EmployeeAssetRequestForm(request.POST or None,instance = employee_requests)
         
     if request.method == 'POST':
             form= EmployeeRequest(request.POST or None,instance = status)
@@ -594,14 +593,26 @@ def employeerequestdetails(request,id):
             if form.is_valid() :
                                 
                 form.save()
-                return redirect('assets:employeerequestdetails',id=id)
+                return redirect('assets:dept_requests')
 
     params={
       
         'employee_requests': employee_requests,
         'form': form,
+        'form2': form2,
     }
     return render(request,'assets/employeerequestdetails.html', params)
+
+def update_employee_request(request, id):
+   
+    try:
+        employee_requests=EmployeeAssetRequest.objects.get(id=id)
+    except EmployeeAssetRequest.DoesNotExist:
+        return redirect('assets:employee_requests')
+    form = EmployeeAssetRequestForm(request.POST or None,instance =employee_requests)
+    if form.is_valid():
+        form.save()
+        return redirect('assets:employeerequestdetails',id=id)
 
 @login_required(login_url='/login')
 def managerrequestdetails(request,id):
@@ -609,6 +620,7 @@ def managerrequestdetails(request,id):
     # user = User.objects.get(id=id)
     status= get_object_or_404(ManagerRequest,id=id)
     form = ManagerRequestUpdateForm()
+    form2 = ManagerRequestForm(request.POST or None,instance = manager_requests)
             
     if request.method == 'POST':
                 form= ManagerRequestUpdateForm(request.POST or None,instance = status)
@@ -621,10 +633,26 @@ def managerrequestdetails(request,id):
     params={
         'manager_requests': manager_requests,
         'form': form,
+        'form2': form2,
     }
 
 
     return render(request,'assets/managerrequestdetails.html', params)
+
+
+def update_manager_request(request, id):
+   
+    try:
+        manager_requests= ManagerRequest.objects.get(id=id)
+    except ManagerRequest.DoesNotExist:
+        return redirect('assets:dept_requests')
+    form = ManagerRequestForm(request.POST or None,instance = manager_requests)
+    if form.is_valid():
+        form.save()
+        return redirect('assets:managerrequestdetails',id=id)
+    
+
+  
 
 def home(request):
 	return render(request, 'assets/home.html')

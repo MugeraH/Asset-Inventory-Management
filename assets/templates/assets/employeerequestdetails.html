@@ -6,7 +6,6 @@
   <div class="row">
     <div class="col-md-7 mt-4">
       <div class="header d-flex flex-row justify-content-between">
-        {% if user.is_admin or user.is_superuser%}
         <div class="dropdown" style="float: right">
           <button
             class="btn btn-primary dropdown-toggle"
@@ -19,6 +18,7 @@
             Actions
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {% if user.is_admin or user.is_superuser%}
             <a
               class="dropdown-item"
               href="#"
@@ -26,11 +26,19 @@
               data-target="#staticBackdrop"
               >Update</a
             >
+            {% endif%} {% if not user.is_admin or not user.is_superuser%}
+            <a
+              class="dropdown-item"
+              href="#"
+              data-toggle="modal"
+              data-target="#staticBackdrop2"
+              >Update</a
+            >
+            {% endif%}
             <!-- <a class="dropdown-item" href="#">Assign Department</a>
                         <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a> -->
           </div>
         </div>
-        {% endif%}
       </div>
 
       <div class="row">
@@ -100,6 +108,45 @@
             {% csrf_token %}
             <!-- form2 -->
             {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="staticBackdrop2"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Requests</h5>
+          <button
+            type="button"
+            class="close text-white"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form
+            class="form"
+            action="{%url 'assets:update_employee_request' employee_requests.id%}"
+            method="post"
+            novalidate
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %}
+            <!-- form2 -->
+            {% bootstrap_form form2 %}
             <button type="submit" class="btn btn-success">Update</button>
           </form>
         </div>
