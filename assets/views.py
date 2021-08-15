@@ -2,7 +2,7 @@ from django import forms
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render,reverse,redirect
 from django.contrib import messages
-from .email import send_welcome_email
+
 from .forms import UserUpdateForm, ProfileUpdateForm, EmailForm
 from assets.models import Profile 
 from django.db.models import manager
@@ -70,10 +70,7 @@ def  DashBoardView(request):
         }
         return render(request,'assets/dashboard.html',context)
 def  employeeDashBoardView(request):
-       
-     
         asset = EmployeeAsset.objects.filter(employee__user=request.user.id) 
-          
         context = {
         'asset': asset,        
         }
@@ -86,9 +83,6 @@ def  managerDashBoardView(request):
         
         dept_assets=Asset.objects.filter(department=department)
         dept_employees=Profile.objects.filter(department=department)
-       
-         
-       
         context = {
     
         'department':department,
@@ -140,29 +134,20 @@ def assets(request):
     return render(request,'assets/assets.html', params)
 
 def dept_assets(request):
-   
     department= Department.objects.get(manager=request.user.id)
     dept_assets=EmployeeAsset.objects.filter(asset__department=department)
-    
-    
     user=User.objects.get(id=request.user.id)
     print(dept_assets)
-  
     
     params= {'dept_assets': dept_assets,'user':user}
     return render(request,'assets/departmentAsset.html',params)
 
 def employee_assets(request):
     assets = EmployeeAsset.objects.filter(employee__user=request.user.id) 
-           
     context = {
         'assets': assets,        
         }
     return render(request,'assets/employee_assets.html', context)
-
-
-
-
 
 def assetdetails(request,id):
     asset=Asset.objects.get(id=id)
@@ -172,7 +157,6 @@ def assetdetails(request,id):
         'form':form
         
     }
-
     return render(request,'assets/assetdetails.html', params)
 
 def update_asset(request, id):
@@ -211,8 +195,6 @@ def assign_asset_user(request,id):
     asset= EmployeeAsset.objects.get(asset_id=id)
     assigned_asset=Asset.objects.get(id=id)
     employees = Profile.objects.filter(department=asset.asset.department)
-   
-  
     if request.method == 'POST':
         
             name= request.POST.get('employee')
@@ -223,13 +205,12 @@ def assign_asset_user(request,id):
             
             asset.employee=employee
             asset.save()
-          
             return redirect('assets:dept_assets')
     else:
         print('')
 
     params={
-       'employees':employees,
+        'employees':employees,
         'asset':asset
     }
     return render(request,'assets/assignuserasset.html', params)
@@ -237,13 +218,11 @@ def assign_asset_user(request,id):
 def unassign_asset_user(request,id):
     asset= EmployeeAsset.objects.get(asset_id=id)
     assigned_asset=Asset.objects.get(id=id)
-       
     assigned_asset.is_assigned_user=False
     assigned_asset.save()
             
     asset.employee=None
     asset.save()
-          
     return redirect('assets:dept_assets')
 def unassign_asset_dept(request,id):
     
@@ -251,9 +230,7 @@ def unassign_asset_dept(request,id):
         asset= EmployeeAsset.objects.get(asset_id=id)
     except Asset.DoesNotExist:
         print("")
-   
     assigned_asset=Asset.objects.get(id=id)
-       
     assigned_asset.is_assigned_user=False
     assigned_asset.is_assigned_dept=False
     assigned_asset.department=None
@@ -261,9 +238,7 @@ def unassign_asset_dept(request,id):
             
     asset.employee=None
     asset.save()
-          
     return redirect('assets:assets')
-  
 
 def departments(request):
         department=Department.objects.all()
@@ -365,8 +340,6 @@ def employeedetails(request,id):
     # requests=EmployeeAssetRequest.objects.filter(employee=employee.user)
     
     form = EmployeeProfile(instance = employee)
-
-    
     
     
     if request.method == 'POST':
@@ -406,9 +379,7 @@ def employeedetails(request,id):
 @login_required(login_url='/login')
 def employeerequests(request):
     assets= EmployeeAssetRequest.objects.all()
-
     params= {'assets': assets,}
-
     return render(request,'assets/employee_request.html', params)
 
 
@@ -656,7 +627,6 @@ def update_manager_request(request, id):
 
 def home(request):
 	return render(request, 'assets/home.html')
-
 
 def delete_asset(request, id):
     id = int(id)
