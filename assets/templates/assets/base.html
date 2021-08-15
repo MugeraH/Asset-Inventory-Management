@@ -82,7 +82,7 @@
                   <img src="../../static/icons/user.png" alt="" />
                 </div>
                 <div>
-                  <a class="nav-link" href="{% url 'profile_page' %}">Profile </a>
+                  <a class="nav-link" href="{% url 'profile' %}">Profile </a>
                 </div>
                 <!-- <div>
                   <a class="nav-link" href="{% url 'profile' %}">Update </a>
@@ -123,9 +123,9 @@
           </div>
           {% if user.is_superuser %}
           <div class="side_option">
-            <a class="flex-cont" href="departments/">
+            <a class="flex-cont" href="/departments">
               <div class="icon">
-                <img src="../../static/icons/department.png" alt="" />
+                <img src="../../static/icons/department(1).png" alt="" />
               </div>
               <div class="title">Departments</div>
             </a>
@@ -136,7 +136,7 @@
           <div class="side_option">
             <a class="flex-cont" href="/employees">
               <div class="icon">
-                <img src="../../static/icons/company.png" alt="" />
+                <img src="../../static/icons/team.png" alt="" />
               </div>
               <div class="title">Employees</div>
             </a>
@@ -145,7 +145,7 @@
           <div class="side_option">
             <a class="flex-cont" href="/assets">
               <div class="icon">
-                <img src="../../static/icons/assets.png" alt="" />
+                <img src="../../static/icons/assets(1).png" alt="" />
               </div>
               <div class="title">Assets</div>
             </a>
@@ -153,7 +153,7 @@
           <div class="side_option">
             <a class="flex-cont" href="/requests">
               <div class="icon">
-                <img src="../../static/icons/mail.png" alt="" />
+                <img src="../../static/icons/mail(1).png" alt="" />
               </div>
               <div class="title">Requests</div>
             </a>
@@ -163,8 +163,16 @@
       </div>
       {% endif %}
       <div class="home_content">
+                 
         <div class="container-fluid">
-          {%block content%} {%endblock content%}
+
+         
+          {%block content%}
+           
+
+
+
+          {%endblock content%}
         </div>
       </div>
     </div>

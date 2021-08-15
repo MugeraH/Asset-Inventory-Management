@@ -7,7 +7,6 @@
   font-family: "Roboto", sans-serif;
 }
 
-
 /* styling for scroll bar */
 
 * {
@@ -31,7 +30,11 @@
   background: rgb(30, 30, 211);
   border-radius: 20px;
   border: transparent;
+<<<<<<< HEAD
   background: rgb(30, 30, 211);
+=======
+  background: rgb(17, 17, 43);
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
   border-radius: 20px;
   border: transparent;
 }
@@ -53,13 +56,25 @@ body {
   flex: 1;
   height: 100vh;
   overflow-y: scroll;
+<<<<<<< HEAD
+=======
+  background: rgb(240, 240, 240);
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 }
-
 
 /* sidebar hughes*/
 
 .sidenav {
+<<<<<<< HEAD
   width: 20%;
+=======
+  height: 100;
+  background: rgb(30, 30, 211);
+  color: #fff;
+  transition: 0.3s all ease;
+  padding-top: 40px;
+  width: 15%;
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
   height: 100;
   background: rgb(30, 30, 211);
   color: #fff;
@@ -89,14 +104,22 @@ body {
 }
 
 .side_option {
+<<<<<<< HEAD
   margin: 10px;
+=======
+  margin: 10px 0px;
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
   padding: 15px;
   transition: 0.3s all ease;
 }
 
 .side_option:hover {
   background-color: rgb(42, 42, 177);
+<<<<<<< HEAD
   background-color: rgb(30, 30, 211);
+=======
+  /* background-color: rgb(17, 17, 43); */
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 }
 
 .side_option .title {
@@ -106,7 +129,6 @@ body {
 #open {
   display: none;
 }
-
 
 /* navbar hughes */
 
@@ -122,7 +144,11 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+<<<<<<< HEAD
   background: rgb(30, 30, 211);
+=======
+  background: rgb(17, 17, 43);
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
   color: #fff;
   padding: 4px 10px !important;
 }
@@ -141,7 +167,11 @@ body {
 }
 
 .icon img {
+<<<<<<< HEAD
   width: 30px;
+=======
+  width: 40px;
+>>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 }
 
 .navbar-brand .logo_name {
@@ -191,7 +221,6 @@ body {
 .myname {
   text-transform: capitalize;
 }
-
 
 /* form-styling hughes*/
 
@@ -269,6 +298,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 10px;
 }
 
@@ -339,6 +369,9 @@ header {
   font-weight: 600;
   color: white;
 }
+.modal-body {
+  background-color: rgb(189, 189, 189) !important;
+}
 
 .modal-body textarea {
   height: 150px;
@@ -369,19 +402,75 @@ header {
   font-weight: 550;
   margin: 7px 0px;
   padding: 8px;
-  color: #fff;
-  text-decoration: underline;
+  color: #000;
+  text-decoration: none;
 }
 
 .modal1 {
   display: flex;
   border-radius: 10px;
 }
-
 #emp {
   text-align: center;
 }
 
-.container-fluid {
-  background: rgb(134, 133, 133);
+
+table {
+  width: 100%;
+  background-color: rgb(243, 240, 240);
+}
+
+tr:nth-child(even) {
+  background-color: rgba(199, 152, 64, 0.5) !important;
+}
+
+th {
+  background-color: blue !important;
+
+  color: white;
+}
+td {
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.profile-wrapper {
+  margin: 60px auto;
+}
+
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile .img {
+  border: 2px solid black;
+  border-right: none;
+  flex: 1;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile .img img {
+  background-color: rgb(73, 73, 73) !important;
+  margin: 20px auto;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-details {
+  background-color: blue !important;
+  flex: 1;
+  padding: 20px;
+  color: white;
+}
+
+.profile-details h4 span {
+  text-transform: uppercase;
+  padding-right: 9px;
+  font-size: 18px;
+  font-weight: 600;
 }

@@ -113,31 +113,18 @@
             <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
                 
                 <ul class="navbar-nav mr-auto p-0">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item active p-0">
-                        <a class="nav-link" href="/">Hello {{user}}, Welcome to an amazing Asset  Management application <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active p-0">
-                        <a class="nav-link" href="{%url 'profile'%}">Profile </a>
-                    </li>
-                    <li class="nav-item active p-0">
-                        <a class="nav-link" href="{%url 'logout'%}">Logout</a>
-                    </li>
-
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{%url 'login'%}"> Login </a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <div class="sidebar">
-
-                    <ul class="navbar-nav ml-auto">
+                    
+                   <ul class="navbar-nav ml-auto">
                                     <li><a href="#home" class="menu-btn">HOME</a></li>
                                     <li><a href="#about" class="menu-btn">ABOUT</a></li>
                                     
                                     <li><a href="#contact" class="menu-btn">CONTACT</a></li>
                                 </ul>
+                   
+                </ul>
+                <div class="sidebar">
+
+                   
             </div>
         </div>
     </nav>
@@ -429,6 +416,7 @@
                         <p class="text">The administration will send you login info for your demo account and incase of any inquiries concerning your account you can reach out to us for help </p>
                         <ul class="contact-info">
                             <li><i class="lni-money-location"></i>Moringa, Ngong Road</li>
+                            <br>
                             <li><i class="lni-phone-handset"></i> +254 711-320-751</li>
                             <li><i class="lni-envelope"></i> taratibu@gmail.com</li><br>
                             <li><a href="https://facebook.com/"><i class="lni-facebook-filled"></i></a></li>
