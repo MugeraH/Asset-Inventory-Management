@@ -124,5 +124,15 @@ class TestEmail(TestCase):
         email = Email.objects.all()
         self.assertTrue(len(email)==0)
 
-        
+# class TestProfile(TestCase):
+#     def setUp(self):
+#         self.new_user = User(username = "Kelly", email = "kelly@gmail.com",password = "yes",last_login="time",is_superuser="yes")
+#         self.new_user.save()
+
+#     def tearDown(self):
+#         Profile.objects.all().delete()
+#         User.objects.all().delete()
+
+#     def test_isinstance(self):
+#         self.assertTrue(isinstance(self.new_user.profile, Profile))
 
