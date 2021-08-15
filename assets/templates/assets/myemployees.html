@@ -4,11 +4,9 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
-      <div id="emp">
-        <h2 class="mt-4" style="text-align: center">Employees</h2>
-      </div>
-      <br />
+    <div class="col-md-7">
+      <h2 class="mt-4">Department Employees</h2>
+
       <table class="table">
         <thead>
           <tr>
@@ -25,7 +23,7 @@
         <tbody>
           <tr
             style="cursor: pointer"
-            onclick="window.location='/employeedetails/{{employee.id}}'"
+            onclick="window.location='/myemployeesdetails/{{employee.id}}'"
           >
             <th scope="row">{{ employee.id }}</th>
             <td>{{ employee.user.username }}</td>
@@ -43,6 +41,7 @@
         {% endfor %}
       </table>
     </div>
+    <div class="col-md-5"></div>
   </div>
 </div>
 
