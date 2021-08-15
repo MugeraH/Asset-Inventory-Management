@@ -37,7 +37,7 @@ class Asset(models.Model):
     department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='asset_department',null=True)
 
     category= models.CharField(max_length=50,choices=CATEGORY_CHOICES,default='furniture')
-    created_at= models.DateTimeField(auto_now_add=True)
+    created_at= models.DateTimeField(auto_now_add=True) 
     updated_date= models.DateTimeField(auto_now=True)
     is_assigned_dept= models.BooleanField(default=False)
     is_assigned_user= models.BooleanField(default=False)

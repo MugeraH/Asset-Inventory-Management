@@ -30,15 +30,7 @@
   background: rgb(30, 30, 211);
   border-radius: 20px;
   border: transparent;
-<<<<<<< HEAD
-  background: rgb(30, 30, 211);
-=======
-  background: rgb(17, 17, 43);
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
-  border-radius: 20px;
-  border: transparent;
 }
-
 body {
   height: 100%;
   width: 100%;
@@ -56,25 +48,18 @@ body {
   flex: 1;
   height: 100vh;
   overflow-y: scroll;
-<<<<<<< HEAD
-=======
   background: rgb(240, 240, 240);
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 }
 
 /* sidebar hughes*/
 
 .sidenav {
-<<<<<<< HEAD
-  width: 20%;
-=======
   height: 100;
   background: rgb(30, 30, 211);
   color: #fff;
   transition: 0.3s all ease;
   padding-top: 40px;
   width: 15%;
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
   height: 100;
   background: rgb(30, 30, 211);
   color: #fff;
@@ -104,22 +89,14 @@ body {
 }
 
 .side_option {
-<<<<<<< HEAD
-  margin: 10px;
-=======
   margin: 10px 0px;
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
   padding: 15px;
   transition: 0.3s all ease;
 }
 
 .side_option:hover {
   background-color: rgb(42, 42, 177);
-<<<<<<< HEAD
-  background-color: rgb(30, 30, 211);
-=======
   /* background-color: rgb(17, 17, 43); */
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 }
 
 .side_option .title {
@@ -144,11 +121,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-<<<<<<< HEAD
-  background: rgb(30, 30, 211);
-=======
   background: rgb(17, 17, 43);
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
   color: #fff;
   padding: 4px 10px !important;
 }
@@ -167,11 +140,7 @@ body {
 }
 
 .icon img {
-<<<<<<< HEAD
-  width: 30px;
-=======
   width: 40px;
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
 }
 
 .navbar-brand .logo_name {
