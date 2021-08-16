@@ -727,6 +727,7 @@ def delete_department(request, id):
     
     return redirect('assets:departments')
 
+
 def delete_employee(request, id):
     id = int(id)   
     try:
