@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import manager
 from django.urls import path,include
 from django.contrib.auth.views import(
     LoginView,
@@ -13,26 +14,27 @@ from assets import views as user_views
 
 from django.urls import path, include
 from django.contrib.auth.models import User
+from assets.models import EmployeeAsset
 from rest_framework import routers, serializers, viewsets
 
 # Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class EmployeeAssetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'is_staff']
+        model = EmployeeAsset
+        fields = ['employee', 'asset',]
 
 # ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class EmployeeAssetViewSet(viewsets.ModelViewSet):
+    queryset = EmployeeAsset.objects.all()
+    serializer_class = EmployeeAssetSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+router.register(r'employeeasset', EmployeeAssetViewSet)
 
 
 urlpatterns = [
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api-employeeasset/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
     path('',include("assets.urls")),
     path('profile/', user_views.profile, name='profile'),
