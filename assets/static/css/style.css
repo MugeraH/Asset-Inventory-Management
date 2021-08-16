@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +8,11 @@
 }
 
 /* styling for scroll bar */
+
 * {
+  scrollbar-width: thin;
+  scrollbar-color: #6d6d7b transparent;
+  scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #6d6d7b transparent;
   scroll-behavior: smooth;
@@ -16,15 +21,16 @@
 *::-webkit-scrollbar {
   width: 10px;
 }
+
 *::-webkit-scrollbar-track {
   background: transparent;
 }
+
 *::-webkit-scrollbar-thumb {
   background: rgb(17, 17, 43);
   border-radius: 20px;
   border: transparent;
 }
-
 body {
   height: 100%;
   width: 100%;
@@ -36,16 +42,29 @@ body {
   display: flex;
   width: 100%;
 }
+
 .home_content {
   width: 78%;
   flex: 1;
   height: 100vh;
   overflow-y: scroll;
+  background: rgb(240, 240, 240);
 }
 
 /* sidebar hughes*/
 
 .sidenav {
+  height: 100;
+  background: rgb(30, 30, 211);
+  color: #fff;
+  transition: 0.3s all ease;
+  padding-top: 40px;
+  width: 15%;
+  height: 100;
+  background: rgb(30, 30, 211);
+  color: #fff;
+  transition: 0.3s all ease;
+  padding-top: 40px;
   width: 20%;
   height: 100;
   background: rgb(17, 17, 43);
@@ -53,6 +72,7 @@ body {
   transition: 0.3s all ease;
   padding-top: 40px;
 }
+
 .sidenav a {
   color: #fff;
   text-decoration: none;
@@ -69,13 +89,20 @@ body {
 }
 
 .side_option {
-  margin: 10px;
+  margin: 10px 0px;
   padding: 15px;
   transition: 0.3s all ease;
 }
+
 .side_option:hover {
+<<<<<<< HEAD
   background-color: rgb(17, 17, 43);
+=======
+  background-color: rgb(42, 42, 177);
+  /* background-color: rgb(17, 17, 43); */
+>>>>>>> c307b155a6a417d2a3c822699409080a091c26e6
 }
+
 .side_option .title {
   font-weight: 600;
 }
@@ -85,12 +112,20 @@ body {
 }
 
 /* navbar hughes */
+
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   background:rgb(17, 17, 43);
+  color: #fff;
+  padding: 4px 10px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: rgb(17, 17, 43);
   color: #fff;
   padding: 4px 10px !important;
 }
@@ -105,12 +140,13 @@ body {
   display: flex;
   width: 180px;
   align-items: center;
-
   gap: 10px;
 }
+
 .icon img {
-  width: 30px;
+  width: 40px;
 }
+
 .navbar-brand .logo_name {
   padding: 0;
   margin: 0;
@@ -118,6 +154,7 @@ body {
   font-weight: 600;
   display: block;
 }
+
 .navbar-brand span {
   font-size: 9px;
   padding: 0;
@@ -128,6 +165,7 @@ body {
 .navbar a {
   color: #fff;
 }
+
 .navbar a:hover {
   color: #fff;
 }
@@ -136,6 +174,7 @@ body {
   padding: 2px 10px !important;
   font-weight: 550;
 }
+
 .navbar-nav {
   display: flex;
   align-items: center;
@@ -143,19 +182,21 @@ body {
 
 .nav-icon {
   display: flex;
-
   margin-left: 10px;
   padding-left: 5px;
 }
+
 .nav-icon .icon img {
   height: 25px;
   object-fit: contain;
 }
+
 .myname {
   text-transform: capitalize;
 }
 
 /* form-styling hughes*/
+
 .form-container {
   background: blue;
   width: 40%;
@@ -198,6 +239,7 @@ body {
 .dash-card .title {
   text-align: center;
 }
+
 .dash-card .title h3 {
   font-weight: 600;
 }
@@ -209,15 +251,19 @@ body {
   justify-content: center;
   flex: 1;
 }
+
 .dash_icon img {
   height: 100%;
 }
+
 .one {
   background: rgb(30, 30, 211);
 }
+
 .two {
   background: rgb(96, 96, 181);
 }
+
 .three {
   background: rgb(6, 112, 112);
 }
@@ -225,6 +271,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 10px;
 }
 
@@ -278,6 +325,7 @@ header {
 .dep-card h3 {
   font-weight: 600;
 }
+
 .dep-card h5 {
   font-weight: 600;
 }
@@ -285,16 +333,28 @@ header {
 .modal {
   border-radius: 10px;
 }
+
 .modal-header {
   background: rgb(30, 30, 211);
 }
+
 .modal-header .modal-title {
   font-weight: 600;
   color: white;
 }
+.modal-body {
+  background-color: rgb(189, 189, 189) !important;
+}
 
 .modal-body textarea {
   height: 150px;
+}
+.dep_description{
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 80px;
+
 }
 
 .dep_detail .row .dep_det-card {
@@ -317,16 +377,80 @@ header {
 .dropdown-menu {
   padding: 9px 1px;
 }
+
 .dropdown-item {
   font-weight: 550;
   margin: 7px 0px;
   padding: 8px;
+  color: #000;
+  text-decoration: none;
 }
 
-.modal1{
+.modal1 {
   display: flex;
   border-radius: 10px;
 }
-#emp{
+#emp {
   text-align: center;
+}
+
+
+table {
+  width: 100%;
+  background-color: rgb(243, 240, 240);
+}
+
+tr:nth-child(even) {
+  background-color: rgba(199, 152, 64, 0.5) !important;
+}
+
+th {
+  background-color: blue !important;
+
+  color: white;
+}
+td {
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.profile-wrapper {
+  margin: 60px auto;
+}
+
+.profile {
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile .img {
+  border: 2px solid black;
+  border-right: none;
+  flex: 1;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile .img img {
+  background-color: rgb(73, 73, 73) !important;
+  margin: 20px auto;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-details {
+  background-color: blue !important;
+  flex: 1;
+  padding: 20px;
+  color: white;
+}
+
+.profile-details h4 span {
+  text-transform: uppercase;
+  padding-right: 9px;
+  font-size: 18px;
+  font-weight: 600;
 }
