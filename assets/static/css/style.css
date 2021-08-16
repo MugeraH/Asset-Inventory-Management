@@ -51,7 +51,7 @@ body {
   flex: 1;
   height: 100vh;
   overflow-y: scroll;
-  background: rgb(240, 240, 240);
+  background: rgb(138, 210, 238);
 }
 
 /* sidebar hughes*/
@@ -62,9 +62,9 @@ body {
   color: #fff;
   transition: 0.3s all ease;
   padding-top: 40px;
-  width: 15%;
+  width: 250px;
   height: 100;
-  background: blue;
+  background: rgb(30, 30, 211);
 }
 
 .sidenav a {
@@ -334,7 +334,7 @@ header {
   color: white;
 }
 .modal-body {
-  background-color: rgb(189, 189, 189) !important;
+  /* background-color: rgb(189, 189, 189) !important; */
 }
 
 .modal-body textarea {
@@ -402,8 +402,21 @@ td {
   color: black;
   font-size: 20px;
   font-weight: 500;
+  background: rgb(226, 245, 252);
+}
+td > * {
+  align-items: center;
+  justify-content: center;
 }
 
+td img {
+  padding: 0;
+  margin: 0;
+  height: 80px;
+  width: 80px;
+
+  border-radius: 30%;
+}
 .profile-wrapper {
   margin: 60px auto;
 }

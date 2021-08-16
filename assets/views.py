@@ -656,15 +656,19 @@ def request_demo(request):
 
 
 @login_required(login_url='/login')
-
 def delete_asset(request, id):
     id = int(id)
     try:
         asset = Asset.objects.get(id = id)
+        asset_assigned= EmployeeAsset.objects.filter(asset=asset)
     except Asset.DoesNotExist:
         return redirect(request,'assets/assets.html')
+    
+    asset.department= None
+    asset_assigned.employee=None
+    asset_assigned.delete()
     asset.delete()
-    return redirect(request,'assets/assets.html')
+    return redirect('assets:assets')
 
 
 

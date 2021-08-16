@@ -23,7 +23,7 @@ urlpatterns=[
     path('employeeassetrequest',views.employeeassetrequest,name='employeeassetrequest'),
     path('managerrequest/',views.managerrequest,name='managerrequest'),
     path('assetdetails/<int:id>', views.assetdetails,name='assetdetails'),
-    path('delete/<int:id>/', views.delete_asset,name='delete_asset'),
+    path('delete_asset/<int:id>', views.delete_asset,name='delete_asset'),
     
     path('dashboard',DashBoardView,name='dashboard'),
     
