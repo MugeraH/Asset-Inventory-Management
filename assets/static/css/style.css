@@ -60,17 +60,6 @@ body {
   transition: 0.3s all ease;
   padding-top: 40px;
   width: 15%;
-  height: 100;
-  background: rgb(30, 30, 211);
-  color: #fff;
-  transition: 0.3s all ease;
-  padding-top: 40px;
-  width: 20%;
-  height: 100;
-  background: rgb(30, 30, 211);
-  color: #fff;
-  transition: 0.3s all ease;
-  padding-top: 40px;
 }
 
 .sidenav a {
@@ -121,9 +110,6 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background: rgb(17, 17, 43);
-  color: #fff;
-  padding: 4px 10px !important;
 }
 
 .navbar-brand {
@@ -345,12 +331,11 @@ header {
 .modal-body textarea {
   height: 150px;
 }
-.dep_description{
+.dep_description {
   white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
   height: 80px;
-
 }
 
 .dep_detail .row .dep_det-card {
@@ -389,7 +374,6 @@ header {
 #emp {
   text-align: center;
 }
-
 
 table {
   width: 100%;
