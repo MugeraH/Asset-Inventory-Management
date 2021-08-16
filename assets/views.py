@@ -312,7 +312,6 @@ def employees(request):
             return redirect('assets:dept_employees')
     employees= Profile.objects.all().exclude(user__is_superuser=True)
     
-   
 
     params={
         'employees':employees,
@@ -671,25 +670,11 @@ def delete_asset(request, id):
     return redirect(request,'assets/assets.html')
 
 
-# try:
-#         asset= EmployeeAsset.objects.get(asset_id=id)
-#     except Asset.DoesNotExist:
-#         print("")
-   
-#     assigned_asset=Asset.objects.get(id=id)
-       
-#     assigned_asset.is_assigned_user=False
-#     assigned_asset.is_assigned_dept=False
-#     assigned_asset.department=None
-#     assigned_asset.save()
-            
-#     asset.employee=None
-#     asset.save()
 
 def delete_department(request, id):
     id = int(id)   
     try:
-         dept = Department.objects.get(id = id)
+        dept = Department.objects.get(id = id)
     except Department.DoesNotExist:
         return redirect(request,'assets:departments')
     dept.delete()
