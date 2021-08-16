@@ -24,9 +24,9 @@ class Department(models.Model):
         return self.name
     
 CATEGORY_CHOICES= (
-    ("furniture", "furniture"),
-    ("electronics", "electronics"),
-    ("stationary", "stationary"),
+    ("Furniture", "Furniture"),
+    ("Electronics", "Electronics"),
+    ("Stationary", "Stationary"),
 
 )
 class Asset(models.Model):
@@ -49,15 +49,15 @@ class Asset(models.Model):
         return self.name
     
 REQUESTTYPE_CHOICES = (
-    ("new_asset", "new_asset"),
-    ("repair", "repair"),
-    ("replacement", "replacement"),
+    ("New_asset", "New_asset"),
+    ("Repair", "Repair"),
+    ("Replacement", "Replacement"),
 
 )
 REQUEST_STATUS = (
-    ("pending", "pending"),
-    ("approved", "approved"),
-    ("rejected", "rejected"),
+    ("Pending", "Pending"),
+    ("Approved", "Approved"),
+    ("Rejected", "Rejected"),
 
 )
 
@@ -125,9 +125,9 @@ post_save.connect(post_asset_created_signal,sender = Asset)
 
 
 URGENCY = (
-    ("1", "high"),
-    ("2", "medium"),
-    ("3", "low"),
+    ("1", "High"),
+    ("2", "Medium"),
+    ("3", "Low"),
 
 )
 

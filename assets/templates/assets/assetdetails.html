@@ -6,7 +6,6 @@
 
 <div class="container-fluid">
     <div class="row">
-
         <div class="col-md-9 mt-4">
             <div class="header d-flex flex-row  justify-content-between">
                 <h2>Asset Details</h2>
@@ -15,61 +14,44 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Actions
                     </button>
-
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         {% if user.is_superuser %}
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">Update </a>
                         {% endif %}
-
                     </div>
                 </div>
-
             </div>
             <div class="col-md-12">
                 <div class="card-title text-center" style="text-decoration: underline;">
                     <h3>{{asset.name}}</h3>
                     <hr>
-
                 </div>
             </div>
-
             <div class="row">
-
-
-
                 <div class="col-md-7 ">
                     <div class="card">
                         <img src="{{ asset.image.url }}" alt="{{ asset.name }}" height="100%" width="100%">
 
                         <div class="card-title">
-
                             <div class="card-body">
-
                             </div>
-
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-5">
                     <ul class="p-4 mt-3" style="list-style-type: square; font-size: 20px;">
-
                         <li>Category: <strong>{{ asset.category }}</strong></li>
                         <li>Department: <strong>{{ asset.department.name }}</strong></li>
                         <li>Created <strong>{{ asset.created_at }}</strong></li>
                         <li>Is Assigned?: <strong>{{ asset.is_assigned }}</li>
                     </ul>
-
                 </div>
             </div>
         </div>
-
-
     </div>
     <div class="col-md-5">
     </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -80,8 +62,6 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-
-
                 <!-- Modal -->
                 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -100,10 +80,6 @@
                                     <button type="submit" class="btn btn-success">Update</button>
                                 </form>
                             </div>
-                            <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Assign</button>
-                    </div> -->
                         </div>
                     </div>
                     <div class="modal-body">
@@ -111,16 +87,14 @@
                             {% csrf_token %}
                             ​
                             {{form}}
-
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Assign.</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Assign.</button>
                     </div>
                 </div>
             </div>
-
         </div>
 
         {% endblock%}
