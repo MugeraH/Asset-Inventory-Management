@@ -410,6 +410,7 @@
                 <div class="col-lg-6">
                     <div class="contact-form form-style-one mt-35 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
                         <form  id="contact-form" action="assets/contact.php" method="post">
+                        {% csrf_token %}
                             <div class="form-input mt-15">
                                 <label>Full Name</label>
                                 <div class="input-items default">
@@ -435,6 +436,9 @@
                             <div class="form-input rounded-buttons mt-20">
                                 <button type="button" onclick="myFunction()" value="Submit form" class="main-btn rounded-three">Submit</button>
                             </div> <!-- form input -->
+                            {% for message in messages %}
+							<p id="messages">{{message}}</p>
+						{% endfor %}
                         </form>
                     </div> <!-- contact form -->
                 </div>
