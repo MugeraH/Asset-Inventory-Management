@@ -26,28 +26,7 @@
 
             </div>
 
-
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-7">
-                    <div class="card card-body">
-                        <div class="card-title" style="text-decoration: underline;">
-                            <h2>Asset Details</h2>
-                        </div>
-                        <div class="card-title">
-                            <p> {{asset.name}}</p>
-                            <hr>
-                            <ul class="p-4">
-                                <li>Category: <strong>{{ asset.category }}</strong></li>
-                                <li>Department: <strong>{{ asset.department.name }}</strong></li>
-                                <li>Created <strong>{{ asset.created_at }}</strong></li>
-                                <li>Is Assigned?: <strong>{{ asset.is_assigned}}</li>
-                            </ul>
-
-                        </div>
-                    </div>
-
-                    <!-- <table class="table mt-4">
+                    <table class="table mt-4">
                         <thead>
                           <tr>
                             <th scope="col">ID</th>
@@ -63,23 +42,16 @@
                             <th scope="row">{{ asset.name }}</th>
                             <td>{{asset.category}}</td>
                             <td>{{asset.department.name }}</td>
-                            <td>{{asset.created_at }}</td>
-                            <td>{{asset.created_at }}</td>
+                            <td>{{asset.created_at|date }}</td>
+                            <td>{{is_assigned }}</td>
+                            
                             <td>
-                              {% if employee.user.is_admin %} Manager -->
-                              <!-- super -->
-                              <!-- {%elif employee.user.is_superuser%} Admin {%else%} -->
-                              <!-- employee -->
-                              <!-- Employee {% endif %} -->
-                            <!-- </td>
+                             </td>
                           </tr>
                         </tbody>
-                      </table> -->
+                      </table>
                 </div>
-            </div>
-
-
-        </div>
+          
 
         <div class="col-md-5"></div>
     </div>

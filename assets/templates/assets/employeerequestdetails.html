@@ -1,0 +1,84 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
+{%block content%}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-7 mt-4">
+            <div class="header d-flex flex-row  justify-content-between">
+               {% if user.is_admin%}
+                <div class="dropdown" style="float:right;">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">Update</a>
+                        <!-- <a class="dropdown-item" href="#">Assign Department</a>
+                        <a class="dropdown-item" href="delete/{{asset.id}}">Delete</a> -->
+                    </div>
+                </div>
+                {% endif%}
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <div class="card card-body ">
+                        <div class="card-title" style="text-decoration: underline;">
+                            <h2>Employee Request Details</h2>
+                        </div>
+                        <div class="card-title">
+                            
+                            <hr>
+                            <ul class="p-4">
+                                <li>name: <strong>{{ employee_requests.emloyee.username  }}</strong></li>
+                                <li>Request: <strong>{{ employee_requests.request_detail}}</strong></li>
+                                <li>Created: <strong>{{ employee_requests.posted_date }}</strong></li>
+                                <li>Quantity: <strong>{{ employee_requests.quantity }}</strong></li>
+                                <li>Status: <strong>{{ employee_requests.status }}</strong></li>
+                               
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-5"></div>
+    </div>
+
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Update Requests
+          </h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="form" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- form2 -->
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-success">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    {% endblock%}
