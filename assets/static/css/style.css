@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -29,11 +30,7 @@
   background: rgb(30, 30, 211);
   border-radius: 20px;
   border: transparent;
-  background: rgb(17, 17, 43);
-  border-radius: 20px;
-  border: transparent;
 }
-
 body {
   height: 100%;
   width: 100%;
@@ -64,7 +61,13 @@ body {
   padding-top: 40px;
   width: 15%;
   height: 100;
-  background: rgb(17, 17, 43);
+  background: rgb(30, 30, 211);
+  color: #fff;
+  transition: 0.3s all ease;
+  padding-top: 40px;
+  width: 20%;
+  height: 100;
+  background: rgb(30, 30, 211);
   color: #fff;
   transition: 0.3s all ease;
   padding-top: 40px;
@@ -232,6 +235,7 @@ body {
 .dash-card .title {
   text-align: center;
 }
+
 .dash-card .title h3 {
   font-weight: 600;
 }
@@ -243,15 +247,19 @@ body {
   justify-content: center;
   flex: 1;
 }
+
 .dash_icon img {
   height: 100%;
 }
+
 .one {
   background: rgb(30, 30, 211);
 }
+
 .two {
   background: rgb(96, 96, 181);
 }
+
 .three {
   background: rgb(6, 112, 112);
 }
@@ -313,6 +321,7 @@ header {
 .dep-card h3 {
   font-weight: 600;
 }
+
 .dep-card h5 {
   font-weight: 600;
 }
@@ -320,9 +329,11 @@ header {
 .modal {
   border-radius: 10px;
 }
+
 .modal-header {
   background: rgb(30, 30, 211);
 }
+
 .modal-header .modal-title {
   font-weight: 600;
   color: white;
@@ -362,6 +373,7 @@ header {
 .dropdown-menu {
   padding: 9px 1px;
 }
+
 .dropdown-item {
   font-weight: 550;
   margin: 7px 0px;
@@ -377,6 +389,7 @@ header {
 #emp {
   text-align: center;
 }
+
 
 table {
   width: 100%;

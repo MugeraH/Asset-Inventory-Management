@@ -52,11 +52,6 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['image', 'bio', 'phone' ]
 
-class UserEmailForm(forms.ModelForm):
-    email = forms.EmailField()
-    class Meta:
-        model = User
-        fields = ['username', 'email',]
 class EmployeeRequest(forms.ModelForm):
     class Meta:
         model=EmployeeAssetRequest

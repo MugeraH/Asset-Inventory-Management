@@ -33,7 +33,6 @@
             <th scope="col">Name</th>
             <th scope="col">Category</th>
             <th scope="col">Department</th>
-            <th scope="col"></th>
           </tr>
         </thead>
 
@@ -48,13 +47,9 @@
             onclick="window.location='/assetdetails/{{asset.id}}'"
           >
             <th scope="row">{{ asset.id }}</th>
-            <td style="text-transform: capitalize;">{{ asset.name }}</td>
-            <td style="text-transform: capitalize;">{{ asset.category }}</td>
-           {% if not asset.department %}
-              <td class="text-warning">unassigned</td>
-              {%else%}
-               <td style="text-transform: capitalize;">{{ asset.department }}</td>
-           {% endif %}
+            <td>{{ asset.name }}</td>
+            <td>{{ asset.category }}</td>
+            <td>{{ asset.department }}</td>
             <td>
               {% if not asset.is_assigned_dept %}
               <a

@@ -8,11 +8,14 @@ from assets.models import Profile
 from django.db.models import manager
 from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
-from django.http import Http404,HttpResponse, HttpResponseRedirect
+from django.http import Http404,HttpResponse
+from django.conf import settings
 
-from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,UserEmailForm
-from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
-from .email import send_response_email
+
+
+from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
+
 
 
 import sys
@@ -692,6 +695,7 @@ def delete_department(request, id):
     dept.delete()
     
     return redirect('assets:departments')
+
 
 def delete_employee(request, id):
     id = int(id)   

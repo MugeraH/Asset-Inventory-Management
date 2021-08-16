@@ -37,7 +37,7 @@ class Asset(models.Model):
     department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='asset_department',null=True)
 
     category= models.CharField(max_length=50,choices=CATEGORY_CHOICES,default='furniture')
-    created_at= models.DateTimeField(auto_now_add=True)
+    created_at= models.DateTimeField(auto_now_add=True) 
     updated_date= models.DateTimeField(auto_now=True)
     is_assigned_dept= models.BooleanField(default=False)
     is_assigned_user= models.BooleanField(default=False)
@@ -100,6 +100,13 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user__id = id).first()
         return profile
 
+class Email(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = EmailField()
+    account_specifications = models.TextField()
+
+    def __str__(self):
+        return self.full_name
 class EmployeeAsset(models.Model):
     employee = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='employee_det',null=True)
     asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset_user')
@@ -157,10 +164,3 @@ class ManagerRequest(models.Model):
         
     def __str__(self):
         return f'{self.request} Manager_request'
-class Email(models.Model):
-    full_name = models.CharField(max_length=100)
-    email = EmailField()
-    account_specifications = models.TextField()
-
-    def __str__(self):
-        return self.full_name
