@@ -10,6 +10,12 @@ from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from django.conf import settings
+from .serializers import EmailSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+
 
 
 
@@ -197,7 +203,7 @@ def assign_asset_user(request,id):
         
             name= request.POST.get('employee')
             employee = Profile.objects.get(user__username=name)
-            print(employee)
+           
             assigned_asset.is_assigned_user=True
             assigned_asset.save()
             
@@ -328,8 +334,6 @@ def dept_employees(request):
     }
     return render(request,'assets/departmentEmployees.html', params)
 
-
-
 @login_required(login_url='/login')
 def employeedetails(request,id):
     employee= Profile.objects.get(id=id)
@@ -345,7 +349,6 @@ def employeedetails(request,id):
         if form.is_valid() :
         
             dept = form.cleaned_data['department']
-
             department = Department.objects.get(name=dept)
             role = form.cleaned_data['role']
             if role == "Admin":
@@ -353,11 +356,17 @@ def employeedetails(request,id):
                 department.save()
                 user.is_admin=True
                 user.save()
-            else:
+            elif ((role == "Employee") and (department.manager==user.id)):
                 department.manager=None
                 department.save()
                 user.is_admin=False
                 user.save()
+            elif role == "Employee":
+                 user.is_admin=False
+                 user.save()
+                
+            
+              
     
             form.save()
             return redirect('assets:employeedetails',id=id)
@@ -413,15 +422,7 @@ def managerrequest(request):
     }
     return render(request,'assets/manager_request.html', params)
 
-@login_required(login_url='/login')
-def delete_employee(request, id):
-    id = int(id)
-    try:
-        employee = User.objects.get(id = id)
-    except Asset.DoesNotExist:
-        return redirect(request,'assets/employees.html')
-    employee.delete()
-    return redirect(request,'assets/employees.html')
+
 
 
 @login_required(login_url='/login')
@@ -649,7 +650,7 @@ def request_demo(request):
             email = form.__str__['email']
             account_specifications = form.cleaned_data['account_specifications']
 
-            recipient = Email(full_name = name,email =email, account_specifications  =account_specifications )
+            recipient = Email(full_name = name,email=email,account_specifications=account_specifications )
             recipient.save()
             # form.save()
             send_welcome_email(name,email)
@@ -657,6 +658,7 @@ def request_demo(request):
             HttpResponseRedirect('news_today')
             #.................
     return render(request, 'assets/home.html', {"form":form})
+
 
 @login_required(login_url='/login')
 
@@ -672,27 +674,37 @@ def delete_asset(request, id):
     return redirect(request,'assets/assets.html')
 
 
-# try:
-#         asset= EmployeeAsset.objects.get(asset_id=id)
-#     except Asset.DoesNotExist:
-#         print("")
-   
-#     assigned_asset=Asset.objects.get(id=id)
-       
-#     assigned_asset.is_assigned_user=False
-#     assigned_asset.is_assigned_dept=False
-#     assigned_asset.department=None
-#     assigned_asset.save()
-            
-#     asset.employee=None
-#     asset.save()
+
 
 def delete_department(request, id):
     id = int(id)   
     try:
          dept = Department.objects.get(id = id)
+         
+         assets= Asset.objects.filter(department=dept)
+         employees= Profile.objects.filter(department=dept)
     except Department.DoesNotExist:
         return redirect(request,'assets:departments')
+    
+    for employee in employees:
+        user= User.objects.get(id=employee.user.id)
+        user.is_admin=False
+        user.save()
+        employee.department=None
+        employee.save()
+    
+    for asset in assets:
+        asset.is_assigned_user=False
+        asset.is_assigned_dept=False
+        employee_assets = EmployeeAsset.objects.filter(asset_id=asset.id)
+       
+        if(employee_assets):
+            for asset_employee in employee_assets:
+                asset_employee.employee=None
+                asset_employee.save()
+        asset.department = None
+        asset.save()
+    
     dept.delete()
     
     return redirect('assets:departments')
@@ -701,10 +713,38 @@ def delete_department(request, id):
 def delete_employee(request, id):
     id = int(id)   
     try:
+         
          profile = Profile.objects.get(id = id)
-         employee = User.objects.filter(id=profile.user.id)
+         employee = User.objects.get(id=profile.user.id) 
+         department=Department.objects.get(manager=employee.id)
+         if (department):
+              department.manager=None
+              department.save()
+       
+        
+    except Department.DoesNotExist:
+        print("")
+    try:
+         profile = Profile.objects.get(id = id)
+         employee = User.objects.get(id=profile.user.id)
+         assets= EmployeeAsset.objects.filter(employee=profile)
+        
+        
     except Department.DoesNotExist:
         return redirect(request,'assets:departments')
+    for asset in assets:
+        asset.employee=None
+        asset.save()
+       
+        assigned_assets= Asset.objects.filter(name=asset)
+        for asset_assigned in assigned_assets:
+             asset_assigned.is_assigned_user=False
+             asset_assigned.save()
+            
+        
+        
+    
+         
     profile.delete()
     employee.delete()
     
@@ -733,6 +773,20 @@ def delete_employee_request(request, id):
    
     
     return redirect('assets:employee_requests')
-    
-   
 
+class Mail(APIView):
+
+   
+    def get(self, request, format=None):
+        all_mail = Email.objects.all()
+        serializers = EmailSerializer(all_mail, many=True)
+        return Response(serializers.data)
+
+class MailList(APIView):
+#............
+    def post(self, request, format=None):
+        serializers = EmailSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
