@@ -29,7 +29,7 @@
   background: rgb(30, 30, 211);
   border-radius: 20px;
   border: transparent;
-  background: rgb(17, 17, 43);
+  background: blue;
   border-radius: 20px;
   border: transparent;
 }
@@ -58,13 +58,13 @@ body {
 
 .sidenav {
   height: 100;
-  background: rgb(30, 30, 211);
+
   color: #fff;
   transition: 0.3s all ease;
   padding-top: 40px;
   width: 15%;
   height: 100;
-  background: rgb(17, 17, 43);
+  background: blue;
   color: #fff;
   transition: 0.3s all ease;
   padding-top: 40px;
@@ -86,14 +86,21 @@ body {
 }
 
 .side_option {
-  margin: 10px 0px;
-  padding: 15px;
+  margin: 7px 0px;
+  padding: 10px;
+  transition: 0.3s all ease;
+}
+.icon img {
+  width: 40px;
   transition: 0.3s all ease;
 }
 
+.side_option:hover .icon img {
+  width: 45px;
+}
+
 .side_option:hover {
-  background-color: rgb(42, 42, 177);
-  /* background-color: rgb(17, 17, 43); */
+  /* background-color: rgb(42, 110, 173); */
 }
 
 .side_option .title {
@@ -118,9 +125,6 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background: rgb(17, 17, 43);
-  color: #fff;
-  padding: 4px 10px !important;
 }
 
 .navbar-brand {
@@ -134,10 +138,6 @@ body {
   width: 180px;
   align-items: center;
   gap: 10px;
-}
-
-.icon img {
-  width: 40px;
 }
 
 .navbar-brand .logo_name {
@@ -214,7 +214,7 @@ body {
 }
 
 .dashboard .row {
-  width: 80%;
+  width: 100vw;
 
   /* margin: 0 auto; */
   /* display: flex;
@@ -225,7 +225,8 @@ body {
   display: flex !important;
   align-items: center;
   color: #fff;
-  height: 100px;
+  height: 150px;
+  width: 150px;
   border-radius: 5px;
 }
 
