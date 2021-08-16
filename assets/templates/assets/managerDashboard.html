@@ -8,11 +8,13 @@
 {%block content%} ​
 <div class="container-fluid dashboard">
 
-  <h1 class="mt-4 mb-4" style="text-transform: capitalize">
+
+    <h1 class="mt-2 mb-2" style="text-transform: capitalize">
     {{department.name}} Department
   </h1>
 
-  <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
+ 
+ <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
   <!-- greeting -->
   <!-- {% if user.is_superuser %}
   <h3>Welcome Admin</h3>
@@ -37,7 +39,7 @@
         <h6>Employees</h6>
       </div>
       <div class="dash_icon">
-        <img src="../../static/icons/company.png" alt="" />
+        <img src="../../static/icons/team.png" alt="" />
       </div>
     </div>
 
@@ -50,16 +52,12 @@
         <h6>Assets</h6>
       </div>
       <div class="dash_icon">
-        <img src="../../static/icons/assets.png" alt="" />
+        <img src="../../static/icons/assets(1).png" alt="" />
       </div>
     </div>
   </div>
   <div class="row">
-    {% for request in manager_requests%}
-    <ul>
-      <li>{{request.request}}</li>
-    </ul>
-    {% endfor %}
+   
   </div>
 
 

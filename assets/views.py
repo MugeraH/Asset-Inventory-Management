@@ -89,7 +89,7 @@ def  managerDashBoardView(request):
         'dept_employees': dept_employees
         
         }
-        return render(request,'assets/dashboard.html',context)
+        return render(request,'assets/managerDashboard.html',context)
 
 
 
