@@ -49,9 +49,7 @@ def  DashBoardView(request):
         
         if not request.user.is_admin and not request.user.is_superuser:
             return redirect('assets:employee_dashboard')
-       
-       
-       
+        
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
         total_user = User.objects.count()      
@@ -86,9 +84,9 @@ def  managerDashBoardView(request):
         context = {
     
         'department':department,
-      'manager_requests':manager_requests,
-       'dept_assets':dept_assets,
-       'dept_employees': dept_employees
+        'manager_requests':manager_requests,
+        'dept_assets':dept_assets,
+        'dept_employees': dept_employees
         
         }
         return render(request,'assets/dashboard.html',context)
@@ -494,34 +492,6 @@ def dept_requests(request):
     }
     return render(request,'assets/dept_requests.html',ctx)
 
-# def dept_requests(request):
-#     department= Department.objects.get(manager=request.user.id)
-#     dept_requests=EmployeeAssetRequest.objects.filter(employee__department=department)
-    
-    # user=Profile.objects.get(user=request.user)
-    # my_requests= ManagerRequest.objects.filter(employee=user)
-#     form=ManagerRequestForm()
-#     if request.method == 'POST':
-#         form=ManagerRequestForm(request.POST,request.FILES)
-#         if form.is_valid():
-#             request = form.save(commit=False)
-#             request.employee=user
-        
-#             request.save()
-#             return redirect('assets:dept_requests')
-#     else:
-#         form=ManagerRequestForm()
-  
-#     params= {
-#         'my_requests':my_requests,
-#         'dept_requests': dept_requests,
-
-        # 'user':user,
-        # 'form':form,
-#     }
-#     return render(request,'assets/dept_requests.html',params)
-
-
 def employee_requests(request):
     user=request.user.id
     user=Profile.objects.get(user=request.user)
@@ -529,7 +499,6 @@ def employee_requests(request):
     form=EmployeeAssetRequestForm()
     if request.method == 'POST':
         form=EmployeeAssetRequestForm(request.POST,request.FILES)
-       
         if form.is_valid():
             request = form.save(commit=False)
             request.employee = user

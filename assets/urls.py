@@ -66,7 +66,6 @@ urlpatterns=[
     path('requests', views.requests,name='requests'),
     path('add_departments/',views.add_departments,name='add_departments'),
     path('employee_assets',views.employee_assets,name='employee_assets'),
-   
 ]
 
 if settings.DEBUG:
