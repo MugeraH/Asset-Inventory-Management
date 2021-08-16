@@ -136,8 +136,8 @@ class EmployeeAssetRequest(models.Model):
     
 
     class Meta:
-         ordering = ["urgency"]
-     
+        ordering = ["urgency"]
+
     def __str__(self):
         return f'{self.request_detail} employee_request'
     

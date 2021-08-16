@@ -334,6 +334,13 @@ header {
 .modal-body textarea {
   height: 150px;
 }
+.dep_description{
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 80px;
+
+}
 
 .dep_detail .row .dep_det-card {
   padding: 18px 15px;
