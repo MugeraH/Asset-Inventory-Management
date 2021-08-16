@@ -48,15 +48,6 @@ class Asset(models.Model):
     def __str__(self):
         return self.name
     
-
-
-    
-
-
-
-
-        
-    
 REQUESTTYPE_CHOICES = (
     ("new_asset", "new_asset"),
     ("repair", "repair"),
@@ -70,12 +61,9 @@ REQUEST_STATUS = (
 
 )
 
-    
-    
 ROLES = (
     ("Admin", "Admin"),
     ("Employee", "Employee"),
-  
 
 )
     
@@ -89,7 +77,6 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ["pk"]
-   
     def __str__(self):
         return f'{self.user.username} Profile'
     
@@ -137,8 +124,6 @@ def post_asset_created_signal(sender,instance,created, **kwargs):
 post_save.connect(post_asset_created_signal,sender = Asset)
 
 
-
-    
 URGENCY = (
     ("1", "high"),
     ("2", "medium"),
