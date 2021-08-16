@@ -15,7 +15,7 @@ class Department(models.Model):
     description=models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
-    manager=models.ForeignKey(User,on_delete=models.CASCADE,related_name='department', null=True)
+    manager=models.ForeignKey(User,on_delete=models.CASCADE,related_name='department_manager', null=True)
     
     class Meta:
         ordering = ["pk"]
