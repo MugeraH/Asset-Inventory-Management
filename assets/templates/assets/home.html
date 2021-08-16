@@ -39,8 +39,6 @@
     <link rel="stylesheet" href="../../static/css/navbar.css">
 
 
-
-
 </head>
 
 <body>
@@ -67,13 +65,13 @@
         }
 
         /* Change the link color to #111 (black) on hover */
-        li a:hover {
+        /* li a:hover {
             background-color: #111;
-        }
+        } */
     </style>
 
     <!--====== PRELOADER PART START ======-->
-
+    <div class="overlay">
     <div class="preloader">
         <div class="loader">
             <div class="ytp-spinner">
@@ -90,11 +88,7 @@
             </div>
         </div>
     </div>
-
-
-
     <!--====== NAVBAR PART START ======-->
-
     <nav class="navbar navbar-expand-lg p-0">
         <div class="flex-cont">
             <div class="icon">
@@ -117,20 +111,20 @@
             </button>
 
             <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
+                
+                <ul class="navbar-nav mr-auto p-0">
+                    
+                   <ul class="navbar-nav ml-auto">
+                                    <li><a href="#home" class="menu-btn">HOME</a></li>
+                                    <li><a href="#about" class="menu-btn">ABOUT</a></li>
+                                    
+                                    <li><a href="#contact" class="menu-btn">CONTACT</a></li>
+                                </ul>
+                   
+                </ul>
                 <div class="sidebar">
 
-                    <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item active">
-                                        <a class="page-scroll" href="#home">HOME</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#about">ABOUT</a>
-                                    </li>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="page-scroll" href="#contact">CONTACT</a>
-                                    </li>
-                                </ul>
+                   
             </div>
         </div>
     </nav>
@@ -238,8 +232,8 @@
                     </div> <!-- single about -->
                 </div>
                 <div class="col-lg-6">
-                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
-                        data-wow-delay="1.6s">
+                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.2s"
+                        data-wow-delay="2.0s">
                         <div class="about-icon">
                             <img src="../../static/images/cloud.png" alt="Icon">
                         </div>
@@ -380,6 +374,31 @@
 
 
 
+    <footer id="contact" class="footer-area" style="background-color: aqua;">
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-link">
+                            <h6 class="footer-title">Contact</h6>
+                            <ul>
+                                <li>0711320751</a></li>
+                                <li>taratibu@gmail.com</a></li>
+                                <li></a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer-link">
+                            <h6 class="footer-title">Location</h6>
+                            <ul>
+                                <li>Moringa, Ngong Road</a></li>
+                                <li></a></li>
+                                <li><a href=""></a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+
 <section id="contact" class="contact-area">
         <div class="container">
             <div class="row justify-content-center">
@@ -397,6 +416,7 @@
                         <p class="text">The administration will send you login info for your demo account and incase of any inquiries concerning your account you can reach out to us for help </p>
                         <ul class="contact-info">
                             <li><i class="lni-money-location"></i>Moringa, Ngong Road</li>
+                            <br>
                             <li><i class="lni-phone-handset"></i> +254 711-320-751</li>
                             <li><i class="lni-envelope"></i> taratibu@gmail.com</li><br>
                             <li><a href="https://facebook.com/"><i class="lni-facebook-filled"></i></a></li>
@@ -409,8 +429,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="contact-form form-style-one mt-35 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
-                        <form  id="contact-form" action="assets/contact.php" method="post">
-                        {% csrf_token %}
+                        <form  id="contact-form" method="post">
+                            {% csrf_token %}
                             <div class="form-input mt-15">
                                 <label>Full Name</label>
                                 <div class="input-items default">
@@ -434,7 +454,7 @@
                             </div> <!-- form input -->
                             <p class="form-message"></p>
                             <div class="form-input rounded-buttons mt-20">
-                                <button type="button" onclick="myFunction()" value="Submit form" class="main-btn rounded-three">Submit</button>
+                                <input type="submit" value="submit">
                             </div> <!-- form input -->
                             {% for message in messages %}
 							<p id="messages">{{message}}</p>
@@ -472,7 +492,7 @@
         </div>
     </footer>
 
-
+</div>
 
     <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
 

@@ -19,7 +19,7 @@ urlpatterns = [
     path('profile_page/', user_views.profile_page, name='profile_page'),
     path('signup/',SignupView.as_view(),name='signup'),
     path('login/',LoginView.as_view(),name='login'),
-    path('logout/',LogoutView.as_view(next_page = '/'),name='logout')
+    path('logout/',LogoutView.as_view(next_page = 'login'),name='logout')
 
 
 ]
