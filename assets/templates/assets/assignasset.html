@@ -73,16 +73,15 @@
                     </div>
                     <div class="modal-body">
                         <form class="form" method="post" novalidate enctype="multipart/form-data">
-                           
                             ​
                             {% csrf_token %} {% bootstrap_form form layout='block' %}
 
 
-                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Assign</button>
                         </form>
                     </div>
-                   
+            
                 </div>
             </div>
         </div>

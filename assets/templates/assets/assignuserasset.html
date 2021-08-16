@@ -68,13 +68,8 @@
 
 <div class="form-group ">
      <label for="select">Employee</label>
-<<<<<<< HEAD
-    <select class="form-control" id="select" name="employee" >
-    <option selected></option>
-=======
                          ​ <select class="form-control" id="select" name="employee" >
     <option hidden></option>
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
     {% for employee in employees  %}
       <option value="{{employee.user.username}}">{{employee.user.username}}</option>
     {% endfor %}
