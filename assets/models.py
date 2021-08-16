@@ -37,7 +37,7 @@ class Asset(models.Model):
     department= models.ForeignKey('Department',on_delete=models.CASCADE,related_name='asset_department',null=True)
 
     category= models.CharField(max_length=50,choices=CATEGORY_CHOICES,default='furniture')
-    created_at= models.DateTimeField(auto_now_add=True)
+    created_at= models.DateTimeField(auto_now_add=True) 
     updated_date= models.DateTimeField(auto_now=True)
     is_assigned_dept= models.BooleanField(default=False)
     is_assigned_user= models.BooleanField(default=False)
@@ -47,15 +47,6 @@ class Asset(models.Model):
 
     def __str__(self):
         return self.name
-    
-
-
-    
-
-
-
-
-        
     
 REQUESTTYPE_CHOICES = (
     ("new_asset", "new_asset"),
@@ -70,12 +61,9 @@ REQUEST_STATUS = (
 
 )
 
-    
-    
 ROLES = (
     ("Admin", "Admin"),
     ("Employee", "Employee"),
-  
 
 )
     
@@ -89,7 +77,6 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ["pk"]
-   
     def __str__(self):
         return f'{self.user.username} Profile'
     
@@ -137,8 +124,6 @@ def post_asset_created_signal(sender,instance,created, **kwargs):
 post_save.connect(post_asset_created_signal,sender = Asset)
 
 
-
-    
 URGENCY = (
     ("1", "high"),
     ("2", "medium"),
@@ -158,8 +143,8 @@ class EmployeeAssetRequest(models.Model):
     
 
     class Meta:
-         ordering = ["urgency"]
-     
+        ordering = ["urgency"]
+
     def __str__(self):
         return f'{self.request_detail} employee_request'
     

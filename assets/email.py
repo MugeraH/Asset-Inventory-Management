@@ -1,14 +1,14 @@
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 
-def send_welcome_email(name,receiver):
+def send_response_email(name,receiver):
     # Creating message subject and sender
-    subject = 'Welcome to T'
-    sender = 'ephraimkamau54@gmail.com'
-
+    subject = 'Thanks for reaching out to Assset  Management Inventory, we will get back you as soon as possible.'
+    sender = 'jackotienokey@gmail.com'
+    
     #passing in the context vairables
-    text_content = render_to_string('assets/email/newsemail.txt',{"name": name})
-    html_content = render_to_string('assets/email/newsemail.html',{"name": name})
+    text_content = render_to_string('Email/customeremail.txt',{"name": name})
+    html_content = render_to_string('Email/customeremail.html',{"name": name})
 
     msg = EmailMultiAlternatives(subject,text_content,sender,[receiver])
     msg.attach_alternative(html_content,'text/html')
