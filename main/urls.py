@@ -12,8 +12,7 @@ from django.contrib.auth.views import(
 from users.views import SignupView
 from assets import views as user_views
 
-from django.urls import path, include
-from django.contrib.auth.models import User
+
 from assets.models import EmployeeAsset
 from rest_framework import routers, serializers, viewsets
 
