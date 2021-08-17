@@ -4,12 +4,16 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib import messages
 
 from .forms import UserUpdateForm, ProfileUpdateForm, EmailForm
-from assets.models import Profile 
+from assets.models import Profile
 from django.db.models import manager
 from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from django.conf import settings
+from .serializers import DepartmentSerializer
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 
 
 
@@ -28,6 +32,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 # from .email import send_welcome_email
 import datetime as dt
+
+class DepartmentList(APIView):
+    def get(self, request,format=None):
+        departments = Department.objects.all()
+        serializers = DepartmentSerializer(departments,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = DepartmentSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+
+# class DepartmentViewSet(viewsets.ModelViewSet):
+#     queryset = Department.objects.all().order_by('name')
+#     serializer_class = DepartmentSerializer
+
 
 
 def HomePageView(request):
@@ -771,5 +792,3 @@ def delete_employee_request(request, id):
     
     return redirect('assets:employee_requests')
     
-   
-
