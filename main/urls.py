@@ -38,7 +38,8 @@ urlpatterns = [
     path('',include("assets.urls")),
     path('profile/', user_views.profile, name='profile'),
     path('profile_page/', user_views.profile_page, name='profile_page'),
-    path('signup/',SignupView.as_view(),name='signup'),
+    # path('signup/',SignupView.as_view(),name='signup'),
+    path('signup/',SignupView,name='signup'),
     path('login/',LoginView.as_view(),name='login'),
     path('logout/',LogoutView.as_view(next_page = 'login'),name='logout')
 

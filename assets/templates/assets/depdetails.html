@@ -4,18 +4,13 @@
 <!-- html -->
 {% block content %}
 <!-- content -->
-<div class="p-5 mt-2">
+<div class="pl-5 pr-5 pt-2">
   <header>
-    <div>
-      <h1 class="">
-        <span style="text-transform: capitalize">{{department.name}}</span>
-        Department
-      </h1>
-      {% if department.description %}
+    <h1 class="">
+      <span style="text-transform: capitalize">{{department.name}}</span>
+      Department
+    </h1>
 
-      <h4 class="p-0 m-0">{{department.description}}</h4>
-      {% endif %}
-    </div>
     <div class="dropdown">
       <button
         class="btn btn-primary dropdown-toggle"
@@ -47,6 +42,12 @@
       </div>
     </div>
   </header>
+  <div>
+    {% if department.description %}
+
+    <h4 class="p-0 pl-2 m-0">{{department.description}}</h4>
+    {% endif %}
+  </div>
 
   <div class="mycard mt-5 mb-5">
     <h4>
@@ -64,7 +65,7 @@
           <h5>Employees</h5>
         </div>
         <div class="dash_icon">
-          <img src="../../static/icons/department.png" alt="" />
+          <img src="../../static/icons/department(1).png" alt="" />
         </div>
       </div>
       <div class="col-md-2 m-4 dep_det-card three d-flex">
@@ -73,7 +74,7 @@
           <h5>Assets</h5>
         </div>
         <div class="dash_icon">
-          <img src="../../static/icons/assets.png" alt="" />
+          <img src="../../static/icons/assets(1).png" alt="" />
         </div>
       </div>
     </div>

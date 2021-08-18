@@ -27,8 +27,12 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+              <th scope="col">Description</th>
+               <th scope="col">Image</th>
             <th scope="col">Category</th>
             <th scope="col">Department</th>
+            <th scope="col"></th>
+           
           </tr>
         </thead>
 
@@ -44,6 +48,10 @@
           >
             <th scope="row">{{ asset.id }}</th>
             <td>{{ asset.name }}</td>
+            <td>{{ asset.description}}</td>
+            <td>
+              <img src="{{asset.image.url}}" alt="">
+            </td>
             <td>{{ asset.category }}</td>
             <td>{{ asset.department }}</td>
             <td>
