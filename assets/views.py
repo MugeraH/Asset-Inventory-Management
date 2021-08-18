@@ -685,8 +685,8 @@ def delete_department(request, id):
 def delete_employee(request, id):
     id = int(id)   
     try:
-         profile = Profile.objects.get(id = id)
-         employee = User.objects.filter(id=profile.user.id)
+        profile = Profile.objects.get(id = id)
+        employee = User.objects.filter(id=profile.user.id)
     except Department.DoesNotExist:
         return redirect(request,'assets:departments')
     profile.delete()
@@ -697,26 +697,37 @@ def delete_employee(request, id):
 def delete_manager_request(request, id):
     id = int(id)   
     try:
-         request =ManagerRequest.objects.get(id = id)
+        request =ManagerRequest.objects.get(id = id)
         
     except ManagerRequest.DoesNotExist:
         return redirect(request,'assets:dept_requests')
     request.delete()
-   
     
     return redirect('assets:dept_requests')
 
 def delete_employee_request(request, id):
     id = int(id)   
     try:
-         request =EmployeeAssetRequest.objects.get(id = id)
+        request =EmployeeAssetRequest.objects.get(id = id)
         
     except EmployeeAssetRequest.DoesNotExist:
         return redirect(request,'assets:employee_requests')
     request.delete()
-   
+
     
     return redirect('assets:employee_requests')
-    
-   
+
+# api from employee_assets_request
+from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import  EmployeeAssetRequest
+from .serializer import EmployeeAssetRequest
+
+
+class EmployeeAssetRe(APIView):
+    def get(self, request, format=None):
+        all_assets =EmployeeAssetRequest.objects.all()
+        serializers = EmployeeAssetRequest(all_assets, many=True)
+        return Response(serializers.data)
 

@@ -1,6 +1,7 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
 
 from . import views
 from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails,assets,assetdetails,addasset
@@ -66,6 +67,9 @@ urlpatterns=[
     path('requests', views.requests,name='requests'),
     path('add_departments/',views.add_departments,name='add_departments'),
     path('employee_assets',views.employee_assets,name='employee_assets'),
+
+    #api for employee asset requests
+    path('api-token-auth/', obtain_auth_token),
 ]
 
 if settings.DEBUG:

@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'assets',
     'users',
     # installed dependancies
-    'rest_framework',  
+    'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders', 
     'cloudinary',
     'bootstrap4', 
@@ -48,7 +49,8 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.authentication.TokenAuthentication'
     ]
 }
 
