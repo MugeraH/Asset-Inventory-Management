@@ -69,6 +69,7 @@ urlpatterns=[
     path('requests', views.requests,name='requests'),
     path('add_departments/',views.add_departments,name='add_departments'),
     path('employee_assets',views.employee_assets,name='employee_assets'),
+    path('api/asset/', views.AssetList.as_view()),
 ]
 
 if settings.DEBUG:
