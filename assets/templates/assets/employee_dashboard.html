@@ -1,0 +1,43 @@
+{%extends 'assets/base.html'%}
+<!-- bootstrap -->
+{% load bootstrap4%}
+<!-- static -->
+{% load static %}
+
+<!-- content -->
+{%block content%} ​
+<div class="container-fluid dashboard">
+  {% if user.is_admin %}
+  <h1 class="mt-4 mb-4" style="text-transform: capitalize">
+    {{department.name}} Department
+  </h1>
+  {% endif %}
+  <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
+  <!-- greeting -->
+  <!-- {% if user.is_superuser %}
+  <h3>Welcome Admin</h3>
+  {%elif user.is_admin%}
+  <h3>Welcome Manager</h3>
+  {%else%}
+  <h3>Welcome Employee</h3>
+  {% endif %} -->
+
+  <!-- row -->
+
+  <div class="m-4">
+    <div class="row">
+      <div class="col-md-3 m-4 dash-card two">
+        <div class="title">
+          <h3>{{asset | length}}</h3>
+
+          <h6>Assets</h6>
+        </div>
+        <div class="dash_icon">
+          <img src="../../static/icons/assets(1).png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  ​ {% endblock %}
+</div>

@@ -1,0 +1,93 @@
+{%extends 'assets/base.html'%}
+<!-- bootstrap -->
+{% load bootstrap4%}
+<!-- static -->
+{% load static %}
+
+<!-- content -->
+{%block content%} ​
+<div class="container-fluid dashboard">
+  {% if user.is_admin %}
+  <h1 class="mt-4 mb-4" style="text-transform: capitalize">
+    {{department.name}} Department
+  </h1>
+  {% endif %}
+  <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
+  <!-- greeting -->
+  <!-- {% if user.is_superuser %}
+  <h3>Welcome Admin</h3>
+  {%elif user.is_admin%}
+  <h3>Welcome Manager</h3>
+  {%else%}
+  <h3>Welcome Employee</h3>
+  {% endif %} -->
+
+  <!-- row -->
+
+  {% if user.is_superuser or user.is_admin %}
+  <div class="row mt-5">
+    {% if user.is_superuser %}
+    <div class="col-md-3 m-4 dash-card one">
+      <div class="title">
+        <h3>{{departments}}</h3>
+        <h6>Departments</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/department(1).png" alt="" />
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="col-md-3 m-4 dash-card two">
+      <div class="title">
+        {% if user.is_superuser %}
+        <h3>{{employees}}</h3>
+        {%elif user.is_admin %}
+        <h3>{{ dept_employees.count}}</h3>
+
+        {% endif %}
+        <h6>Employees</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/team.png" alt="" />
+      </div>
+    </div>
+
+    <div class="col-md-3 m-4 dash-card three">
+      <div class="title">
+        {% if user.is_superuser %}
+        <h3>{{assets}}</h3>
+        {%elif user.is_admin %}
+
+        <h3>{{dept_assets.count}}</h3>
+        {% endif %}
+        <h6>Assets</h6>
+      </div>
+      <div class="dash_icon">
+        <img src="../../static/icons/assets(1).png" alt="" />
+      </div>
+    </div>
+  </div>
+  {%else%}
+  <div class="m-4">
+    <div class="row">
+      <div class="col-md-3 m-4 dash-card two">
+        <div class="title">
+          <h3>{{employee.assets}}</h3>
+          <h3>0</h3>
+
+          <h6>Assets</h6>
+        </div>
+        <div class="dash_icon">
+          <img src="../../static/icons/assets(1).png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-4">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias, id!
+    </p>
+  </div>
+  {% endif %}
+</div>
+​ {% endblock %}

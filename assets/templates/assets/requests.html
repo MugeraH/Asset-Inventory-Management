@@ -1,0 +1,197 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
+{%block content%}
+
+<div class="container-fluid mb-4">
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="mt-4"> Manager Requests</h2>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Request</th>
+            <th scope="col">Posted_date</th>
+            <th scope="col">Quantity</th>
+              <th scope="col">Urgency</th>
+            <th scope="col">Status</th>
+
+          </tr>
+        </thead>
+
+        {% for request in manager_requests %}
+
+
+        <tbody>
+          <tr onclick="window.location='/managerrequestdetails/{{request.id}}'">
+
+            <th scope="row">{{ request.id}}</th>
+            <td>{{ request.request }}</td>
+            <td>{{ request.posted_date | date  }}</td>
+             <td>{{ request.quantity }} </td>
+            <td>
+              {% if request.urgency == "1" %}
+                         
+                         <h5 class="text-danger">high</h5>
+                     
+                           {%elif request.urgency == "2" %}
+                          
+<h5 class="text-warning">medium</h5>
+                           
+ 
+                           {%elif request.urgency == "3" %}
+                         
+<h5 class="text-default">low</h5>
+
+ {%else%}
+
+                         {% endif %}  
+            </td>
+           
+            <td>
+  {% if request.status == "approved" %}
+                         
+                           <button class="btn btn-success">{{request.status }}</button>
+                     
+                           {%elif request.status == "rejected" %}
+                          
+ <button class="btn btn-danger">{{request.status }}</button>
+                           
+ 
+                           {%elif request.status == "pending" %}
+                         
+ <button class="btn btn-warning">{{request.status }}</button>
+
+ {%else%}
+
+                         {% endif %}
+               
+            </td>
+
+          </tr>
+
+        </tbody>
+
+        {% endfor %}
+      </table>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="row">
+
+    <div class="col-md-12">
+      <h2 class="mt-4">Employee Requests</h2>
+
+
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Request</th>
+            <th scope="col">Posted_date</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Urgency</th>
+            <th scope="col">Status</th>
+
+          </tr>
+        </thead>
+
+
+        {% for request in emp_requests %}
+
+
+        <tbody>
+          <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
+
+            <th scope="row">{{ request.id}}</th>
+            <td>{{ request.request_detail }}({{ request.type }})</td>
+            <td>{{ request.posted_date | date }}</td>
+            <td>{{ request.quantity }} </td>
+            <td>   {% if request.urgency == "1" %}
+                         
+                         <h5 class="text-danger">High</h5>
+                     
+                           {%elif request.urgency == "2" %}
+                          
+<h5 class="text-warning">Medium</h5>
+                           
+ 
+                           {%elif request.urgency == "3" %}
+                         
+<h5 class="text-default">Low</h5>
+
+ {%else%}
+
+                         {% endif %}   </td>
+            <td>
+
+                {% if request.status == "approved" %}
+                         
+                           <button class="btn btn-success">{{request.status }}</button>
+                     
+                           {%elif request.status == "rejected" %}
+                          
+ <button class="btn btn-danger">{{request.status }}</button>
+                           
+ 
+                           {%elif request.status == "pending" %}
+                         
+ <button class="btn btn-warning">{{request.status }}</button>
+
+ {%else%}
+
+                         {% endif %}
+               
+            </td>
+
+            <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
+
+            </td>
+          </tr>
+
+
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Request</h5>
+          <div class="modal1">
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+              &times;
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <form class="form" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %} {% bootstrap_form form layout='block' %}
+            <button type="submit" class="btn btn-success" style="margin-top: 13px; margin-left: 7px">
+              Add
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+ {% endblock%}

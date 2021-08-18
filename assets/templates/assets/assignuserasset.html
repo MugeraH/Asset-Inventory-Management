@@ -1,0 +1,92 @@
+{%extends 'assets/base.html'%}
+{% load bootstrap4%}
+{% load static %}
+
+{%block content%}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-12 mt-4">
+            <div class="header d-flex flex-row  justify-content-between">
+                <h2>Assets</h2>
+                <a class="btn btn-primary"  
+                         data-toggle="modal"
+          data-target="#staticBackdrop">Assign Asset to Employee</a>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <div class="card card-body">
+                        <div class="card-title" style="text-decoration: underline;">
+                            <h2>Asset Details</h2>
+                        </div>
+                        <div class="card-title">
+                            <p> {{asset.name}}</p>
+                            <hr>
+                            <ul class="p-4">
+                                <li>Category: <strong>{{ asset.asset.category }}</strong></li>
+                                <li>Department: <strong>{{ asset.asset.department.name }}</strong></li>
+                                <li>Created <strong>{{ asset.asset.created_at }}</strong></li>
+                                <li>Is Assigned?: <strong>{{ asset.asset.is_assigned}}</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-5"></div>
+    </div>
+   
+        <!-- Modal -->
+        <div   class="modal fade"
+    id="staticBackdrop"
+    data-backdrop="static"
+    data-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{% url 'assets:assign_asset_user' asset.asset.id %}" class="form" method="post" novalidate enctype="multipart/form-data">
+                            {% csrf_token %}
+
+
+<div class="form-group ">
+     <label for="select">Employee</label>
+                         ​ <select class="form-control" id="select" name="employee" >
+    <option hidden></option>
+    {% for employee in employees  %}
+      <option value="{{employee.user.username}}">{{employee.user.username}}</option>
+    {% endfor %}
+   
+  </select>
+   
+  </div>
+
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Assign</button>
+                        </form>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+
+</div>
+
+{% endblock%}
