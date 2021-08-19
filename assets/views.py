@@ -4,12 +4,16 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib import messages
 
 from .forms import UserUpdateForm, ProfileUpdateForm, EmailForm
-from assets.models import Profile 
+from assets.models import Profile
 from django.db.models import manager
 from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from django.conf import settings
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.decorators import api_view
 
 
 
@@ -17,7 +21,7 @@ from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import AssetSerializer
+from .serializers import AssetSerializer,EmployeeAssetRequestSerializer,DepartmentSerializer,ManagerRequestSerializer,EmployeeAssetSerializer,EmailSerializer
 from rest_framework import status
 from assets import serializers
 
@@ -32,6 +36,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 # from .email import send_welcome_email
 import datetime as dt
+
+
+# class DepartmentViewSet(viewsets.ModelViewSet):
+#     queryset = Department.objects.all().order_by('name')
+#     serializer_class = DepartmentSerializer
+
 
 
 def HomePageView(request):
@@ -827,3 +837,64 @@ class AssetList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
    
 
+class DepartmentList(APIView):
+    def get(self, request,format=None):
+        departments = Department.objects.all()
+        serializers = DepartmentSerializer(departments,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = DepartmentSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+class EmployeeAssetRequestList(APIView):
+    def get(self, request,format=None):
+        employeerequests = EmployeeAssetRequest.objects.all()
+        serializers = EmployeeAssetRequestSerializer(employeerequests,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = EmployeeAssetRequestSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+class ManagerRequestSerializerList(APIView):
+    def get(self, request,format=None):
+        manager_request = ManagerRequest.objects.all()
+        serializers = ManagerRequestSerializer(manager_request,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = ManagerRequestSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+class EmployeeAssetSerializerList(APIView):
+    def get (self, request,format=None):
+        employeeasset= EmployeeAsset.objects.all()
+        serializers=EmployeeAssetSerializer(employeeasset,many=True)
+        return Response(serializers.data)
+class EmailSerializerList(APIView):
+    def get (self, request,format=None):
+        email= Email.objects.all()
+        serializers=EmailSerializer(email,many=True)
+        return Response(serializers.data)
+
+@api_view(['GET'])
+def api_overview(request):
+    # '''
+    # Set safe=False to allow other data types rather than dictionary
+    # In order to allow non-dict objects to be serialized set the safe parameter to False 
+    # '''
+    api_urls = {
+        'Assets': '/api/assets/',
+        'Departments': '/api/departments/',
+        'EmployeeRequests': '/api/employeeAssetRequest/',
+        'ManagerRequest': '/api/managerrequest/',
+        'EmpoyeeAsset': '/api/employeeAsset/',
+        'Email': '/api/emails/',
+    }
+    
+    return Response(api_urls)

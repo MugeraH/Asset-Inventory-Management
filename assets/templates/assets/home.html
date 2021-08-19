@@ -72,59 +72,34 @@
 
     <!--====== PRELOADER PART START ======-->
     <div class="overlay">
-    <div class="preloader">
-        <div class="loader">
-            <div class="ytp-spinner">
-                <div class="ytp-spinner-container">
-                    <div class="ytp-spinner-rotator">
-                        <div class="ytp-spinner-left">
-                            <div class="ytp-spinner-circle"></div>
-                        </div>
-                        <div class="ytp-spinner-right">
-                            <div class="ytp-spinner-circle"></div>
+        <div class="preloader">
+            <div class="loader">
+                <div class="ytp-spinner">
+                    <div class="ytp-spinner-container">
+                        <div class="ytp-spinner-rotator">
+                            <div class="ytp-spinner-left">
+                                <div class="ytp-spinner-circle"></div>
+                            </div>
+                            <div class="ytp-spinner-right">
+                                <div class="ytp-spinner-circle"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--====== NAVBAR PART START ======-->
-    <nav class="navbar navbar-expand-lg p-0">
-        <div class="flex-cont">
-            <div class="icon">
-                <img onclick="openSideMenu()" id="open" src="../../static/icons/menu (2).svg" alt="" />
-                <img onclick="closeSideMenu()" id="close" src="../../static/icons/menu (1).png" alt="" />
-            </div>
+        <!--====== NAVBAR PART START ======-->
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="flex-cont">
+                <div class="icon">
+                    <img onclick="openSideMenu()" id="open" src="../../static/icons/menu (2).svg" alt="" />
+                    <img onclick="closeSideMenu()" id="close" src="../../static/icons/menu (1).png" alt="" />
+                </div>
 
-            <a class="navbar-brand" href="/">
-                <span class="logo_name">TARATIBU ASSETS</span>
-                <span>SIMPLIFIED ASSET MANAGEMENT</span>
-            </a>
-        </div>
-
-        <div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="text-white">
-                    <i class="fas fa-bars"></i>
-                </span>
-            </button>
-
-            <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
-                
-                <ul class="navbar-nav mr-auto p-0">
-                    
-                   <ul class="navbar-nav ml-auto">
-                                    <li><a href="#home" class="menu-btn">HOME</a></li>
-                                    <li><a href="#about" class="menu-btn">ABOUT</a></li>
-                                    
-                                    <li><a href="#contact" class="menu-btn">CONTACT</a></li>
-                                </ul>
-                   
-                </ul>
-                <div class="sidebar">
-
-                   
+                <a class="navbar-brand" href="/">
+                    <span class="logo_name">TARATIBU ASSETS</span>
+                    <span>SIMPLIFIED ASSET MANAGEMENT</span>
+                </a>
             </div>
         </div>
     </nav>
@@ -163,105 +138,172 @@
                                         <h2 class="carousel-title">SIMPLIFIED ASSET MANAGEMENT</h2>
                                         <ul class="carousel-btn rounded-buttons">
 
-                                        </ul>
-                                    </div>
-                                </div> <!-- row -->
-                            </div> <!-- container -->
-                        </div> <!-- carousel caption -->
-                    </div> <!-- carousel-item -->
+            <div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="text-white">
+                        <i class="fas fa-bars"></i>
+                    </span>
+                </button>
+
+                <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav mr-auto p-0">
+
+                        <ul class="navbar-nav ml-auto">
+                            <li><a href="#home" class="menu-btn">HOME</a></li>
+                            <li><a href="#about" class="menu-btn">ABOUT</a></li>
+
+                            <li><a href="#contact" class="menu-btn">CONTACT</a></li>
+                        </ul>
+
+                    </ul>
+                    <div class="sidebar">
 
 
-                </div> <!-- carousel-inner -->
-
-                <a class="carousel-control-prev" href="#carouselOne" role="button" data-slide="prev">
-                    <i class="lni-arrow-left-circle"></i>
-                </a>
-
-                <a class="carousel-control-next" href="#carouselOne" role="button" data-slide="next">
-                    <i class="lni-arrow-right-circle"></i>
-                </a>
-            </div> <!-- carousel -->
-        </div> <!-- bd-example -->
-    </div>
-
-    </section>
-
-    <!--====== NAVBAR PART ENDS ======-->
-
-
-    <!--====== ABOUT PART START ======-->
-
-    <section id="features" class="about-area">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6 col-lg-8">
-
-                    <div class="section-title text-center mt-30 pb-40">
-                        <h4 class="title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.6s">FEATURES</h4>
-                        <p class="text wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s">Manage your inventory
-                            using a highly optimized digital platform.</p>
-                    </div> <!-- section title -->
+                    </div>
                 </div>
-            </div> <!-- row -->
+        </nav>
+        <div id="home" class="slider-area">
+            <div class="bd-example">
+                <div id="carouselOne" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselOne" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselOne" data-slide-to="1"></li>
+                        <li data-target="#carouselOne" data-slide-to="2"></li>
+                    </ol>
 
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
-                        data-wow-delay="1.2s">
-                        <div class="about-icon">
-                            <img src="../../static/images/icon-1.png" alt="Icon">
-                        </div>
-                        <div class="about-content media-body">
-                            <h4 class="about-title">Role-Based System</h4>
-                            <p class="text">Departments are subdivided in an organized manner which corresponds to a
-                                user specific job description.</p>
-                        </div>
-                    </div> <!-- single about -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
-                        data-wow-delay="1.4s">
-                        <div class="about-icon">
-                            <img src="../../static/images/real.png" alt="Icon">
-                        </div>
-                        <div class="about-content media-body">
-                            <h4 class="about-title">Real Time Data Access</h4>
-                            <p class="text">All data stored or otherwise manipulated is available on a real time basis
-                                at request.</p>
-                        </div>
-                    </div> <!-- single about -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.2s"
-                        data-wow-delay="2.0s">
-                        <div class="about-icon">
-                            <img src="../../static/images/cloud.png" alt="Icon">
-                        </div>
-                        <div class="about-content media-body">
-                            <h4 class="about-title">Cloud Based</h4>
-                            <p class="text">Any user can work on their specific accounts from anywhere at any time
-                                provided the user has a stable internet connection.</p>
-                        </div>
-                    </div> <!-- single about -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
-                        data-wow-delay="1.8s">
-                        <div class="about-icon">
-                            <img src="../../static/images/inventory.png" alt="Icon">
-                        </div>
-                        <div class="about-content media-body">
-                            <h4 class="about-title">Inventory Management System</h4>
-                            <p class="text">An inventory management system is embedded on the platform to easen the
-                                process of tracking the assets going and out of the main platform</p>
-                        </div>
-                    </div> <!-- single about -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
-    </section>
+                    <div class="carousel-inner">
+                        <div class="carousel-item bg_cover active"
+                            style="background-image: url(../../static/images/slider-1.jpg); padding-top: 0%;">
+                            <div class="carousel-caption">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-6 col-lg-7 col-sm-10">
+                                            <h2 class="carousel-title">WELCOME TO TARATIBU ASSETS</h2>
+                                            <ul class="carousel-btn rounded-buttons">
+                                                <li><a class="main-btn rounded-three" href="{%url 'login'%}">GET
+                                                        STARTED</a></li>
+                                                <li><a class="main-btn rounded-one" href="#">DOWNLOAD</a></li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- row -->
+                                </div> <!-- container -->
+                            </div> <!-- carousel caption -->
+                        </div> <!-- carousel-item -->
 
-    <!--====== ABOUT PART ENDS ======-->
+                        <div class="carousel-item bg_cover"
+                            style="background-image: url(../../static/images/slider-2.jpg)">
+                            <div class="carousel-caption">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-6 col-lg-7 col-sm-10">
+                                            <h2 class="carousel-title">BEST ASSETS MANAGEMENT INVENTORY SYSTEM</h2>
+                                            <ul class="carousel-btn rounded-buttons">
+
+                                            </ul>
+                                        </div>
+                                    </div> <!-- row -->
+                                </div> <!-- container -->
+                            </div> <!-- carousel caption -->
+                        </div> <!-- carousel-item -->
+
+
+                    </div> <!-- carousel-inner -->
+
+                    <a class="carousel-control-prev" href="#carouselOne" role="button" data-slide="prev">
+                        <i class="lni-arrow-left-circle"></i>
+                    </a>
+
+                    <a class="carousel-control-next" href="#carouselOne" role="button" data-slide="next">
+                        <i class="lni-arrow-right-circle"></i>
+                    </a>
+                </div> <!-- carousel -->
+            </div> <!-- bd-example -->
+        </div>
+
+        </section>
+
+        <!--====== NAVBAR PART ENDS ======-->
+
+
+        <!--====== ABOUT PART START ======-->
+
+        <section id="features" class="about-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-8">
+
+                        <div class="section-title text-center mt-30 pb-40">
+                            <h4 class="title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.6s" id="features">
+                                FEATURES</h4>
+                            <p class="text wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s">Manage your
+                                inventory
+                                using a highly optimized digital platform.</p>
+                        </div> <!-- section title -->
+                    </div>
+                </div> <!-- row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
+                            data-wow-delay="1.2s">
+                            <div class="about-icon">
+                                <img src="../../static/images/icon-1.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Role-Based System</h4>
+                                <p class="text">Departments are subdivided in an organized manner which corresponds to a
+                                    user specific job description.</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
+                            data-wow-delay="1.4s">
+                            <div class="about-icon">
+                                <img src="../../static/images/real.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Real Time Data Access</h4>
+                                <p class="text">All data stored or otherwise manipulated is available on a real time
+                                    basis
+                                    at request.</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.2s"
+                            data-wow-delay="2.0s">
+                            <div class="about-icon">
+                                <img src="../../static/images/cloud.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Cloud Based</h4>
+                                <p class="text">Any user can work on their specific accounts from anywhere at any time
+                                    provided the user has a stable internet connection.</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
+                            data-wow-delay="1.8s">
+                            <div class="about-icon">
+                                <img src="../../static/images/inventory.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Inventory Management System</h4>
+                                <p class="text">An inventory management system is embedded on the platform to easen the
+                                    process of tracking the assets going and out of the main platform</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </section>
+
+        <!--====== ABOUT PART ENDS ======-->
 
     <section id="" class="">
         <div class="container">
@@ -437,19 +479,64 @@
                                     <input type="text" placeholder="Name" name="name">
                                     <i class="lni-user"></i>
                                 </div>
-                            </div> <!-- form input -->
-                            <div class="form-input mt-15">
-                                <label>Email</label>
-                                <div class="input-items default">
-                                    <input type="email" placeholder="Email" name="email">
-                                    <i class="lni-envelope"></i>
+                            </div> <!-- row -->
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="contact-two mt-50 wow fadeIn" data-wow-duration="1.5s"
+                                        data-wow-delay="0.2s">
+                                        <h4 class="contact-title">Protocol</h4>
+                                        <p class="text">The administration will send you login info for your demo
+                                            account and incase of any inquiries concerning your account you can reach
+                                            out to us for help </p>
+                                        <ul class="contact-info">
+                                            <li><i class="lni-money-location"></i>Moringa, Ngong Road</li>
+                                            <br>
+                                            <li><i class="lni-phone-handset"></i> +254 711-320-751</li>
+                                            <li><i class="lni-envelope"></i> taratibu@gmail.com</li><br>
+                                            <li><a href="https://facebook.com/"><i class="lni-facebook-filled"></i></a>
+                                            </li>
+                                            <li><a href="https://twitter.com/"><i class="lni-twitter-original"></i></a>
+                                            </li>
+                                            <li><a href="https://instagram.com/"><i
+                                                        class="lni-instagram-original"></i></a></li>
+                                            <li><a href="#"><i class="lni-linkedin-original"></i></a></li>
+
+                                        </ul>
+                                    </div> <!-- contact two -->
                                 </div>
-                            </div> <!-- form input -->
-                            <div class="form-input mt-15">
-                                <label>Account Specifications</label>
-                                <div class="input-items default">
-                                    <textarea placeholder="account Specifications" name="message"></textarea>
-                                    <i class="lni-pencil-alt"></i>
+                                <div class="col-lg-6">
+                                    <div class="contact-form form-style-one mt-35 wow fadeIn" data-wow-duration="1.5s"
+                                        data-wow-delay="0.5s">
+                                        <form id="contact-form" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-input mt-15">
+                                                <label>Full Name</label>
+                                                <div class="input-items default">
+                                                    <input type="text" placeholder="Name" name="name">
+                                                    <i class="lni-user"></i>
+                                                </div>
+                                            </div> <!-- form input -->
+                                            <div class="form-input mt-15">
+                                                <label>Email</label>
+                                                <div class="input-items default">
+                                                    <input type="email" placeholder="Email" name="email">
+                                                    <i class="lni-envelope"></i>
+                                                </div>
+                                            </div> <!-- form input -->
+                                            <div class="form-input mt-15">
+                                                <label>Account Specifications</label>
+                                                <div class="input-items default">
+                                                    <textarea placeholder="account Specifications"
+                                                        name="message"></textarea>
+                                                    <i class="lni-pencil-alt"></i>
+                                                </div>
+                                            </div> <!-- form input -->
+                                            <p class="form-message"></p>
+                                            <div class="form-input rounded-buttons mt-20">
+                                                <input type="submit" value="submit">
+                                            </div> <!-- form input -->
+                                        </form>
+                                    </div> <!-- contact form -->
                                 </div>
                             </div> <!-- form input -->
                             <p class="form-message"></p>
@@ -498,9 +585,9 @@
 
 
     <script>
-    function myFunction(){
-        document.getElementById("contact-form").submit();
-    }
+        function myFunction() {
+            document.getElementById("contact-form").submit();
+        }
     </script>
     <script src="../../static/js/vendor/modernizr-3.6.0.min.js"></script>
     <script src="../../static/js/vendor/jquery-1.12.4.min.js"></script>
