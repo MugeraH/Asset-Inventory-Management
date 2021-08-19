@@ -795,9 +795,6 @@ def delete_employee_request(request, id):
    
     
     return redirect('assets:employee_requests')
-<<<<<<< HEAD
-    
-=======
 
 class AssetList(APIView):
     def get(self, request, format=None):
@@ -813,4 +810,3 @@ class AssetList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
    
 
->>>>>>> 4e8085f0f88d4b4e538895a24dcba36cf27dfd6f
