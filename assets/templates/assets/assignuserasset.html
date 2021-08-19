@@ -4,46 +4,51 @@
 
 {%block content%}
 
-<div class="container-fluid">
-    <div class="row">
 
-        <div class="col-md-12 mt-4">
-            <div class="header d-flex flex-row  justify-content-between">
-                <h2>Assets</h2>
-                <a class="btn btn-primary"  
+               
+
+      
+       <div class="container-fluid mt-3">
+  <header>
+    <h2>Assign Asset to User </h2>
+     <div>
+          <a class="btn btn-primary"  
                          data-toggle="modal"
           data-target="#staticBackdrop">Assign Asset to Employee</a>
+     </div>
+  </header>
+  <div class="card-title pl-2" style="text-transform: capitalize">
+    <h3>{{asset.asset.name}}</h3>
+    <hr />
+  </div>
 
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-7">
-                    <div class="card card-body">
-                        <div class="card-title" style="text-decoration: underline;">
-                            <h2>Asset Details</h2>
-                        </div>
-                        <div class="card-title">
-                            <p> {{asset.name}}</p>
-                            <hr>
-                            <ul class="p-4">
-                                <li>Category: <strong>{{ asset.asset.category }}</strong></li>
-                                <li>Department: <strong>{{ asset.asset.department.name }}</strong></li>
-                                <li>Created <strong>{{ asset.asset.created_at }}</strong></li>
-                                <li>Is Assigned?: <strong>{{ asset.asset.is_assigned}}</li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="col-md-5"></div>
+  <div class="row p-3">
+    <div class="col-md-6">
+      <div>
+        <img
+          src="{{ asset.asset.image.url }}"
+          alt="{{ asset.asset.name }}"
+          height="70%"
+          width="70%"
+        />
+      </div>
     </div>
+    <div class="col-md-6">
+      <ul class="p-4 mt-3" style="list-style-type: square; font-size: 20px">
+        <li>Category: <strong>{{ asset.asset.category }}</strong></li>
+        <li>Department: <strong>{{ asset.asset.department.name }}</strong></li>
+        <li>Created <strong>{{ asset.asset.created_at }}</strong></li>
+        <li>
+          Employee Assigned : {% if asset.asset.is_assigned_user %}
+          <button class="btn btn-sm btn-success">Yes</button>
+          {%else%}
+          <button class="btn btn-sm btn-info">No</button>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
    
         <!-- Modal -->
         <div   class="modal fade"
@@ -68,13 +73,8 @@
 
 <div class="form-group ">
      <label for="select">Employee</label>
-<<<<<<< HEAD
-    <select class="form-control" id="select" name="employee" >
-    <option selected></option>
-=======
                          ​ <select class="form-control" id="select" name="employee" >
     <option hidden></option>
->>>>>>> c7f57d3f760f39a45cbfe09f9e65cfa25aa1869a
     {% for employee in employees  %}
       <option value="{{employee.user.username}}">{{employee.user.username}}</option>
     {% endfor %}

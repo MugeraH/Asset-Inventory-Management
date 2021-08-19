@@ -45,12 +45,12 @@
       <ul class="p-4 mt-3" style="list-style-type: square; font-size: 20px">
         <li>Category: <strong>{{ asset.category }}</strong></li>
         <li>Department: <strong>{{ asset.department.name }}</strong></li>
-        <li>Created <strong>{{ asset.created_at }}</strong></li>
+        <li>Created <strong>{{ asset.created_at| date }}</strong></li>
         <li>
           Employee Assigned : {% if asset.is_assigned_user %}
-          <button class="btn btn-success">Yes</button>
+          <button class="btn btn-sm btn-success">Yes</button>
           {%else%}
-          <button class="btn btn-info">No</button>
+          <button class="btn btn-sm btn-info">No</button>
           {% endif %}
         </li>
       </ul>
