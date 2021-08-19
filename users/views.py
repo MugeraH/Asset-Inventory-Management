@@ -30,7 +30,7 @@ def SignupView(request):
             lastname=form.cleaned_data['lastname']
             name=username
             email=form.cleaned_data['email']
-            send_welcome_email(name,email,date)
+            # send_welcome_email(name,email,date)
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('login')

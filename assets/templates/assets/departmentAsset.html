@@ -5,21 +5,12 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 mt-4">
-      <div class="header d-flex flex-row justify-content-between">
-        <h2>Department Assets</h2>
-        <!-- <a href="addasset"
-          ><img
-            src="https://img.icons8.com/ios/50/4a90e2/add--v1.png"
-            alt="add asset"
-        /></a> -->
-        <!-- <a
-          href="#"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#staticBackdrop"
-        >
-          Add Asset</a
-        > -->
+      <div class="intro mt-3">
+        <header class="mb-3 p-0">
+          <h2>Department Assets</h2>
+
+          <div></div>
+        </header>
       </div>
 
       <table class="table mt-4">
@@ -27,16 +18,46 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Picture</th>
             <th scope="col">Category</th>
             <th scope="col">Department</th>
             <th scope="col">Assigned To</th>
+            <th scope="col"></th>
             <th scope="col"></th>
           </tr>
         </thead>
 
         {% for asset in dept_assets %}
-
         <tbody>
+          <tr
+            style="cursor: pointer"
+            onclick="window.location='/assign_asset_user/{{asset.asset.id}}'"
+          >
+            <th scope="row">{{ asset.asset.id }}</th>
+            <td>{{ asset.asset.name }}</td>
+            <td>
+              <img src="{{asset.asset.image.url}}" alt="" />
+            </td>
+            <td>{{ asset.asset.category }}</td>
+
+            <td>{{ asset.employee.user.username }}</td>
+            <td>
+              {% if not asset.asset.is_assigned_user %}
+              <a class="btn btn-sm btn-outline-primary" href="#">
+                Assign Employee</a
+              >
+              {% endif %} {% if asset.asset.is_assigned_user %}
+              <a
+                href="{%url 'assets:unassign_asset_user'  asset.asset.id   %}"
+                class="btn btn-sm btn-outline-danger"
+                >Unassign Employee</a
+              >
+              {% endif %}
+            </td>
+          </tr>
+        </tbody>
+
+        <!-- <tbody>
           <tr
             style="cursor: pointer"
             onclick="window.location='/assign_asset_user/{{asset.asset.id}}'"
@@ -60,7 +81,7 @@
               {% endif %}
             </td>
           </tr>
-        </tbody>
+        </tbody> -->
         {% endfor %}
       </table>
     </div>

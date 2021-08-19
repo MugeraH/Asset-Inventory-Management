@@ -56,25 +56,49 @@ def  DashBoardView(request):
         
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
-        total_user = User.objects.count()      
+        total_user = User.objects.count()  
+        date = dt.date.today() 
+        
+        managers = Profile.objects.filter(role="Admin")
+        assigned_assets=Asset.objects.filter(is_assigned_dept=True)
+        unassigned_assets=Asset.objects.filter(is_assigned_dept=False)
+        manager_requests= ManagerRequest.objects.count()
+        uncompleted_manager_request=ManagerRequest.objects.filter(status="pending")
+        employee_requests= EmployeeAssetRequest.objects.count()
+        uncompleted_employee_request=EmployeeAssetRequest.objects.filter(status="pending")
+        # messages.success(request,"Congrats young padawan")   
 
         context = {
         'assets': total_asset,
         'departments': total_department,
-        
+        'manager_requests':manager_requests,
+        'uncompleted_manager_request': uncompleted_manager_request,
+        'employee_requests':employee_requests,
+        'uncompleted_employee_request': uncompleted_employee_request,
+        'managers':managers,
+        'assigned_assets': assigned_assets,
+        'unassigned_assets':unassigned_assets,
         'employees' : total_user,
         'dept_assets':dept_assets,
         'dept_employees': dept_employees,
-     
+        "date":date
         
-    
-        
+        # "messages":messages
+            
         }
         return render(request,'assets/dashboard.html',context)
 def  employeeDashBoardView(request):
-        asset = EmployeeAsset.objects.filter(employee__user=request.user.id) 
+        user=Profile.objects.get(user=request.user)
+        assets = EmployeeAsset.objects.filter(employee__user=request.user.id) 
+        employee_requests= EmployeeAssetRequest.objects.filter(employee=user)
+        employee_requests_undone= EmployeeAssetRequest.objects.filter(employee=user,status="pending")
+        date = dt.date.today() 
         context = {
-        'asset': asset,        
+        'assets': assets,    
+          "date":date ,
+          "employee_requests_undone":employee_requests_undone ,
+          "employee_requests": employee_requests,
+           
         }
         return render(request,'assets/employee_dashboard.html',context)
     
@@ -84,13 +108,27 @@ def  managerDashBoardView(request):
         department= Department.objects.get(manager=request.user.id)
         
         dept_assets=Asset.objects.filter(department=department)
+        dept_assets_assigned=Asset.objects.filter(department=department,is_assigned_user=True)
+        dept_assets_unassigned=Asset.objects.filter(department=department,is_assigned_user=False)
+        
+        dept_employee_requests= EmployeeAssetRequest.objects.filter(employee__department=department)
+        dept_employee_requests_undone= EmployeeAssetRequest.objects.filter(employee__department=department,status="pending")
+        
         dept_employees=Profile.objects.filter(department=department)
+        date = dt.date.today() 
         context = {
     
         'department':department,
         'manager_requests':manager_requests,
         'dept_assets':dept_assets,
-        'dept_employees': dept_employees
+        'dept_employees': dept_employees,
+          "date":date,
+          "dept_assets_assigned": dept_assets_assigned,
+          "dept_assets_unassigned": dept_assets_unassigned,
+          "dept_employee_requests":dept_employee_requests,
+          "dept_employee_requests_undone":dept_employee_requests_undone
+          
+          
         
         }
         return render(request,'assets/managerDashboard.html',context)

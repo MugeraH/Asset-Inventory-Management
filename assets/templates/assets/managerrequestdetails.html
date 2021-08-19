@@ -5,9 +5,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 mt-4">
-      <header>
-        <h2>Manager Request Details</h2>
-        {% if user.is_superuser%}
+
+  <div class="intro mt-3">
+    <header class="mb-3 p-0">
+      <h2>Manager Request Details</h2>
+
+      <div>
+         {% if user.is_superuser%}
 
         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#staticBackdrop">Update</a>
         {% endif%}
@@ -17,8 +21,14 @@
 
           <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#staticBackdrop3">delete</a>
           {% endif %}
-        </div>
-      </header>
+      </div>
+    </header>
+  </div>
+
+
+    
+
+      <hr>
 
       <div class="row">
       
