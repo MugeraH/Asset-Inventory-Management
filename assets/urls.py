@@ -15,8 +15,10 @@ app_name ="assets"
 
 urlpatterns=[
     # path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
-    
+    path('api/assets/', views.AssetList.as_view()),
     path('api/departments/', views.DepartmentList.as_view()),
+    path('api/employeeAssetRequest/', views.EmployeeAssetRequestList.as_view()),
+    path('api/managerrequest/', views.ManagerRequestSerializerList.as_view()),
     path('update/department/<int:id>/',views.update_department,name='update_department'),
     path('departments/',views.departments,name='departments'), 
     path('addasset',views.addasset,name='assetform'),
