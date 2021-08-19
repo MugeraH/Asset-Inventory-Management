@@ -145,9 +145,9 @@
                                 <div class="row justify-content-center">
                                     <div class="col-xl-6 col-lg-7 col-sm-10">
                                         <h2 class="carousel-title">WELCOME TO TARATIBU ASSETS</h2>
-                                        <ul class="carousel-btn rounded-buttons">
-                                            <li><a class="main-btn rounded-three" href="{%url 'login'%}">GET STARTED</a></li>
-                                            <li><a class="main-btn rounded-one" href="#">DOWNLOAD</a></li>
+                                        <ul class="carousel-btn rounded-buttons text-center ml-5">
+                                            <li><a class="main-btn rounded-three text-center ml-5" href="{%url 'login'%}">GET STARTED</a></li>
+                                            <li><a class="main-btn rounded-one" href="#contact">Demo</a></li>
                                         </ul>
                                     </div>
                                 </div> <!-- row -->
@@ -160,7 +160,7 @@
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-xl-6 col-lg-7 col-sm-10">
-                                        <h2 class="carousel-title">BEST ASSETS MANAGEMENT INVENTORY SYSTEM</h2>
+                                        <h2 class="carousel-title">SIMPLIFIED ASSET MANAGEMENT</h2>
                                         <ul class="carousel-btn rounded-buttons">
 
                                         </ul>
@@ -410,12 +410,21 @@
                 <div class="col-lg-6">
                     <div class="contact-two mt-50 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.2s">
                         <h4 class="contact-title">Protocol</h4>
+                       
+                       
                         <p class="text">The administration will send you login info for your demo account and incase of any inquiries concerning your account you can reach out to us for help </p>
-                        <ul class="contact-info">
-                            <li><i class="lni-money-location"></i>Moringa, Ngong Road</li><br>
-                            <li><i class="lni-phone-handset"></i> +254 711-320-751</li>
-                            <li><i class="lni-envelope"></i> taratibu@gmail.com</li>
-                        </ul>
+                      <div class="mt-4">
+                           <span class="text-muted mt-2" style="display: block;"><i class="lni-money-location"></i>Moringa, Ngong Road</span>
+                       <span class="text-muted mt-2" style="display: block;"><i class="lni-envelope"></i> taratibu@gmail.com</span>
+                       <span class="text-muted mt-2" style="display: block;"><i class="lni-phone-handset"></i> +254 711-320-751</span>
+                      </div>
+                       
+                        <!-- <ul class="contact-info">
+                            <li></li>
+                           <br>
+                            <li></li>
+                             <li></li>
+                        </ul> -->
                     </div> <!-- contact two -->
                 </div>
                 <div class="col-lg-6">
@@ -445,7 +454,7 @@
                             </div> <!-- form input -->
                             <p class="form-message"></p>
                             <div class="form-input rounded-buttons mt-20">
-                                <input type="submit" value="submit">
+                                <input class="btn btn-outline-primary"type="submit" value="submit">
                             </div> <!-- form input -->
                             {% for message in messages %}
 							<p id="messages">{{message}}</p>
@@ -462,7 +471,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-5">
                         <div class="copyright text-center text-lg-left mt-10">
-                            <p class="text">Product Of Taratibu</p>
+                            <p class="text-white">Product Of Taratibu</p>
                         </div> <!--  copyright -->
                     </div>
                     <div class="col-lg-2">
