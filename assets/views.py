@@ -783,3 +783,52 @@ def delete_employee_request(request, id):
    
     
     return redirect('assets:employee_requests')
+
+class AssetList(APIView):
+    def get(self, request, format=None):
+        all_merch = Asset.objects.all()
+        serializers = AssetSerializer(all_merch, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = AssetSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+   
+
+class DepartmentList(APIView):
+    def get(self, request,format=None):
+        departments = Department.objects.all()
+        serializers = DepartmentSerializer(departments,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = DepartmentSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+class EmployeeAssetRequestList(APIView):
+    def get(self, request,format=None):
+        employeerequests = EmployeeAssetRequest.objects.all()
+        serializers = EmployeeAssetRequestSerializer(employeerequests,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = EmployeeAssetRequestSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+class ManagerRequestSerializerList(APIView):
+    def get(self, request,format=None):
+        manager_request = ManagerRequest.objects.all()
+        serializers = ManagerRequestSerializer(manager_request,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = ManagerRequestSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
