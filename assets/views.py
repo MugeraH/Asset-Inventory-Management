@@ -13,6 +13,7 @@ from django.conf import settings
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework.decorators import api_view
 
 
 
@@ -20,7 +21,7 @@ from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import AssetSerializer,EmployeeAssetRequestSerializer,DepartmentSerializer,ManagerRequestSerializer
+from .serializers import AssetSerializer,EmployeeAssetRequestSerializer,DepartmentSerializer,ManagerRequestSerializer,EmployeeAssetSerializer,EmailSerializer
 from rest_framework import status
 from assets import serializers
 
@@ -832,3 +833,30 @@ class ManagerRequestSerializerList(APIView):
             serializers.save()
             return Response(serializers.data,status=status.HTTTP_201_CREATED)
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+class EmployeeAssetSerializerList(APIView):
+    def get (self, request,format=None):
+        employeeasset= EmployeeAsset.objects.all()
+        serializers=EmployeeAssetSerializer(employeeasset,many=True)
+        return Response(serializers.data)
+class EmailSerializerList(APIView):
+    def get (self, request,format=None):
+        email= Email.objects.all()
+        serializers=EmailSerializer(email,many=True)
+        return Response(serializers.data)
+
+@api_view(['GET'])
+def api_overview(request):
+    # '''
+    # Set safe=False to allow other data types rather than dictionary
+    # In order to allow non-dict objects to be serialized set the safe parameter to False 
+    # '''
+    api_urls = {
+        'Assets': '/api/assets/',
+        'Departments': '/api/departments/',
+        'EmployeeRequests': '/api/employeeAssetRequest/',
+        'ManagerRequest': '/api/managerrequest/',
+        'EmpoyeeAsset': '/api/employeeAsset/',
+        'Email': '/api/emails/',
+    }
+    
+    return Response(api_urls)
