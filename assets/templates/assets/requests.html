@@ -5,7 +5,15 @@
 {%block content%}
 
 <div class="container-fluid mb-4">
+  <div class="intro mt-3">
+    <header class="mb-3 p-0">
+        <h2 class="aset" style="text-align: center;">Requests</h2>
 
+      <div>
+     
+      </div>
+    </header>
+  </div>
 
   <div class="row">
     <div class="col-md-12">
@@ -15,7 +23,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Name</th>
+            <th scope="col">Id</th>
             <th scope="col">Request</th>
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
@@ -38,16 +46,16 @@
             <td>
               {% if request.urgency == "1" %}
                          
-                         <h5 class="text-danger">high</h5>
+                         <h5 class="text-danger">High</h5>
                      
                            {%elif request.urgency == "2" %}
                           
-<h5 class="text-warning">medium</h5>
+<h5 class="text-warning">Medium</h5>
                            
  
                            {%elif request.urgency == "3" %}
                          
-<h5 class="text-default">low</h5>
+<h5 class="text-default">Low</h5>
 
  {%else%}
 
@@ -57,16 +65,16 @@
             <td>
   {% if request.status == "approved" %}
                          
-                           <button class="btn btn-success">{{request.status }}</button>
+                           <button class="btn btn-sm btn-success">{{request.status }}</button>
                      
                            {%elif request.status == "rejected" %}
                           
- <button class="btn btn-danger">{{request.status }}</button>
+ <button class="btn btn-sm btn-danger">{{request.status }}</button>
                            
  
                            {%elif request.status == "pending" %}
                          
- <button class="btn btn-warning">{{request.status }}</button>
+ <button class="btn btn-sm btn-warning">{{request.status }}</button>
 
  {%else%}
 
@@ -98,7 +106,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">ID</th>
+            <th scope="col">Id</th>
             <th scope="col">Request</th>
             <th scope="col">Posted_date</th>
             <th scope="col">Quantity</th>
@@ -139,16 +147,16 @@
 
                 {% if request.status == "approved" %}
                          
-                           <button class="btn btn-success">{{request.status }}</button>
+                           <button class="btn btn-sm btn-success">{{request.status }}</button>
                      
                            {%elif request.status == "rejected" %}
                           
- <button class="btn btn-danger">{{request.status }}</button>
+ <button class="btn btn-sm btn-danger">{{request.status }}</button>
                            
  
                            {%elif request.status == "pending" %}
                          
- <button class="btn btn-warning">{{request.status }}</button>
+ <button class="btn btn-sm btn-warning">{{request.status }}</button>
 
  {%else%}
 

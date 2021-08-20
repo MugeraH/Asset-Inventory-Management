@@ -4,24 +4,26 @@ from django.shortcuts import render,reverse,redirect
 from django.contrib import messages
 
 from .forms import UserUpdateForm, ProfileUpdateForm, EmailForm
-from assets.models import Profile 
+from assets.models import Profile
 from django.db.models import manager
 from django.shortcuts import render,reverse,redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.http import Http404,HttpResponse
 from django.conf import settings
-from .serializers import EmailSerializer
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import status
-
-
+from rest_framework.decorators import api_view
 
 
 
 from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
-
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import AssetSerializer,EmployeeAssetRequestSerializer,DepartmentSerializer,ManagerRequestSerializer,EmployeeAssetSerializer,EmailSerializer
+from rest_framework import status
+from assets import serializers
 
 
 import sys
@@ -34,6 +36,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import datetime as dt
+
+
+# class DepartmentViewSet(viewsets.ModelViewSet):
+#     queryset = Department.objects.all().order_by('name')
+#     serializer_class = DepartmentSerializer
+
 
 
 def HomePageView(request):
@@ -58,25 +66,49 @@ def  DashBoardView(request):
         
         total_asset = Asset.objects.count()
         total_department = Department.objects.count()
-        total_user = User.objects.count()      
+        total_user = User.objects.count()  
+        date = dt.date.today() 
+        
+        managers = Profile.objects.filter(role="Admin")
+        assigned_assets=Asset.objects.filter(is_assigned_dept=True)
+        unassigned_assets=Asset.objects.filter(is_assigned_dept=False)
+        manager_requests= ManagerRequest.objects.count()
+        uncompleted_manager_request=ManagerRequest.objects.filter(status="pending")
+        employee_requests= EmployeeAssetRequest.objects.count()
+        uncompleted_employee_request=EmployeeAssetRequest.objects.filter(status="pending")
+        # messages.success(request,"Congrats young padawan")   
 
         context = {
         'assets': total_asset,
         'departments': total_department,
-        
+        'manager_requests':manager_requests,
+        'uncompleted_manager_request': uncompleted_manager_request,
+        'employee_requests':employee_requests,
+        'uncompleted_employee_request': uncompleted_employee_request,
+        'managers':managers,
+        'assigned_assets': assigned_assets,
+        'unassigned_assets':unassigned_assets,
         'employees' : total_user,
         'dept_assets':dept_assets,
         'dept_employees': dept_employees,
-     
+        "date":date
         
-    
-        
+        # "messages":messages
+            
         }
         return render(request,'assets/dashboard.html',context)
 def  employeeDashBoardView(request):
-        asset = EmployeeAsset.objects.filter(employee__user=request.user.id) 
+        user=Profile.objects.get(user=request.user)
+        assets = EmployeeAsset.objects.filter(employee__user=request.user.id) 
+        employee_requests= EmployeeAssetRequest.objects.filter(employee=user)
+        employee_requests_undone= EmployeeAssetRequest.objects.filter(employee=user,status="pending")
+        date = dt.date.today() 
         context = {
-        'asset': asset,        
+        'assets': assets,    
+          "date":date ,
+          "employee_requests_undone":employee_requests_undone ,
+          "employee_requests": employee_requests,
+           
         }
         return render(request,'assets/employee_dashboard.html',context)
     
@@ -86,16 +118,30 @@ def  managerDashBoardView(request):
         department= Department.objects.get(manager=request.user.id)
         
         dept_assets=Asset.objects.filter(department=department)
+        dept_assets_assigned=Asset.objects.filter(department=department,is_assigned_user=True)
+        dept_assets_unassigned=Asset.objects.filter(department=department,is_assigned_user=False)
+        
+        dept_employee_requests= EmployeeAssetRequest.objects.filter(employee__department=department)
+        dept_employee_requests_undone= EmployeeAssetRequest.objects.filter(employee__department=department,status="pending")
+        
         dept_employees=Profile.objects.filter(department=department)
+        date = dt.date.today() 
         context = {
     
         'department':department,
         'manager_requests':manager_requests,
         'dept_assets':dept_assets,
-        'dept_employees': dept_employees
+        'dept_employees': dept_employees,
+          "date":date,
+          "dept_assets_assigned": dept_assets_assigned,
+          "dept_assets_unassigned": dept_assets_unassigned,
+          "dept_employee_requests":dept_employee_requests,
+          "dept_employee_requests_undone":dept_employee_requests_undone
+          
+          
         
         }
-        return render(request,'assets/dashboard.html',context)
+        return render(request,'assets/managerDashboard.html',context)
 
 
 
@@ -661,17 +707,19 @@ def request_demo(request):
 
 
 @login_required(login_url='/login')
-
-
-@login_required(login_url='/login')
 def delete_asset(request, id):
     id = int(id)
     try:
         asset = Asset.objects.get(id = id)
+        asset_assigned= EmployeeAsset.objects.filter(asset=asset)
     except Asset.DoesNotExist:
         return redirect(request,'assets/assets.html')
+    
+    asset.department= None
+    asset_assigned.employee=None
+    asset_assigned.delete()
     asset.delete()
-    return redirect(request,'assets/assets.html')
+    return redirect('assets:assets')
 
 
 
@@ -774,19 +822,78 @@ def delete_employee_request(request, id):
     
     return redirect('assets:employee_requests')
 
-class Mail(APIView):
-
-   
+class AssetList(APIView):
     def get(self, request, format=None):
-        all_mail = Email.objects.all()
-        serializers = EmailSerializer(all_mail, many=True)
+        all_merch = Asset.objects.all()
+        serializers = AssetSerializer(all_merch, many=True)
         return Response(serializers.data)
 
-class MailList(APIView):
-#
     def post(self, request, format=None):
-        serializers = EmailSerializer(data=request.data)
+        serializers = AssetSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+   
+
+class DepartmentList(APIView):
+    def get(self, request,format=None):
+        departments = Department.objects.all()
+        serializers = DepartmentSerializer(departments,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = DepartmentSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+class EmployeeAssetRequestList(APIView):
+    def get(self, request,format=None):
+        employeerequests = EmployeeAssetRequest.objects.all()
+        serializers = EmployeeAssetRequestSerializer(employeerequests,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = EmployeeAssetRequestSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+class ManagerRequestSerializerList(APIView):
+    def get(self, request,format=None):
+        manager_request = ManagerRequest.objects.all()
+        serializers = ManagerRequestSerializer(manager_request,many=True)
+        return Response(serializers.data)
+    def post(self, request,format=None):
+        serializers = ManagerRequestSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data,status=status.HTTTP_201_CREATED)
+        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+class EmployeeAssetSerializerList(APIView):
+    def get (self, request,format=None):
+        employeeasset= EmployeeAsset.objects.all()
+        serializers=EmployeeAssetSerializer(employeeasset,many=True)
+        return Response(serializers.data)
+class EmailSerializerList(APIView):
+    def get (self, request,format=None):
+        email= Email.objects.all()
+        serializers=EmailSerializer(email,many=True)
+        return Response(serializers.data)
+
+@api_view(['GET'])
+def api_overview(request):
+    # '''
+    # Set safe=False to allow other data types rather than dictionary
+    # In order to allow non-dict objects to be serialized set the safe parameter to False 
+    # '''
+    api_urls = {
+        'Assets': '/api/assets/',
+        'Departments': '/api/departments/',
+        'EmployeeRequests': '/api/employeeAssetRequest/',
+        'ManagerRequest': '/api/managerrequest/',
+        'EmpoyeeAsset': '/api/employeeAsset/',
+        'Email': '/api/emails/',
+    }
+    
+    return Response(api_urls)

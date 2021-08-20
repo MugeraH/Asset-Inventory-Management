@@ -4,46 +4,43 @@
 <!-- html -->
 {% block content %}
 <!-- content -->
-<div class="p-5 mt-2">
-  <header>
-    <h1 class="">
-      <span style="text-transform: capitalize">{{department.name}}</span>
-      Department
-    </h1>
+<div class="pl-5 pr-5 pt-2">
+  <div class="intro mt-3">
+    <header class="mb-3 p-0">
+      <h2 class="aset" style="text-align: center">
+        <span style="text-transform: capitalize">{{department.name}}</span>
+        Department
+      </h2>
 
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Actions
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <!-- <a class="dropdown-item" href="#">Add Assets</a> -->
+      <div>
         <a
-          class="dropdown-item"
+          class="btn btn-primary"
           href="#"
           data-toggle="modal"
           data-target="#staticBackdrop"
           >Update Department</a
         >
-        <hr />
+
         <a
-          class="dropdown-item"
+          class="btn btn-danger"
           href="#"
           data-toggle="modal"
           data-target="#staticBackdrop2"
           >Delete Department</a
         >
       </div>
-    </div>
-  </header>
+    </header>
+  </div>
+
   <div>
+    <h2 class="mt-3">Description</h2>
     {% if department.description %}
 
-    <h4 class="p-0 pl-2 m-0">{{department.description}}</h4>
+    <p class="h2 p-0 pl-2 mt-3">"{{department.description}}"</p>
     {% endif %}
   </div>
 
-  <div class="mycard mt-5 mb-5">
+  <div class="mycard mt-3 mb-5">
     <h4>
       Manager : {% if department.manager %}
       <span style="text-transform: capitalize">{{department.manager}}</span>
@@ -51,24 +48,21 @@
       {% endif %}
     </h4>
   </div>
-  <div class="dep_detail mt-5">
+  <div class="dep_detail mt-3">
     <div class="row">
-      <div class="col-md-2 m-4 dep_det-card two d-flex">
+      <div class="m-4 dash-card three">
         <div class="title">
+          <h6>Total Department Employees</h6>
+
           <h3>{{employees.count}}</h3>
-          <h5>Employees</h5>
-        </div>
-        <div class="dash_icon">
-          <img src="../../static/icons/department.png" alt="" />
         </div>
       </div>
-      <div class="col-md-2 m-4 dep_det-card three d-flex">
+
+      <div class="m-4 dash-card two">
         <div class="title">
+          <h6>Total Department Assets</h6>
+
           <h3>{{assets.count}}</h3>
-          <h5>Assets</h5>
-        </div>
-        <div class="dash_icon">
-          <img src="../../static/icons/assets.png" alt="" />
         </div>
       </div>
     </div>

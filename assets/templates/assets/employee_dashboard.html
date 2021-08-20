@@ -7,33 +7,36 @@
 <!-- content -->
 {%block content%} ​
 <div class="container-fluid dashboard">
-  {% if user.is_admin %}
-  <h1 class="mt-4 mb-4" style="text-transform: capitalize">
-    {{department.name}} Department
-  </h1>
-  {% endif %}
-  <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
-  <!-- greeting -->
-  <!-- {% if user.is_superuser %}
-  <h3>Welcome Admin</h3>
-  {%elif user.is_admin%}
-  <h3>Welcome Manager</h3>
-  {%else%}
-  <h3>Welcome Employee</h3>
-  {% endif %} -->
+  <div class="intro">
+    <header>
+      <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
+      <h3>{{date}}</h3>
+    </header>
+  </div>
 
-  <!-- row -->
-
-  <div class="m-4">
-    <div class="row">
-      <div class="col-md-3 m-4 dash-card two">
+  <div class="mt-4">
+    <div class="row d-flex mt-4">
+      <div class="m-4 dash-card three">
         <div class="title">
-          <h3>{{asset | length}}</h3>
+          <h6>My Assets</h6>
 
-          <h6>Assets</h6>
+          <h3>{{assets | length}}</h3>
         </div>
-        <div class="dash_icon">
-          <img src="../../static/icons/assets.png" alt="" />
+      </div>
+
+      <div class="m-4 dash-card eight">
+        <div class="title">
+          <h6>My Requests</h6>
+
+          <h3>{{ employee_requests | length}}</h3>
+        </div>
+      </div>
+
+      <div class="m-4 dash-card nine">
+        <div class="title">
+          <h6>Pending request</h6>
+
+          <h3>{{ employee_requests_undone | length}}</h3>
         </div>
       </div>
     </div>

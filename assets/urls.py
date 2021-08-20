@@ -1,6 +1,9 @@
-from django.urls import path
+from django import urls
+from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+# from rest_framework import routers
+
 
 from . import views
 from .views import HomePageView,DashBoardView,employees,employeerequests,employeeassetrequest,employeedetails, assets,assetdetails,addasset
@@ -11,9 +14,18 @@ app_name ="assets"
 
 
 urlpatterns=[
+    # path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
     
-    
- 
+    # Endpoints 
+    path('api/assets/', views.AssetList.as_view()),
+    path('api/departments/', views.DepartmentList.as_view()),
+    path('api/employeeAssetRequest/', views.EmployeeAssetRequestList.as_view()),
+    path('api/managerrequest/', views.ManagerRequestSerializerList.as_view()),
+    path('api/employeeAsset/',views.EmployeeAssetSerializerList.as_view()),
+    path('api/emails/',views.EmailSerializerList.as_view()),
+    path('api/',views.api_overview),
+
+
     path('update/department/<int:id>/',views.update_department,name='update_department'),
     path('departments/',views.departments,name='departments'), 
     path('addasset',views.addasset,name='assetform'),
@@ -23,7 +35,7 @@ urlpatterns=[
     path('employeeassetrequest',views.employeeassetrequest,name='employeeassetrequest'),
     path('managerrequest/',views.managerrequest,name='managerrequest'),
     path('assetdetails/<int:id>', views.assetdetails,name='assetdetails'),
-    path('delete/<int:id>/', views.delete_asset,name='delete_asset'),
+    path('delete_asset/<int:id>', views.delete_asset,name='delete_asset'),
     
     path('dashboard',DashBoardView,name='dashboard'),
     
@@ -66,8 +78,7 @@ urlpatterns=[
     path('requests', views.requests,name='requests'),
     path('add_departments/',views.add_departments,name='add_departments'),
     path('employee_assets',views.employee_assets,name='employee_assets'),
-    path('api/email/', views.MailList.as_view()),
- 
+    path('api/asset/', views.AssetList.as_view()),
 ]
 
 if settings.DEBUG:

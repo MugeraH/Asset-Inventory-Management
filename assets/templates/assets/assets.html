@@ -3,37 +3,36 @@
 {%block content%}
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-7 mt-4">
-      <div class="header d-flex flex-row justify-content-around " >
-      
+
+    <div class="intro mt-3">
+    <header class="mb-3 p-0">
         <h2 class="aset" style="text-align: center;">Assets</h2>
-      </div>
-    </div>
-        <!-- <a href="addasset"
-          ><img
-            src="https://img.icons8.com/ios/50/4a90e2/add--v1.png"
-            alt="add asset"
-        /></a> -->
-        <div class="col-md-5 mt-4">
-        <div class="header d-flex flex-row justify-content-around ">
-        <a style="text-align: left;"
+
+      <div>
+        <a
           href="#"
           class="btn btn-primary"
           data-toggle="modal"
-          data-target="#staticBackdrop">
-          Add Asset</a>      
-        </div>
+          data-target="#staticBackdrop"
+        >
+          Add Asset</a
+        >
       </div>
+    </header>
   </div>
+
+ 
       <table class="table mt-4">
         <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+              <th scope="col">Description</th>
+               <th scope="col">Image</th>
             <th scope="col">Category</th>
             <th scope="col">Department</th>
             <th scope="col"></th>
+           
           </tr>
         </thead>
 
@@ -49,6 +48,10 @@
           >
             <th scope="row">{{ asset.id }}</th>
             <td>{{ asset.name }}</td>
+            <td>{{ asset.description}}</td>
+            <td>
+              <img src="{{asset.image.url}}" alt="">
+            </td>
             <td>{{ asset.category }}</td>
             <td>{{ asset.department }}</td>
             <td>
