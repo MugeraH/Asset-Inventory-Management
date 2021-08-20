@@ -5,9 +5,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 mt-4">
-      <header>
-        <h2>Manager Request Details</h2>
-        {% if user.is_superuser%}
+
+  <div class="intro mt-3">
+    <header class="mb-3 p-0">
+      <h2>Manager Request Details</h2>
+
+      <div>
+         {% if user.is_superuser%}
 
         <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#staticBackdrop">Update</a>
         {% endif%}
@@ -17,8 +21,14 @@
 
           <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#staticBackdrop3">delete</a>
           {% endif %}
-        </div>
-      </header>
+      </div>
+    </header>
+  </div>
+
+
+    
+
+      <hr>
 
       <div class="row">
       
@@ -26,16 +36,20 @@
 
 
         <div class="col-md-8 m-4">
-          <div class="card card-body bg-secondary" style="border-left: 3px solid rgb(30, 30, 211) ;line-height: 2.0em;">
-            <div class="card-title" style="text-decoration: underline">
-              <h2>{{ manager_requests.emloyee.user.username }}</h2>
-            </div>
+          <div class="card card-body " >
+           
             <div class="card-title">
-              <hr />
-              <h4>Request:</h4>
+              <header class="p-0 m-0">
+                <div>
+                   <h4>Request:</h4>
               <p>
                 {{ manager_requests.request}}
               </p>
+                </div>
+                 <h4>{{ manager_requests.employee.user.username}}</h4>
+              </header>
+             
+
               <h4>Specifications:</h4>
               <p>
                 {{ manager_requests.specs}}
@@ -43,7 +57,25 @@
 
               <h5>Quantity: <strong>{{ manager_requests.quantity }}</strong></h5>
               <h5>Request date: <span>{{ manager_requests.posted_date |  date }}</span></h5>
-              <h4>Status: <strong class="text">{{ manager_requests.status }}</strong></h4>
+              <h4>Status:
+
+                     {% if manager_requests.status == "approved" %}
+                         
+                           <button class="btn btn-sm btn-success">{{manager_requests.status }}</button>
+                     
+                           {%elif manager_requests.status == "rejected" %}
+                          
+ <button class="btn btn-sm btn-danger">{{manager_requests.status }}</button>
+                           
+ 
+                           {%elif manager_requests.status == "pending" %}
+                         
+ <button class="btn btn-sm btn-warning">{{manager_requests.status }}</button>
+
+ {%else%}
+
+                         {% endif %}
+              </h4>
 
 
 
