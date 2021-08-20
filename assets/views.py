@@ -32,7 +32,7 @@ from users.models import User
 from django.views import generic 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-# from .email import send_welcome_email
+from django.contrib import messages
 import datetime as dt
 
 
@@ -783,7 +783,7 @@ class Mail(APIView):
         return Response(serializers.data)
 
 class MailList(APIView):
-#............
+#
     def post(self, request, format=None):
         serializers = EmailSerializer(data=request.data)
         if serializers.is_valid():

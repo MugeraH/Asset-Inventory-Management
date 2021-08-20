@@ -1,5 +1,6 @@
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from decouple import config
 
 def send_welcome_email(name,receiver,date):
     # Creating message subject and sender

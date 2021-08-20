@@ -1,4 +1,4 @@
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives,send_mail
 from django.template.loader import render_to_string
 
 def send_response_email(name,receiver):
@@ -17,7 +17,7 @@ def send_response_email(name,receiver):
     
 def send_email(name,receiver,date):
     # Creating message subject and sender
-    subject = 'Welcome to the Awwwards clone'
+    subject = 'Welcome to the Assset  Management Inventory'
     sender = 'testmugera@gmail.com'
     ctx= {
         "name": name,
