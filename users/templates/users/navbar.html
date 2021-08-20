@@ -1,64 +1,85 @@
-<nav class="navbar navbar-expand-lg p-0">
-  <div class="flex-cont">
-    <div class="icon">
-      <img
-        onclick="openSideMenu()"
-        id="open"
-        src="../../static/icons/menu (2).svg"
-        alt=""
-      />
-      <img
-        onclick="closeSideMenu()"
-        id="close"
-        src="../../static/icons/menu (1).png"
-        alt=""
-      />
-    </div>
+    <nav class="navbar navbar-expand-lg p-0">
+      <div class="flex-cont">
+        <div class="icon">
+          <img onclick="openSideMenu()" id="open" src="../../static/icons/menu (2).svg" alt="" />
+          <img onclick="closeSideMenu()" id="close" src="../../static/icons/menu (1).png" alt="" />
+        </div>
 
-    <a class="navbar-brand" href="/">
-      <span class="logo_name">TARATIBU ASSETS</span>
-      <span>SIMPLIFIED ASSET MANAGEMENT</span>
-    </a>
-  </div>
+        <a class="navbar-brand" href="/">
+          <span class="logo_name">TARATIBU ASSETS</span>
+          <span>SIMPLIFIED ASSET MANAGEMENT</span>
+        </a>
+      </div>
 
-  <div>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="text-white">
-        <i class="fas fa-bars"></i>
-      </span>
-    </button>
+      <div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="text-white">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
 
-    <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto p-0">
-        {% if user.is_authenticated %}
-        <li class="nav-item active p-0">
-          <a class="nav-link" href="/"
-            >Hello {{user}} <span class="sr-only">(current)</span></a
-          >
-        </li>
-        <li class="nav-item active p-0">
-          <a class="nav-link" href="/">Profile </a>
-        </li>
-        <li class="nav-item active p-0">
-          <a class="nav-link" href="/">Logout</a>
-        </li>
+        <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto p-0">
+            {% if user.is_authenticated %}
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Hello {{user}} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Profile </a>
+            </li>
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Logout</a>
+            </li>
 
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{%url 'login'%}">
-            <b>Already have an account? Login</b>
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-</nav>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'login'%}"> Login </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>    <nav class="navbar navbar-expand-lg p-0">
+      <div class="flex-cont">
+        <div class="icon">
+          <img onclick="openSideMenu()" id="open" src="../../static/icons/menu (2).svg" alt="" />
+          <img onclick="closeSideMenu()" id="close" src="../../static/icons/menu (1).png" alt="" />
+        </div>
+
+        <a class="navbar-brand" href="/">
+          <span class="logo_name">TARATIBU ASSETS</span>
+          <span>SIMPLIFIED ASSET MANAGEMENT</span>
+        </a>
+      </div>
+
+      <div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="text-white">
+            <i class="fas fa-bars"></i>
+          </span>
+        </button>
+
+        <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto p-0">
+            {% if user.is_authenticated %}
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Hello {{user}} <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Profile </a>
+            </li>
+            <li class="nav-item active p-0">
+              <a class="nav-link" href="/">Logout</a>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{%url 'login'%}"> Login </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
