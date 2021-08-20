@@ -2996,8 +2996,10 @@ p {
 }
 
 .single-blog .blog-image img {
-  width: 100%;
-  border-radius: 8px;
+
+    width: 100%;
+    border-radius: 10px;
+
 }
 
 .single-blog .blog-content {
