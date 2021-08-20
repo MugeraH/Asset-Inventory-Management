@@ -171,6 +171,7 @@ def assets(request):
     user=User.objects.get(id=request.user.id)
     print(user)
     form=AssetForm()
+    
     if request.method == 'POST':
         form=AssetForm(request.POST,request.FILES)
         if form.is_valid():
