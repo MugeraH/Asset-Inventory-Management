@@ -1,0 +1,87 @@
+{% load bootstrap4 %} {% load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Asset Inventory</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+
+    {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% endblock %}
+
+    <style>
+      form li {
+        display: none;
+      }
+
+      form small {
+        display: none;
+      }
+      .form-text {
+        display: none;
+      }
+
+      form {
+        padding: 10px;
+      }
+
+      form label {
+        padding-left: 10px;
+        font-weight: bold;
+      }
+
+      form input {
+        height: 50px !important;
+
+        /* border: none !important;
+        outline: none !important;
+        border-bottom: 1px solid white !important; */
+        font-size: 25px;
+        font-weight: 600;
+      }
+      ::placeholder {
+      }
+
+      .register {
+        background: white;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .register .btn {
+        width: 100%;
+        font-weight: bold;
+        font-size: 22px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid cont-register p-0 m-0">
+      <h1 class="header-title text-center text-white mb-4 pt-4">
+        <b> Taratibu Assets</b>
+      </h1>
+      <div class="row">
+        <div class="col-md-5 register second">
+          <h2 class="text-center m-2">Register</h2>
+
+          <form method="POST">
+            {%csrf_token%} {% bootstrap_form form %}
+
+            <button class="btn btn-success" type="submit">Sign Up</button>
+          </form>
+
+          <h5 style="font-weight: 600" class="m-4">
+            Already have an account <a href="{%url 'login'%}"> Sign in</a>
+          </h5>
+        </div>
+      </div>
+    </div>
+    {%include "users/scripts.html"%} {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %} {% endblock %}
+  </body>
+</html>

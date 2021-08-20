@@ -1,0 +1,128 @@
+{%extends 'assets/base.html'%} {% load bootstrap4%} {% load static %}
+<!-- content -->
+{%block content%}
+
+<div class="ml-5 mr-5 pt-2 pr-5">
+  <div class="intro mt-3">
+    <header class="mb-3 p-0">
+      <h1 class="m-0 p-0">DEPARTMENTS</h1>
+
+      <div>
+        <a
+          href="/add_department"
+          class="btn btn-success"
+          data-toggle="modal"
+          data-target="#staticBackdrop"
+        >
+          Add Department</a
+        >
+      </div>
+    </header>
+  </div>
+
+  <div class="text-center">
+    <div>
+      <div class="icon-wrap m-3" style="height: 100px">
+        <img
+          style="height: 100%"
+          src="../../static/icons/department(1).png"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- <p class="m-0 p-0">
+    We ensure that all assets in departments are physically safeguarded and
+    properly accounted for in our organization asset records
+  </p> -->
+
+  <div class="departments mt-3">
+    <div class="row">
+      {%for department in department%}
+
+      <a
+        href="{%url 'assets:department_detail' department.id%}"
+        class="col-md-3 dep-card m-3 mt-5"
+      >
+        <h3 style="text-transform: capitalize">{{department.name}}</h3>
+
+        <h5>
+          Manager : {% if department.manager %}
+          <span style="text-transform: capitalize"
+            >{{department.manager}}
+          </span>
+
+          <!-- option -->
+          {% endif %}
+        </h5>
+
+        <h4 class="dep_description text-muted">{{department.description}}</h4>
+      </a>
+
+      <!-- <div class="col-6">
+        <a href="/department_detail/{{department.id}}">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title text-success text-center">
+                {{department.name}}
+              </h5>
+              <p class="card-text">{{department.description}}</p>
+              <p class="card-title">
+                <mark>Head of Department {{department.manager}}</mark>
+              </p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{department.created_at}}</small>
+            </div>
+          </div>
+        </a>
+      </div> -->
+      {%endfor%}
+    </div>
+  </div>
+</div>
+
+<!-- add department modal -->
+<div
+  class="modal  fade"
+  id="staticBackdrop"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
+        <button
+          type="button"
+          class="close text-white"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="form"
+          method="post"
+          novalidate
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} {% bootstrap_form form layout='block' %}
+          <button type="submit" class="btn btn-success">Add</button>
+        </form>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+​ {% endblock %}

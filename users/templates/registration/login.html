@@ -1,0 +1,59 @@
+{% load bootstrap4 %} {% load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  
+
+    <title>Asset Inventory</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+
+    {% block styles %} {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% endblock %}
+  </head>
+
+  <body>
+    <div class="container-fluid cont p-0 m-0">
+      <div class="wrapper row">
+        <div class="col-md-6 p-0 m-0 first">
+        <h2>Taratibu Assets</h2>
+        <div>
+            <img
+            src="../../static/images/asset-management-erp-software.png"
+            alt=""
+          />
+        </div>
+        <h3>SIMPLIFIED ASSET MANAGEMENT</h3>
+        </div>
+        <div class="col-md-6 second">
+          <h3 class="m-3">
+            <b>Login</b>
+          </h3>
+
+          <form method="POST">
+            {%csrf_token%} {% bootstrap_form form %}
+
+            <button class="btn btn-success" type="submit">Login</button>
+          </form>
+
+          <div class="m-3 mb-5 text-center">
+            <span> <a href="#">Forgot your password</a></span>
+          </div>
+          <div class="reg m-3 mt-5 text-center">
+            <span class="mt-5"
+              >Don't have an account
+              <a href="{%url 'signup'%}">Register</a></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    {%include "users/scripts.html"%} {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %} {% endblock %}
+  </body>
+</html>

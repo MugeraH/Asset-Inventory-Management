@@ -1,10 +1,624 @@
-{%extends 'assets/base.html'%}
 <!-- bootstrap -->
+{% load static%}
 {% load bootstrap4 %}
-<!-- html -->
-{% block content %}
-<!-- content -->
-<div class="container-fluid p-4">
-  <h1 class="text-success">Home Page</h1>
-</div>
-{% endblock%}
+
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!--====== Title ======-->
+    <title>Taratibu</title>
+    <link rel="shortcut icon" href="../../static/images/favicon.png" type="image/png">
+
+    <!--====== Bootstrap css ======-->
+    <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+
+    <!--====== Line Icons css ======-->
+    <link rel="stylesheet" href="../../static/css/LineIcons.css">
+
+    <!--====== Magnific Popup css ======-->
+    <link rel="stylesheet" href="../../static/css/magnific-popup.css">
+
+    <!--====== Slick css ======-->
+    <link rel="stylesheet" href="../../static/css/slick.css">
+
+    <!--====== Animate css ======-->
+    <link rel="stylesheet" href="../../static/css/animate.css">
+
+    <!--====== Default css ======-->
+    <link rel="stylesheet" href="../../static/css/default.css">
+
+    <!--====== Style css ======-->
+    <link rel="stylesheet" href="../../static/css/style-main.css">
+    <link rel="stylesheet" href="../../static/css/navbar.css">
+
+
+</head>
+
+<body>
+
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* Change the link color to #111 (black) on hover */
+        /* li a:hover {
+            background-color: #111;
+        } */
+    </style>
+
+    <!--====== PRELOADER PART START ======-->
+    <div class="overlay">
+        <div class="preloader">
+            <div class="loader">
+                <div class="ytp-spinner">
+                    <div class="ytp-spinner-container">
+                        <div class="ytp-spinner-rotator">
+                            <div class="ytp-spinner-left">
+                                <div class="ytp-spinner-circle"></div>
+                            </div>
+                            <div class="ytp-spinner-right">
+                                <div class="ytp-spinner-circle"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--====== NAVBAR PART START ======-->
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="flex-cont">
+                <div class="icon">
+                    <img onclick="openSideMenu()" id="open" src="../../static/icons/menu (2).svg" alt="" />
+                    <img onclick="closeSideMenu()" id="close" src="../../static/icons/menu (1).png" alt="" />
+                </div>
+
+                <a class="navbar-brand" href="/">
+                    <span class="logo_name">TARATIBU ASSETS</span>
+                    <span>SIMPLIFIED ASSET MANAGEMENT</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div id="home" class="slider-area">
+        <div class="bd-example">
+            <div id="carouselOne" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselOne" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselOne" data-slide-to="1"></li>
+                    <li data-target="#carouselOne" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item bg_cover active"
+                        style="background-image: url(../../static/images/slider-1.jpg); padding-top: 0%;">
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-6 col-lg-7 col-sm-10">
+                                        <h2 class="carousel-title">WELCOME TO TARATIBU ASSETS</h2>
+                                        <ul class="carousel-btn rounded-buttons text-center ml-5">
+                                            <li><a class="main-btn rounded-three text-center ml-5" href="{%url 'login'%}">GET STARTED</a></li>
+                                            <li><a class="main-btn rounded-one" href="#contact">Demo</a></li>
+                                        </ul>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- container -->
+                        </div> <!-- carousel caption -->
+                    </div> <!-- carousel-item -->
+
+                    <div class="carousel-item bg_cover" style="background-image: url(../../static/images/slider-2.jpg)">
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-6 col-lg-7 col-sm-10">
+                                        <h2 class="carousel-title">SIMPLIFIED ASSET MANAGEMENT</h2>
+                                        <ul class="carousel-btn rounded-buttons">
+
+            <div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="text-white">
+                        <i class="fas fa-bars"></i>
+                    </span>
+                </button>
+
+                <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav mr-auto p-0">
+
+                        <ul class="navbar-nav ml-auto">
+                            <li><a href="#home" class="menu-btn">HOME</a></li>
+                            <li><a href="#about" class="menu-btn">ABOUT</a></li>
+
+                            <li><a href="#contact" class="menu-btn">CONTACT</a></li>
+                        </ul>
+
+                    </ul>
+                    <div class="sidebar">
+
+
+                    </div>
+                </div>
+        </nav>
+        <div id="home" class="slider-area">
+            <div class="bd-example">
+                <div id="carouselOne" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselOne" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselOne" data-slide-to="1"></li>
+                        <li data-target="#carouselOne" data-slide-to="2"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="carousel-item bg_cover active"
+                            style="background-image: url(../../static/images/slider-1.jpg); padding-top: 0%;">
+                            <div class="carousel-caption">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-6 col-lg-7 col-sm-10">
+                                            <h2 class="carousel-title">WELCOME TO TARATIBU ASSETS</h2>
+                                            <ul class="carousel-btn rounded-buttons">
+                                                <li><a class="main-btn rounded-three" href="{%url 'login'%}">GET
+                                                        STARTED</a></li>
+                                                <li><a class="main-btn rounded-one" href="#">DOWNLOAD</a></li>
+                                            </ul>
+                                        </div>
+                                    </div> <!-- row -->
+                                </div> <!-- container -->
+                            </div> <!-- carousel caption -->
+                        </div> <!-- carousel-item -->
+
+                        <div class="carousel-item bg_cover"
+                            style="background-image: url(../../static/images/slider-2.jpg)">
+                            <div class="carousel-caption">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-6 col-lg-7 col-sm-10">
+                                            <h2 class="carousel-title">SIMPLIFIED ASSETS MANAGEMENT</h2>
+                                            <ul class="carousel-btn rounded-buttons">
+
+                                            </ul>
+                                        </div>
+                                    </div> <!-- row -->
+                                </div> <!-- container -->
+                            </div> <!-- carousel caption -->
+                        </div> <!-- carousel-item -->
+
+
+                    </div> <!-- carousel-inner -->
+
+                    <a class="carousel-control-prev" href="#carouselOne" role="button" data-slide="prev">
+                        <i class="lni-arrow-left-circle"></i>
+                    </a>
+
+                    <a class="carousel-control-next" href="#carouselOne" role="button" data-slide="next">
+                        <i class="lni-arrow-right-circle"></i>
+                    </a>
+                </div> <!-- carousel -->
+            </div> <!-- bd-example -->
+        </div>
+
+        </section>
+
+        <!--====== NAVBAR PART ENDS ======-->
+
+
+        <!--====== ABOUT PART START ======-->
+
+        <section id="features" class="about-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6 col-lg-8">
+
+                        <div class="section-title text-center mt-30 pb-40">
+                            <h4 class="title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.6s" id="features">
+                                FEATURES</h4>
+                            <p class="text wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s">Manage your
+                                inventory
+                                using a highly optimized digital platform.</p>
+                        </div> <!-- section title -->
+                    </div>
+                </div> <!-- row -->
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
+                            data-wow-delay="1.2s">
+                            <div class="about-icon">
+                                <img src="../../static/images/icon-1.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Role-Based System</h4>
+                                <p class="text">Departments are subdivided in an organized manner which corresponds to a
+                                    user specific job description.</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
+                            data-wow-delay="1.4s">
+                            <div class="about-icon">
+                                <img src="../../static/images/real.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Real Time Data Access</h4>
+                                <p class="text">All data stored or otherwise manipulated is available on a real time
+                                    basis
+                                    at request.</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.2s"
+                            data-wow-delay="2.0s">
+                            <div class="about-icon">
+                                <img src="../../static/images/cloud.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Cloud Based</h4>
+                                <p class="text">Any user can work on their specific accounts from anywhere at any time
+                                    provided the user has a stable internet connection.</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s"
+                            data-wow-delay="1.8s">
+                            <div class="about-icon">
+                                <img src="../../static/images/inventory.png" alt="Icon">
+                            </div>
+                            <div class="about-content media-body">
+                                <h4 class="about-title">Inventory Management System</h4>
+                                <p class="text">An inventory management system is embedded on the platform to easen the
+                                    process of tracking the assets going and out of the main platform</p>
+                            </div>
+                        </div> <!-- single about -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </section>
+
+        <!--====== ABOUT PART ENDS ======-->
+
+    <section id="" class="">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-8">
+                    
+                    <div class="section-title text-center mt-30 pb-40">
+                        <h4 class="title wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.6s">ABOUT</h4>
+                        <p class="text wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s">.</p>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.2s">
+                        <div class="about-icon">
+                            <img src="../../static/images/history.png" alt="Icon">
+                        </div>
+                        <div class="about-content media-body">
+                            <h4 class="about-title">HISTORY</h4>
+                            <p class="text">Taratibu is an online and asset inventory management system inteded to allow businesses to optimize spending and support strategic decision-making.</p>
+                        </div>
+                    </div> <!-- single about -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="single-about d-sm-flex mt-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1.4s">
+                        <div class="about-icon">
+                            <img src="../../static/images/features.png" alt="Icon">
+                        </div>
+                        <div class="about-content media-body">
+                            <h4 class="about-title">WHAT OUR SYSTEM ENTAILS</h4>
+                            <p class="text">It relates to IT assets while at the same time allowing managers to get a better overview of a company's total business value, IT asset utilization, and procurement routines.</p>
+                        </div>
+                    </div> <!-- single about -->
+                
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+    <!--====== portfolio PART START ======-->
+
+    <section id="understand" class="portfolio-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center pb-20">
+                        <h3 class="title">OVERVIEW</h3>
+
+                    </div> <!-- row -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- portfolio menu -->
+                </div>
+            </div> <!-- row -->
+            <div class="row grid">
+                <div class="col-lg-4 col-sm-6 branding-3 planning-3">
+                    <div class="single-portfolio mt-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <div class="portfolio-image">
+                            <img src="../../static/images/dashboard.png" alt="">
+                            <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                <div class="portfolio-content">
+                                    <div class="portfolio-icon">
+                                        <a class="image-popup" href="../../static/images/dashboard.png"><i
+                                                class="lni-zoom-in"></i></a>
+                                    </div>
+                                    <div class="portfolio-icon">
+                                        <a href="#"><i class="lni-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-text">
+                            <h4 class="portfolio-title"><a href="#">Dashboard Area</a></h4>
+                            <p class="text">Voila! Once you are logged on, this is where all the magic happens!.</p>
+                        </div>
+                    </div> <!-- single portfolio -->
+                </div>
+                <div class="col-lg-4 col-sm-6 marketing-3 research-3">
+                    <div class="single-portfolio mt-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.4s">
+                        <div class="portfolio-image">
+                            <img src="../../static/images/Departments.png" alt="">
+                            <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                <div class="portfolio-content">
+                                    <div class="portfolio-icon">
+                                        <a class="image-popup" href="../../static/images/Departments.png"><i
+                                                class="lni-zoom-in"></i></a>
+                                    </div>
+                                    <div class="portfolio-icon">
+                                        <a href="#"><i class="lni-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-text">
+                            <h4 class="portfolio-title"><a href="#">Department Area</a></h4>
+                            <p class="text">You can see the different departments from here.</p>
+                        </div>
+                    </div> <!-- single portfolio -->
+                </div>
+                <div class="col-lg-4 col-sm-6 branding-3 marketing-3">
+                    <div class="single-portfolio mt-30 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.7s">
+                        <div class="portfolio-image">
+                            <img src="../../static/images/requests.png" alt="">
+                            <div class="portfolio-overlay d-flex align-items-center justify-content-center">
+                                <div class="portfolio-content">
+                                    <div class="portfolio-icon">
+                                        <a class="image-popup" href="../../static/images/requests.png"><i
+                                                class="lni-zoom-in"></i></a>
+                                    </div>
+                                    <div class="portfolio-icon">
+                                        <a href="#"><i class="lni-link"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-text">
+                            <h4 class="portfolio-title"><a href="#">Request Area</a></h4>
+                            <p class="text">One is able to see the requests made.</p>
+                        </div>
+                    </div> <!-- single portfolio -->
+
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+
+
+
+
+<footer id="contact" class="footer-area" style="background-color: aqua;">
+<section id="contact" class="contact-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section-title text-center pb-20">
+                        <h3 class="title">REQUEST DEMO</h3>
+                        <p class="text">Taratibu assets will get back to you once we receive your information </p>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-two mt-50 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.2s">
+                        <h4 class="contact-title">Protocol</h4>
+                       
+                       
+                        <p class="text">The administration will send you login info for your demo account and incase of any inquiries concerning your account you can reach out to us for help </p>
+                      <div class="mt-4">
+                           <span class="text-muted mt-2" style="display: block;"><i class="lni-money-location"></i>Moringa, Ngong Road</span>
+                       <span class="text-muted mt-2" style="display: block;"><i class="lni-envelope"></i> taratibu@gmail.com</span>
+                       <span class="text-muted mt-2" style="display: block;"><i class="lni-phone-handset"></i> +254 711-320-751</span>
+                      </div>
+                       
+                        <!-- <ul class="contact-info">
+                            <li></li>
+                           <br>
+                            <li></li>
+                             <li></li>
+                        </ul> -->
+                    </div> <!-- contact two -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-form form-style-one mt-35 wow fadeIn" data-wow-duration="1.5s" data-wow-delay="0.5s">
+                        <form  id="contact-form" method="post">
+                            {% csrf_token %}
+                            <div class="form-input mt-15">
+                                <label>Full Name</label>
+                                <div class="input-items default">
+                                    <input type="text" placeholder="Name" name="name">
+                                    <i class="lni-user"></i>
+                                </div>
+                            </div> <!-- row -->
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="contact-two mt-50 wow fadeIn" data-wow-duration="1.5s"
+                                        data-wow-delay="0.2s">
+                                        <h4 class="contact-title">Protocol</h4>
+                                        <p class="text">The administration will send you login info for your demo
+                                            account and incase of any inquiries concerning your account you can reach
+                                            out to us for help </p>
+                                        <ul class="contact-info">
+                                            <li><i class="lni-money-location"></i>Moringa, Ngong Road</li>
+                                            <br>
+                                            <li><i class="lni-phone-handset"></i> +254 711-320-751</li>
+                                            <li><i class="lni-envelope"></i> taratibu@gmail.com</li><br>
+                                            <li><a href="https://facebook.com/"><i class="lni-facebook-filled"></i></a>
+                                            </li>
+                                            <li><a href="https://twitter.com/"><i class="lni-twitter-original"></i></a>
+                                            </li>
+                                            <li><a href="https://instagram.com/"><i
+                                                        class="lni-instagram-original"></i></a></li>
+                                            <li><a href="#"><i class="lni-linkedin-original"></i></a></li>
+
+                                        </ul>
+                                    </div> <!-- contact two -->
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="contact-form form-style-one mt-35 wow fadeIn" data-wow-duration="1.5s"
+                                        data-wow-delay="0.5s">
+                                        <form id="contact-form" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-input mt-15">
+                                                <label>Full Name</label>
+                                                <div class="input-items default">
+                                                    <input type="text" placeholder="Name" name="name">
+                                                    <i class="lni-user"></i>
+                                                </div>
+                                            </div> <!-- form input -->
+                                            <div class="form-input mt-15">
+                                                <label>Email</label>
+                                                <div class="input-items default">
+                                                    <input type="email" placeholder="Email" name="email">
+                                                    <i class="lni-envelope"></i>
+                                                </div>
+                                            </div> <!-- form input -->
+                                            <div class="form-input mt-15">
+                                                <label>Account Specifications</label>
+                                                <div class="input-items default">
+                                                    <textarea placeholder="account Specifications"
+                                                        name="message"></textarea>
+                                                    <i class="lni-pencil-alt"></i>
+                                                </div>
+                                            </div> <!-- form input -->
+                                            <p class="form-message"></p>
+                                            <div class="form-input rounded-buttons mt-20">
+                                                <input type="submit" value="submit">
+                                            </div> <!-- form input -->
+                                        </form>
+                                    </div> <!-- contact form -->
+                                </div>
+                            </div> <!-- form input -->
+                            <p class="form-message"></p>
+                            <div class="form-input rounded-buttons mt-20">
+                                <input class="btn btn-outline-primary"type="submit" value="submit">
+                            </div> <!-- form input -->
+                            {% for message in messages %}
+							<p id="messages">{{message}}</p>
+						{% endfor %}
+                        </form>
+                    </div> <!-- contact form -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-5">
+                        <div class="copyright text-center text-lg-left mt-10">
+                            <p class="text-white">Product Of Taratibu</p>
+                        </div> <!--  copyright -->
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="footer-logo text-center mt-10">
+                            <a href="index.html"><img src="../../static/images/logo-2.svg" alt="Logo"></a>
+                        </div> <!-- footer logo -->
+                    </div>
+                    <div class="col-lg-5">
+                        <ul class="social text-center text-lg-right mt-10">
+                            <li><a href="https://facebook.com/"><i class="lni-facebook-filled"></i></a></li>
+                            <li><a href="https://twitter.com/"><i class="lni-twitter-original"></i></a></li>
+                            <li><a href="https://instagram.com/"><i class="lni-instagram-original"></i></a></li>
+                            <li><a href="#"><i class="lni-linkedin-original"></i></a></li>
+                        </ul> <!-- social -->
+                    </div>
+                </div> 
+            </div> 
+        </div> 
+    </footer>
+
+    
+
+    <a href="#" class="back-to-top"><i class="lni-chevron-up"></i></a>
+
+
+    <script>
+        function myFunction() {
+            document.getElementById("contact-form").submit();
+        }
+    </script>
+    <script src="../../static/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="../../static/js/vendor/jquery-1.12.4.min.js"></script>
+
+
+    <script src="../../static/js/bootstrap.min.js"></script>
+    <script src="../../static/js/popper.min.js"></script>
+
+
+    <script src="../../static/js/slick.min.js"></script>
+
+
+    <script src="../../static/js/isotope.pkgd.min.js"></script>
+
+
+    <script src="../../static/js/imagesloaded.pkgd.min.js"></script>
+
+
+    <script src="../../static/js/jquery.magnific-popup.min.js"></script>
+
+
+    <script src="../../static/js/scrolling-nav.js"></script>
+    <script src="../../static/js/jquery.easing.min.js"></script>
+
+
+    <script src="../../static/js/wow.min.js"></script>
+
+
+    <script src="../../static/js/main.js"></script>
+    <script src="../../static/js/navbar.js"></script>
+
+</body>
+
+</html>

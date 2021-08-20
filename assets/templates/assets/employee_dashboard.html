@@ -1,0 +1,46 @@
+{%extends 'assets/base.html'%}
+<!-- bootstrap -->
+{% load bootstrap4%}
+<!-- static -->
+{% load static %}
+
+<!-- content -->
+{%block content%} ​
+<div class="container-fluid dashboard">
+  <div class="intro">
+    <header>
+      <h2>Welcome <span style="text-transform: capitalize"> {{user}}</span></h2>
+      <h3>{{date}}</h3>
+    </header>
+  </div>
+
+  <div class="mt-4">
+    <div class="row d-flex mt-4">
+      <div class="m-4 dash-card three">
+        <div class="title">
+          <h6>My Assets</h6>
+
+          <h3>{{assets | length}}</h3>
+        </div>
+      </div>
+
+      <div class="m-4 dash-card eight">
+        <div class="title">
+          <h6>My Requests</h6>
+
+          <h3>{{ employee_requests | length}}</h3>
+        </div>
+      </div>
+
+      <div class="m-4 dash-card nine">
+        <div class="title">
+          <h6>Pending request</h6>
+
+          <h3>{{ employee_requests_undone | length}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  ​ {% endblock %}
+</div>

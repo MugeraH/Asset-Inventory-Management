@@ -1,0 +1,197 @@
+{%extends 'assets/base.html'%}
+<!-- bootstrap -->
+{% load bootstrap4%}
+<!-- static -->
+{% load static %}
+
+<!-- content -->
+{%block content%} ​
+<div class="container-fluid">
+
+  <div class="intro mt-3">
+        <header class="mb-3 p-0">
+          <h2>Department Requests</h2>
+
+          <div></div>
+        </header>
+      </div>
+
+
+
+  <header class="mt-5">
+    <h2>My Request</h2>
+    <button class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">Add Request</button>
+  </header>
+
+  <div class="my_request mb-5">
+       <table class="table mt-4">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Request</th>
+                        <th scope="col">Posted_date</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Urgency</th>
+                        <th scope="col">Status</th>
+
+                    </tr>
+                </thead>
+
+
+                {% for request in my_requests %}
+                <!-- {% for request in dept_requests -->
+
+
+                <tbody>
+                    <tr onclick="window.location='/managerrequestdetails/{{request.id}}'">
+
+                        <th scope="row">{{ request.id}}</th>
+                        <td>{{ request.request }}</td>
+                        <td>{{ request.posted_date | date }}</td>
+                        <td>{{ request.quantity }} </td>
+                        <td>
+                         {% if request.urgency == "1" %}
+                         
+                         <h5 class="text-danger">High</h5>
+                     
+                           {%elif request.urgency == "2" %}
+                          
+<h5 class="text-warning">Medium</h5>
+                           
+ 
+                           {%elif request.urgency == "3" %}
+                         
+<h5 class="text-default">Low</h5>
+
+ {%else%}
+
+                         {% endif %}     
+                        </td>
+                      <td>  {% if request.status == "approved" %}
+                         
+                           <button class="btn btn-success">{{request.status }}</button>
+                     
+                           {%elif request.status == "rejected" %}
+                          
+ <button class="btn btn-danger">{{request.status }}</button>
+                           
+ 
+                           {%elif request.status == "pending" %}
+                         
+ <button class="btn btn-warning">{{request.status }}</button>
+
+ {%else%}
+
+                         {% endif %}</td>
+
+                        <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+                {% endfor %}
+            </table>
+  </div>
+  <div class="dept_requests mt-5">
+            <h2>Department Employees requests</h2>
+            <table class="table">
+
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Employee</th>
+                        <th scope="col">Request</th>
+                        <th scope="col">Posted_date</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Urgency</th>
+                        <th scope="col">Status</th>
+
+                    </tr>
+                </thead>
+
+
+                {% for request in employee_dept_requests %}
+
+
+
+                <tbody>
+                    <tr onclick="window.location='/employeerequestdetails/{{request.id}}'">
+
+                        <th scope="row">{{ request.id}}</th>
+                        <td >{{ request.employee.user.username}}</td>
+                        <td>{{ request.request_detail }}({{ request.type }})</td>
+                        <td>{{ request.posted_date | date }}</td>
+                        <td>{{ request.quantity }} </td>
+                        <td> {% if request.urgency == "1" %}
+                         
+                         <h5 class="text-danger">High</h5>
+                     
+                           {%elif request.urgency == "2" %}
+                          
+<h5 class="text-warning">Medium</h5>
+                           
+ 
+                           {%elif request.urgency == "3" %}
+                         
+<h5 class="text-default">Low</h5>
+
+ {%else%}
+
+                         {% endif %}  </td>
+                        <td>
+                          {% if request.status == "approved" %}
+                         
+                           <button class="btn btn-success">{{request.status }}</button>
+                     
+                           {%elif request.status == "rejected" %}
+                          
+ <button class="btn btn-danger">{{request.status }}</button>
+                           
+ 
+                           {%elif request.status == "pending" %}
+                         
+ <button class="btn btn-warning">{{request.status }}</button>
+
+ {%else%}
+
+                         {% endif %}
+               
+                        </td>
+
+                        <!-- <td> <a href="delete/{{ request.id }}" class="btn btn-danger">Delete request</a> -->
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+                {% endfor %}
+            </table>
+  </div>
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Request</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    &times;
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form class="form" method="post" novalidate enctype="multipart/form-data">
+                    {% csrf_token %} {% bootstrap_form form layout='block' %}
+                    <button type="submit" class="btn btn-success">Add</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+​ {% endblock %}

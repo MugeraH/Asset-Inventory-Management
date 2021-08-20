@@ -1,0 +1,54 @@
+{%extends 'assets/base.html'%} {% load bootstrap4%} {% load static %}
+<!-- content -->
+{%block content%}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="intro mt-3">
+        <header class="mb-3 p-0">
+          <h2 class="" style="text-align: center">Employees</h2>
+
+          <div></div>
+        </header>
+      </div>
+
+      <br />
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Department</th>
+            <th scope="col">Role</th>
+          </tr>
+        </thead>
+
+        {% for employee in employees %}
+
+        <tbody>
+          <tr
+            style="cursor: pointer"
+            onclick="window.location='/employeedetails/{{employee.id}}'"
+          >
+            <th scope="row">{{ employee.id }}</th>
+            <td>{{ employee.user.username }}</td>
+            <td>{{ employee.user.email }}</td>
+            <td>{{ employee.department }}</td>
+            <td>
+              {% if employee.user.is_admin %} Manager
+              <!-- super -->
+              {%elif employee.user.is_superuser%} Admin {%else%}
+              <!-- employee -->
+              Employee {% endif %}
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock%}
