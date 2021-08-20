@@ -23,6 +23,7 @@
     {% block styles %} 
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% endblock %}
   </head>
   <body>
@@ -69,19 +70,19 @@
             {% if user.is_authenticated %}
             <li class="nav-item active p-0">
               <a class="nav-link" href="/"></a>
-                <span class="myname">
+                <b class="myname">
                   {% if user.is_superuser %} Admin {%elif user.is_admin%}
                   Manager {%else%} Employee {% endif %}
-                </span>
+                </b>
                 <span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item active p-0">
               <div class="nav-icon">
-                <div class="icon">
+                <div class="icon p-0 m-0">
                   <img src="../../static/icons/user.png" alt="" />
                 </div>
-                <div>
+                <div class="p-0 m-0">
                   <a class="nav-link" href="{% url 'profile' %}">Profile </a>
                 </div>
               
@@ -125,7 +126,10 @@
               <div class="icon">
                 <img src="../../static/icons/department(1).png" alt="" />
               </div>
-              <div class="title">Departments</div>
+              <div class="title">
+                
+                Departments
+              </div>
             </a>
           </div>
           {%endif%}
@@ -161,8 +165,22 @@
       </div>
       {% endif %}
       <div class="home_content">
+       
         <div class="container-fluid">
+
+           {% if messages %}
+            {% for message in messages  %}
+             
+              <div class="alert mt-3 {{message.tags}} alert-dismissible fade show" role="alert">
+ {{message}}
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+            {% endfor %}
+          {% endif %}
           {%block content%}
+          
 
           {%endblock content%}
         </div>

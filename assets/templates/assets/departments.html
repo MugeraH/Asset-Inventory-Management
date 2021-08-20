@@ -2,20 +2,35 @@
 <!-- content -->
 {%block content%}
 
-<div class="m-5 pr-5">
-  <header class="mb-3 p-0">
-    <h1 class="m-0 p-0">DEPARTMENTS</h1>
+<div class="ml-5 mr-5 pt-2 pr-5">
+  <div class="intro mt-3">
+    <header class="mb-3 p-0">
+      <h1 class="m-0 p-0">DEPARTMENTS</h1>
+
+      <div>
+        <a
+          href="/add_department"
+          class="btn btn-success"
+          data-toggle="modal"
+          data-target="#staticBackdrop"
+        >
+          Add Department</a
+        >
+      </div>
+    </header>
+  </div>
+
+  <div class="text-center">
     <div>
-      <a
-        href="/add_department"
-        class="btn btn-success"
-        data-toggle="modal"
-        data-target="#staticBackdrop"
-      >
-        Add Department</a
-      >
+      <div class="icon-wrap m-3" style="height: 100px">
+        <img
+          style="height: 100%"
+          src="../../static/icons/department(1).png"
+          alt=""
+        />
+      </div>
     </div>
-  </header>
+  </div>
 
   <!-- <p class="m-0 p-0">
     We ensure that all assets in departments are physically safeguarded and
@@ -42,7 +57,7 @@
           {% endif %}
         </h5>
 
-        <h4 class=" dep_description text-muted">{{department.description}}</h4>
+        <h4 class="dep_description text-muted">{{department.description}}</h4>
       </a>
 
       <!-- <div class="col-6">
@@ -70,7 +85,7 @@
 
 <!-- add department modal -->
 <div
-  class="modal fade"
+  class="modal  fade"
   id="staticBackdrop"
   data-backdrop="static"
   data-keyboard="false"

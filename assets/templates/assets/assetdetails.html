@@ -4,10 +4,14 @@
 {%block content%}
 
 <div class="container-fluid">
-  <header>
-    <h2>Asset Details</h2>
-    <div class="">
-      {% if user.is_superuser %}
+
+
+    <div class="intro mt-3">
+    <header class="mb-3 p-0">
+       <h2>Asset Details</h2>
+
+      <div>
+     {% if user.is_superuser %}
       <a
         class="btn btn-danger"
         href="#"
@@ -23,10 +27,15 @@
         >Update
       </a>
       {% endif %}
-    </div>
-  </header>
-  <div class="card-title pl-2" style="text-transform: capitalize">
-    <h3>{{asset.name}}</h3>
+    </header>
+  </div>
+
+
+  <div class="card-title mt-5 pl-2" style="text-transform: capitalize">
+    <h2>
+<b>{{asset.name}}</b>
+
+    </h2>
     <hr />
   </div>
 
@@ -45,12 +54,12 @@
       <ul class="p-4 mt-3" style="list-style-type: square; font-size: 20px">
         <li>Category: <strong>{{ asset.category }}</strong></li>
         <li>Department: <strong>{{ asset.department.name }}</strong></li>
-        <li>Created <strong>{{ asset.created_at }}</strong></li>
+        <li>Created <strong>{{ asset.created_at| date }}</strong></li>
         <li>
           Employee Assigned : {% if asset.is_assigned_user %}
-          <button class="btn btn-success">Yes</button>
+          <button class="btn btn-sm btn-success">Yes</button>
           {%else%}
-          <button class="btn btn-info">No</button>
+          <button class="btn btn-sm btn-info">No</button>
           {% endif %}
         </li>
       </ul>

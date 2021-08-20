@@ -6,13 +6,20 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-12">
-      <h2 class="mt-4">Employee assets</h2>
+      <div class="intro mt-3">
+        <header class="mb-3 p-0">
+          <h2 class="">Employee assets</h2>
 
-      <table class="table">
+          <div></div>
+        </header>
+      </div>
+
+      <table class="table mt-5">
         <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Picture</th>
             <th scope="col">Description</th>
             <th scope="col">received on</th>
           </tr>
@@ -24,6 +31,9 @@
           <tr>
             <th scope="row">{{ asset.id }}</th>
             <td>{{ asset.asset.name }}</td>
+            <td>
+              <img src="{{asset.asset.image.url}}" alt="" />
+            </td>
             <td>{{ asset.asset.description }}</td>
             <td>{{ asset.asset.created_at |date }}</td>
           </tr>
