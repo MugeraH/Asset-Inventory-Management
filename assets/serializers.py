@@ -1,7 +1,7 @@
 from django.db.models import fields
 from rest_framework import serializers
 from django import forms
-from .models import Asset,Department,EmployeeAssetRequest,ManagerRequest,EmployeeAsset,Email
+from .models import Asset,Department,EmployeeAssetRequest,ManagerRequest,EmployeeAsset
 
 
 
@@ -26,7 +26,7 @@ class EmployeeAssetSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployeeAsset
         fields = ('employee','asset')
-class EmailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Email
-        fields=('full_name','email','account_specifications')
+# class EmailSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Email
+#         fields=('full_name','email','account_specifications')

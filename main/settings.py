@@ -83,7 +83,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'asset',
 #         'USER': 'ibrahim',
-#         'PASSWORD': 'secret',
+#         'PASSWORD': 'millow24',
 #         'HOST': 'localhost',
 #         'PORT': '5432'
 #     }

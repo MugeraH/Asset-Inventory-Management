@@ -58,26 +58,25 @@
         <li class="nav-item">
           <a class="nav-link" style="text-transform: capitalize" href="#">Create New Card</a>
         </li>
-        <li class="nav-item" input-group mb-2">
+        <li class="nav-item input-group mb-2">
           <div class="input-group-append">
             <span class="input-group-text"><i class="fas fa-key"></i></span>
           </div>
-          {{form.password2}}
-    </>">
-    <a class="nav-link" style="text-transform: capitalize" href="#">Add Category</a>
-    </li>
-    {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="#"> Login </a>
-    </li>
+         
+          <a class="nav-link" style="text-transform: capitalize" href="#">Add Category</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="#"> Login </a>
+        </li>
 
-    <li class="nav-item active p-0">
-      <a class="nav-link" href="{%url 'logout'%}"> Logout</a>
-    </li>
+        <li class="nav-item active p-0">
+          <a class="nav-link" href="{%url 'logout'%}"> Logout</a>
+        </li>
 
-    {% endif %}
-    </ul>
-  </div>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
 

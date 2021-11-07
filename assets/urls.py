@@ -22,7 +22,7 @@ urlpatterns=[
     path('api/employeeAssetRequest/', views.EmployeeAssetRequestList.as_view()),
     path('api/managerrequest/', views.ManagerRequestSerializerList.as_view()),
     path('api/employeeAsset/',views.EmployeeAssetSerializerList.as_view()),
-    path('api/emails/',views.EmailSerializerList.as_view()),
+    # path('api/emails/',views.EmailSerializerList.as_view()),
     path('api/',views.api_overview),
 
 

@@ -17,11 +17,11 @@ from rest_framework.decorators import api_view
 
 
 
-from . models import Email, EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
+from . models import EmployeeAsset,EmployeeAssetRequest,Department,Asset,ManagerRequest,Profile
 from . forms import DepartmentForm,AssetForm,EmployeeAssetRequestForm,ManagerRequestForm,AssetAssigningForm,DepartmentAssigningForm,EmployeeProfile,EmployeeRequest,ManagerRequestUpdateForm
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import AssetSerializer,EmployeeAssetRequestSerializer,DepartmentSerializer,ManagerRequestSerializer,EmployeeAssetSerializer,EmailSerializer
+from .serializers import AssetSerializer,EmployeeAssetRequestSerializer,DepartmentSerializer,ManagerRequestSerializer,EmployeeAssetSerializer
 from rest_framework import status
 from assets import serializers
 
@@ -877,11 +877,12 @@ class EmployeeAssetSerializerList(APIView):
         employeeasset= EmployeeAsset.objects.all()
         serializers=EmployeeAssetSerializer(employeeasset,many=True)
         return Response(serializers.data)
-class EmailSerializerList(APIView):
-    def get (self, request,format=None):
-        email= Email.objects.all()
-        serializers=EmailSerializer(email,many=True)
-        return Response(serializers.data)
+# class EmailSerializerList(APIView):
+#     def get (self, request,format=None):
+#         email= Email.objects.all()
+#         serializers=EmailSerializer(email,many=True)
+
+#         return Response(serializers.data)
 
 @api_view(['GET'])
 def api_overview(request):

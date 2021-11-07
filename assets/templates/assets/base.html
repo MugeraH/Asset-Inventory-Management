@@ -1,194 +1,175 @@
-{% load bootstrap4 %} 
+{% load bootstrap4 %}
 {% load static%}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Asset Inventory</title>
-    <link rel="icon" href="{% static 'images/favicon.ico' %}" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <title>Asset Inventory</title>
+  <link rel="icon" href="{% static 'images/favicon.ico' %}" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    {% block styles %} 
-    {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    {% endblock %}
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg p-0">
-      <div class="flex-cont">
-        <div class="icon">
-          <img
-            onclick="openSideMenu()"
-            id="open"
-            src="../../static/icons/menu (2).svg"
-            alt=""
-          />
-          <img
-            onclick="closeSideMenu()"
-            id="close"
-            src="../../static/icons/menu (1).png"
-            alt=""
-          />
-        </div>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
 
-        <a class="navbar-brand" href="/">
-          <span class="logo_name">TARATIBU ASSETS</span>
-          <span>SIMPLIFIED ASSET MANAGEMENT</span>
-        </a>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  {% block styles %}
+  {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% endblock %}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg p-0">
+    <div class="flex-cont">
+      <div class="icon">
+        <img onclick="openSideMenu()" id="open" src="../../static/icons/menu (2).svg" alt="" />
+        <img onclick="closeSideMenu()" id="close" src="../../static/icons/menu (1).png" alt="" />
       </div>
 
-      <div>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="text-white">
-            <i class="fas fa-bars"></i>
-          </span>
-        </button>
+      <a class="navbar-brand" href="/">
+        <span class="logo_name">TARATIBU ASSETS</span>
+        <span>SIMPLIFIED ASSET MANAGEMENT</span>
+      </a>
+    </div>
 
-        <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto p-0">
-            {% if user.is_authenticated %}
-            <li class="nav-item active p-0">
-              <a class="nav-link" href="/"></a>
-                <b class="myname">
-                  {% if user.is_superuser %} Admin {%elif user.is_admin%}
-                  Manager {%else%} Employee {% endif %}
-                </b>
-                <span class="sr-only">(current)</span></a
-              >
-            </li>
-            <li class="nav-item active p-0">
-              <div class="nav-icon">
-                <div class="icon p-0 m-0">
-                  <img src="../../static/icons/user.png" alt="" />
-                </div>
-                <div class="p-0 m-0">
-                  <a class="nav-link" href="{% url 'profile' %}">Profile </a>
-                </div>
-              
-              </div>
-            </li>
-            <li class="nav-item active p-0">
-              <div class="nav-icon">
-                <div class="icon">
-                  <img src="../../static/icons/logout.png" alt="" />
-                </div>
-                <div>
-                  <a class="nav-link" href="{%url 'logout'%}">Logout</a>
-                </div>
-              </div>
-            </li>
+    <div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="text-white">
+          <i class="fas fa-bars"></i>
+        </span>
+      </button>
 
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{%url 'login'%}"> Login </a>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <div class="main">
-      {% if user.is_authenticated %}
-      <div id="sidebar" class="sidenav">
-        <div id="sidelink1">
-          <div class="side_option">
-            <a class="flex-cont" href="/dashboard">
-              <div class="icon">
-                <img src="../../static/icons/menu.png" alt="" />
+      <div class="collapse navbar-collapse p-0" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto p-0">
+          {% if user.is_authenticated %}
+          <li class="nav-item active p-0">
+            <a class="nav-link" href="/"></a>
+            <b class="myname">
+              {% if user.is_superuser %} Admin {%elif user.is_admin%}
+              Manager {%else%} Employee {% endif %}
+            </b>
+            <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active p-0">
+            <div class="nav-icon">
+              <div class="icon p-0 m-0">
+                <img src="../../static/icons/user.png" alt="" />
               </div>
-              <div class="title">Dashboard</div>
-            </a>
-          </div>
-          {% if user.is_superuser %}
-          <div class="side_option">
-            <a class="flex-cont" href="/departments">
-              <div class="icon">
-                <img src="../../static/icons/department(1).png" alt="" />
+              <div class="p-0 m-0">
+                <a class="nav-link" href="{% url 'profile' %}">Profile </a>
               </div>
-              <div class="title">
-                
-                Departments
-              </div>
-            </a>
-          </div>
-          {%endif%}
-          <!-- next -->
-          {% if user.is_superuser or user.is_admin %}
-          <div class="side_option">
-            <a class="flex-cont" href="/employees">
-              <div class="icon">
-                <img src="../../static/icons/team.png" alt="" />
-              </div>
-              <div class="title">Employees</div>
-            </a>
-          </div>
-          {%endif%}
-          <div class="side_option">
-            <a class="flex-cont" href="/assets">
-              <div class="icon">
-                <img src="../../static/icons/assets(1).png" alt="" />
-              </div>
-              <div class="title">Assets</div>
-            </a>
-          </div>
-          <div class="side_option">
-            <a class="flex-cont" href="/requests">
-              <div class="icon">
-                <img src="../../static/icons/mail(1).png" alt="" />
-              </div>
-              <div class="title">Requests</div>
-            </a>
-          </div>
-        </div>
-        
-      </div>
-      {% endif %}
-      <div class="home_content">
-       
-        <div class="container-fluid">
 
-           {% if messages %}
-            {% for message in messages  %}
-             
-              <div class="alert mt-3 {{message.tags}} alert-dismissible fade show" role="alert">
- {{message}}
- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-            {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item active p-0">
+            <div class="nav-icon">
+              <div class="icon">
+                <img src="../../static/icons/logout.png" alt="" />
+              </div>
+              <div>
+                <a class="nav-link" href="{%url 'logout'%}">Logout</a>
+              </div>
+            </div>
+          </li>
+
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'login'%}"> Login </a>
+          </li>
           {% endif %}
-          {%block content%}
-          
-
-          {%endblock content%}
-        </div>
+        </ul>
       </div>
     </div>
-    
-    {%include "assets/scripts.html"%} {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %} {% endblock %}
-  </body>
+  </nav>
+  <div class="main">
+    {% if user.is_authenticated %}
+    <div id="sidebar" class="sidenav">
+      <div id="sidelink1">
+        <div class="side_option">
+          <a class="flex-cont" href="/dashboard">
+            <div class="icon">
+              <img src="../../static/icons/menu.png" alt="" />
+            </div>
+            <div class="title">Dashboard</div>
+          </a>
+        </div>
+        {% if user.is_superuser %}
+        <div class="side_option">
+          <a class="flex-cont" href="/departments">
+            <div class="icon">
+              <img src="../../static/icons/department(1).png" alt="" />
+            </div>
+            <div class="title">
+
+              Departments
+            </div>
+          </a>
+        </div>
+        {%endif%}
+        <!-- next -->
+        {% if user.is_superuser or user.is_admin %}
+        <div class="side_option">
+          <a class="flex-cont" href="/employees">
+            <div class="icon">
+              <img src="../../static/icons/team.png" alt="" />
+            </div>
+            <div class="title">Employees</div>
+          </a>
+        </div>
+        {%endif%}
+        <div class="side_option">
+          <a class="flex-cont" href="/assets">
+            <div class="icon">
+              <img src="../../static/icons/assets(1).png" alt="" />
+            </div>
+            <div class="title">Assets</div>
+          </a>
+        </div>
+        <div class="side_option">
+          <a class="flex-cont" href="/requests">
+            <div class="icon">
+              <img src="../../static/icons/mail(1).png" alt="" />
+            </div>
+            <div class="title">Requests</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    {% endif %}
+    <div class="home_content">
+
+      <div class="container-fluid">
+
+        {% if messages %}
+        {% for message in messages  %}
+
+        <div class="alert mt-3 {{message.tags}} alert-dismissible fade show" role="alert">
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {%block content%}
+
+
+        {%endblock content%}
+      </div>
+    </div>
+  </div>
+
+  {%include "assets/scripts.html"%} {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %} {% endblock %}
+</body>
+
 </html>

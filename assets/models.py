@@ -3,6 +3,7 @@ import sys
 from django.db.models.fields import EmailField
 sys.path.append("..")
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -85,9 +86,17 @@ class Profile(models.Model):
         if created:
             Profile.objects.create(user=instance)
 
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.profile.save()
     @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
+
+    
+    def create_user_profile(sender, instance, created, **kwargs):
+        try:
+            instance.profile.save()
+        except ObjectDoesNotExist:
+            Profile.objects.create(user=instance)
 
     def save_profile(self):
         self.user
@@ -100,13 +109,13 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user__id = id).first()
         return profile
 
-class Email(models.Model):
-    full_name = models.CharField(max_length=100)
-    email = EmailField()
-    account_specifications = models.TextField()
+# class Email(models.Model):
+#     full_name = models.CharField(max_length=100)
+#     email = EmailField()
+#     account_specifications = models.TextField()
 
-    def __str__(self):
-        return self.full_name
+#     def __str__(self):
+#         return self.full_name
 class EmployeeAsset(models.Model):
     employee = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='employee_det',null=True)
     asset= models.ForeignKey(Asset,on_delete=models.CASCADE,related_name='asset_user')
